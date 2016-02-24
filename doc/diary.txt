@@ -7,10 +7,10 @@ Diary:
 ----------------------------------------------
 
 Team Members:
-	Florian Auderset
-	Tobias Flühmann
-	Raphael Suter
-	ludes3
-	r3h6
+	Florian Auderset (audef1)
+	Tobias Flühmann (tfluehmann)
+	Raphael Suter (suter1)
+	Sandro Luder (ludes3)
+	Remo Häusler (r3h6)
 	
 24.02.16 =====================================

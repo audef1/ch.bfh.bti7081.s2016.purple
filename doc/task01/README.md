@@ -12,7 +12,7 @@
 
 ### Allgemein
 
-* Authentifizierung
+* 2x Authentifizierung
 * Suche
 
 ### Arzt, Fachangestellte Gesundheit, Spitex

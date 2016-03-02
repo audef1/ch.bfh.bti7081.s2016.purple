@@ -3,7 +3,7 @@
 ## Target users
 
 * Arzt
-* FAG
+* Fachangestellte Gesundheit
 * Spitex
 * Empfang
 
@@ -15,7 +15,7 @@
 * Authentifizierung
 * Suche
 
-### Arzt, FAG, Spitex
+### Arzt, Fachangestellte Gesundheit, Spitex
 
 * Warnungen
 * Patientendossier
@@ -38,3 +38,10 @@
 * Reporting (Zeit, Dauer, Mitarbeiter)
 
 ## Critical success factors
+
+* Systemverfügbarkeit
+* Stabilität
+* Projektmanagment (vollständige Plannung)
+* Benutzerfreundlichkeit
+* Vollständige Funktion der Key-Features
+* Kunde regelmässig einbeziehen

@@ -4,7 +4,7 @@
 
 * Arzt
 * Fachangestellte Gesundheit
-* Spitex
+* Spitex (externe Mitarbeiter)
 * Empfang
 
 

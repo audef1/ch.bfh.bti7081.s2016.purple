@@ -24,6 +24,7 @@
 	* Behandlung (inkl. History)
 	* Medikation / Rezepte
 	* Diagnosen
+		* Rapport
 	* Terminverwaltung
 	
 ### Empfang

@@ -6,11 +6,16 @@
 Diary:
 ----------------------------------------------
 
-Team Members:
+Team Mitglieder:
 	Florian Auderset (audef1)
 	Tobias Flühmann (tfluehmann)
 	Raphael Suter (suter1)
-	Sandro Luder (ludes3)
 	Remo Häusler (r3h6)
 	
 24.02.16 =====================================
+
+02.03.16 =====================================
+Im Team: Erarbeitung Task01. Dokument abgelegt auf Repo /doc/task01/README.md
+Präsentation des Ergebnisses durch tfluehmann.
+
+

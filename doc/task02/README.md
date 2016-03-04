@@ -32,3 +32,22 @@
 	* welche Features in der Iteration ausgeliefert werden ist schwierig abzuschätzen
 	
 ### Gruppenentscheid: Agile
+
+## Our Process Model
+| Aktivität                       | Ziele                                 | Output            | Tasks     |
+| ------------------------------  | ------------------------------------- | ----------------- | --------- |
+| 0. Projektrichtlinien definieren| Richtlininen 
+| 1. Anforderungen defnieren      | Übersicht Arbeit
+| 2. User Stories + Grobplanung   | Backlog ist erstellt
+| 3. Stories priorisieren         | Backlog ist priorisiert
+| 4. Start 1. Iteration (Meeting) | Stories verteilt
+| 	4.0 Daily Meeting			  |
+|	4.1 Stories im Team verteilen |
+|	4.2 Implementieren			  | 
+|	4.3 testen					  | 
+|	4.4 Review mit Kunde		  | alles funktioniert
+|	4.5 Release (d, w, m, f)	  | Kunde erhält neue Version
+|	4.6 neue Stories, neue Prios? | 
+| 5. Definitive Abnahme           | Finale Version              |
+
+

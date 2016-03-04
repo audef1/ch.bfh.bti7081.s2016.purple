@@ -15,7 +15,11 @@ Team Mitglieder:
 24.02.16 =====================================
 
 02.03.16 =====================================
+Anwesend: alle
 Im Team: Erarbeitung Task01. Dokument abgelegt auf Repo /doc/task01/README.md
 Präsentation des Ergebnisses durch tfluehmann.
 
+04.03.16 =====================================
+Anwesend: alle
+Ausarbeiten des Task02. 
 

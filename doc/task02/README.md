@@ -34,9 +34,9 @@
 ### Gruppenentscheid: Agile
 
 ## Our Process Model
-| Aktivität                       | Ziele                                 | Output            | Tasks     |
-| ------------------------------  | ------------------------------------- | ----------------- | --------- |
-| 0. Projektrichtlinien definieren| Richtlininen 
+| Aktivität                       | Ziele                                           | Output            | Tasks     |
+| ------------------------------  | ----------------------------------------------- | ----------------- | --------- |
+| 0. Projektrichtlinien definieren| Richtlininen (design, code, communication, svn)
 | 1. Anforderungen defnieren      | Übersicht Arbeit
 | 2. User Stories + Grobplanung   | Backlog ist erstellt
 | 3. Stories priorisieren         | Backlog ist priorisiert

@@ -34,20 +34,20 @@
 ### Gruppenentscheid: Agile
 
 ## Our Process Model
-| Aktivität                       | Ziele                                           | Output            | Tasks     |
-| ------------------------------  | ----------------------------------------------- | ----------------- | --------- |
-| 0. Projektrichtlinien definieren| Richtlininen (design, code, communication, svn)
-| 1. Anforderungen defnieren      | Übersicht Arbeit
-| 2. User Stories + Grobplanung   | Backlog ist erstellt
-| 3. Stories priorisieren         | Backlog ist priorisiert
-| 4. Start 1. Iteration (Meeting) | Stories verteilt
-| 	4.0 Daily Meeting			  |
-|	4.1 Stories im Team verteilen |
-|	4.2 Implementieren			  | 
-|	4.3 testen					  | 
-|	4.4 Review mit Kunde		  | alles funktioniert
-|	4.5 Release (d, w, m, f)	  | Kunde erhält neue Version
-|	4.6 neue Stories, neue Prios? | 
-| 5. Definitive Abnahme           | Finale Version              |
+| Aktivität                       | Ziele                                           | Output              | Tasks     |
+| ------------------------------  | ----------------------------------------------- | -----------------   | --------- |
+| 0. Projektrichtlinien definieren| Richtlininen (design, code, communication, svn) |  Req. List          |
+| 1. Anforderungen defnieren      | Übersicht Arbeit				    |  Mockups + Übersicht|      
+| 2. User Stories + Grobplanung   | Backlog ist erstellt                            |  Offerte            |
+| 3. Stories priorisieren         | Backlog ist priorisiert                         |                     |
+| 4. Start 1. Iteration (Meeting) | Stories verteilt                                |                     |
+| 	4.0 Daily Meeting	  |		                                    |                     |
+|	4.1 Stories im Team verteilen |                                             |                     |
+|	4.2 Implementieren			  |                                 |                     |
+|	4.3 testen					  |                         |                     |
+|	4.4 Review mit Kunde		  | alles funktioniert                      |                     |
+|	4.5 Release (d, w, m, f)	  | Kunde erhält neue Version               | Version xyz         |
+|	4.6 neue Stories, neue Prios? |                                             |                     |
+| 5. Definitive Abnahme           | Finale Version                                  | Endversion          |                 
 
 

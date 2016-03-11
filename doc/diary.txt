@@ -11,15 +11,20 @@ Team Mitglieder:
 	Tobias Flühmann (tfluehmann)
 	Raphael Suter (suter1)
 	Remo Häusler (r3h6)
+	Mathias Rudolf (gimmie7)
 	
 24.02.16 =====================================
 
 02.03.16 =====================================
 Anwesend: alle
 Im Team: Erarbeitung Task01. Dokument abgelegt auf Repo /doc/task01/README.md
-Pr�sentation des Ergebnisses durch tfluehmann.
+Präsentation des Ergebnisses durch tfluehmann.
 
 04.03.16 =====================================
 Anwesend: alle
 Ausarbeiten des Task02. Dokumente (README.md und Task 2.pdf) abgelegt auf Repo /doc/task02/
-Pr�sentation des Ergebnisses durch audef1.
+Präsentation des Ergebnisses durch audef1.
+
+11.03.16 =====================================
+Anwesend: alle
+Ergänzung vom Task01. Mental Health Act (Gesetz) fehlte.

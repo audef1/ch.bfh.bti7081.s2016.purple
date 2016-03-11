@@ -46,3 +46,4 @@
 * Benutzerfreundlichkeit
 * Vollständige Funktion der Key-Features
 * Kunde regelmässig einbeziehen
+* einhaltung Mental Health Act (Gesetzliche Richtlinien im Umgang mit psychisch kranken Personen)

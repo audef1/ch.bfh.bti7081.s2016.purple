@@ -21,7 +21,9 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 # Research
 
-## Bern
+## Organisationen
+
+### Bern
 
 - Spitex (Nur Medizinisches)
 - Rotes Kreuz (Transport)
@@ -63,7 +65,8 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Wichtige Hinweise zum Patienten
 - Tracking über GPS -> Zeitmanagment automatisiert
 - Alarmierungsfunktion bei Notfällen vor Ort
-- Für Patient, Fallerkennung über Mobile-App -> Notruf
+- Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage
+- Mehrsprachig (nicht nur Landesprachen)
 
 
 

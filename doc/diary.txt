@@ -32,6 +32,12 @@ Ergänzung vom Task01. Mental Health Act (Gesetz) fehlte.
 16.03.16 =====================================
 Anwesend: alle
 Festlegen der Fragen für die Interviews.
+Design Thinking, erste Iteration. Dokumente in Task Ordner angelegt.
+
+18.03.16 =====================================
+Anwesend: alle
+Abschliessen der ersten Iteration ohne Validierung.
+		
 
 17.03.16 =====================================
 Wer: suter1

@@ -48,7 +48,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ideen (Features)
 
-- Navigation zum nächsten Kunden
+- Navigation (Karte) zum nächsten Kunden
 - Zeitrapport
 - Medikamentenliste und Materialliste für Tag
 - Medikamentliste und Materialliste für den Patienten
@@ -57,9 +57,14 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Portrait (Überblick) von Patienten
 - Letzter Rapport (Sprachausgabe)
 - Reminder
-- Notfall Alerts
-- Rapport per Spracheingabe
+- Alerts über Notfälle
+- Rapport per Spracheingabe (Voice Report)
 - Sprachsteuerung
+- Wichtige Hinweise zum Patienten
+- Tracking über GPS -> Zeitmanagment automatisiert
+- Alarmierungsfunktion bei Notfällen vor Ort
+- Für Patient, Fallerkennung über Mobile-App -> Notruf
+
 
 
 

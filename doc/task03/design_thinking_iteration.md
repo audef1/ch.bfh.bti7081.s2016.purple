@@ -89,6 +89,9 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Medikamenterfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)
 
+# Design
+
+## Storyboards
 
 # Prototype
 

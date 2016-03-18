@@ -103,6 +103,8 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ![Storyboard voicerapport](storyboards/storyboard_voicerapport.jpg)
 
+![Storyboard rapport erweiterung](storyboards/storyboard_rapportierung_erweiterung.jpg)
+
 
 
 # Prototype

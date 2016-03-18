@@ -69,7 +69,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Zeitrapport
 - Medikamentenliste und Materialliste für Tag
 - Medikamentliste und Materialliste für den Patienten
-- Taskliste für den Patienten
+- Taskliste für Patienten-Besuch
 - Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
 - Portrait (Überblick) von Patienten
@@ -81,7 +81,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Wichtige Hinweise zum Patienten
 - Tracking über GPS -> Zeitmanagment automatisiert
 - Alarmierungsfunktion bei Notfällen vor Ort
-- Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage
+- ~~Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage~~
 - Mehrsprachig (nicht nur Landesprachen)
 - Weisungshandbücher auf Abruf
 - Terminbuchungen-/Anfragen (in Rapport)

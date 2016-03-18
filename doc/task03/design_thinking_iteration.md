@@ -72,7 +72,8 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Taskliste für Patienten-Besuch
 - Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
-- Portrait (Überblick) von Patienten
+- Portrait (Überblick, wichtige Informationen) von Patienten
+	- "Likes" und "Don't likes" 
 - Letzter Rapport (Sprachausgabe)
 - Reminder
 - Alerts über Notfälle

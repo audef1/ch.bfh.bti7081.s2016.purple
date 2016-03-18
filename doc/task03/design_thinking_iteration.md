@@ -4,9 +4,18 @@
 
 Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusammenhang mit der mentalen Störung des Patienten.
 
-## Success measures
+## Scope
 
 - Hilfe bei Vorbereitung des Besuches
+- Hilfe bei Dokumentation des Besuches
+
+## Out-of-scope
+
+- Terminplannung
+- Komplette Krankengeschichte
+
+## Success measures
+
 - Besuch gut Dokumeniert
 - Healthvisitors brauchen App
 - Weniger Papier (Administrativer Aufwand)
@@ -61,6 +70,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Medikamentenliste und Materialliste für Tag
 - Medikamentliste und Materialliste für den Patienten
 - Taskliste für den Patienten
+- Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
 - Portrait (Überblick) von Patienten
 - Letzter Rapport (Sprachausgabe)
@@ -74,9 +84,9 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage
 - Mehrsprachig (nicht nur Landesprachen)
 - Weisungshandbücher auf Abruf
-
-
-
+- Terminbuchungen-/Anfragen (in Rapport)
+- Medikamenterfassung (Autocomplete)
+- Behandlungen aus vorgegebener Liste (Autocomplete)
 
 
 # Prototype

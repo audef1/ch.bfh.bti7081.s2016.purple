@@ -73,7 +73,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
 - Portrait (Überblick, wichtige Informationen) von Patienten
-	- "Likes" und "Don't likes" 
+	- "Likes" und "Don't likes"
 - Letzter Rapport (Sprachausgabe)
 - Reminder
 - Alerts über Notfälle
@@ -92,6 +92,18 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 # Design
 
 ## Storyboards
+
+![Storyboard Emergency](storyboards/storyboard_emergency_functionality.jpg)
+
+![Storyboard information vorbereitung](storyboards/storyboard_information_vorbereitung.jpg)
+
+![Storyboard Medikamentenportionierung](storyboards/storyboard_medikamentenportionierung.jpg)
+
+![Storyboard transport](storyboards/storyboard_transport.jpg)
+
+![Storyboard voicerapport](storyboards/storyboard_voicerapport.jpg)
+
+
 
 # Prototype
 

@@ -4,7 +4,19 @@
 
 Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusammenhang mit der mentalen Störung des Patienten.
 
-## Ziele des Besuchs:
+## Success measures
+
+- Hilfe bei Vorbereitung des Besuches
+- Besuch gut Dokumeniert
+- Healthvisitors brauchen App
+- Weniger Papier (Administrativer Aufwand)
+- Besserer Austausch von Informationen zwischen Pflegepersonal
+
+
+# Research
+
+## Ziele des Besuchs
+
 - Förderung der Selbstständigkeit
 - Planung und Umsetzung von Aktivitäten
 - Hilfe bei Behörden- und Arztgängen
@@ -14,12 +26,6 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Hilfestellung bei der Medikamenteneinnahme (Spritzen geben)
 - Frühzeitige Erkennung von Krisen
 - Sozialer Kontakt
-
-
----> here goes more stuff...
-
-
-# Research
 
 ## Organisationen
 
@@ -67,6 +73,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Alarmierungsfunktion bei Notfällen vor Ort
 - Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage
 - Mehrsprachig (nicht nur Landesprachen)
+- Weisungshandbücher auf Abruf
 
 
 

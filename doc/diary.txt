@@ -34,13 +34,17 @@ Anwesend: alle
 Festlegen der Fragen für die Interviews.
 Design Thinking, erste Iteration. Dokumente in Task Ordner angelegt.
 
-18.03.16 =====================================
-Anwesend: alle
-Abschliessen der ersten Iteration ohne Validierung.
-		
-
 17.03.16 =====================================
 Wer: suter1
 Interviewtermin organisiert: Samstag, 26.03.16 ab 14:00 Uhr
+
+18.03.16 =====================================
+Anwesend: alle
+Abschliessen der ersten Iteration ohne Validierung.
+
+24.03.16 =====================================
+Wer: audef1
+Interview mit A. Baeriswyl, Pflechefachfrau in einer Psychiatrischen Tagesklinik.
+
 
 Quellen: http://www.ipw.zh.ch/internet/gesundheitsdirektion/ipw/de/krankheitsbilder.html

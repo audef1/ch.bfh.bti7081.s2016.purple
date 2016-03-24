@@ -2,7 +2,7 @@
 **Datum:** 24.03.2016
 **Interviewpartner:** A. Baeriswyl
 **Position:** Pflegefachfrau in einer Psychiatrischen Tagesklinik
-
+======
 ##Fragen
 - Allgemein zu den Patienten
 	In der Tagesklinik werden verschiedenste Patienten mit unterschiedlichen 
@@ -31,7 +31,7 @@
 	
 - Was würde Ihre Arbeit erleichtern? (allgemein)
 	* Allgemein ein Zentrales System mit den verschiedenen Informationen 
-	zum Patienten (Digitales Dossier), welches auch Berichte von externen Untersuchungen beinhaltet.
+	zum Patienten (Digitales Dossier), welches auch Berichte von externen Untersuchungen und nächste Termine bei Psychiatern oder Ärzten beinhaltet.
 	* Möglichkeit Feedback zum Patienten an den Psychiater / Arzt weiterzugeben:
 	Bsp. Anpassung der Medikation nötig -> Patient wirkt trotz Medikation unruhig.
 	
@@ -39,6 +39,7 @@
 	Risikopatienten sind schwer aus den Dossiers herauszulesen / werden nicht speziell hervorgehoben.
 	Suizidal gefährdete Patienten werden im Gespräch verschiedene Fragen gestellt, welche dann das Risiko auf einer Skala anzeigt. -> Dieser Katalog könnte in die App eingebracht werden -> Bsp. Fragecheckliste welche am Schluss Risiko anzeigt.
 	Bei suizidalen Patienten wird eine Gefahrenmeldung an die KESB gesendet, welche im schlimmsten Fall die "fürsorgliche Unterbringung" organisiert -> geschlossene Anstalt.
+	
 - Gibt es stressige Situationen und wieso?
 	Demente Patienten können agressiv werden. Ansonsten sei die Arbeit in der Klinik relativ ruhig. 
 	

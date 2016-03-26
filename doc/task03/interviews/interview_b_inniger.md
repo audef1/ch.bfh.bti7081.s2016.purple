@@ -30,11 +30,7 @@ Der Arbeitgeber gibt vorallem Zeitvorschriften bei nichtverrechenbaren Leistunge
 Ja es gibt einen Pickettdienst. Wir dürfen aber, je nach Situation, direkt mit dem Arzt Telefonieren oder/und die Ambulanz kontaktieren. 
 
 ##### Wie wird kommuniziert (Informationsfluss, Erfahrungsaustausch)
-* mit Patient
-**Direkt wenn wir bei den Klienten sind oder per Telefon.
-* mit Arbeitskollegen
-** Wenn wir Glück haben, sehen wir einander im Büro und können es direkt sagen. Meistens schreiben wir es aber im entsprechenden Ordner auf, da es oft mehrere betrifft.
-* mit Vorgesetzten
-** Einer der grössten Aufgabe der direkten Vorgesetzten ist die Planung. Wenn wir zur Planung Infos haben, schreiben wir alles in die entsprechende Agenda. Sonstige Anregungen dürfen wir direkt mit ihnen besprechen. 
-* mit behandelnden Ärzten?
-** Wie schon erwähnt, gibt es Ärzte bei denen wir Telefonisch oder per Fax kommunizieren. Andere wünschen per Mail, wieder Anderen spielt es nicht so eine Rolle. Wenn wir beim Klient sind und etwas gerade dringend wissen müssen, rufen wir den entsprechenden Arzt an.
+* mit Patient: Direkt wenn wir bei den Klienten sind oder per Telefon.
+* mit Arbeitskollegen: Wenn wir Glück haben, sehen wir einander im Büro und können es direkt sagen. Meistens schreiben wir es aber im entsprechenden Ordner auf, da es oft mehrere betrifft.
+* mit Vorgesetzten: Einer der grössten Aufgabe der direkten Vorgesetzten ist die Planung. Wenn wir zur Planung Infos haben, schreiben wir alles in die entsprechende Agenda. Sonstige Anregungen dürfen wir direkt mit ihnen besprechen. 
+* mit behandelnden Ärzten: Wie schon erwähnt, gibt es Ärzte bei denen wir Telefonisch oder per Fax kommunizieren. Andere wünschen per Mail, wieder Anderen spielt es nicht so eine Rolle. Wenn wir beim Klient sind und etwas gerade dringend wissen müssen, rufen wir den entsprechenden Arzt an.

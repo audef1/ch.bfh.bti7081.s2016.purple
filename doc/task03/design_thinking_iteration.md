@@ -88,6 +88,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Terminbuchungen-/Anfragen (in Rapport)
 - Medikamenterfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)
+- Medikamente und Material bestellen
 
 # Design
 
@@ -105,7 +106,9 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ![Storyboard rapport erweiterung](storyboards/storyboard_rapportierung_erweiterung.jpg)
 
+![Storyboard Zeitrapport](storyboards/storyboard_zeitrapport.jpg)
 
+][Storyboard Medikamente und Material bestellen](storyboards/storyboard_medikamente_bestellen.jpg)
 
 # Prototype
 

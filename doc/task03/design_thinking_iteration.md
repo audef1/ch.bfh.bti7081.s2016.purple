@@ -108,7 +108,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ![Storyboard Zeitrapport](storyboards/storyboard_zeitrapport.jpg)
 
-][Storyboard Medikamente und Material bestellen](storyboards/storyboard_medikamente_bestellen.jpg)
+![Storyboard Medikamente und Material bestellen](storyboards/storyboard_medikamente_bestellen.jpg)
 
 # Prototype
 

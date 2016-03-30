@@ -1,6 +1,6 @@
 # Persona Heidi, Sozialhelferin
 
-Heidi ist 42 Jahre alt und arbeitet seit über 10 Jahren als Sozialhelferin.
-Vor ihren Patientenbesuchen verschafft sie sich jeweils einen umfangreichen Überblick über ihre zu besuchenden Patienten.
-Sie nimmt sich gerne Zeit für ihre Patienten, wobei sie oft in Konflikt mit den nächsten geplanten Terminen gerät.
-Den Computer benötigt sie hauptsächlich um gelegentlich Mails zu lesen, und mit dem Smartphone beschränkt sie sich auf Telefonieren und SMS.
+Heidi ist 42 Jahre alt und arbeitet seit Ã¼ber 10 Jahren als Sozialhelferin.
+Vor ihren Patientenbesuchen verschafft sie sich jeweils einen umfangreichen Ãœberblick Ã¼ber ihre zu besuchenden Patienten.
+Sie nimmt sich gerne Zeit fÃ¼r ihre Patienten, wobei sie oft in Konflikt mit den nÃ¤chsten geplanten Terminen gerÃ¤t.
+Den Computer benÃ¶tigt sie hauptsÃ¤chlich um gelegentlich Mails zu lesen, und mit dem Smartphone beschrÃ¤nkt sie sich auf Telefonieren und SMS.

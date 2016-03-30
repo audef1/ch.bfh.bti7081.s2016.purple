@@ -26,14 +26,14 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ziele des Besuchs
 
-- Förderung der Selbstständigkeit
-- Planung und Umsetzung von Aktivitäten
-- Hilfe bei Behörden- und Arztgängen
+- Fï¿½rderung der Selbststï¿½ndigkeit
+- Planung und Umsetzung von Aktivitï¿½ten
+- Hilfe bei Behï¿½rden- und Arztgï¿½ngen
 - UnterstÃ¼tzung bei EinkÃ¤ufen
-- Erhalten von selbstständigem Wohnen (Verwahrlosung verhindern)
-- Überwachung der Medikamentenabgabe
+- Erhalten von selbststï¿½ndigem Wohnen (Verwahrlosung verhindern)
+- ï¿½berwachung der Medikamentenabgabe
 - Hilfestellung bei der Medikamenteneinnahme (Spritzen geben)
-- Frühzeitige Erkennung von Krisen
+- Frï¿½hzeitige Erkennung von Krisen
 - Sozialer Kontakt
 
 ## Organisationen
@@ -47,17 +47,17 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 ## Krankheitsbilder bei Patienten:
 
 - ADHS
-- Persönlichkeitsstörungen (Borderline, Probleme mit Umgebung)
-- Angststörungen
-- Posttraumatische Belastungsstörungen
+- Persï¿½nlichkeitsstï¿½rungen (Borderline, Probleme mit Umgebung)
+- Angststï¿½rungen
+- Posttraumatische Belastungsstï¿½rungen
 - Burnout
 - Schizophrenie
 - Demenz
 - Sucht
 - Krise
-- Zwangsstörungen
+- Zwangsstï¿½rungen
 
-# Synthesize
+#ï¿½Synthesize
 
 ## Fragen
 
@@ -65,26 +65,26 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ideen (Features)
 
-- Navigation (Karte) zum nächsten Kunden
+- Navigation (Karte) zum nï¿½chsten Kunden
 - Zeitrapport
-- Medikamentenliste und Materialliste für Tag
-- Medikamentliste und Materialliste für den Patienten
-- Taskliste für Patienten-Besuch
-- Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
+- Medikamentenliste und Materialliste fï¿½r Tag
+- Medikamentliste und Materialliste fï¿½r den Patienten
+- Taskliste fï¿½r Patienten-Besuch
+- Taskliste (Termin) und Checkliste in Rapport automatisch ï¿½bernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
-- Portrait (Überblick, wichtige Informationen) von Patienten
+- Portrait (ï¿½berblick, wichtige Informationen) von Patienten
 	- "Likes" und "Don't likes"
 - Letzter Rapport (Sprachausgabe)
 - Reminder
-- Alerts über Notfälle
+- Alerts ï¿½ber Notfï¿½lle
 - Rapport per Spracheingabe (Voice Report)
 - Sprachsteuerung
 - Wichtige Hinweise zum Patienten
-- Tracking über GPS -> Zeitmanagment automatisiert
-- Alarmierungsfunktion bei Notfällen vor Ort
-- ~~Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage~~
+- Tracking ï¿½ber GPS -> Zeitmanagment automatisiert
+- Alarmierungsfunktion bei Notfï¿½llen vor Ort
+- ~~Fï¿½r Patient, Fallerkennung ï¿½ber Mobile-App -> Notruf mit Rï¿½ckfrage~~
 - Mehrsprachig (nicht nur Landesprachen)
-- Weisungshandbücher auf Abruf
+- Weisungshandbï¿½cher auf Abruf
 - Terminbuchungen-/Anfragen (in Rapport)
 - Medikamentenerfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)
@@ -125,3 +125,7 @@ https://moqups.com/t.fluehmann94@hotmail.com/VtHLS7Zw/
 ![Prototyp Medikamente und Material bestellen](prototypes/prototyp_medikamente_bestellen_s2.jpg)
 
 # Validation
+
+Mit den Informationen aus den Interviews konnten wir unsere Prototypen erheblich verbessern und wussten wo
+momentan die "Pain-Points" fÃ¼r die Health Visitors sind.
+[ Interviews ](../interviews9

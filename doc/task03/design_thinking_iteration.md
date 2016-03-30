@@ -26,14 +26,14 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ziele des Besuchs
 
-- F�rderung der Selbstst�ndigkeit
-- Planung und Umsetzung von Aktivit�ten
-- Hilfe bei Beh�rden- und Arztg�ngen
+- Förderung der Selbstständigkeit
+- Planung und Umsetzung von Aktivitäten
+- Hilfe bei Behörden- und Arztgängen
 - Unterstützung bei Einkäufen
-- Erhalten von selbstst�ndigem Wohnen (Verwahrlosung verhindern)
-- �berwachung der Medikamentenabgabe
+- Erhalten von selbstständigem Wohnen (Verwahrlosung verhindern)
+- Überwachung der Medikamentenabgabe
 - Hilfestellung bei der Medikamenteneinnahme (Spritzen geben)
-- Fr�hzeitige Erkennung von Krisen
+- Frühzeitige Erkennung von Krisen
 - Sozialer Kontakt
 
 ## Organisationen
@@ -47,17 +47,17 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 ## Krankheitsbilder bei Patienten:
 
 - ADHS
-- Pers�nlichkeitsst�rungen (Borderline, Probleme mit Umgebung)
-- Angstst�rungen
-- Posttraumatische Belastungsst�rungen
+- Persönlichkeitsstörungen (Borderline, Probleme mit Umgebung)
+- Angststörungen
+- Posttraumatische Belastungsstörungen
 - Burnout
 - Schizophrenie
 - Demenz
 - Sucht
 - Krise
-- Zwangsst�rungen
+- Zwangsstörungen
 
-#�Synthesize
+# Synthesize
 
 ## Fragen
 
@@ -65,26 +65,26 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ideen (Features)
 
-- Navigation (Karte) zum n�chsten Kunden
+- Navigation (Karte) zum nächsten Kunden
 - Zeitrapport
-- Medikamentenliste und Materialliste f�r Tag
-- Medikamentliste und Materialliste f�r den Patienten
-- Taskliste f�r Patienten-Besuch
-- Taskliste (Termin) und Checkliste in Rapport automatisch �bernommen (erweiterbar)
+- Medikamentenliste und Materialliste für Tag
+- Medikamentliste und Materialliste für den Patienten
+- Taskliste für Patienten-Besuch
+- Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
-- Portrait (�berblick, wichtige Informationen) von Patienten
+- Portrait (Überblick, wichtige Informationen) von Patienten
 	- "Likes" und "Don't likes"
 - Letzter Rapport (Sprachausgabe)
 - Reminder
-- Alerts �ber Notf�lle
+- Alerts über Notfälle
 - Rapport per Spracheingabe (Voice Report)
 - Sprachsteuerung
 - Wichtige Hinweise zum Patienten
-- Tracking �ber GPS -> Zeitmanagment automatisiert
-- Alarmierungsfunktion bei Notf�llen vor Ort
-- ~~F�r Patient, Fallerkennung �ber Mobile-App -> Notruf mit R�ckfrage~~
+- Tracking über GPS -> Zeitmanagment automatisiert
+- Alarmierungsfunktion bei Notfällen vor Ort
+- ~~Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage~~
 - Mehrsprachig (nicht nur Landesprachen)
-- Weisungshandb�cher auf Abruf
+- Weisungshandbücher auf Abruf
 - Terminbuchungen-/Anfragen (in Rapport)
 - Medikamentenerfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)

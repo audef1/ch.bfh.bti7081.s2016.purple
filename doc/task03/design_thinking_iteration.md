@@ -11,14 +11,14 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Out-of-scope
 
-- Terminplannung
+- Terminplanung
 - Komplette Krankengeschichte
 
 ## Success measures
 
-- Besuch gut Dokumeniert
-- Healthvisitors brauchen App
-- Weniger Papier (Administrativer Aufwand)
+- Besuch gut dokumeniert
+- Health visitors brauchen App
+- Weniger Papier (Reduktion des administrativen Aufwands)
 - Besserer Austausch von Informationen zwischen Pflegepersonal
 
 
@@ -26,38 +26,38 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ziele des Besuchs
 
-- FÃ¶rderung der SelbststÃ¤ndigkeit
-- Planung und Umsetzung von AktivitÃ¤ten
-- Hilfe bei BehÃ¶rden- und ArztgÃ¤ngen
+- Förderung der Selbstständigkeit
+- Planung und Umsetzung von Aktivitäten
+- Hilfe bei Behörden- und Arztgängen
 - UnterstÃ¼tzung bei EinkÃ¤ufen
-- Erhalten von selbststÃ¤ndigem Wohnen (Verwahrlosung verhindern)
-- Ãœberwachung der Medikamentenabgabe
+- Erhalten von selbstständigem Wohnen (Verwahrlosung verhindern)
+- Überwachung der Medikamentenabgabe
 - Hilfestellung bei der Medikamenteneinnahme (Spritzen geben)
-- FrÃ¼hzeitige Erkennung von Krisen
+- Frühzeitige Erkennung von Krisen
 - Sozialer Kontakt
 
 ## Organisationen
 
 ### Bern
 
-- Spitex (Nur Medizinisches)
+- Spitex (nur medizinisches)
 - Rotes Kreuz (Transport)
 - Bellevie (Haushalt)
 
 ## Krankheitsbilder bei Patienten:
 
 - ADHS
-- PersÃ¶nlichkeitsstÃ¶rungen ( Borderline, Probleme mit Umgebung)
-- AngststÃ¶rungen
-- Posttraumatische BelastungsstÃ¶rungen
+- Persönlichkeitsstörungen (Borderline, Probleme mit Umgebung)
+- Angststörungen
+- Posttraumatische Belastungsstörungen
 - Burnout
 - Schizophrenie
 - Demenz
 - Sucht
 - Krise
-- ZwangsstÃ¶rungen
+- Zwangsstörungen
 
-#Â Synthesize
+# Synthesize
 
 ## Fragen
 
@@ -65,28 +65,28 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 
 ## Ideen (Features)
 
-- Navigation (Karte) zum nÃ¤chsten Kunden
+- Navigation (Karte) zum nächsten Kunden
 - Zeitrapport
-- Medikamentenliste und Materialliste fÃ¼r Tag
-- Medikamentliste und Materialliste fÃ¼r den Patienten
-- Taskliste fÃ¼r Patienten-Besuch
-- Taskliste (Termin) und Checkliste in Rapport automatisch Ã¼bernommen (erweiterbar)
+- Medikamentenliste und Materialliste für Tag
+- Medikamentliste und Materialliste für den Patienten
+- Taskliste für Patienten-Besuch
+- Taskliste (Termin) und Checkliste in Rapport automatisch übernommen (erweiterbar)
 - Krankheitsgeschichte von Patienten
-- Portrait (Ãœberblick, wichtige Informationen) von Patienten
+- Portrait (Überblick, wichtige Informationen) von Patienten
 	- "Likes" und "Don't likes"
 - Letzter Rapport (Sprachausgabe)
 - Reminder
-- Alerts Ã¼ber NotfÃ¤lle
+- Alerts über Notfälle
 - Rapport per Spracheingabe (Voice Report)
 - Sprachsteuerung
 - Wichtige Hinweise zum Patienten
-- Tracking Ã¼ber GPS -> Zeitmanagment automatisiert
-- Alarmierungsfunktion bei NotfÃ¤llen vor Ort
-- ~~FÃ¼r Patient, Fallerkennung Ã¼ber Mobile-App -> Notruf mit RÃ¼ckfrage~~
+- Tracking über GPS -> Zeitmanagment automatisiert
+- Alarmierungsfunktion bei Notfällen vor Ort
+- ~~Für Patient, Fallerkennung über Mobile-App -> Notruf mit Rückfrage~~
 - Mehrsprachig (nicht nur Landesprachen)
-- WeisungshandbÃ¼cher auf Abruf
+- Weisungshandbücher auf Abruf
 - Terminbuchungen-/Anfragen (in Rapport)
-- Medikamenterfassung (Autocomplete)
+- Medikamentenerfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)
 - Medikamente und Material bestellen
 - Memo (Erinnerungsnotiz)

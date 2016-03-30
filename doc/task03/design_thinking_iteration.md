@@ -89,6 +89,7 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 - Medikamenterfassung (Autocomplete)
 - Behandlungen aus vorgegebener Liste (Autocomplete)
 - Medikamente und Material bestellen
+- Memo (Erinnerungsnotiz)
 
 # Design
 
@@ -109,6 +110,8 @@ Der Healtvisitor besucht Patienten und verrichtet verschiedene Arbeiten im Zusam
 ![Storyboard Zeitrapport](storyboards/storyboard_zeitrapport.jpg)
 
 ![Storyboard Medikamente und Material bestellen](storyboards/storyboard_medikamente_bestellen.jpg)
+
+![Storyboard Medikamente und Material bestellen](storyboards/storyboard_memo.jpg)
 
 # Prototype
 

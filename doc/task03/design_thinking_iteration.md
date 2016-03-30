@@ -128,4 +128,4 @@ https://moqups.com/t.fluehmann94@hotmail.com/VtHLS7Zw/
 
 Mit den Informationen aus den Interviews konnten wir unsere Prototypen erheblich verbessern und wussten wo
 momentan die "Pain-Points" für die Health Visitors sind.
-[ Interviews ](../interviews)
+[ Interviews ](./interviews)

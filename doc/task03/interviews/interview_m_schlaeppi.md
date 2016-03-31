@@ -1,6 +1,6 @@
 #Interview
-**Datum**: 26.03.2016<br/>
-**Interviewpartner**: B. Inniger<br/>
+**Datum**: 31.03.2016<br/>
+**Interviewpartner**: M. Schläppi<br/>
 **Position**: Spitex
 
 ##Fragen

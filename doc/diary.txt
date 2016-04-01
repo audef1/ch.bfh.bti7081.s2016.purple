@@ -44,7 +44,7 @@ Abschliessen der ersten Iteration ohne Validierung.
 
 20.03.16 =====================================
 Wer: suter1
-Interview mit E. Suter, ehemalige Spitexmitarbeiterin für psychisch Kranke Personen.
+Interview mit E. Suter, ehemalige Spitexmitarbeiterin fÃ¼r psychisch Kranke Personen.
 
 21.03.16 =====================================
 Wer: r3h6
@@ -54,11 +54,11 @@ Interview.
 Wer: audef1
 Interview mit A. Baeriswyl, Pflechefachfrau in einer Psychiatrischen Tagesklinik.
 
-26.03.16
+26.03.16 ====================================
 Wer: gimmie7
 Interview per E-Mail mit B. Inniger, Spitex
 
-29.03.2016
+29.03.2016 ==================================
 Wer: gimmie7
 Storyboard und Prototyp zu "Medikamente und Material bestellen" erstellt
 
@@ -66,4 +66,8 @@ Quellen: http://www.ipw.zh.ch/internet/gesundheitsdirektion/ipw/de/krankheitsbil
 
 30.03.16 =====================================
 Wer: tfluehmann, suter1, r3h6, gimmie7
-Design Thinking, Präsentation der Ergebnisse.
+Design Thinking, PrÃ¤sentation der Ergebnisse.
+
+01.04.16
+Wer: tfluehmann, suter1, r3h6, gimmie7, audefl1
+Requirements Dokument; Aufteilung wer was fertig stellt

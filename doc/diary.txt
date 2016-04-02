@@ -45,6 +45,7 @@ Abschliessen der ersten Iteration ohne Validierung.
 20.03.16 =====================================
 Wer: suter1
 Interview mit E. Suter, ehemalige Spitexmitarbeiterin für psychisch Kranke Personen.
+Validierung zuvor erstellen Storyboards, notieren der Reaktionen.
 
 21.03.16 =====================================
 Wer: r3h6
@@ -65,9 +66,11 @@ Storyboard und Prototyp zu "Medikamente und Material bestellen" erstellt
 Quellen: http://www.ipw.zh.ch/internet/gesundheitsdirektion/ipw/de/krankheitsbilder.html
 
 30.03.16 =====================================
-Wer: tfluehmann, suter1, r3h6, gimmie7
+Anwesend: tfluehmann, suter1, r3h6, gimmie7
+Ferienabwesend: audef1
 Design Thinking, Präsentation der Ergebnisse.
 
-01.04.16
-Wer: tfluehmann, suter1, r3h6, gimmie7, audefl1
-Requirements Dokument; Aufteilung wer was fertig stellt
+01.04.16 =====================================
+Anwesend: alle
+Task04 - Aufsetzen Requirements Dokument,
+Aufteilung wer was fertigstellt

@@ -1,0 +1,7 @@
+[Health Visitor]-(Notruf)
+(Notruf)<(Polizei)
+(Notruf)<(Feuerwehr)
+(Notruf)<(Ambulanz)
+[Health Visitor]-(Alarmierung)
+(Alarmierung)<(Vorgesetzter)
+(Alarmierung)<(Notfallkontakte)

@@ -1,15 +1,17 @@
 (note: Aktueller Termin 1.0 {bg:beige})
 [Health Visitor]-(Checkliste),
-(Checkliste)<(Bearbeiten),
+(Checkliste)>(Bearbeiten),
 (Checkliste)<(Ansehen),
-(Bearbeiten)>(Erweitern),
-(Bearbeiten)>(Abhacken),
+(Bearbeiten)<(Erweitern),
+(Bearbeiten)<(Bestätigen),
 [Health Visitor]-(Details),
 (Details)<(Auswählen)
 [Health Visitor]-(Kurzbeschrieb)
-(Kurzbeschrieb)<(Erweitern)
-(Kurzbeschrieb)<(Einsehen)
+(Kurzbeschrieb)>(Bearbeiten)
+(Kurzbeschrieb)<(Ansehen)
 [Health Visitor]-(Report)
-(Report)<(Erfassen)
-(Report)<(Anzeigen)
+(Report)<(Erstellen)
+(Report)>(Bearbeiten)
+(Report)<(Ansehen)
+[Health Visitor]-(Navigation benutzen)
 

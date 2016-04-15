@@ -87,3 +87,7 @@ Task05 - Validierung des Requirements Dokuments der Gruppe Black gemäss Kriteri
 06.04.16 =====================================
 Anwesend: alle
 Task06 - Kontext und (high level) Aktivitätsdiagramm erstellt.
+
+15.04.16
+Anwesend: alle
+Task07 - Domain Model erstellt; nächste Schritte definiert

@@ -16,7 +16,7 @@
 
 ![Class Diagram](images/new_report_sequence_diagram.svg)
 
-## CR Cards
+## CRC Cards
 
 [Open PDF CRC-Cards](pdf/crc_cards.pdf)
 

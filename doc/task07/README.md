@@ -15,3 +15,11 @@
 ## Sequence Diagram (New Report)
 
 ![Class Diagram](images/new_report_sequence_diagram.svg)
+
+## CR Cards
+
+[Open PDF CRC-Cards](pdf/crc_cards.pdf)
+
+## Presentation
+
+[Open PDF Presentation](pdf/presentation.pdf)

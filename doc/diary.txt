@@ -88,6 +88,18 @@ Task05 - Validierung des Requirements Dokuments der Gruppe Black gemäss Kriteri
 Anwesend: alle
 Task06 - Kontext und (high level) Aktivitätsdiagramm erstellt.
 
-15.04.16
+15.04.16 =====================================
 Anwesend: alle
 Task07 - Domain Model erstellt; nächste Schritte definiert
+
+16. - 19.04.16 =====================================
+Anwesend: alle
+Task07 - Arbeiten an Task07:
+		 - CRC-Cards (audef1),
+		 - UML (tfluehmann, gimmie7, suter1, audef1),
+		 - Sequenzdiagramme (tfluehmann, r3h6)
+		 - Präsentation (suter1)
+
+20.04.16 =====================================
+Anwesend: alle
+Task07 - Abschluss des Tasks, Präsentation durch suter1 und r3h6

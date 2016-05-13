@@ -103,3 +103,17 @@ Task07 - Arbeiten an Task07:
 20.04.16 =====================================
 Anwesend: alle
 Task07 - Abschluss des Tasks, Präsentation durch suter1 und r3h6
+
+11.05.16 =====================================
+Anwesend: alle
+Task09 - Brainstorming, Entwurf Systemarchitektur durch r3h6, gimmie7, audef1.
+CS1 IDE Setup - Setup des Projekts gemäss Anleitung durch suter1 und tfluehmann.
+
+12. - 13.05.16 =====================================
+Wer: alle
+Task09 - Abschluss Systemarchitektur.
+
+13.05.16 =====================================
+Anwesend: alle
+Task09 - Präsentation durch audef1.
+

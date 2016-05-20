@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.MyUI;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -33,7 +33,7 @@ public class NavigatorUI extends UI {
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
-    @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
+    @VaadinServletConfiguration(ui = HealthVisitorUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
     }
 }

@@ -80,6 +80,7 @@ public class LoginView extends CustomComponent implements View{
         //TODO validate this shit in the db
         if(userMail.length() > 1 && userPassword.length() > 1){
             getSession().setAttribute("userMail", userMail);
+            controller.setUserMail(userMail);
             password.setValue("");
             logger.debug("both values ok, redirecting to dashboard");
             getUI().getNavigator().navigateTo(DashboardView.NAME);

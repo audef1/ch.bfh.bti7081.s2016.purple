@@ -25,6 +25,8 @@ public class DashboardView extends CustomComponent implements View {
     public DashboardView(){
         logger.debug("arrived on dashboard view");
         controller = new DashboardController(this);
+
+        //TODO outsource into an xml/html file
         //TODO add some magic buttons doing almost nothing
         exampleButton = new Button("Hello World");
         exampleButton.setSizeFull();

@@ -1,26 +1,19 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.servlet.annotation.WebServlet;
-
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 import com.vaadin.annotations.Theme;
-import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinServlet;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 /**
@@ -36,8 +29,6 @@ public class HealthVisitorUI extends UI {
 
     static final Logger logger = LogManager.getLogger(HealthVisitorUI.class);
 
-
-
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
@@ -46,7 +37,7 @@ public class HealthVisitorUI extends UI {
         // The view
         getNavigator().addView(LoginView.NAME, LoginView.class);
         getNavigator().addView(DashboardView.NAME, DashboardView.class);
-
+        //register al views in the navigator --> acts like a dispatcher
 
         EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");
         EntityManager em = emFac.createEntityManager();
@@ -57,7 +48,11 @@ public class HealthVisitorUI extends UI {
         em.close();
         emFac.close();
 
+        if(getSession().getAttribute("userMail") != null){
+            getNavigator().navigateTo(DashboardView.NAME);
+        }
         getNavigator().navigateTo(LoginView.NAME);
+
     }
 
 

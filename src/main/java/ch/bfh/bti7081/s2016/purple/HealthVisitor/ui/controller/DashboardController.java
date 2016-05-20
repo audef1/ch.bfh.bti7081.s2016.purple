@@ -7,7 +7,7 @@ import com.vaadin.ui.UI;
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class DashboardController {
+public class DashboardController extends BaseController {
     private  DashboardView dashboardView;
     public DashboardController(DashboardView dv){
         this.dashboardView = dv;

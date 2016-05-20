@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -44,6 +45,8 @@ public class HealthVisitorUI extends UI {
 
         // The view
         getNavigator().addView(LoginView.NAME, LoginView.class);
+        getNavigator().addView(DashboardView.NAME, DashboardView.class);
+
 
         EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");
         EntityManager em = emFac.createEntityManager();

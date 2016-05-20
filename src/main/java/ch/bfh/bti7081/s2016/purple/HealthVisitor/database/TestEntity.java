@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table
 public class TestEntity {
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int eid;
@@ -21,5 +22,22 @@ public class TestEntity {
 
     public TestEntity(){
         super();
+    }
+
+
+    public int getEid() {
+        return eid;
+    }
+
+    public void setEid(int eid) {
+        this.eid = eid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

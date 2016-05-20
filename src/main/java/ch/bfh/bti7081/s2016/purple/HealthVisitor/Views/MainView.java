@@ -24,7 +24,7 @@ public class MainView extends VerticalLayout implements View {
         @Override
         public void buttonClick(ClickEvent event) {
             // Navigate to a specific state
-            navigator.navigateTo(MAINVIEW + "/" + menuitem);
+       //     navigator.navigateTo(MAINVIEW + "/" + menuitem);
         }
     }
 
@@ -43,7 +43,7 @@ public class MainView extends VerticalLayout implements View {
         menuContent.addComponent(new Button("Sheep", new ButtonListener("sheep")));
 
         // Allow going back to the start
-        logout.addClickListener(event -> navigator.navigateTo(""));
+      //  logout.addClickListener(event -> navigator.navigateTo(""));
     }
 
     @DesignRoot

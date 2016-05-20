@@ -1,7 +1,11 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.database.TestEntity;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -42,6 +46,15 @@ public class MyUI extends UI {
         layout.setSpacing(true);
         
         setContent(layout);
+
+        EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");
+        EntityManager em = emFac.createEntityManager();
+        em.getTransaction().begin();
+        TestEntity test = new TestEntity(1, "hello");
+        em.persist(test);
+        System.out.println("Persisted");
+        em.close();
+        emFac.close();
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

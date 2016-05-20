@@ -66,6 +66,13 @@
 			<artifactId>vaadin-client</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<!-- http://mvnrepository.com/artifact/com.vaadin.addon/jpacontainer -->
+		<dependency>
+			<groupId>com.vaadin.addon</groupId>
+			<artifactId>jpacontainer</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+
 		<!--
 		  Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
 		  
@@ -84,6 +91,25 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>eclipselink</artifactId>
+			<version>LATEST</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.persistence</groupId>
+			<artifactId>javax.persistence</artifactId>
+			<version>LATEST</version>
+		</dependency>
+		<!-- http://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.8.7</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

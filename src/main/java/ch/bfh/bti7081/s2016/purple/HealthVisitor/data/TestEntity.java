@@ -1,4 +1,4 @@
-package ch.bfh.bti7081.s2016.purple.HealthVisitor.database;
+package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
 import javax.persistence.*;
 

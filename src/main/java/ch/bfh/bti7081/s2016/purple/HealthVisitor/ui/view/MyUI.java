@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.database.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;

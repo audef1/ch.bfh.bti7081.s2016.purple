@@ -1,8 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.MyUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.Views.DashboardView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.Views.MainView;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -29,8 +28,8 @@ public class NavigatorUI extends UI {
         navigator = new Navigator(this, this);
 
         // Create and register the views
-        navigator.addView(DASHBOARDVIEW, new DashboardView());
-        navigator.addView(MAINVIEW, new MainView());
+      //  navigator.addView(DASHBOARDVIEW, new DashboardView());
+        //navigator.addView(MAINVIEW, new MainView());
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

@@ -5,7 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.annotation.WebServlet;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.database.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -16,6 +16,9 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -27,6 +30,8 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 @Widgetset("ch.bfh.bti7081.s2016.purple.HealthVisitor.MyAppWidgetset")
 public class MyUI extends UI {
+
+    static final Logger logger = LogManager.getLogger(MyUI.class);
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -52,7 +57,7 @@ public class MyUI extends UI {
         em.getTransaction().begin();
         TestEntity test = new TestEntity(1, "hello");
         em.persist(test);
-        System.out.println("Persisted");
+        logger.debug("persisted test_entity");
         em.close();
         emFac.close();
     }

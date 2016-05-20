@@ -10,8 +10,8 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.Views.DashboardView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.Views.MainView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MainView;
 
 @Theme("mytheme")
 @Widgetset("ch.bfh.bti7081.s2016.purple.HealthVisitor.MyAppWidgetset")

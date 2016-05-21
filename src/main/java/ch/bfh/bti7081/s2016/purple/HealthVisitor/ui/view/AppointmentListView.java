@@ -34,8 +34,6 @@ public class AppointmentListView extends CustomComponent implements View {
         //TODO outsource into an xml/html file
         //TODO add some magic buttons doing almost nothing
         
-        CssLayout layout = new CssLayout();
-        
         grid = new GridLayout(4, 2);
         grid.addStyleName("ourcustomlayout");
         grid.setSpacing(true);
@@ -58,9 +56,7 @@ public class AppointmentListView extends CustomComponent implements View {
         
         HorizontalLayout title = new HorizontalLayout();
         Label listTitle = new Label("Termine für ");
-        
-        layout.addComponent(listTitle);
-        layout.setStyleName(ValoTheme.LABEL_HUGE);
+        listTitle.setStyleName("h1");
         
         title.addComponent(listTitle);
         

@@ -28,10 +28,12 @@ public class LoginView extends CustomComponent implements View{
         controller = new LoginController(this);
         logger.debug("this is the loginview");
 
-        ThemeResource resource = new ThemeResource("images/logo.png");
+        ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
         Image logo = new Image("Logo", resource);
         logo.setWidth("300px");
         logo.setCaption("");
+        
+        Label lbl = new Label();
         
         user = new TextField("");
         user.setWidth("300px");
@@ -52,7 +54,7 @@ public class LoginView extends CustomComponent implements View{
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((clickEvent -> {validate();}));
 
-        VerticalLayout fields = new VerticalLayout(logo, user, password, magicLoginButton);
+        VerticalLayout fields = new VerticalLayout(logo, lbl, user, password, magicLoginButton);
         fields.setSpacing(true);
         fields.setMargin(new MarginInfo(true, true, true, false));
         fields.setSizeUndefined();
@@ -60,8 +62,10 @@ public class LoginView extends CustomComponent implements View{
         // The view root layout
         VerticalLayout viewLayout = new VerticalLayout(fields);
         viewLayout.setSizeFull();
+        viewLayout.setSpacing(true);
+        viewLayout.setMargin(true);
         viewLayout.setCaption("Ready to login?");
-        viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
+        viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_LEFT);
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
         setCompositionRoot(viewLayout);
     }

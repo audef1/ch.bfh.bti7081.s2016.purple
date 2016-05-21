@@ -1,14 +1,20 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
-import com.vaadin.navigator.View;
-import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.Reindeer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 
 /**
  * Created by tgdflto1 on 20/05/16.
@@ -18,49 +24,85 @@ public class DashboardView extends CustomComponent implements View {
     private static final Logger logger = LogManager.getLogger(DashboardView.class);
     private final DashboardController controller;
 
-    private final GridLayout grid;
-    private final String[] buttonNames = {"Medication for Today", "Appointment List", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
-
+    private final VerticalLayout general;
+    
+    //private final GridLayout grid;
 
     public DashboardView(){
         logger.debug("arrived on dashboard view");
         controller = new DashboardController(this);
 
         //TODO outsource into an xml/html file
-        //TODO add some magic buttons doing almost nothing
-        grid = new GridLayout(4, 2);
-        grid.addStyleName("ourcustomlayout");
-        grid.setSpacing(true);
-
-        grid.setMargin(true);
-
-        for(String name : buttonNames){
-            Button exampleButton = new Button(name);
-            exampleButton.setSizeFull();
-            exampleButton.setHeight("50px");
-            exampleButton.setWidth("300px");
-            exampleButton.setDescription("magic");
-            grid.addComponent(exampleButton);
-        }
         
-        Button btn = new Button("Terminliste");
-        btn.addClickListener(clickevent ->
+        general = new VerticalLayout();
+        general.setMargin(true);
+        general.setSpacing(true);
+        
+        ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
+        Image logo = new Image("Logo", resource);
+        logo.setWidth("300px");
+        logo.setCaption("");
+        general.addComponent(logo);
+        
+        Label lbl = new Label();
+        general.addComponent(lbl);
+        
+        GridLayout grid = new GridLayout(3,2);
+        grid.setSpacing(true);
+        grid.addStyleName("ourcustomlayout");
+        
+        Button btMedcation = new Button("Medikamente heute");
+        btMedcation.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(MedicationView.NAME));
+        grid.addComponent(btMedcation);
+        
+        Button btAppointmentToday = new Button("Termine heute");
+        btAppointmentToday.addClickListener(clickevent ->
         	getUI().getNavigator().navigateTo(AppointmentListView.NAME));
-        grid.addComponent(btn);
+        grid.addComponent(btAppointmentToday);
+        
+        Button btAppointmentNow = new Button("Aktueller Termin");
+        btAppointmentNow.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME));
+        grid.addComponent(btAppointmentNow);
+        
+        Button btPatients = new Button("Meine Patienten");
+        btPatients.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(PatientListView.NAME));
+        grid.addComponent(btPatients);
+        
+        // TODO: Alarmpage
+        /*
+        Button btEmergency = new Button("Alarm");
+        btEmergency.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(EmergencyView.NAME));
+        grid.addComponent(btEmergency);
+        */
+        
+        Button btAppointmentList = new Button("Terminliste");
+        btAppointmentList.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(AppointmentListView.NAME));
+        grid.addComponent(btAppointmentList);
+        
+        general.addComponent(grid);
 
+        /*
         VerticalLayout fields = new VerticalLayout(grid);
         fields.setSpacing(true);
         fields.setCaption("hmm... what now");
         fields.setMargin(new MarginInfo(true, true, true, false));
         fields.setSizeUndefined();
+        */
 
         // The view root layout
+        /*
         VerticalLayout viewLayout = new VerticalLayout(fields);
         viewLayout.setSizeFull();
         viewLayout.setCaption("Ready to login?");
         viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
-        setCompositionRoot(viewLayout);
+        */
+        setCompositionRoot(general);
     }
 
     @Override

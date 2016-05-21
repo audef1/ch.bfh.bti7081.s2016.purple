@@ -14,21 +14,21 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.VerticalLayout;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListController;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListController;
 
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class AppointmentListView extends CustomComponent implements View {
-    public static final String NAME ="AppointmentList";
-    private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
-    private final AppointmentListController controller;
+public class PatientListView extends CustomComponent implements View {
+    public static final String NAME ="PatientList";
+    private static final Logger logger = LogManager.getLogger(PatientListView.class);
+    private final PatientListController controller;
     private final VerticalLayout general;
     
 
-    public AppointmentListView(){
+    public PatientListView(){
         logger.debug("arrived on appointment list view");
-        controller = new AppointmentListController(this);
+        controller = new PatientListController(this);
 
         //TODO outsource into an xml/html file
 
@@ -46,7 +46,7 @@ public class AppointmentListView extends CustomComponent implements View {
         topLeft.addComponent(btBack);
         
         HorizontalLayout title = new HorizontalLayout();
-        Label listTitle = new Label("Termine für ");
+        Label listTitle = new Label("Patienten von ");
         listTitle.setStyleName("h1");
         
         title.addComponent(listTitle);

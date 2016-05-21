@@ -5,6 +5,9 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientListView;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -44,6 +47,8 @@ public class HealthVisitorUI extends UI {
         getNavigator().addView(DashboardView.NAME, DashboardView.class);
         getNavigator().addView(AppointmentListView.NAME, AppointmentListView.class);
         getNavigator().addView(AppointmentDetailView.NAME, AppointmentDetailView.class);
+        getNavigator().addView(PatientListView.NAME, PatientListView.class);
+        getNavigator().addView(MedicationView.NAME, MedicationView.class);
         //register al views in the navigator --> acts like a dispatcher
 
         EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");

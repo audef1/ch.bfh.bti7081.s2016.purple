@@ -5,6 +5,7 @@ import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.Reindeer;
@@ -22,10 +23,15 @@ public class LoginView extends CustomComponent implements View{
     private final TextField user;
     private final PasswordField password;
     private final Button magicLoginButton;
+    
     public LoginView(){
         controller = new LoginController(this);
         logger.debug("this is the loginview");
 
+        ThemeResource resource = new ThemeResource("images/logo.png");
+        Image logo = new Image("Logo", resource);
+        logo.setWidth("300px");
+        
         user = new TextField("");
         user.setWidth("300px");
         user.setRequired(true);
@@ -43,7 +49,7 @@ public class LoginView extends CustomComponent implements View{
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((clickEvent -> {validate();}));
 
-        VerticalLayout fields = new VerticalLayout(user, password, magicLoginButton);
+        VerticalLayout fields = new VerticalLayout(logo, user, password, magicLoginButton);
         fields.setSpacing(true);
         fields.setMargin(new MarginInfo(true, true, true, false));
         fields.setSizeUndefined();

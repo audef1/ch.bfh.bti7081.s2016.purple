@@ -31,17 +31,20 @@ public class LoginView extends CustomComponent implements View{
         ThemeResource resource = new ThemeResource("images/logo.png");
         Image logo = new Image("Logo", resource);
         logo.setWidth("300px");
+        logo.setCaption("");
         
         user = new TextField("");
         user.setWidth("300px");
         user.setRequired(true);
-        user.setInputPrompt("Your email (eg. foo@bar.com)");
-        user.addValidator(new EmailValidator("Please enter a valid email"));
+        user.setCaption("Benutzername");
+        user.setInputPrompt("E-Mail");
+        user.addValidator(new EmailValidator("Bitte geben Sie eine gültige E-Mail Adresse ein!"));
         user.setInvalidAllowed(false);
 
         password = new PasswordField("");
         password.setWidth("300px");
         password.setRequired(true);
+        password.setCaption("Kennwort");
         password.addValidator(new PasswordValidator());
         password.setInvalidAllowed(true);
 
@@ -72,7 +75,7 @@ public class LoginView extends CustomComponent implements View{
     private void validate(){
         Notification.show("received", Notification.Type.ASSISTIVE_NOTIFICATION);
         if(!password.isValid() || !user.isValid()){
-            Notification.show("Please enter valid information",
+            Notification.show("Login oder Kennwort falsch",
                     Notification.Type.WARNING_MESSAGE);
             return;
         }

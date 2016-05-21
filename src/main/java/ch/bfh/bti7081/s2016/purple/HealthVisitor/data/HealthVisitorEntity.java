@@ -2,8 +2,8 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -18,6 +18,9 @@ public class HealthVisitorEntity extends PersonEntity {
     @OneToMany(mappedBy="health_visitor")
     private Set<ClientEntity> clients;
 
+    private int workingHours;
+    private int employeeNumber;
+    private Date hireDate;
 
     public Set<ClientEntity> getClients() {
         return clients;
@@ -26,4 +29,32 @@ public class HealthVisitorEntity extends PersonEntity {
     public void setClients(Set<ClientEntity> clients) {
         this.clients = clients;
     }
+
+
+    public int getWorkingHours() {
+        return workingHours;
+    }
+
+    public void setWorkingHours(int workingHours) {
+        this.workingHours = workingHours;
+    }
+
+    public int getEmployeeNumber() {
+        return employeeNumber;
+    }
+
+    public void setEmployeeNumber(int employeeNumber) {
+        this.employeeNumber = employeeNumber;
+    }
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
+    }
+
+
+
 }

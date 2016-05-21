@@ -19,7 +19,7 @@ public class DashboardView extends CustomComponent implements View {
     private final DashboardController controller;
 
     private final GridLayout grid;
-    private final String[] buttonNames = {"Medication for Today", "hello hello", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
+    private final String[] buttonNames = {"Medication for Today", "Appointment List", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
 
 
     public DashboardView(){
@@ -42,6 +42,11 @@ public class DashboardView extends CustomComponent implements View {
             exampleButton.setDescription("magic");
             grid.addComponent(exampleButton);
         }
+        
+        Button btn = new Button("Terminliste");
+        btn.addClickListener(clickevent ->
+        	getUI().getNavigator().navigateTo(AppointmentListView.NAME));
+        grid.addComponent(btn);
 
         VerticalLayout fields = new VerticalLayout(grid);
         fields.setSpacing(true);

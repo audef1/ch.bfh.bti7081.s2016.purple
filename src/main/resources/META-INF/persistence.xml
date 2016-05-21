@@ -5,6 +5,11 @@
              xmlns="http://java.sun.com/xml/ns/persistence">
     <persistence-unit name="EclipseLink_JPA" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity</class>
+        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ContactEntity</class>
+        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity</class>
+        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.PersonEntity</class>
+        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity</class>
         <!-- <class>ch.bfh.bti8081.s2016.purple.HealthVisitor.TestEntity</class> -->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>

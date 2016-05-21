@@ -115,6 +115,11 @@
 			<artifactId>log4j-core</artifactId>
 			<version>LATEST</version>
 		</dependency>
+		<dependency>
+    		<groupId>com.google.maps</groupId>
+    		<artifactId>google-maps-services</artifactId>
+    		<version>LATEST</version>
+		</dependency>
 
 
 	</dependencies>

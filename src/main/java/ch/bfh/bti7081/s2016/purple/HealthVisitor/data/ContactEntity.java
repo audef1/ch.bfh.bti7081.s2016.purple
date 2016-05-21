@@ -13,7 +13,7 @@ import java.util.Collection;
 @DiscriminatorValue("C")
 public class ContactEntity extends PersonEntity{
 
-    @ManyToMany
+ /**   @ManyToMany
     @JoinTable(name="ClI_CON",
             joinColumns=
             @JoinColumn(name="CON_ID"),
@@ -21,8 +21,9 @@ public class ContactEntity extends PersonEntity{
             @JoinColumn(name="CLI_ID")
     )
     private Collection<ClientEntity> clients;
+            **/
     private String relation;
-
+/**
     public Collection<ClientEntity> getClients() {
         return clients;
     }
@@ -30,6 +31,7 @@ public class ContactEntity extends PersonEntity{
     public void setClients(Collection<ClientEntity> clients) {
         this.clients = clients;
     }
+ **/
 
     public String getRelation() {
         return relation;

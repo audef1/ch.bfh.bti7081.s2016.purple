@@ -15,7 +15,9 @@ import java.util.Set;
 @DiscriminatorValue("H")
 public class HealthVisitorEntity extends PersonEntity {
 
-    @OneToMany(mappedBy="health_visitor")
+
+
+    @OneToMany(mappedBy="hv")
     private Set<ClientEntity> clients;
 
     private int workingHours;
@@ -25,6 +27,7 @@ public class HealthVisitorEntity extends PersonEntity {
     public Set<ClientEntity> getClients() {
         return clients;
     }
+
 
     public void setClients(Set<ClientEntity> clients) {
         this.clients = clients;

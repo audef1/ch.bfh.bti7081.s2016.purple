@@ -13,7 +13,7 @@ import java.util.Collection;
 @DiscriminatorValue("K")
 public class ClientEntity extends PersonEntity {
 
-
+/**
     @ManyToMany
     @JoinTable(name = "ClI_CON",
             joinColumns =
@@ -22,20 +22,20 @@ public class ClientEntity extends PersonEntity {
             @JoinColumn(name = "CON_ID")
     )
     private Collection<ContactEntity> contacts;
-
+**/
     @ManyToOne
     @JoinColumn(name="HV_ID", nullable=false)
-    private HealthVisitorEntity responsibleHealthVisitor;
-
+    private HealthVisitorEntity hv;
 
     public HealthVisitorEntity getResponsibleHealthVisitor() {
-        return responsibleHealthVisitor;
+        return hv;
     }
 
     public void setResponsibleHealthVisitor(HealthVisitorEntity responsibleHealthVisitor) {
-        this.responsibleHealthVisitor = responsibleHealthVisitor;
+        this.hv = responsibleHealthVisitor;
     }
 
+    /**
     public Collection<ContactEntity> getContacts() {
         return contacts;
     }
@@ -43,4 +43,5 @@ public class ClientEntity extends PersonEntity {
     public void setContacts(Collection<ContactEntity> contacts) {
         this.contacts = contacts;
     }
+     **/
 }

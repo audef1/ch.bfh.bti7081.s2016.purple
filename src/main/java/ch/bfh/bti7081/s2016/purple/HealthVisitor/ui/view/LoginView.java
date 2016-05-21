@@ -8,6 +8,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
+import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.themes.Reindeer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,13 +28,14 @@ public class LoginView extends CustomComponent implements View{
     public LoginView(){
         controller = new LoginController(this);
         logger.debug("this is the loginview");
-
+        
         ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
         Image logo = new Image("Logo", resource);
         logo.setWidth("300px");
         logo.setCaption("");
         
-        Label lbl = new Label();
+        Label lblHeader = new Label("Login");
+        lblHeader.setStyleName("header");
         
         user = new TextField("");
         user.setWidth("300px");
@@ -54,18 +56,28 @@ public class LoginView extends CustomComponent implements View{
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((clickEvent -> {validate();}));
 
-        VerticalLayout fields = new VerticalLayout(logo, lbl, user, password, magicLoginButton);
+        // The Layout for the Logo
+        GridLayout top = new GridLayout(2, 1);
+        top.setSizeFull();
+        top.addComponent(lblHeader, 0, 0);
+        top.addComponent(logo, 1, 0);
+        top.setComponentAlignment(logo, Alignment.TOP_RIGHT);
+        top.setMargin(new MarginInfo(false, false, true, true));
+        
+        // The Layout for the Login-Part
+        VerticalLayout fields = new VerticalLayout(user, password, magicLoginButton);
         fields.setSpacing(true);
         fields.setMargin(new MarginInfo(true, true, true, false));
         fields.setSizeUndefined();
 
         // The view root layout
-        VerticalLayout viewLayout = new VerticalLayout(fields);
+        VerticalLayout viewLayout = new VerticalLayout(top, fields);
         viewLayout.setSizeFull();
         viewLayout.setSpacing(true);
-        viewLayout.setMargin(true);
+        viewLayout.setMargin(new MarginInfo(true, true, true, true));
         viewLayout.setCaption("Ready to login?");
-        viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_LEFT);
+        viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
+        
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
         setCompositionRoot(viewLayout);
     }

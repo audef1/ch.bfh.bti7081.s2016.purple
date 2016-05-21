@@ -19,7 +19,7 @@ public class DashboardView extends CustomComponent implements View {
     private final DashboardController controller;
 
     private final GridLayout grid;
-    private final String[] buttonNames = {"hello world", "hello hello", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
+    private final String[] buttonNames = {"Medication for Today", "hello hello", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
 
 
     public DashboardView(){
@@ -30,7 +30,9 @@ public class DashboardView extends CustomComponent implements View {
         //TODO add some magic buttons doing almost nothing
         grid = new GridLayout(4, 2);
         grid.addStyleName("ourcustomlayout");
+        grid.setSpacing(true);
 
+        grid.setMargin(true);
 
         for(String name : buttonNames){
             Button exampleButton = new Button(name);

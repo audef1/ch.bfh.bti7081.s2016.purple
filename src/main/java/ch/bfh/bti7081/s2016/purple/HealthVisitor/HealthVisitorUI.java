@@ -53,8 +53,9 @@ public class HealthVisitorUI extends UI {
 
         if(getSession().getAttribute("userMail") != null){
             getNavigator().navigateTo(DashboardView.NAME);
+        }else{
+            getNavigator().navigateTo(LoginView.NAME);
         }
-        getNavigator().navigateTo(LoginView.NAME);
 
     }
 

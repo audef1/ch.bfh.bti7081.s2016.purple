@@ -3,13 +3,10 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0"
              xmlns="http://java.sun.com/xml/ns/persistence">
+
+
     <persistence-unit name="EclipseLink_JPA" transaction-type="RESOURCE_LOCAL">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity</class>
-        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ContactEntity</class>
-        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity</class>
-        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.PersonEntity</class>
-        <class>ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity</class>
         <!-- <class>ch.bfh.bti8081.s2016.purple.HealthVisitor.TestEntity</class> -->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
@@ -17,6 +14,7 @@
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:test.db" />
             <property name="eclipselink.logging.level" value="ALL" />
             <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.logging.logger" value="ch.bfh.bti7081.s2016.purple.HealthVisitor.CustomLogger"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -1,19 +1,21 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListController;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.Reindeer;
-import com.vaadin.ui.themes.ValoTheme;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.VerticalLayout;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListController;
 
 /**
  * Created by tgdflto1 on 20/05/16.
@@ -24,8 +26,6 @@ public class AppointmentListView extends CustomComponent implements View {
     private final AppointmentListController controller;
 
     private final GridLayout grid;
-    //private final String[] buttonNames = {"Medication for Today", "hello hello", "heilo", "heil", "hei", "he", "aloah", "bonjour"};
-
 
     public AppointmentListView(){
         logger.debug("arrived on appointment list view");
@@ -42,10 +42,9 @@ public class AppointmentListView extends CustomComponent implements View {
 
         VerticalLayout general = new VerticalLayout();
         general.setSpacing(true);
+        general.setMargin(true);
         
         HorizontalLayout topLeft = new HorizontalLayout();
-        topLeft.setSpacing(true);
-        topLeft.setMargin(true);
         
         Button btBack = new Button("Zurück");
         btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
@@ -60,14 +59,17 @@ public class AppointmentListView extends CustomComponent implements View {
         
         title.addComponent(listTitle);
         
-        general.addComponents(topLeft, title);
+        Grid list = new Grid();
+        list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
         
-        
-        
+        general.addComponents(topLeft, title, list);
         
         grid.addComponent(general);
         
         setCompositionRoot(general);
+        
+        list.addSelectionListener((clickEvent ->
+        		getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
         
         /*
         for(String name : buttonNames){

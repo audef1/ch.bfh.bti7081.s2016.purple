@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
@@ -42,6 +43,7 @@ public class HealthVisitorUI extends UI {
         getNavigator().addView(LoginView.NAME, LoginView.class);
         getNavigator().addView(DashboardView.NAME, DashboardView.class);
         getNavigator().addView(AppointmentListView.NAME, AppointmentListView.class);
+        getNavigator().addView(AppointmentDetailView.NAME, AppointmentDetailView.class);
         //register al views in the navigator --> acts like a dispatcher
 
         EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");

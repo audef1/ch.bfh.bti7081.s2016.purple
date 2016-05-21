@@ -1,0 +1,5 @@
+
+/* Add padding through which the background color shows. */
+.v-gridlayout-gridexpandratio .v-gridlayout-margin, .v-gridlayout-slot {
+    padding: 2px;
+}

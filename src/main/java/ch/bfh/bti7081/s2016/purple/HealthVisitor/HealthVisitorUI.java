@@ -4,9 +4,11 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 import com.vaadin.annotations.Theme;
+import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.annotation.WebServlet;
 
 
 /**
@@ -26,7 +29,7 @@ import javax.persistence.Persistence;
 @Theme("mytheme")
 @Widgetset("ch.bfh.bti7081.s2016.purple.HealthVisitor.MyAppWidgetset")
 public class HealthVisitorUI extends UI {
-
+    Navigator navigator;
     static final Logger logger = LogManager.getLogger(HealthVisitorUI.class);
 
     @Override
@@ -56,4 +59,9 @@ public class HealthVisitorUI extends UI {
     }
 
 
+
+    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    @VaadinServletConfiguration(ui = HealthVisitorUI.class, productionMode = false)
+    public static class MyUIServlet extends VaadinServlet {
+    }
 }

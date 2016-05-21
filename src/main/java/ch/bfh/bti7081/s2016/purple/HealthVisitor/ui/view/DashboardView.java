@@ -2,7 +2,6 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
-import com.vaadin.data.Container;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.shared.ui.MarginInfo;

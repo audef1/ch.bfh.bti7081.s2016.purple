@@ -1,9 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.LoginController;
-import com.vaadin.data.Validator;
 import com.vaadin.data.validator.EmailValidator;
-import com.vaadin.event.MouseEvents;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
@@ -12,7 +10,6 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.Reindeer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import sun.security.util.Password;
 
 /**
  * Created by tgdflto1 on 20/05/16.

@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by tgdflto1 on 21/05/16.
@@ -13,16 +14,12 @@ import java.util.Collection;
 @DiscriminatorValue("K")
 public class ClientEntity extends PersonEntity {
 
-/**
-    @ManyToMany
-    @JoinTable(name = "ClI_CON",
-            joinColumns =
-            @JoinColumn(name = "CLI_ID"),
-            inverseJoinColumns =
-            @JoinColumn(name = "CON_ID")
-    )
+    @OneToMany(mappedBy="client")
+    private List<AppointmentEntity> appointments;
+
+    @ManyToMany(mappedBy="clients")
     private Collection<ContactEntity> contacts;
-**/
+
     @ManyToOne
     @JoinColumn(name="HV_ID", nullable=false)
     private HealthVisitorEntity hv;

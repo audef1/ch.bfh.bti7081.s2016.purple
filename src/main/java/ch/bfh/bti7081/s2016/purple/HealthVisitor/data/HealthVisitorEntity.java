@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,6 +16,9 @@ import java.util.Set;
 @DiscriminatorValue("H")
 public class HealthVisitorEntity extends PersonEntity {
 
+
+    @OneToMany(mappedBy="healthVisitor")
+    private List<AppointmentEntity> appointments;
 
 
     @OneToMany(mappedBy="hv")
@@ -28,6 +32,13 @@ public class HealthVisitorEntity extends PersonEntity {
         return clients;
     }
 
+    public List<AppointmentEntity> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<AppointmentEntity> appointments) {
+        this.appointments = appointments;
+    }
 
     public void setClients(Set<ClientEntity> clients) {
         this.clients = clients;

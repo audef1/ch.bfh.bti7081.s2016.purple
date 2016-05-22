@@ -7,4 +7,6 @@
     
 
     
+
+    <inherits name="com.vaadin.tapio.googlemaps.Widgetset" />
 </module>

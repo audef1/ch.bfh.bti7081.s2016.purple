@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.LoginController;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
@@ -99,10 +100,9 @@ public class LoginView extends CustomComponent implements View{
         String userPassword = password.getValue();
         logger.debug("password is: "+userPassword);
         logger.debug("username is: "+ userMail);
-        //TODO validate this shit in the db
-        if(userMail.length() > 1 && userPassword.length() > 1){
+        HealthVisitorEntity hve = controller.authenticate(userMail, userPassword);
+        if(hve != null){
             getSession().setAttribute("userMail", userMail);
-            controller.setUserMail(userMail);
             password.setValue("");
             logger.debug("both values ok, redirecting to dashboard");
             getUI().getNavigator().navigateTo(DashboardView.NAME);

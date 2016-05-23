@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,11 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("C")
 public class ContactEntity extends PersonEntity{
+    public ContactEntity(){}
+    public ContactEntity(String firstName, String lastName, Date dateOfBirth, String email, String password, String relation) {
+        super(firstName, lastName, dateOfBirth, email, password);
+        this.relation = relation;
+    }
 
     @ManyToMany
     @JoinTable(name="ClI_CON",
@@ -23,7 +29,10 @@ public class ContactEntity extends PersonEntity{
     )
     private Collection<ClientEntity> clients;
     private String relation;
-/**
+
+
+
+    /**
     public Collection<ClientEntity> getClients() {
         return clients;
     }

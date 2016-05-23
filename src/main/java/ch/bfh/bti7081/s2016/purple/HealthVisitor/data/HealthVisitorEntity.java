@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -13,9 +14,20 @@ import java.util.Set;
  */
 
 @Entity
+@Table
 @DiscriminatorValue("H")
 public class HealthVisitorEntity extends PersonEntity {
+    public HealthVisitorEntity(){}
+    public HealthVisitorEntity(String firstName, String lastName,
+                               Date dateOfBirth, String email,
+                               String password, int workingHours,
+                               int employeeNumber, Date hireDate) {
 
+        super(firstName, lastName, dateOfBirth, email, password);
+        this.workingHours = workingHours;
+        this.employeeNumber = employeeNumber;
+        this.hireDate = hireDate;
+    }
 
     @OneToMany(mappedBy="healthVisitor")
     private List<AppointmentEntity> appointments;

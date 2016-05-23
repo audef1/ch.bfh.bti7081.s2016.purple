@@ -13,7 +13,7 @@
             <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
             <property name="javax.persistence.jdbc.url" value="jdbc:sqlite:test.db" />
             <property name="eclipselink.logging.level" value="ALL" />
-            <property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
             <property name="eclipselink.logging.logger" value="ch.bfh.bti7081.s2016.purple.HealthVisitor.CustomLogger"/>
         </properties>
     </persistence-unit>

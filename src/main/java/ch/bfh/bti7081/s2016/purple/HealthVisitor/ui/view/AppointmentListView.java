@@ -1,5 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import com.vaadin.data.util.BeanItemContainer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -53,10 +55,14 @@ public class AppointmentListView extends CustomComponent implements View {
 
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
-		
-		Grid list = new Grid();
-		list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
-		
+
+
+		final BeanItemContainer<AppointmentEntity> ds =
+				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, controller.getAppointments());
+		Grid grid = new Grid("Employees", ds);
+		grid.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
+
+
 		// The Layout for the Logo
 		GridLayout top = new GridLayout(2, 1);
 		top.setSizeFull();
@@ -71,7 +77,7 @@ public class AppointmentListView extends CustomComponent implements View {
 		title.addComponent(listTitle);
 		title.setMargin(new MarginInfo(false, true, true, true));
 		title.setSpacing(true);
-		title.addComponent(list);
+		title.addComponent(grid);
 
 		// TODO Add patients and appointments from db to the list
 
@@ -79,7 +85,7 @@ public class AppointmentListView extends CustomComponent implements View {
 
 		setCompositionRoot(general);
 
-		list.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
+		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.InitializeBasicEntities;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
@@ -34,6 +35,8 @@ import javax.servlet.annotation.WebServlet;
 @Theme("mytheme")
 @Widgetset("ch.bfh.bti7081.s2016.purple.HealthVisitor.MyAppWidgetset")
 public class HealthVisitorUI extends UI {
+    public static final String PERSISTENCE_UNIT_NAME = "EclipseLink_JPA";
+
     Navigator navigator;
     static final Logger logger = LogManager.getLogger(HealthVisitorUI.class);
 
@@ -51,15 +54,8 @@ public class HealthVisitorUI extends UI {
         getNavigator().addView(MedicationView.NAME, MedicationView.class);
         //register al views in the navigator --> acts like a dispatcher
 
-        EntityManagerFactory emFac = Persistence.createEntityManagerFactory("EclipseLink_JPA");
-        EntityManager em = emFac.createEntityManager();
-        em.getTransaction().begin();
-        TestEntity test = new TestEntity(1, "hello");
-        em.persist(test);
-        logger.debug("persisted test_entity");
-        em.close();
-        emFac.close();
-
+        InitializeBasicEntities initiUtilities = InitializeBasicEntities.getInstance();
+        initiUtilities.initializeBasicUser();
         if(getSession().getAttribute("userMail") != null){
             getNavigator().navigateTo(DashboardView.NAME);
         }else{

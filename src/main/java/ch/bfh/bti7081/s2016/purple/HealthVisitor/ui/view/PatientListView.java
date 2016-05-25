@@ -16,12 +16,15 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListContro
  */
 public class PatientListView extends BaseView {
     public static final String NAME ="PatientList";
+    public static final String VIEW_NAME ="Patientenliste";
+
     private static final Logger logger = LogManager.getLogger(PatientListView.class);
     private final PatientListController controller;
     private final VerticalLayout general;
     
 
     public PatientListView(){
+        super(VIEW_NAME);
         logger.debug("arrived on appointment list view");
         controller = new PatientListController(this);
 

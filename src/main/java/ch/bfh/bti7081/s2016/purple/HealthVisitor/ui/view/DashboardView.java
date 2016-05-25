@@ -22,6 +22,7 @@ public class DashboardView extends BaseView{
 	private  VerticalLayout general;
 
 	public DashboardView() {
+		super(DashboardView.NAME);
 		logger.debug("arrived on dashboard view");
 		controller = new DashboardController(this);
 
@@ -39,8 +40,6 @@ public class DashboardView extends BaseView{
 		logo.setWidth("300px");
 		logo.setCaption("");
 
-		Label lblHeader = new Label("Dashboard");
-		lblHeader.setStyleName("header");
 
 		GridLayout grid = new GridLayout(3, 2);
 		grid.setSpacing(true);
@@ -77,7 +76,6 @@ public class DashboardView extends BaseView{
 		// The Layout for the Logo
 		GridLayout top = new GridLayout(2, 1);
 		top.setSizeFull();
-		top.addComponent(lblHeader, 0, 0);
 		top.addComponent(logo, 1, 0);
 		top.setComponentAlignment(logo, Alignment.TOP_RIGHT);
 		top.setMargin(new MarginInfo(true, true, false, true));

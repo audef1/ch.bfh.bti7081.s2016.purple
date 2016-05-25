@@ -28,6 +28,7 @@ public class LoginView extends BaseView{
     private  Button magicLoginButton;
     
     public LoginView(){
+        super(NAME);
         controller = new LoginController(this);
         logger.debug("this is the loginview");
     }
@@ -35,9 +36,6 @@ public class LoginView extends BaseView{
     @Override
     protected Layout initView() {
 
-
-        Label lblHeader = new Label("Login");
-        lblHeader.setStyleName("header");
 
         user = new TextField("");
         user.setWidth("300px");
@@ -61,7 +59,6 @@ public class LoginView extends BaseView{
         // The Layout for the Logo
         GridLayout top = new GridLayout(2, 1);
         top.setSizeFull();
-        top.addComponent(lblHeader, 0, 0);
         top.setMargin(new MarginInfo(false, false, true, true));
 
         // The Layout for the Login-Part

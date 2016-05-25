@@ -9,7 +9,7 @@ import com.vaadin.ui.*;
  * Created by tgdflto1 on 25/05/16.
  */
 public class HeaderComponent extends HorizontalLayout {
-    public HeaderComponent(){
+    public HeaderComponent(String pageName){
         this.setWidth("100%");
         this.setSizeFull();
         this.setWidth("100%");
@@ -18,6 +18,7 @@ public class HeaderComponent extends HorizontalLayout {
         Image logo = new Image("Logo", resource);
         logo.setWidth("300px");
         logo.setCaption("");
+        this.addComponent(new Label(pageName));
         this.addComponent(logo);
         this.setComponentAlignment(logo, Alignment.TOP_RIGHT);
     }

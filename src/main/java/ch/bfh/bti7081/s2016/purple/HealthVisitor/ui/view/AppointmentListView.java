@@ -19,11 +19,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListCo
  */
 public class AppointmentListView extends BaseView {
 	public static final String NAME = "AppointmentList";
+	public static final String VIEW_NAME = "Terminliste";
+
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
 	private final AppointmentListController controller;
 	private VerticalLayout general;
 
 	public AppointmentListView() {
+		super(VIEW_NAME);
 		logger.debug("arrived on appointment list view");
 		controller = new AppointmentListController(this);
 
@@ -43,8 +46,6 @@ public class AppointmentListView extends BaseView {
 		logo.setWidth("300px");
 		logo.setCaption("");
 
-		Label lblHeader = new Label("Dashboard");
-		lblHeader.setStyleName("header");
 
 		Button btBack = new Button("Zurück");
 		btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
@@ -63,7 +64,7 @@ public class AppointmentListView extends BaseView {
 		// The Layout for the Logo
 		GridLayout top = new GridLayout(2, 1);
 		top.setSizeFull();
-		HorizontalLayout hl = new HorizontalLayout(btBack, lblHeader);
+		HorizontalLayout hl = new HorizontalLayout(btBack);
 		hl.setSpacing(true);
 		top.addComponent(hl, 0, 0);
 		top.addComponent(logo, 1, 0);

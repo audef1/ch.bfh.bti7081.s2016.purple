@@ -13,11 +13,14 @@ import org.apache.logging.log4j.Logger;
 
 public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
+	public static final String VIEW_NAME = "Termindetails";
+
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private final AppointmentDetailController controller;
 	private  VerticalLayout general;
 
 	public AppointmentDetailView() {
+		super(AppointmentDetailView.VIEW_NAME);
 		logger.debug("arrived on appointment detail view");
 		controller = new AppointmentDetailController(this);
 	}
@@ -28,13 +31,6 @@ public class AppointmentDetailView extends BaseView{
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
 
-		ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
-		Image logo = new Image("Logo", resource);
-		logo.setWidth("300px");
-		logo.setCaption("");
-		logo.addClickListener(clickevent ->
-				getUI().getNavigator().navigateTo(DashboardView.NAME));
-
 
 		Label lblHeader = new Label("Termin Detail");
 		lblHeader.setStyleName("header");
@@ -43,8 +39,6 @@ public class AppointmentDetailView extends BaseView{
 		btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
 		btBack.addClickListener((clickEvent -> getUI().getNavigator().navigateTo(DashboardView.NAME)));
 
-		Label lblTitle = new Label("Aktueller Termin: ");
-		lblTitle.setStyleName("h1");
 
 		Button btnArrival = new Button("Ankunft bestätigen");
 		btnArrival.addClickListener(clickevent ->
@@ -100,9 +94,7 @@ public class AppointmentDetailView extends BaseView{
 		hl.setMargin(new MarginInfo(true, false, true, false));
 
 		VerticalLayout vl = new VerticalLayout();
-		vl.addComponent(logo);
 		vl.addComponent(btnArrival);
-		vl.setComponentAlignment(logo, Alignment.TOP_RIGHT);
 		vl.setComponentAlignment(btnArrival, Alignment.TOP_LEFT);
 		vl.setMargin(new MarginInfo(false, false, true, false));
 		vl.setSpacing(true);
@@ -148,7 +140,6 @@ public class AppointmentDetailView extends BaseView{
 
 		// Set the root layout
 		general.addComponent(top);
-		general.addComponent(lblTitle);
 		general.addComponent(data);
 
 		return general;

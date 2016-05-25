@@ -20,6 +20,7 @@ public class MedicationView extends BaseView {
 
 
     public MedicationView(){
+        super(NAME);
         logger.debug("arrived on dashboard view");
         controller = new MedicationController(this);
 

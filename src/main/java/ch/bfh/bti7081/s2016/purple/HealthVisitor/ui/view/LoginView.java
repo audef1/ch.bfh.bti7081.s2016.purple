@@ -1,7 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.validator.PasswordValidator;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.LoginController;
+
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
@@ -11,6 +13,7 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.themes.Reindeer;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -106,21 +109,6 @@ public class LoginView extends CustomComponent implements View{
             password.setValue("");
             logger.debug("both values ok, redirecting to dashboard");
             getUI().getNavigator().navigateTo(DashboardView.NAME);
-        }
-    }
-
-    private class PasswordValidator implements com.vaadin.data.Validator {
-        @Override
-        public void validate(Object o) throws InvalidValueException {
-            String enteredPassword = (String) o;
-            if(enteredPassword.length() > 10){
-                logger.debug("password ok");
-                Notification.show("Password Correct redirecting now",
-                        Notification.Type.ASSISTIVE_NOTIFICATION);
-
-            }else{
-                Notification.show("Please enter valid information",
-                        Notification.Type.ERROR_MESSAGE);            }
         }
     }
 }

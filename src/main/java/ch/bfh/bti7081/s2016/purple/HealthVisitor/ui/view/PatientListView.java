@@ -1,18 +1,13 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
+import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListController;
 
@@ -62,6 +57,11 @@ public class PatientListView extends BaseView {
         
         list.addSelectionListener((clickEvent ->
         		getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
+    }
+
+    @Override
+    protected Layout initView() {
+        return null;
     }
 
     @Override

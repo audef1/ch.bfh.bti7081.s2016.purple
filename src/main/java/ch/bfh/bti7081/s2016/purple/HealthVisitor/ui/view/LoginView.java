@@ -22,23 +22,23 @@ public class LoginView extends BaseView{
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
     public static final String NAME ="Login";
-    private final LoginController controller;
-    private final TextField user;
-    private final PasswordField password;
-    private final Button magicLoginButton;
+    private  LoginController controller;
+    private  TextField user;
+    private  PasswordField password;
+    private  Button magicLoginButton;
     
     public LoginView(){
         controller = new LoginController(this);
         logger.debug("this is the loginview");
-        
-        ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
-        Image logo = new Image("Logo", resource);
-        logo.setWidth("300px");
-        logo.setCaption("");
-        
+    }
+
+    @Override
+    protected Layout initView() {
+
+
         Label lblHeader = new Label("Login");
         lblHeader.setStyleName("header");
-        
+
         user = new TextField("");
         user.setWidth("300px");
         user.setRequired(true);
@@ -62,10 +62,10 @@ public class LoginView extends BaseView{
         GridLayout top = new GridLayout(2, 1);
         top.setSizeFull();
         top.addComponent(lblHeader, 0, 0);
-        top.addComponent(logo, 1, 0);
-        top.setComponentAlignment(logo, Alignment.TOP_RIGHT);
+//        top.addComponent(logo, 1, 0);
+//        top.setComponentAlignment(logo, Alignment.TOP_RIGHT);
         top.setMargin(new MarginInfo(false, false, true, true));
-        
+
         // The Layout for the Login-Part
         VerticalLayout fields = new VerticalLayout(user, password, magicLoginButton);
         fields.setSpacing(true);
@@ -79,9 +79,9 @@ public class LoginView extends BaseView{
         viewLayout.setMargin(new MarginInfo(true, true, true, true));
         viewLayout.setCaption("Ready to login?");
         viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
-        
+
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
-        setCompositionRoot(viewLayout);
+        return viewLayout;
     }
 
     @Override

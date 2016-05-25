@@ -11,12 +11,11 @@ import org.apache.logging.log4j.Logger;
  * Created by tgdflto1 on 20/05/16.
  */
 public abstract class BaseController {
-
-
     protected AuthenticationService authService;
     protected HealthVisitorEntity user;
     protected BaseView view;
     private static final Logger logger = LogManager.getLogger(BaseController.class);
+
     public BaseController(BaseView view) {
         this.view = view;
         logger.debug("setting user");
@@ -26,15 +25,6 @@ public abstract class BaseController {
     }
 
     public HealthVisitorEntity getUser(){
-            return authService.getUser();
-    }
-
-    public void setUser(HealthVisitorEntity user) {
-        this.user = user;
-    }
-
-
-    public AuthenticationService getAuthService() {
-        return authService;
+        return authService.getUser();
     }
 }

@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -7,13 +8,6 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Image;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 
@@ -25,14 +19,17 @@ public class DashboardView extends BaseView{
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);
 	private final DashboardController controller;
 
-	private final VerticalLayout general;
+	private  VerticalLayout general;
 
 	public DashboardView() {
 		logger.debug("arrived on dashboard view");
 		controller = new DashboardController(this);
 
 		// TODO outsource into an xml/html file
+	}
 
+	@Override
+	protected Layout initView() {
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
@@ -88,7 +85,7 @@ public class DashboardView extends BaseView{
 		// Set the root layout
 		general.addComponent(top);
 		general.addComponent(grid);
-		setCompositionRoot(general);
+		return general;
 	}
 
 	@Override

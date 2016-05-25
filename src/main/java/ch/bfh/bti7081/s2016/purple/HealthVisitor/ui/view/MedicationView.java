@@ -5,6 +5,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationControl
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Layout;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +24,11 @@ public class MedicationView extends BaseView {
         controller = new MedicationController(this);
 
 
+    }
+
+    @Override
+    protected Layout initView() {
+        return null;
     }
 
     @Override

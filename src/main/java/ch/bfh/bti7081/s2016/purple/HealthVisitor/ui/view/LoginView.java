@@ -3,7 +3,6 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.validator.PasswordValidator;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.LoginController;
-
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.View;
@@ -13,14 +12,13 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.themes.Reindeer;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class LoginView extends CustomComponent implements View{
+public class LoginView extends BaseView{
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
     public static final String NAME ="Login";
@@ -103,12 +101,8 @@ public class LoginView extends CustomComponent implements View{
         String userPassword = password.getValue();
         logger.debug("password is: "+userPassword);
         logger.debug("username is: "+ userMail);
-        HealthVisitorEntity hve = controller.authenticate(userMail, userPassword);
-        if(hve != null){
-            getSession().setAttribute("userMail", userMail);
-            password.setValue("");
-            logger.debug("both values ok, redirecting to dashboard");
+        if(controller.authenticate(userMail, userPassword))
             getUI().getNavigator().navigateTo(DashboardView.NAME);
-        }
+
     }
 }

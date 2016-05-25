@@ -4,6 +4,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -16,7 +17,7 @@ import java.util.Set;
 @Entity
 @Table
 @DiscriminatorValue("H")
-public class HealthVisitorEntity extends PersonEntity {
+public class HealthVisitorEntity extends PersonEntity implements Serializable{
     public HealthVisitorEntity(){}
     public HealthVisitorEntity(String firstName, String lastName,
                                Date dateOfBirth, String email,

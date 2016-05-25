@@ -16,20 +16,12 @@ import javax.persistence.Persistence;
  */
 public class LoginController extends BaseController{
 
-    private final LoginView loginView;
 
-    public LoginController(LoginView loginView) {
-        this.loginView = loginView;
+    public LoginController(LoginView view) {
+        super(view);
     }
 
-    public HealthVisitorEntity authenticate(String email, String password) {
-        HealthVisitorEntity hve = new HealthVisitorDao().findByEmail(email);
-        if (hve == null)
-            return null;
-        if (hve.getEmail().equals(email) && hve.getPassword().equals(password)) {
-            setUser(hve);
-            return hve;
-        }
-        return null;
+    public boolean authenticate(String userMail, String userPassword) {
+         return super.authService.authenticate(userMail, userPassword);
     }
 }

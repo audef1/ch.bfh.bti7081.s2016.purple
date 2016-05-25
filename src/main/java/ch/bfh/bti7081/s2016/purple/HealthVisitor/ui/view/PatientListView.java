@@ -19,7 +19,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListContro
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class PatientListView extends CustomComponent implements View {
+public class PatientListView extends BaseView {
     public static final String NAME ="PatientList";
     private static final Logger logger = LogManager.getLogger(PatientListView.class);
     private final PatientListController controller;

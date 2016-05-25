@@ -2,6 +2,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.InitializeBasicEntities;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
@@ -56,7 +57,7 @@ public class HealthVisitorUI extends UI {
 
         InitializeBasicEntities initiUtilities = InitializeBasicEntities.getInstance();
         initiUtilities.initializeBasicUser();
-        if(getSession().getAttribute("userMail") != null){
+        if(new AuthenticationService().isAuthenticated()){
             getNavigator().navigateTo(DashboardView.NAME);
         }else{
             getNavigator().navigateTo(LoginView.NAME);

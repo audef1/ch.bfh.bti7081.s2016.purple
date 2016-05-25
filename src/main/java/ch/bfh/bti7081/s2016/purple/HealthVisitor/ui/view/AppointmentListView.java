@@ -25,7 +25,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListCo
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class AppointmentListView extends CustomComponent implements View {
+public class AppointmentListView extends BaseView {
 	public static final String NAME = "AppointmentList";
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
 	private final AppointmentListController controller;

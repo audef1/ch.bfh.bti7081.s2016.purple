@@ -25,7 +25,7 @@ import com.vaadin.ui.Window;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 
-public class AppointmentDetailView extends CustomComponent implements View {
+public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private final AppointmentDetailController controller;
@@ -60,8 +60,6 @@ public class AppointmentDetailView extends CustomComponent implements View {
 		Button btnArrival = new Button("Ankunft bestätigen");
 		btnArrival.addClickListener(clickevent -> 
 			btnArrivalClicked(btnArrival));
-		
-		
 
 //		Google-Maps-Implementation
 		LatLon pos = new LatLon(46.9648208, 7.453848);

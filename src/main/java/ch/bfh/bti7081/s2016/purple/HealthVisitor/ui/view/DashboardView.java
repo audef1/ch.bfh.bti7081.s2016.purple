@@ -20,7 +20,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardControll
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class DashboardView extends CustomComponent implements View {
+public class DashboardView extends BaseView{
 	public static final String NAME = "Dashboard";
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);
 	private final DashboardController controller;

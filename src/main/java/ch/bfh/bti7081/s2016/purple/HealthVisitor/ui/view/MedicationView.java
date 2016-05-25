@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Created by tgdflto1 on 20/05/16.
  */
-public class MedicationView extends CustomComponent implements View {
+public class MedicationView extends BaseView {
     public static final String NAME ="Medication";
     private static final Logger logger = LogManager.getLogger(MedicationView.class);
     private final MedicationController controller;

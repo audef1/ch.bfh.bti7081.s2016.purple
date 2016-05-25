@@ -16,6 +16,7 @@ public class HealthVisitorDao {
     }
 
     public HealthVisitorEntity findByEmail(String mail){
+
         EntityManager em = factory.createEntityManager();
 //        em.getTransaction().begin();
 //        em.createQuery("SELECT * FROM PERSON WHERE email = ").executeUpdate();
@@ -31,6 +32,17 @@ public class HealthVisitorDao {
         }catch(NoResultException e){
             return null;
         }
+    }
 
+    public HealthVisitorEntity findById(String id){
+        EntityManager em = factory.createEntityManager();
+        TypedQuery<HealthVisitorEntity> query = em.
+                createQuery("SELECT p FROM person p WHERE TYPE(p) = :klass AND p.id = :id",
+                        HealthVisitorEntity.class);
+        try{
+            return query.setParameter("klass", HealthVisitorEntity.class).setParameter("id", id).getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
     }
 }

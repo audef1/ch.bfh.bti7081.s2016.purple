@@ -116,4 +116,17 @@ Task09 - Abschluss Systemarchitektur.
 13.05.16 =====================================
 Anwesend: alle
 Task09 - Präsentation durch audef1.
+Task10 - Beginn Planung Scrum Backlog.
+
+13.05 - 20.05.16 =====================================
+Wer:	gimmie7
+Task10 - Scrum Journal für Sprint 1 fertigstellen.
+
+20.05.16 =====================================
+Anwesend: alle
+Task11 - Start der Implementierung gemäss Scrum Journal.
+
+25.05.16 =====================================
+Anwesend: alle
+Task11 - Arbeiten an Sprint 1.
 

@@ -15,7 +15,8 @@ import com.vaadin.ui.*;
  */
 public abstract class BaseView extends CustomComponent implements View {
     protected VerticalLayout vl;
-    public BaseView(){
+
+    public BaseView() {
         vl = new VerticalLayout();
         vl.setWidth("100%");
         vl.addComponent(new HeaderComponent()); //Header
@@ -26,10 +27,4 @@ public abstract class BaseView extends CustomComponent implements View {
     }
 
     protected abstract Layout initView();
-
-//    @Override
-//    protected void setCompositionRoot(Component compositionRoot) {
-//        vl.addComponent(compositionRoot);
-//        super.setCompositionRoot(vl);
-//    }
 }

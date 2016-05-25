@@ -9,8 +9,9 @@ import com.vaadin.ui.*;
  */
 public class FooterComponent extends HorizontalLayout {
     public FooterComponent(){
-        Label copyright = new Label("Copyright by Raphael Suter, Florian Auderset, Remo Häusler, Mathias Rudolf, Tobias Flühmann");
+        Label copyright = new Label("© Copyright by Raphael Suter, Florian Auderset, Remo Häusler, Mathias Rudolf, Tobias Flühmann");
         this.addComponent(copyright);
+        this.setStyleName("footer");
         this.setMargin(new MarginInfo(true, false, false, false));
         this.setComponentAlignment(copyright, Alignment.BOTTOM_CENTER);
     }

@@ -32,6 +32,10 @@ public class AuthenticationService {
         return false;
     }
 
+    public void invalidate(){
+        session.invalidate();
+    }
+
     public boolean isAuthenticated(){
         return this.user != null;
     }

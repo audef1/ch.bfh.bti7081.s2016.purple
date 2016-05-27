@@ -126,7 +126,12 @@ Task10 - Scrum Journal für Sprint 1 fertigstellen.
 Anwesend: alle
 Task11 - Start der Implementierung gemäss Scrum Journal.
 
-25.05.16 =====================================
+25.05 - 27.05.16 =====================================
 Anwesend: alle
 Task11 - Arbeiten an Sprint 1.
+
+27.05.16 =====================================
+Anwesend: alle
+Task11 - Arbeiten an Sprint 1, Abschluss Sprint 1.
+Task12 + 13 - Vorbereitung Sprint 2.
 

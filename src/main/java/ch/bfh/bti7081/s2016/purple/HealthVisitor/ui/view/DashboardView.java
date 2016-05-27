@@ -43,28 +43,23 @@ public class DashboardView extends BaseView{
 		grid.setSpacing(true);
 		grid.addStyleName("ourcustomlayout");
 
-		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute");
-		btMedcation.setIcon(FontAwesome.MEDKIT);
+		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute", FontAwesome.MEDKIT);
 		btMedcation.addClickListener(clickevent -> getUI().getNavigator().navigateTo(MedicationView.NAME));
 		grid.addComponent(btMedcation);
 
-		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute");
-		btAppointmentToday.setIcon(FontAwesome.CALENDAR_TIMES_O);
+		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute", FontAwesome.CALENDAR_TIMES_O);
 		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentToday);
 
-		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin");
-		btAppointmentNow.setIcon(FontAwesome.CLOCK_O);
+		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin", FontAwesome.CLOCK_O);
 		btAppointmentNow.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME));
 		grid.addComponent(btAppointmentNow);
 
-		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten");
-		btPatients.setIcon(FontAwesome.USERS);
+		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten", FontAwesome.USERS);
 		btPatients.addClickListener(clickevent -> getUI().getNavigator().navigateTo(PatientListView.NAME));
 		grid.addComponent(btPatients);
 
-		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste");
-		btAppointmentList.setIcon(FontAwesome.CALENDAR);
+		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste", FontAwesome.CALENDAR);
 		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentList);
 		

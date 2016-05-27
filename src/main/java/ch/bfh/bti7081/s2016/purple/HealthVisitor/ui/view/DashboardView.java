@@ -22,8 +22,7 @@ public class DashboardView extends BaseView{
 	public static final String VIEW_NAME = NAME;
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);
 	private final DashboardController controller;
-
-	private  VerticalLayout general;
+	private CssLayout layout;
 
 	public DashboardView() {
 		super(VIEW_NAME);
@@ -35,9 +34,8 @@ public class DashboardView extends BaseView{
 
 	@Override
 	protected Layout initView() {
-		general = new VerticalLayout();
-		general.setMargin(new MarginInfo(false, false, true, true));
-		general.setSpacing(true);
+		
+		layout = new CssLayout();
 
 		GridLayout grid = new GridLayout(3, 2);
 		grid.setSpacing(true);
@@ -70,11 +68,10 @@ public class DashboardView extends BaseView{
 				 * getUI().getNavigator().navigateTo(EmergencyView.NAME));
 				 * grid.addComponent(btEmergency);
 				 */
-
-
+	
 		// Set the root layout
-		general.addComponent(grid);
-		return general;
+		layout.addComponent(grid);
+		return layout;
 	}
 
 	@Override

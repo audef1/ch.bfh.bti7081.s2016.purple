@@ -75,10 +75,9 @@ public class LoginView extends BaseView{
         viewLayout.setSizeFull();
         viewLayout.setSpacing(true);
         viewLayout.setMargin(new MarginInfo(true, true, true, true));
-        viewLayout.setCaption("Ready to login?");
         viewLayout.setComponentAlignment(fields, Alignment.MIDDLE_CENTER);
-
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
+        
         return viewLayout;
     }
 

@@ -1,21 +1,32 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+import java.util.Locale;
 
-import com.vaadin.data.Property;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.DateField;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
+import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
-import java.util.Locale;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 
 public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
@@ -172,8 +183,6 @@ public class AppointmentDetailView extends BaseView{
 		arrival.setResolution(arrival.RESOLUTION_MIN);
 		content.addComponent(arrival);
 		
-		logger.debug(arrival.getValue());
-		
 		DateField end = new DateField();
 		end.setCaption("Ende der Behandlung");
 		end.setDateFormat("dd.MM.yyyy HH:mm");
@@ -214,6 +223,12 @@ public class AppointmentDetailView extends BaseView{
 	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String getViewName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

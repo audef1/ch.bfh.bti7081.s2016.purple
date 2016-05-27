@@ -20,7 +20,7 @@ public abstract class BaseController {
     public BaseController(BaseView view) {
         this.view = view;
         logger.debug("setting user");
-        authService = new AuthenticationService(UI.getCurrent());
+        authService = new AuthenticationService();
         if(authService.isAuthenticated()) user = authService.getUser();
 
     }

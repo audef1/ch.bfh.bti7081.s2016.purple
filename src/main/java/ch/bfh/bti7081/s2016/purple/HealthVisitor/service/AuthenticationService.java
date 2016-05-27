@@ -18,13 +18,12 @@ public class AuthenticationService {
     private static Logger logger = LogManager.getLogger(AuthenticationService.class);
     private HealthVisitorEntity user;
     private VaadinSession session;
-    private WrappedSession httpSession;
-    private static String USER = "user";
 
-    public AuthenticationService(UI ui) {
-        this.httpSession = VaadinService.getCurrentRequest().getWrappedSession();
-        this.session = ui.getSession();
-        this.user = (HealthVisitorEntity) httpSession.getAttribute(USER);
+    private static String SESSION_KEY = "user";
+
+    public AuthenticationService() {
+        this.session = VaadinSession.getCurrent();
+        this.user = (HealthVisitorEntity) session.getAttribute(SESSION_KEY);
     }
 
     public boolean authenticate(String email, String password) {
@@ -39,7 +38,7 @@ public class AuthenticationService {
     }
 
     public void invalidate(){
-        session.setAttribute(USER, null);
+        session.setAttribute(SESSION_KEY, null);
     }
 
     public boolean isAuthenticated(){
@@ -54,7 +53,6 @@ public class AuthenticationService {
     private void setUser(HealthVisitorEntity user) {
         logger.debug("user set: "+ user);
         this.user = user;
-        this.httpSession.setAttribute(USER, user);
-        this.session.setAttribute(USER, user);
+        this.session.setAttribute(SESSION_KEY, user);
     }
 }

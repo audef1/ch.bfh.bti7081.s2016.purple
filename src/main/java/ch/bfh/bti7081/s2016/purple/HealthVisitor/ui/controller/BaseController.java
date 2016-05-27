@@ -1,10 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.*;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
-import com.vaadin.server.VaadinService;
-import com.vaadin.ui.UI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +11,7 @@ import org.apache.logging.log4j.Logger;
  */
 public abstract class BaseController {
     protected AuthenticationService authService;
+    protected AppointmentService appointmentService;
     protected HealthVisitorEntity user;
     protected BaseView view;
     private static final Logger logger = LogManager.getLogger(BaseController.class);
@@ -21,6 +20,7 @@ public abstract class BaseController {
         this.view = view;
         logger.debug("setting user");
         authService = new AuthenticationService();
+        appointmentService = new AppointmentService();
         if(authService.isAuthenticated()) user = authService.getUser();
 
     }
@@ -31,5 +31,9 @@ public abstract class BaseController {
 
     public AuthenticationService getAuthService() {
         return authService;
+    }
+    
+    public AppointmentService getAppointmentService(){
+    	return appointmentService;
     }
 }

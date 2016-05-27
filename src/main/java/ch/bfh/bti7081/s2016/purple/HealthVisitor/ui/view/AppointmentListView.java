@@ -1,9 +1,13 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import java.util.List;
+
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.*;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,13 +51,14 @@ public class AppointmentListView extends BaseView {
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
 
-
-//		final BeanItemContainer<AppointmentEntity> ds =
-//				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, controller.getAppointments());
-		Grid grid = new Grid("Employees");
-		grid.setColumns("address");
-
-
+		//TODO: get appointments only for current health visitor (use getAppointments() from HealthVisitorEntity?)
+		List<AppointmentEntity> items = controller.getAppointments();
+		final BeanItemContainer<AppointmentEntity> container =
+				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, items);
+		
+		Grid grid = new Grid(container);
+		grid.setColumnOrder("address", "duration");
+		
 		// The Layout for the Logo
 		GridLayout top = new GridLayout(2, 1);
 		top.setSizeFull();

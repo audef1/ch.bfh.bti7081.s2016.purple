@@ -1,4 +1,4 @@
 ID,ADDRESS,DURATION,PLACE,STARTTIME,CLIENT_ID,HEALTHVISITOR_ID
-1, 'Wankdorffeldstrasse 102', 30, 'Bern', '2016-06-08 8:00:00', 1, 1
-2, 'Dorfstrasse 7', 45, 'Bolligen', '2016-06-08 9:00:00', 1, 1
-3, 'Grünweg 4', 20, 'Ostermundigen', '2016-06-08 10:15:00', 1, 1
+1, 'Wankdorffeldstrasse 102', 30, 'Bern', strftime('%s','2016-06-08 8:00:00'), 1, 1
+2, 'Dorfstrasse 7', 45, 'Bolligen', strftime('%s', '2016-06-08 9:00:00'), 1, 1
+3, 'Grünweg 4', 20, 'Ostermundigen', strftime('%s', '2016-06-08 10:15:00'), 1, 1

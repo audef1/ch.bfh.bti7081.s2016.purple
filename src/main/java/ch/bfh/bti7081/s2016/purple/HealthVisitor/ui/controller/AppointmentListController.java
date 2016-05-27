@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AppointmentService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 
 import java.util.List;
@@ -13,9 +14,7 @@ public class AppointmentListController extends BaseController {
 
     }
 
-//    public List<AppointmentEntity> getAppointments() {
-//
-//        //breaking termine heute...
-//        return appointments;
-//    }
+    public List<AppointmentEntity> getAppointments() {
+        return super.getAppointmentService().getAppointments();
+    }
 }

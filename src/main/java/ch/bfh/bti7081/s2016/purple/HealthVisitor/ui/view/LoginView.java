@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class LoginView extends BaseView{
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
-    public static final String NAME ="Login";
+    public static final String NAME = "Login";
     private  SessionController controller;
     private  TextField user;
     private  PasswordField password;
@@ -93,7 +93,6 @@ public class LoginView extends BaseView{
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
         user.focus();
     }
-
 
     private void validate(){
         Notification.show("received", Notification.Type.ASSISTIVE_NOTIFICATION);

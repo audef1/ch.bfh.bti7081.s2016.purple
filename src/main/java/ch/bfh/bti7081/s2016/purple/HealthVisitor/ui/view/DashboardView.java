@@ -19,13 +19,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardControll
  */
 public class DashboardView extends BaseView{
 	public static final String NAME = "Dashboard";
+	public static final String VIEW_NAME = NAME;
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);
 	private final DashboardController controller;
 
 	private  VerticalLayout general;
 
 	public DashboardView() {
-		super(DashboardView.NAME);
+		super(VIEW_NAME);
 		logger.debug("arrived on dashboard view");
 		controller = new DashboardController(this);
 

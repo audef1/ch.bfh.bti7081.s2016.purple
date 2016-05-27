@@ -9,23 +9,28 @@ import com.vaadin.ui.*;
  * Created by tgdflto1 on 25/05/16.
  */
 public class HeaderComponent extends HorizontalLayout {
-    
-	private Label pagename;
-	
-	public HeaderComponent(String pageName){
+
+    private Label pagename;
+
+
+    public HeaderComponent(String pageName){
         this.setWidth("100%");
         this.setSizeFull();
-        this.setWidth("100%");
         this.setMargin(new MarginInfo(false, true, false, false));
         ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
         Image logo = new Image("Logo", resource);
         logo.setWidth("300px");
         logo.setCaption("");
-        
+        this.addComponent(new VerticalLayout());
+
         pagename = new Label(pageName);
         pagename.addStyleName("pagename");
-        
+
         this.addComponent(pagename);
+        LogoutButton logout =  new LogoutButton();
+        this.addComponent(logout);
+        this.setComponentAlignment(logout, Alignment.TOP_LEFT);
+
         this.addComponent(logo);
         this.setComponentAlignment(logo, Alignment.TOP_RIGHT);
     }

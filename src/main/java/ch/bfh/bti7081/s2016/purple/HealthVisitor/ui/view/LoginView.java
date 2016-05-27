@@ -1,16 +1,12 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.validator.PasswordValidator;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.LoginController;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.SessionController;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
-import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
-import com.vaadin.ui.Grid.Column;
 import com.vaadin.ui.themes.Reindeer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,21 +18,22 @@ public class LoginView extends BaseView{
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
     public static final String NAME ="Login";
-    private LoginController controller;
-    private TextField user;
-    private PasswordField password;
-    private Button magicLoginButton;
+    private  SessionController controller;
+    private  TextField user;
+    private  PasswordField password;
+    private  Button magicLoginButton;
     private Panel loginpanel;
-    
+
+
     public LoginView(){
         super(NAME);
-        controller = new LoginController(this);
+        controller = new SessionController(this);
         logger.debug("this is the loginview");
     }
 
     @Override
     protected Layout initView() {
-    	    	
+
         user = new TextField("");
         user.setWidth("300px");
         user.setRequired(true);
@@ -66,7 +63,7 @@ public class LoginView extends BaseView{
         content.setSizeUndefined(); // Shrink to fit
         content.setMargin(true);
         loginpanel.setContent(content);
-        
+
         // The Layout for the Login-Part
         VerticalLayout fields = new VerticalLayout(loginpanel);
         fields.setSpacing(true);
@@ -95,15 +92,13 @@ public class LoginView extends BaseView{
         Notification.show("received", Notification.Type.ASSISTIVE_NOTIFICATION);
         if(!password.isValid() || !user.isValid()){
             Notification.show("Login oder Kennwort falsch",
-            Notification.Type.WARNING_MESSAGE);
+                    Notification.Type.WARNING_MESSAGE);
             return;
         }
-        
         String userMail = user.getValue();
         String userPassword = password.getValue();
         logger.debug("password is: "+userPassword);
         logger.debug("username is: "+ userMail);
-        
         if(controller.authenticate(userMail, userPassword))
             getUI().getNavigator().navigateTo(DashboardView.NAME);
 

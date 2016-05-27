@@ -1,9 +1,15 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.DbImport;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.InitializeBasicEntities;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.*;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientListView;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -12,6 +18,7 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -43,7 +50,6 @@ public class HealthVisitorUI extends UI {
 
         // The view
         getNavigator().addView(LoginView.NAME, LoginView.class);
-        getNavigator().addView(LogoutView.NAME, LogoutView.class);
         getNavigator().addView(DashboardView.NAME, DashboardView.class);
         getNavigator().addView(AppointmentListView.NAME, AppointmentListView.class);
         getNavigator().addView(AppointmentDetailView.NAME, AppointmentDetailView.class);
@@ -51,8 +57,14 @@ public class HealthVisitorUI extends UI {
         getNavigator().addView(MedicationView.NAME, MedicationView.class);
         //register al views in the navigator --> acts like a dispatcher
 
-        InitializeBasicEntities initiUtilities = InitializeBasicEntities.getInstance();
-        initiUtilities.initializeBasicUser();
+        //TODO: maybe useful for unit testing. remove otherwise
+        //InitializeBasicEntities initiUtilities = InitializeBasicEntities.getInstance();
+        //initiUtilities.initializeBasicUser();
+        
+        //initial import from csv files
+        DbImport.importFromFile("import/person.csv", "PERSON", true);
+        DbImport.importFromFile("import/appointment.csv", "APPOINTMENT", true);
+        
         if(new AuthenticationService().isAuthenticated()){
             getNavigator().navigateTo(DashboardView.NAME);
         }else{

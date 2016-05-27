@@ -53,7 +53,7 @@ public class HealthVisitorUI extends UI {
 
         InitializeBasicEntities initiUtilities = InitializeBasicEntities.getInstance();
         initiUtilities.initializeBasicUser();
-        if(new AuthenticationService().isAuthenticated()){
+        if(new AuthenticationService(this).isAuthenticated()){
             getNavigator().navigateTo(DashboardView.NAME);
         }else{
             getNavigator().navigateTo(LoginView.NAME);

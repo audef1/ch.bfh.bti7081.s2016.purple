@@ -2,10 +2,12 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.service;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.HealthVisitorDao;
-import com.vaadin.server.VaadinService;
-import com.vaadin.server.WrappedSession;
+import com.vaadin.server.VaadinSession;
+import com.vaadin.ui.UI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import javax.jws.soap.SOAPBinding;
 
 /**
  * Created by tgdflto1 on 25/05/16.
@@ -13,11 +15,11 @@ import org.apache.logging.log4j.Logger;
 public class AuthenticationService {
     private static Logger logger = LogManager.getLogger(AuthenticationService.class);
     private HealthVisitorEntity user;
-    private WrappedSession session;
+    private VaadinSession session;
     private static String USER = "user";
 
-    public AuthenticationService() {
-        this.session = VaadinService.getCurrentRequest().getWrappedSession();
+    public AuthenticationService(UI ui) {
+        this.session = ui.getSession();
         this.user = (HealthVisitorEntity) session.getAttribute(USER);
     }
 
@@ -33,7 +35,7 @@ public class AuthenticationService {
     }
 
     public void invalidate(){
-        session.invalidate();
+        session.setAttribute(USER, null);
     }
 
     public boolean isAuthenticated(){

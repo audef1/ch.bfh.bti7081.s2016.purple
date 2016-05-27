@@ -11,27 +11,33 @@ import com.vaadin.ui.*;
 public class HeaderComponent extends HorizontalLayout {
 
     private Label pagename;
+    private LogoutButton logout;
+    private Image logo;
+    private HorizontalLayout buttons;
 
 
     public HeaderComponent(String pageName){
-        this.setWidth("100%");
+       
+    	logout =  new LogoutButton();
+    	pagename = new Label(pageName);
+    	logo = new Image("Logo", new ThemeResource("images/Logo_HealthVisitor.png"));
+    	buttons = new HorizontalLayout();
+    	
+    	this.setWidth("100%");
         this.setSizeFull();
         this.setMargin(new MarginInfo(false, true, false, false));
-        ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
-        Image logo = new Image("Logo", resource);
+        
         logo.setWidth("300px");
         logo.setCaption("");
-        this.addComponent(new VerticalLayout());
-
-        pagename = new Label(pageName);
         pagename.addStyleName("pagename");
-
+        buttons.addComponent(logout);
+        buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
+        
         this.addComponent(pagename);
-        LogoutButton logout =  new LogoutButton();
-        this.addComponent(logout);
-        this.setComponentAlignment(logout, Alignment.TOP_LEFT);
-
+        this.addComponent(buttons);
         this.addComponent(logo);
-        this.setComponentAlignment(logo, Alignment.TOP_RIGHT);
+        this.setComponentAlignment(pagename, Alignment.MIDDLE_LEFT);
+        this.setComponentAlignment(buttons, Alignment.MIDDLE_CENTER);
+        this.setComponentAlignment(logo, Alignment.MIDDLE_RIGHT);
     }
 }

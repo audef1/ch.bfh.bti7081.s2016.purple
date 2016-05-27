@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Resource;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 
@@ -41,32 +43,38 @@ public class DashboardView extends BaseView{
 		grid.addStyleName("ourcustomlayout");
 
 		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute");
+		btMedcation.setIcon(FontAwesome.MEDKIT);
 		btMedcation.addClickListener(clickevent -> getUI().getNavigator().navigateTo(MedicationView.NAME));
 		grid.addComponent(btMedcation);
 
 		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute");
+		btAppointmentToday.setIcon(FontAwesome.CALENDAR_TIMES_O);
 		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentToday);
 
 		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin");
+		btAppointmentNow.setIcon(FontAwesome.CLOCK_O);
 		btAppointmentNow.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME));
 		grid.addComponent(btAppointmentNow);
 
 		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten");
+		btPatients.setIcon(FontAwesome.USERS);
 		btPatients.addClickListener(clickevent -> getUI().getNavigator().navigateTo(PatientListView.NAME));
 		grid.addComponent(btPatients);
 
-		// TODO: Alarmpage
-		/*
-		 * Button btEmergency = new Button("Alarm");
-		 * btEmergency.addClickListener(clickevent ->
-		 * getUI().getNavigator().navigateTo(EmergencyView.NAME));
-		 * grid.addComponent(btEmergency);
-		 */
-
 		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste");
+		btAppointmentList.setIcon(FontAwesome.CALENDAR);
 		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentList);
+		
+		// TODO: Alarmpage
+				/*
+				 * Button btEmergency = new Button("Alarm");
+				 * btEmergency.addClickListener(clickevent ->
+				 * getUI().getNavigator().navigateTo(EmergencyView.NAME));
+				 * grid.addComponent(btEmergency);
+				 */
+
 
 		// Set the root layout
 		general.addComponent(grid);

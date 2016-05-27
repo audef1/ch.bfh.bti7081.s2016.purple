@@ -6,16 +6,16 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import java.util.List;
 
 public class AppointmentListController extends BaseController {
-	private final List<AppointmentEntity> appointments;
+//	private final List<AppointmentEntity> appointments;
     public AppointmentListController(AppointmentListView view){
         super(view);
-        this.appointments = getUser().getAppointments();
+//        this.appointments = getUser().getAppointments();
 
     }
 
-    public List<AppointmentEntity> getAppointments() {
-
-        //breaking termine heute...
-        return appointments;
-    }
+//    public List<AppointmentEntity> getAppointments() {
+//
+//        //breaking termine heute...
+//        return appointments;
+//    }
 }

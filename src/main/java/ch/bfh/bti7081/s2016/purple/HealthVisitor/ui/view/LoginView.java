@@ -1,6 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.validator.PasswordValidator;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.SessionController;
 import com.vaadin.data.validator.EmailValidator;
 import com.vaadin.event.ShortcutAction;
@@ -26,13 +27,15 @@ public class LoginView extends BaseView{
 
 
     public LoginView(){
-        super(NAME);
+        super();
         controller = new SessionController(this);
         logger.debug("this is the loginview");
+        layout = new StandardLayout(this);
+
     }
 
     @Override
-    protected Layout initView() {
+    public Layout initView() {
 
         user = new TextField("");
         user.setWidth("300px");
@@ -79,6 +82,11 @@ public class LoginView extends BaseView{
         viewLayout.setStyleName(Reindeer.LAYOUT_BLUE);
         
         return viewLayout;
+    }
+
+    @Override
+    public String getViewName() {
+        return NAME;
     }
 
     @Override

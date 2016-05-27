@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,18 +25,18 @@ public class PatientListView extends BaseView {
     public static final String VIEW_NAME ="Patientenliste";
 
     private static final Logger logger = LogManager.getLogger(PatientListView.class);
-    private final PatientListController controller;
 
     
 
     public PatientListView(){
-        super(VIEW_NAME);
-        logger.debug("arrived on appointment list view");
+        super();
         this.controller = new PatientListController(this);
+        logger.debug("arrived on appointment list view");
+        layout = new StandardLayout(this);
     }
 
     @Override
-    protected Layout initView() {
+    public Layout initView() {
         VerticalLayout general = new VerticalLayout();
         general.setSpacing(true);
         general.setMargin(true);
@@ -65,6 +67,11 @@ public class PatientListView extends BaseView {
 
 
         return general;
+    }
+
+    @Override
+    public String getViewName() {
+        return VIEW_NAME;
     }
 
     @Override

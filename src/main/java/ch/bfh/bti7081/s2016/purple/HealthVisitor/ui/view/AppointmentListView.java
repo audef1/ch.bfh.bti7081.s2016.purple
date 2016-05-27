@@ -1,5 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,14 +29,16 @@ public class AppointmentListView extends BaseView {
 	private VerticalLayout general;
 
 	public AppointmentListView() {
-		super(VIEW_NAME);
+		super();
 		logger.debug("arrived on appointment list view");
 		controller = new AppointmentListController(this);
+
+		// TODO outsource into an xml/html file
+		layout = new StandardLayout(this);
 	}
 
-	
 	@Override
-	protected Layout initView() {
+	public Layout initView() {
 
 		general = new VerticalLayout();
 		general.setSpacing(true);
@@ -41,7 +47,7 @@ public class AppointmentListView extends BaseView {
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
 
-		
+
 //		final BeanItemContainer<AppointmentEntity> ds =
 //				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, controller.getAppointments());
 		Grid grid = new Grid("Employees");
@@ -63,6 +69,11 @@ public class AppointmentListView extends BaseView {
 		general.addComponents(top, title);
 		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 		return general;
+	}
+
+	@Override
+	public String getViewName() {
+		return VIEW_NAME;
 	}
 
 	@Override

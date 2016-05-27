@@ -26,6 +26,10 @@ public abstract class BaseController {
     }
 
     public HealthVisitorEntity getUser(){
-        return authService.getUser();
+        return getAuthService().getUser();
+    }
+
+    public AuthenticationService getAuthService() {
+        return authService;
     }
 }

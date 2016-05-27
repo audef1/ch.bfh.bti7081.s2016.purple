@@ -1,18 +1,15 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import com.vaadin.ui.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.vaadin.navigator.View;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonComponent;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Resource;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.shared.ui.MarginInfo;
-
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonComponent;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
+import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Layout;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Created by tgdflto1 on 20/05/16.
@@ -21,19 +18,18 @@ public class DashboardView extends BaseView{
 	public static final String NAME = "Dashboard";
 	public static final String VIEW_NAME = NAME;
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);
-	private final DashboardController controller;
-	private CssLayout layout;
+	private Layout layout;
 
 	public DashboardView() {
-		super(VIEW_NAME);
+		super();
 		logger.debug("arrived on dashboard view");
 		controller = new DashboardController(this);
-
+		layout = new StandardLayout(this);
 		// TODO outsource into an xml/html file
 	}
 
 	@Override
-	protected Layout initView() {
+	public Layout initView() {
 		
 		layout = new CssLayout();
 
@@ -72,6 +68,11 @@ public class DashboardView extends BaseView{
 		// Set the root layout
 		layout.addComponent(grid);
 		return layout;
+	}
+
+	@Override
+	public String getViewName() {
+		return VIEW_NAME;
 	}
 
 	@Override

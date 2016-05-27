@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.ViewChangeListener;
@@ -19,13 +20,14 @@ public class AppointmentDetailView extends BaseView{
 	private  VerticalLayout general;
 
 	public AppointmentDetailView() {
-		super(AppointmentDetailView.VIEW_NAME);
+		super();
 		logger.debug("arrived on appointment detail view");
 		controller = new AppointmentDetailController(this);
+		layout = new StandardLayout(this);
 	}
 
 	@Override
-	protected Layout initView() {
+	public Layout initView() {
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
@@ -142,6 +144,11 @@ public class AppointmentDetailView extends BaseView{
 		general.addComponent(data);
 
 		return general;
+	}
+
+	@Override
+	public String getViewName() {
+		return VIEW_NAME;
 	}
 
 	private Object newReport() {

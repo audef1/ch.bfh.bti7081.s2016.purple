@@ -1,0 +1,18 @@
+package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
+import com.vaadin.ui.VerticalLayout;
+
+/**
+ * Created by tgdflto1 on 27/05/16.
+ */
+public class StandardLayout extends VerticalLayout{
+    public StandardLayout(BaseView view){
+        this.setSizeFull();
+        this.addComponent(new HeaderComponent(view)); // Header
+        this.addComponent(view.initView()); // Custom content
+        this.addComponent(new FooterComponent()); // Footer
+        view.setCompositionRoot(this);
+
+    }
+}

@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.SessionController;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.*;
@@ -19,14 +20,15 @@ public class LogoutView extends BaseView{
         private Button magicLoginButton;
 
         public LogoutView(){
-            super(NAME);
+            super();
             controller = new SessionController(this);
             logger.debug("this is the loginview");
+            layout = new StandardLayout(this);
             controller.invalidate();
         }
 
         @Override
-        protected Layout initView() {
+        public Layout initView() {
             VerticalLayout hl = new VerticalLayout();
 
             Label label = new Label("Vielen Dank und bis zum nächsten mal.");
@@ -37,6 +39,11 @@ public class LogoutView extends BaseView{
             hl.addComponent(button);
             return hl;
         }
+
+    @Override
+    public String getViewName() {
+        return NAME;
+    }
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {

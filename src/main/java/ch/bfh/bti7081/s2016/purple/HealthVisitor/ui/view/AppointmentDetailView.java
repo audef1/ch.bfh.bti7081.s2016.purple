@@ -2,12 +2,18 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+
+import com.vaadin.data.Property;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
 import com.vaadin.ui.*;
+
+import java.util.Locale;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,16 +48,13 @@ public class AppointmentDetailView extends BaseView{
 
 
 		Button btnArrival = new Button("Ankunft bestätigen");
-		btnArrival.addClickListener(clickevent ->
-				btnArrivalClicked(btnArrival));
+		
 
 //		Google-Maps-Implementation
 		LatLon pos = new LatLon(46.9648208, 7.453848);
 
 		GoogleMap map = new GoogleMap("AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714", null, "german");
 		map.setSizeFull();
-//		map.setHeight("20%");
-//		map.setWidth("50%");
 		map.addMarker("Wankdorffeldstrasse 102, 3014 Bern", pos, false, null);
 		map.setMinZoom(4);
 		map.setMaxZoom(16);
@@ -60,21 +63,30 @@ public class AppointmentDetailView extends BaseView{
 
 //		Create Checklist
 		Grid checklist = new Grid();
-		checklist.setColumns("Aufgabe");
-//		checklist.setCaption("Checkliste");
-
+		checklist.setColumns("Aufgabenliste");
 
 //		Create Column last report
 		Label lastReport = new Label("Letzter Rapport");
 		lastReport.setStyleName("h2");
 
+//		Show the last report
 		Label report = new Label("Hier steht der letzte Rapport.");
 
+//		Create button to show the form of the new report 
 		Button btnNewReport = new Button("Neuer Rapport erfassen");
-		btnNewReport.addClickListener(clickevent -> newReport());
+		if (btnArrival.getCaption().equals("Ende bestätigen")){
+			btnNewReport.setEnabled(true);
+		} else {
+			btnNewReport.setEnabled(false);
+		}
+		
 
+//		Add clicklistener to button Arrival
+		btnArrival.addClickListener(clickevent ->
+		btnArrivalClicked(btnArrival, btnNewReport));
 
-		Button btnDetails = new Button("Details");
+//		Vreate button to show patient details
+		Button btnDetails = new Button("Patientendetails");
 //		TODO: Show Patient data
 
 
@@ -82,6 +94,7 @@ public class AppointmentDetailView extends BaseView{
 		Label lblBeschriebTitle = new Label("Kurzbeschrieb");
 		lblBeschriebTitle.setStyleName("h2");
 
+//		Show short description about the patient
 		Label lblBeschrieb = new Label("Hier steht der Kurzbeschrieb über den Patienten");
 
 		Button btnEmergencyContact = new Button("Notfallkontakte des Patienten");
@@ -146,28 +159,55 @@ public class AppointmentDetailView extends BaseView{
 		return general;
 	}
 
-	@Override
-	public String getViewName() {
-		return VIEW_NAME;
-	}
-
-	private Object newReport() {
+//	Create pop-up window to enter a new report
+	private void newReport() {
 		final Window window = new Window("Neuer Rapport erstellen");
 		window.setWidth("90%");
 		final FormLayout content = new FormLayout();
 		
+		DateField arrival = new DateField();
+		arrival.setCaption("Behandlungsbeginn:");
+		arrival.setDateFormat("dd.MM.yyyy HH:mm");
+		arrival.setLocale(new Locale("de", "CH"));
+		arrival.setResolution(arrival.RESOLUTION_MIN);
+		content.addComponent(arrival);
+		
+		logger.debug(arrival.getValue());
+		
+		DateField end = new DateField();
+		end.setCaption("Ende der Behandlung");
+		end.setDateFormat("dd.MM.yyyy HH:mm");
+		end.setLocale(new Locale("de", "CH"));
+		end.setResolution(end.RESOLUTION_MIN);
+		content.addComponent(end);
+		
 		RichTextArea text = new RichTextArea();
+		text.setDescription("aktueller Rapport");
 		text.setImmediate(true);
 		text.setSizeFull();
 		content.addComponent(text);
 		
+		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
+		btnSave.addClickListener(clickevent ->
+				save(arrival, end));
+		content.addComponent(btnSave);
+		
 		window.setContent(content);
-		return null;
+		UI.getCurrent().addWindow(window);
 	}
 
-	private void btnArrivalClicked(Button btn){
+	
+//	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
+	private void btnArrivalClicked(Button btn, Button report){
 		btn.setCaption("Ende bestätigen");
+		report.setEnabled(true);
+		report.addClickListener(clickevent -> newReport());
 		// TODO Persistence Current DateTime to the DB.
+	}
+	
+	private void save(DateField arrival, DateField end){
+		logger.debug(arrival.getValue());
+		logger.debug(end.getValue());
 	}
 
 	@Override

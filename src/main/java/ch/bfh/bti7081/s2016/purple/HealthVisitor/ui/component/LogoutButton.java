@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
 
@@ -10,9 +11,8 @@ class LogoutButton extends Button {
 
     public LogoutButton(){
         super("Logout");
+        this.setIcon(FontAwesome.SIGN_OUT);
         this.setData("Logout");
         this.addClickListener(click -> {getUI().getNavigator().navigateTo("logout");});
-
     }
-
 }

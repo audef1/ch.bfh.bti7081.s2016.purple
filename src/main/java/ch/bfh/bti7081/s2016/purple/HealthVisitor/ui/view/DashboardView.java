@@ -9,6 +9,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 
 /**
@@ -39,19 +40,19 @@ public class DashboardView extends BaseView{
 		grid.setSpacing(true);
 		grid.addStyleName("ourcustomlayout");
 
-		Button btMedcation = new Button("Medikamente heute");
+		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute");
 		btMedcation.addClickListener(clickevent -> getUI().getNavigator().navigateTo(MedicationView.NAME));
 		grid.addComponent(btMedcation);
 
-		Button btAppointmentToday = new Button("Termine heute");
+		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute");
 		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentToday);
 
-		Button btAppointmentNow = new Button("Aktueller Termin");
+		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin");
 		btAppointmentNow.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME));
 		grid.addComponent(btAppointmentNow);
 
-		Button btPatients = new Button("Meine Patienten");
+		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten");
 		btPatients.addClickListener(clickevent -> getUI().getNavigator().navigateTo(PatientListView.NAME));
 		grid.addComponent(btPatients);
 
@@ -63,7 +64,7 @@ public class DashboardView extends BaseView{
 		 * grid.addComponent(btEmergency);
 		 */
 
-		Button btAppointmentList = new Button("Terminliste");
+		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste");
 		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentList);
 

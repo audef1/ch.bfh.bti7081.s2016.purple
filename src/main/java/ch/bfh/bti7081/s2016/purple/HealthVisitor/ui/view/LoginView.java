@@ -36,8 +36,6 @@ public class LoginView extends BaseView{
 
     @Override
     protected Layout initView() {
-
-    	loginpanel = new Panel("");
     	    	
         user = new TextField("");
         user.setWidth("300px");
@@ -59,6 +57,7 @@ public class LoginView extends BaseView{
         magicLoginButton.addClickListener((clickEvent -> {validate();}));
 
         // The Layout for the Login Form
+    	loginpanel = new Panel("");
         FormLayout content = new FormLayout();
         content.addStyleName("loginpanel");
         content.addComponent(user);
@@ -96,13 +95,15 @@ public class LoginView extends BaseView{
         Notification.show("received", Notification.Type.ASSISTIVE_NOTIFICATION);
         if(!password.isValid() || !user.isValid()){
             Notification.show("Login oder Kennwort falsch",
-                    Notification.Type.WARNING_MESSAGE);
+            Notification.Type.WARNING_MESSAGE);
             return;
         }
+        
         String userMail = user.getValue();
         String userPassword = password.getValue();
         logger.debug("password is: "+userPassword);
         logger.debug("username is: "+ userMail);
+        
         if(controller.authenticate(userMail, userPassword))
             getUI().getNavigator().navigateTo(DashboardView.NAME);
 

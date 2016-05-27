@@ -10,6 +10,7 @@ public class DashboardButtonComponent extends Button {
 		this.setIcon(icon);
 		this.setWidth("200px");
 		this.setHeight("200px");
+		this.addStyleName("dashboardbutton");
 	}
 	
 	

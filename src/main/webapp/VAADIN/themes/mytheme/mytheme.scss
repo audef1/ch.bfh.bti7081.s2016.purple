@@ -42,5 +42,16 @@
 	    font-size: 50px;
 	    font-weight: bold;
 	}
-  
+	
+	// dashboard button
+	.dashboardbutton {
+		.v-button-wrap{
+			display: inline-block;
+		}
+		
+		.v-icon {
+			display: block;
+			font-size: 40px;
+		}
+  	}
 }

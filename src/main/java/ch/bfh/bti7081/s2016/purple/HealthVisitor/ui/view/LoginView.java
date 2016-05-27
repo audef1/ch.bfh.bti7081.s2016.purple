@@ -22,10 +22,11 @@ public class LoginView extends BaseView{
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
     public static final String NAME ="Login";
-    private  LoginController controller;
-    private  TextField user;
-    private  PasswordField password;
-    private  Button magicLoginButton;
+    private LoginController controller;
+    private TextField user;
+    private PasswordField password;
+    private Button magicLoginButton;
+    private Panel loginpanel;
     
     public LoginView(){
         super(NAME);
@@ -36,7 +37,8 @@ public class LoginView extends BaseView{
     @Override
     protected Layout initView() {
 
-
+    	loginpanel = new Panel("");
+    	    	
         user = new TextField("");
         user.setWidth("300px");
         user.setRequired(true);
@@ -56,19 +58,24 @@ public class LoginView extends BaseView{
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((clickEvent -> {validate();}));
 
-        // The Layout for the Logo
-        GridLayout top = new GridLayout(2, 1);
-        top.setSizeFull();
-        top.setMargin(new MarginInfo(false, false, true, true));
-
+        // The Layout for the Login Form
+        FormLayout content = new FormLayout();
+        content.addStyleName("loginpanel");
+        content.addComponent(user);
+        content.addComponent(password);
+        content.addComponent(magicLoginButton);
+        content.setSizeUndefined(); // Shrink to fit
+        content.setMargin(true);
+        loginpanel.setContent(content);
+        
         // The Layout for the Login-Part
-        VerticalLayout fields = new VerticalLayout(user, password, magicLoginButton);
+        VerticalLayout fields = new VerticalLayout(loginpanel);
         fields.setSpacing(true);
         fields.setMargin(new MarginInfo(true, true, true, false));
         fields.setSizeUndefined();
 
         // The view root layout
-        VerticalLayout viewLayout = new VerticalLayout(top, fields);
+        VerticalLayout viewLayout = new VerticalLayout(fields);
         viewLayout.setSizeFull();
         viewLayout.setSpacing(true);
         viewLayout.setMargin(new MarginInfo(true, true, true, true));

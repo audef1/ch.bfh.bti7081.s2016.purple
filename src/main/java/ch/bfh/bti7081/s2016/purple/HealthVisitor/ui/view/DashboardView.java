@@ -35,12 +35,6 @@ public class DashboardView extends BaseView{
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
 
-		ThemeResource resource = new ThemeResource("images/Logo_HealthVisitor.png");
-		Image logo = new Image("Logo", resource);
-		logo.setWidth("300px");
-		logo.setCaption("");
-
-
 		GridLayout grid = new GridLayout(3, 2);
 		grid.setSpacing(true);
 		grid.addStyleName("ourcustomlayout");
@@ -73,15 +67,7 @@ public class DashboardView extends BaseView{
 		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentList);
 
-		// The Layout for the Logo
-		GridLayout top = new GridLayout(2, 1);
-		top.setSizeFull();
-		top.addComponent(logo, 1, 0);
-		top.setComponentAlignment(logo, Alignment.TOP_RIGHT);
-		top.setMargin(new MarginInfo(true, true, false, true));
-
 		// Set the root layout
-		general.addComponent(top);
 		general.addComponent(grid);
 		return general;
 	}

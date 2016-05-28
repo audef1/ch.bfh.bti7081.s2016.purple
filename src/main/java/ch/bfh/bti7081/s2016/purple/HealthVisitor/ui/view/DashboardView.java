@@ -1,15 +1,17 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonComponent;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Layout;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonComponent;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 
 /**
  * Created by tgdflto1 on 20/05/16.
@@ -37,34 +39,30 @@ public class DashboardView extends BaseView{
 		grid.setSpacing(true);
 		grid.addStyleName("ourcustomlayout");
 
-		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute", FontAwesome.MEDKIT);
-		btMedcation.addClickListener(clickevent -> getUI().getNavigator().navigateTo(MedicationView.NAME));
-		grid.addComponent(btMedcation);
-
-		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute", FontAwesome.CALENDAR_TIMES_O);
-		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
-		grid.addComponent(btAppointmentToday);
-
 		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin", FontAwesome.CLOCK_O);
 		btAppointmentNow.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME));
 		grid.addComponent(btAppointmentNow);
-
-		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten", FontAwesome.USERS);
-		btPatients.addClickListener(clickevent -> getUI().getNavigator().navigateTo(PatientListView.NAME));
-		grid.addComponent(btPatients);
+		
+		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute", FontAwesome.CALENDAR_TIMES_O);
+		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
+		grid.addComponent(btAppointmentToday);
 
 		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste", FontAwesome.CALENDAR);
 		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
 		grid.addComponent(btAppointmentList);
 		
-		// TODO: Alarmpage
-				/*
-				 * Button btEmergency = new Button("Alarm");
-				 * btEmergency.addClickListener(clickevent ->
-				 * getUI().getNavigator().navigateTo(EmergencyView.NAME));
-				 * grid.addComponent(btEmergency);
-				 */
-	
+		DashboardButtonComponent btEmergency = new DashboardButtonComponent("Alarm", FontAwesome.HEARTBEAT);
+		btEmergency.addClickListener(clickevent -> getUI().getNavigator().navigateTo(EmergencyView.NAME));
+		grid.addComponent(btEmergency);
+		
+		DashboardButtonComponent btPatients = new DashboardButtonComponent("Meine Patienten", FontAwesome.USERS);
+		btPatients.addClickListener(clickevent -> getUI().getNavigator().navigateTo(PatientListView.NAME));
+		grid.addComponent(btPatients);
+		
+		DashboardButtonComponent btMedcation = new DashboardButtonComponent("Medikamente heute", FontAwesome.MEDKIT);
+		btMedcation.addClickListener(clickevent -> getUI().getNavigator().navigateTo(MedicationView.NAME));
+		grid.addComponent(btMedcation);
+		
 		// Set the root layout
 		layout.addComponent(grid);
 		return layout;

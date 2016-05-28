@@ -1,15 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.TestEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.DbImport;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.InitializeBasicEntities;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientListView;
+import javax.servlet.annotation.WebServlet;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -19,13 +13,15 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.servlet.annotation.WebServlet;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.DbImport;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.DashboardView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.EmergencyView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientListView;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser
@@ -58,7 +54,8 @@ public class HealthVisitorUI extends UI {
 				AppointmentDetailView.class);
 		getNavigator().addView(PatientListView.NAME, PatientListView.class);
 		getNavigator().addView(MedicationView.NAME, MedicationView.class);
-		// register al views in the navigator --> acts like a dispatcher
+		getNavigator().addView(EmergencyView.NAME, EmergencyView.class);
+		// register all views in the navigator --> acts like a dispatcher
 
 		// TODO: maybe useful for unit testing. remove otherwise
 		// InitializeBasicEntities initiUtilities =
@@ -73,7 +70,8 @@ public class HealthVisitorUI extends UI {
 		if (new AuthenticationService().isAuthenticated()) {
 			getNavigator().navigateTo(DashboardView.NAME);
 		} else {
-			getNavigator().navigateTo(LoginView.NAME);
+			getNavigator().navigateTo(DashboardView.NAME);
+//			getNavigator().navigateTo(LoginView.NAME);
 		}
 
 	}

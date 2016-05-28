@@ -1,6 +1,7 @@
 ID,TYPE,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,PASSWORD,EMPLOYEENUMBER,HIREDATE,WORKINGHOURS,RELATION,HV_ID
-1, 'H', '1977-5-8', 'test@user.ch', 'Test', 'User', 'secret_2016', 1, '2008-3-1', 1, 'Relation?', 1
-2, 'Client', '1944-1-1', 'hans@wurst.ch', 'Hans', 'Wurst', 'secret_2016', 2, NULL, 2, 'Relation?', 2
-3, 'H', '1972-5-7', 'heidi@blume.ch', 'Heidi', 'Blume', 'secret_2016', 3, '2005-1-1', 3, 'Relation?', 3
-4, 'H', '1987-5-20', 'lisa@vogel.ch', 'Lisa', 'Vogel', 'secret_2016', 4, '2009-9-1', 4, 'Relation?', 4
-5, 'H', '1985-1-1', 'hansi@fausi.ch', 'Hansi', 'Fausi', 'secret_2016', 5, '2010-4-5', 5, 'Relation?', 5
+1, 'H', strftime('%s','1980-01-01 00:00:00'), 'test@user.ch', 'Test', 'User', 'secret_2016', 1, strftime('%s','1999-01-01 00:00:00'), 1, 'Relation?', 1
+2, 'H', strftime('%s','1988-02-02 00:00:00'), 'hans@wurst.ch', 'Hans', 'Wurst', 'secret_2016', 2, strftime('%s','2002-01-01 00:00:00'), 2, 'Relation?', 2
+3, 'H', strftime('%s','1977-06-08 00:00:00'), 'heidi@blume.ch', 'Heidi', 'Blume', 'secret_2016', 3, strftime('%s','2005-01-01 00:00:00'), 3, 'Relation?', 3
+4, 'K', strftime('%s','1960-06-22 00:00:00'), 'lisa@vogel.ch', 'Lisa', 'Vogel', 'secret_2016', NULL, NULL, NULL, 'Patient', 1
+5, 'K', strftime('%s','1950-11-01 00:00:00'), 'hansi@fausi.ch', 'Hansi', 'Fausi', 'secret_2016', NULL, NULL, NULL, 'Patient', 1
+6, 'K', strftime('%s','1960-05-01 00:00:00'), 'wolfgang@schaefer.ch', 'Wolfgang', 'Schaefer', 'secret_2016', NULL, NULL, NULL, 'Patient', 2

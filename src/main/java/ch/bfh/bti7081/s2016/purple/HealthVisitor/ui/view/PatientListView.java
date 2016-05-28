@@ -1,11 +1,20 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
+import java.util.List;
+import java.util.Set;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+
 import com.vaadin.ui.*;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
@@ -55,14 +64,18 @@ public class PatientListView extends BaseView {
         listTitle.setStyleName("h1");
 
         title.addComponent(listTitle);
+        
+        HealthVisitorEntity user = controller.getUser();
+        Set<ClientEntity> clients = user.getClients();
+		final BeanItemContainer<ClientEntity> container =
+				new BeanItemContainer<ClientEntity>(ClientEntity.class, clients);
 
-        Grid list = new Grid();
-        list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
+		Grid grid = new Grid(container);
+		//Grid list = new Grid();
+        //list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
 
-        // TODO Add patients and appointments from db to the list
-
-        general.addComponents(topLeft, title, list);
-        list.addSelectionListener((clickEvent ->
+        general.addComponents(topLeft, title, grid);
+        grid.addSelectionListener((clickEvent ->
                 getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 
 

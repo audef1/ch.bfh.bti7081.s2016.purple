@@ -70,8 +70,8 @@ public class HealthVisitorUI extends UI {
 		if (new AuthenticationService().isAuthenticated()) {
 			getNavigator().navigateTo(DashboardView.NAME);
 		} else {
-			getNavigator().navigateTo(DashboardView.NAME);
-//			getNavigator().navigateTo(LoginView.NAME);
+//			getNavigator().navigateTo(DashboardView.NAME);
+			getNavigator().navigateTo(LoginView.NAME);
 		}
 
 	}

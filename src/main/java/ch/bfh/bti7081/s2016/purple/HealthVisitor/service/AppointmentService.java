@@ -18,6 +18,7 @@ import com.vaadin.server.VaadinSession;
 public class AppointmentService {
     private static Logger logger = LogManager.getLogger(AppointmentService.class);
 
+    //TODO: 2016.05.28 gimmie7 - check if this is still used
     public List<AppointmentEntity> getAppointments(){
     	return new AppointmentDao().getAppointments();
     }

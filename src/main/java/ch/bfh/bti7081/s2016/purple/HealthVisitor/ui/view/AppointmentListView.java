@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 import java.util.List;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.data.util.BeanItemContainer;
@@ -51,8 +52,8 @@ public class AppointmentListView extends BaseView {
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
 
-		//TODO: get appointments only for current health visitor (use getAppointments() from HealthVisitorEntity?)
-		List<AppointmentEntity> items = controller.getAppointments();
+		HealthVisitorEntity user = controller.getUser();
+		List<AppointmentEntity> items = user.getAppointments();
 		final BeanItemContainer<AppointmentEntity> container =
 				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, items);
 		

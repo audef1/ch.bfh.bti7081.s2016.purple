@@ -1,5 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
@@ -24,6 +27,9 @@ import java.sql.*;
  * Created by gimmie7 on 27/05/16.
  */
 public abstract class DbImport {    
+
+	static final Logger logger = LogManager.getLogger(HealthVisitorUI.class);
+	
     static final String JDBC_DRIVER = "org.sqlite.JDBC";  
     static final String DB_URL = "jdbc:sqlite:test.db";
 
@@ -32,7 +38,6 @@ public abstract class DbImport {
     static final String PASS = "";
 
     public static void importFromFile(String fileName, String tableName, boolean deleteFirst){
-    	
     	BufferedReader br = null;
     	String line = "";
     	String cvsSplitBy = ",";
@@ -71,7 +76,7 @@ public abstract class DbImport {
 	      	stmt = conn.createStatement();
 	      
 	      	stmt.executeUpdate(query);
-	      	System.out.println("import from " + fileName + " into " + tableName + " successful");
+	      	logger.debug("import from " + fileName + " into " + tableName + " successful");
     	} catch(SQLException se){
     	      //Handle errors for JDBC
     	      se.printStackTrace();

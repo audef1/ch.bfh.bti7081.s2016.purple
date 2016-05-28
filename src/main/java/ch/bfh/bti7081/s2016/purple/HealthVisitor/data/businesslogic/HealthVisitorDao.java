@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by tgdflto1 on 22/05/16.
  */
-public class HealthVisitorDao {
+public class HealthVisitorDao implements PersonDao{
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
 
     public HealthVisitorDao() {
@@ -44,5 +44,20 @@ public class HealthVisitorDao {
         }catch(NoResultException e){
             return null;
         }
+    }
+
+    @Override
+    public void persist(Object entity) {
+
+    }
+
+    @Override
+    public void remove(Object entity) {
+
+    }
+
+    @Override
+    public Object findById(Object id) {
+        return null;
     }
 }

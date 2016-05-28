@@ -61,21 +61,21 @@ public class EmergencyView extends BaseView {
 		general.addComponent(btAmbulance, 1, 1);
 		Resource resAmbulance = new ExternalResource("tel://144");
 		final ResourceReference rrAmbulance = ResourceReference.create(resAmbulance, btAmbulance, "Ambulanz (144)");
-		btGeneral.addClickListener(clickevent -> Page.getCurrent().open(rrAmbulance.getURL(), null));
+		btAmbulance.addClickListener(clickevent -> Page.getCurrent().open(rrAmbulance.getURL(), null));
 		
 		// Create Button to call the firefighters
 		DashboardButtonComponent btFireFighter = new DashboardButtonComponent("Feuerwehr (118)", FontAwesome.FIRE_EXTINGUISHER);
 		general.addComponent(btFireFighter, 0, 2);
 		Resource resFireFighter = new ExternalResource("tel://118");
 		final ResourceReference rrFireFighter = ResourceReference.create(resFireFighter, btFireFighter, "Feuerwehr (118)");
-		btGeneral.addClickListener(clickevent -> Page.getCurrent().open(rrFireFighter.getURL(), null));
+		btFireFighter.addClickListener(clickevent -> Page.getCurrent().open(rrFireFighter.getURL(), null));
 		
 		// Create Button to call REGA
 		DashboardButtonComponent btRega = new DashboardButtonComponent("REGA (1414)", FontAwesome.H_SQUARE);
 		general.addComponent(btRega, 1, 2);
 		Resource resRega = new ExternalResource("tel://1414");
-		final ResourceReference rrRega = ResourceReference.create(resRega, btRega, "Feuerwehr (118)");
-		btGeneral.addClickListener(clickevent -> Page.getCurrent().open(rrRega.getURL(), null));
+		final ResourceReference rrRega = ResourceReference.create(resRega, btRega, "REGA (1414)");
+		btRega.addClickListener(clickevent -> Page.getCurrent().open(rrRega.getURL(), null));
 		
 		return general;
 	}

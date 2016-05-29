@@ -12,8 +12,7 @@ import java.util.List;
 public class AppointmentDao implements Dao{
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
 
-    public AppointmentDao() {
-    }
+    public AppointmentDao() { }
 
     public List<AppointmentEntity> getAppointments(){
         EntityManager em = factory.createEntityManager();
@@ -23,23 +22,25 @@ public class AppointmentDao implements Dao{
         try{
         	return query.getResultList();
         }catch(NoResultException e){
-            //TODO: add exception handling
         	return null;
         }
     }
 
+
+
     @Override
     public void persist(Object entity) {
-
     }
 
     @Override
     public void remove(Object entity) {
-
     }
 
     @Override
     public Object findById(Object id) {
-        return null;
+        EntityManager em = factory.createEntityManager();
+        AppointmentEntity appointment = em.find(AppointmentEntity.class, id);
+        em.close();
+        return appointment;
     }
 }

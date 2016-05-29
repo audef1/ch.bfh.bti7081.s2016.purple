@@ -1,9 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,11 +28,11 @@ public class HealthVisitorEntity extends PersonEntity implements Serializable{
         this.hireDate = hireDate;
     }
 
-    @OneToMany(mappedBy="hv")
+    @OneToMany(mappedBy="hv", fetch=FetchType.EAGER)
     private List<AppointmentEntity> appointments;
 
 
-    @OneToMany(mappedBy="hv")
+    @OneToMany(mappedBy="hv", fetch= FetchType.EAGER)
     private Set<ClientEntity> clients;
 
     private int workingHours;

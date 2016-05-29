@@ -22,8 +22,8 @@ public class AppointmentEntity {
     private int duration;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="HV_ID")
-    private  HealthVisitorEntity hv;
+    @JoinColumn(name="HV_ID", referencedColumnName = "HV_ID")
+    private HealthVisitorEntity hv;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")

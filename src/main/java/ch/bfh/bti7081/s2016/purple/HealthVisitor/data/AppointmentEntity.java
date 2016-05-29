@@ -22,8 +22,8 @@ public class AppointmentEntity {
     private int duration;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="HEALTHVISITOR_ID")
-    private  HealthVisitorEntity healthVisitor;
+    @JoinColumn(name="HV_ID")
+    private  HealthVisitorEntity hv;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")
@@ -41,11 +41,11 @@ public class AppointmentEntity {
     }
 
     public HealthVisitorEntity getHealthVisitor() {
-        return healthVisitor;
+        return hv;
     }
 
     public void setHealthVisitor(HealthVisitorEntity healthVisitor) {
-        this.healthVisitor = healthVisitor;
+        this.hv = healthVisitor;
     }
 
     public String getAddress() {

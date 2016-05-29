@@ -4,6 +4,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AppointmentService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AppointmentListController extends BaseController {
@@ -14,7 +15,7 @@ public class AppointmentListController extends BaseController {
 
     }
 
-    public List<AppointmentEntity> getAppointments() {
-        return super.getAppointmentService().getAppointments();
+    public ArrayList<AppointmentEntity> getAppointments() {
+        return (ArrayList<AppointmentEntity>) super.getAppointmentService().getAppointments();
     }
 }

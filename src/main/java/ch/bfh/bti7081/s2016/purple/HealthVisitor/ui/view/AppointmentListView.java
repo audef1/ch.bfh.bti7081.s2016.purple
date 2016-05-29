@@ -53,7 +53,7 @@ public class AppointmentListView extends BaseView {
 
 		general = new VerticalLayout();
 		general.setSpacing(true);
-		general.setMargin(false);
+		general.setMargin(true);
 
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
@@ -61,7 +61,7 @@ public class AppointmentListView extends BaseView {
 		HealthVisitorEntity user = controller.getUser();
 		List<AppointmentEntity> items = user.getAppointments();
 		container = new BeanItemContainer<>(BasicEvent.class);
-		//this.addAppointments(items);
+		this.addAppointments(items);
 				
 		HorizontalLayout calnav = new HorizontalLayout();
 		calnav.setSpacing(true);
@@ -69,12 +69,12 @@ public class AppointmentListView extends BaseView {
 		Button today = new Button("Heute");
 		calnav.addComponents(week, today);
 		
-		Calendar cal = new Calendar(new AppointmentEventProvider(items));
+		Calendar cal = new Calendar();
 		cal.setSizeFull();
 		cal.setResponsive(true);
 		cal.setFirstVisibleHourOfDay(FIRST_HOUR);
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
-	    cal.setContainerDataSource(container);
+	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
 		general.addComponents(calnav, cal);
 		
@@ -85,7 +85,8 @@ public class AppointmentListView extends BaseView {
 	
 	public void addAppointments(List<AppointmentEntity> items) {
         for (AppointmentEntity appointment : items) {
-        	String name = appointment.getClient().getFirstName() + " " + appointment.getClient().getLastName();
+        	String name = appointment.getClient().getFullName();
+        	//String name = "test";
         	String description = appointment.getAddress();
         	
         	GregorianCalendar cal = new GregorianCalendar();

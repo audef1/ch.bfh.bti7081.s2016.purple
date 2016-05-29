@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
@@ -20,6 +21,7 @@ public class HeaderComponent extends HorizontalLayout {
     private NavigationButton home;
     private Image logo;
     private HorizontalLayout buttons;
+    private Label loggedin;
 
 
     public HeaderComponent(BaseView view) {
@@ -46,6 +48,10 @@ public class HeaderComponent extends HorizontalLayout {
             buttons.addComponent(back);
             buttons.addComponent(logout);
             buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
+            AuthenticationService as = new AuthenticationService();
+    	    HealthVisitorEntity hv = as.getUser();
+    	    loggedin = new Label("angemeldet als: " + hv.getFullName());
+            buttons.addComponent(loggedin);
         }
        
         this.addComponent(pagename);

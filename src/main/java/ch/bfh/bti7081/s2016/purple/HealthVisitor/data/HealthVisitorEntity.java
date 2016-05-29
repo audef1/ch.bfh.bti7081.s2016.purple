@@ -30,7 +30,7 @@ public class HealthVisitorEntity extends PersonEntity implements Serializable{
         this.hireDate = hireDate;
     }
 
-    @OneToMany(mappedBy="healthVisitor")
+    @OneToMany(mappedBy="hv")
     private List<AppointmentEntity> appointments;
 
 
@@ -46,7 +46,7 @@ public class HealthVisitorEntity extends PersonEntity implements Serializable{
     }
 
     public List<AppointmentEntity> getAppointments() {
-        return appointments;
+    	return appointments;
     }
 
     public void setAppointments(List<AppointmentEntity> appointments) {

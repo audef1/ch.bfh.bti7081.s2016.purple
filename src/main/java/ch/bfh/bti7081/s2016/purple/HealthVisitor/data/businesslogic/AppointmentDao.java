@@ -2,6 +2,8 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,11 +18,12 @@ public class AppointmentDao implements Dao{
 
     public List<AppointmentEntity> getAppointments(){
         EntityManager em = factory.createEntityManager();
-        TypedQuery<AppointmentEntity> query = em.
-                createQuery("SELECT a FROM appointment a",
-                        AppointmentEntity.class);
+        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT * FROM appointment WHERE a.hv_id = :hvid", AppointmentEntity.class);
+        
+        int hvid = new AuthenticationService().getUser().getId();
+        
         try{
-        	return query.getResultList();
+        	return query.setParameter("hvid", hvid).getResultList();
         }catch(NoResultException e){
         	return null;
         }

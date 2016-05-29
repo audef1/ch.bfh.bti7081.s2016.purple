@@ -79,10 +79,10 @@ public abstract class DbImport {
 	      	logger.debug("import from " + fileName + " into " + tableName + " successful");
     	} catch(SQLException se){
     	      //Handle errors for JDBC
-    	      se.printStackTrace();
+    	      logger.error(se.getMessage());
     	} catch(Exception e){
     	      //Handle errors for Class.forName
-    		e.printStackTrace();
+    		logger.error(e.getMessage());
     	} finally{
     		//close resources
     		try {
@@ -96,7 +96,7 @@ public abstract class DbImport {
     			if (conn != null)
     				conn.close();
 	      } catch(SQLException se){
-	    	  se.printStackTrace();
+				logger.error(se.getMessage());
 	      }
 	   }
     }

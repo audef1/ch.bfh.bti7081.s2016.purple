@@ -85,8 +85,6 @@ public class AppointmentListView extends BaseView {
 	
 	public void addAppointments(List<AppointmentEntity> items) {
         for (AppointmentEntity appointment : items) {
-        	String name = appointment.getClient().getFullName();
-        	//String name = "test";
         	String description = appointment.getAddress();
         	
         	GregorianCalendar cal = new GregorianCalendar();
@@ -96,7 +94,7 @@ public class AppointmentListView extends BaseView {
 			cal.add(GregorianCalendar.MINUTE, appointment.getDuration());
 			Date end = cal.getTime();
 
-            container.addBean(new BasicEvent(name, description, start, end));
+            container.addBean(new BasicEvent(appointment.getClient().getFullName(), description, start, end));
         }
         container.sort(new Object[]{"start"}, new boolean[] { true });
 	}

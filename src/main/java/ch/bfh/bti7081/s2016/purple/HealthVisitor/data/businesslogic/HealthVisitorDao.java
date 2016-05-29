@@ -21,12 +21,6 @@ public class HealthVisitorDao implements PersonDao{
     }
 
     public HealthVisitorEntity findByEmail(String mail){
-//        em.getTransaction().begin();
-//        em.createQuery("SELECT * FROM PERSON WHERE email = ").executeUpdate();
-//        em.persist(new Person("Jeanne Calment", 122));
-//        em.persist(new Person("Sarah Knauss", 119));
-//        em.persist(new Person("Lucy Hannah", 117));
-//        em.getTransaction().commit();
         TypedQuery<HealthVisitorEntity> query = entityManager.
                 createQuery("SELECT p FROM person p  WHERE TYPE(p) = :klass AND p.email = :email",
                         HealthVisitorEntity.class);

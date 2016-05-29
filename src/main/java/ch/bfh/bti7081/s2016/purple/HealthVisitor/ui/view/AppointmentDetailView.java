@@ -88,8 +88,10 @@ public class AppointmentDetailView extends BaseView{
 
 
 	//		Add clicklistener to button Arrival
-			btnArrival.addClickListener(clickevent ->
-			btnArrivalClicked(btnArrival, btnNewReport));
+			btnArrival.addClickListener(clickevent -> {
+				btnArrivalClicked(btnArrival, btnNewReport);
+				appointment.doAction(appointment);
+			});
 
 	//		Create button to show patient details
 			Button btnDetails = new Button("Patientendetails");

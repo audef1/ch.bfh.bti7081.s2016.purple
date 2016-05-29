@@ -1,5 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
+import java.util.Collection;
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -26,7 +29,8 @@ public class AppointmentEntity {
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-
+    @OneToMany(mappedBy="APPOINTMENT")
+    private Collection<ReportEntity> reports;
 
     public int getId() {
         return id;

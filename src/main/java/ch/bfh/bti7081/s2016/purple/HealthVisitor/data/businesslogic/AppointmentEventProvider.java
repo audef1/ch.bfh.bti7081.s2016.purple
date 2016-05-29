@@ -26,7 +26,7 @@ public class AppointmentEventProvider implements CalendarEventProvider{
 			Date start = cal.getTime();
 			
 			//get enddate from duration
-			cal.add(GregorianCalendar.MINUTE, a.getDuration());
+			cal.add(GregorianCalendar.MINUTE, (int) a.getEndLong());
 			Date end = cal.getTime();
 			
 			String name = "Test";

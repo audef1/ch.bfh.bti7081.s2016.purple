@@ -2,6 +2,9 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import java.util.Locale;
 
+import com.vaadin.data.validator.DateRangeValidator;
+import com.vaadin.data.validator.StringLengthValidator;
+import com.vaadin.shared.ui.datefield.Resolution;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -188,17 +191,19 @@ public class AppointmentDetailView extends BaseView{
 		end.setDateFormat("dd.MM.yyyy HH:mm");
 		end.setLocale(new Locale("de", "CH"));
 		end.setResolution(end.RESOLUTION_MIN);
+		end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
 		content.addComponent(end);
 		
 		RichTextArea text = new RichTextArea();
 		text.setDescription("aktueller Rapport");
 		text.setImmediate(true);
 		text.setSizeFull();
+		text.addValidator(new StringLengthValidator("Bitte geben Sie einen Text ein", 30, Integer.MAX_VALUE, false));
 		content.addComponent(text);
 		
 		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
 		btnSave.addClickListener(clickevent ->
-				save(arrival, end));
+				save(arrival, end, text));
 		content.addComponent(btnSave);
 		
 		window.setContent(content);
@@ -214,7 +219,8 @@ public class AppointmentDetailView extends BaseView{
 		// TODO Persistence Current DateTime to the DB.
 	}
 	
-	private void save(DateField arrival, DateField end){
+	private void save(DateField arrival, DateField end, RichTextArea text){
+		logger.debug("written text is: "+text.getValue());
 		logger.debug(arrival.getValue());
 		logger.debug(end.getValue());
 	}
@@ -228,7 +234,7 @@ public class AppointmentDetailView extends BaseView{
 	@Override
 	public String getViewName() {
 		// TODO Auto-generated method stub
-		return null;
+		return VIEW_NAME;
 	}
 
 }

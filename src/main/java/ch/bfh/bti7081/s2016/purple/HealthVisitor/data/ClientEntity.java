@@ -30,12 +30,22 @@ public class ClientEntity extends PersonEntity {
     @JoinColumn(name="HV_ID")
     private HealthVisitorEntity hv;
 
+    private String details;
+
     public HealthVisitorEntity getResponsibleHealthVisitor() {
         return hv;
     }
 
     public void setResponsibleHealthVisitor(HealthVisitorEntity responsibleHealthVisitor) {
         this.hv = responsibleHealthVisitor;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 
     /**

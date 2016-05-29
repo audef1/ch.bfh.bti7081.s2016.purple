@@ -31,7 +31,7 @@ public class LogoutView extends BaseView {
             Label label = new Label("Vielen Dank und bis zum nächsten mal.");
             label.setStyleName("h1");
             Button button = new Button("Zurück zum Login");
-            button.addClickListener(click -> {getUI().getNavigator().navigateTo("Login");});
+            button.addClickListener(click -> getUI().getNavigator().navigateTo("Login"));
             hl.addComponent(label);
             hl.addComponent(button);
             return hl;

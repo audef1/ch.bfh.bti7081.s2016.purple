@@ -54,7 +54,7 @@ public class LoginView extends BaseView{
 
         magicLoginButton = new Button("Login");
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        magicLoginButton.addClickListener((clickEvent -> {validate();}));
+        magicLoginButton.addClickListener((click -> validate()));
 
         // The Layout for the Login Form
     	loginpanel = new Panel("");

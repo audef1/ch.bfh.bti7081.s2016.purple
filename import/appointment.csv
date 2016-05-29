@@ -7,3 +7,4 @@ ID, ADDRESS,                    ENDTIME,                                PLACE,  
 6, 'Wankdorffeldstrasse 102',   strftime('%s','2016-06-29 09:00:00'),   'Bern',         strftime('%s','2016-06-29 20:00:00'),   3,          1
 7, 'Wankdorffeldstrasse 102',   strftime('%s','2016-06-29 19:00:00'),   'Bern',         strftime('%s','2016-06-29 21:00:00'),   3,          1
 8, 'Wankdorffeldstrasse 103',   strftime('%s', date('now')),            'Bern',         strftime('%s', date('now') + 3000),     3,          1
+9, 'Effingerstrasse 103',       strftime('%s', date('now')),            'Bern',         strftime('%s', date('now') + 30000),    3,          1

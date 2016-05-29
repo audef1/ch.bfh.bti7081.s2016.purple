@@ -29,7 +29,7 @@ public class AppointmentEntity {
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-    @OneToMany(mappedBy="APPOINTMENT")
+    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class)
     private Collection<ReportEntity> reports;
 
     public int getId() {

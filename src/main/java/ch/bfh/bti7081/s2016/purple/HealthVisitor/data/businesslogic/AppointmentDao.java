@@ -26,8 +26,6 @@ public class AppointmentDao implements Dao{
         }
     }
 
-
-
     @Override
     public void persist(Object entity) {
     }

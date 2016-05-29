@@ -36,14 +36,9 @@ public class HealthVisitorDao implements PersonDao{
 
     public HealthVisitorEntity findById(String id){
         EntityManager em = factory.createEntityManager();
-        TypedQuery<HealthVisitorEntity> query = em.
-                createQuery("SELECT p FROM person p WHERE TYPE(p) = :klass AND p.id = :id",
-                        HealthVisitorEntity.class);
-        try{
-            return query.setParameter("klass", HealthVisitorEntity.class).setParameter("id", id).getSingleResult();
-        }catch(NoResultException e){
-            return null;
-        }
+        HealthVisitorEntity hv = em.find(HealthVisitorEntity.class, id);
+        em.close();
+        return hv;
     }
 
     @Override

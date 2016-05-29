@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 import com.vaadin.server.FontAwesome;
@@ -38,12 +39,15 @@ public class HeaderComponent extends HorizontalLayout {
         logo.setWidth("300px");
         logo.setCaption("");
         pagename.addStyleName("pagename");
-        buttons.addComponent(home);
-        buttons.addComponent(back);
-        buttons.addComponent(logout);
         buttons.setSpacing(true);
-        buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
 
+        if (new AuthenticationService().isAuthenticated()){
+        	buttons.addComponent(home);
+            buttons.addComponent(back);
+            buttons.addComponent(logout);
+            buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
+        }
+       
         this.addComponent(pagename);
         this.addComponent(buttons);
         this.addComponent(logo);

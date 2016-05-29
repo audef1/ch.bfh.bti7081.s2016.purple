@@ -14,7 +14,7 @@ public class ReportEntity {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="APPOINTMENT_ID", referencedColumnName="APPOINTMENT_ID")
+    @JoinColumn(name="APPOINTMENT_ID")
     private  AppointmentEntity appointment;
 
     private Date start;

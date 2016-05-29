@@ -21,15 +21,15 @@ public class AppointmentEntity {
     private int startTime;
     private int duration;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="HV_ID", referencedColumnName = "HV_ID")
     private HealthVisitorEntity hv;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class)
+    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
     private Collection<ReportEntity> reports;
 
     public int getId() {

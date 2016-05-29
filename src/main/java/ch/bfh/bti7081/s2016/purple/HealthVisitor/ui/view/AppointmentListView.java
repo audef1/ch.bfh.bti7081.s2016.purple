@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
@@ -8,16 +7,12 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentEventProvider;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
@@ -58,11 +53,17 @@ public class AppointmentListView extends BaseView {
 		
 		//final BeanItemContainer<AppointmentEntity> container = new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, items);
 		
+		HorizontalLayout calnav = new HorizontalLayout();
+		calnav.setSpacing(true);
+		Button week = new Button("Woche");
+		Button today = new Button("Heute");
+		calnav.addComponents(week, today);
+		
 		Calendar cal = new Calendar(new AppointmentEventProvider(items));
 		cal.setSizeFull();
 		cal.setResponsive(true);
-		
-		general.addComponent(cal);
+		cal.setFirstVisibleHourOfDay(cal.getFirstVisibleHourOfDay());
+		general.addComponents(calnav, cal);
 		
 		// TODO Add patients and appointments from db to the list
 		//addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));

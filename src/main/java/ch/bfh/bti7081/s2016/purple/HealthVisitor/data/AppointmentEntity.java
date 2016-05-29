@@ -4,15 +4,12 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import com.vaadin.client.ui.calendar.schedule.CalendarEvent;
-import com.vaadin.ui.components.calendar.event.BasicEvent;
-
 /**
  * Created by tgdflto1 on 22/05/16.
  */
 @Entity(name="appointment")
 @Table(name="APPOINTMENT")
-public class AppointmentEntity{
+public class AppointmentEntity {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

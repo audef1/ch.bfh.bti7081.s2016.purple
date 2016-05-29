@@ -1,5 +1,10 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -10,7 +15,12 @@ import javax.persistence.*;
  */
 @Entity(name="appointment")
 @Table(name="APPOINTMENT")
-public class AppointmentEntity {
+public class AppointmentEntity implements AppoinmentState{
+
+    public AppointmentEntity(){
+        super();
+        this.setState(new PlannedState());
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -18,11 +28,13 @@ public class AppointmentEntity {
 
     private String address;
     private String place;
-    private int startTime;
-    private int duration;
+    private long startTime;
+    private long endTime;
+
+    private AppoinmentState state;
 
     @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="HV_ID", referencedColumnName = "HV_ID")
+    @JoinColumn(name="HV_ID")
     private HealthVisitorEntity hv;
 
     @ManyToOne(fetch=FetchType.EAGER)
@@ -31,6 +43,31 @@ public class AppointmentEntity {
 
     @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
     private Collection<ReportEntity> reports;
+
+
+    public AppoinmentState getState() {
+        return state;
+    }
+
+    public void setState(AppoinmentState state) {
+        this.state = state;
+    }
+
+    public HealthVisitorEntity getHv() {
+        return hv;
+    }
+
+    public void setHv(HealthVisitorEntity hv) {
+        this.hv = hv;
+    }
+
+    public Collection<ReportEntity> getReports() {
+        return reports;
+    }
+
+    public void setReports(Collection<ReportEntity> reports) {
+        this.reports = reports;
+    }
 
     public int getId() {
         return id;
@@ -64,20 +101,37 @@ public class AppointmentEntity {
         this.client = client;
     }
 
-    public int getStartTime() {
+    public long getStartLong() {
         return startTime;
     }
 
-    public void setStartTime(int startTime) {
+    public String getStartTime(){
+        Date date = new Date(getStartLong());
+        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+        return format.format(date);
+    }
+
+    public String getEndTime(){
+        Date date = new Date(getEndLong());
+        Format format = new SimpleDateFormat("yyyy MM dd HH:mm:ss");
+        return format.format(date);
+    }
+
+    public String getDate(){
+        Date date = new Date(getStartLong());
+        Format format = new SimpleDateFormat("yyyy MM dd");
+        return format.format(date);
+    }
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public int getDuration() {
-        return duration;
+    public long getEndLong() {
+        return endTime;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
+    public void setEndTime(long endTime) {
+        this.endTime = endTime;
     }
 
     public String getPlace() {
@@ -86,5 +140,10 @@ public class AppointmentEntity {
 
     public void setPlace(String place) {
         this.place = place;
+    }
+
+    @Override
+    public void doAction(AppointmentEntity context) {
+        this.state.doAction(this);
     }
 }

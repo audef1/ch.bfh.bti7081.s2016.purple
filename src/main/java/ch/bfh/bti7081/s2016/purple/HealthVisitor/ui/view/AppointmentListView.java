@@ -57,6 +57,7 @@ public class AppointmentListView extends BaseView {
 
 		HealthVisitorEntity user = controller.getUser();
 		List<AppointmentEntity> items = user.getAppointments();
+		logger.debug("getting appointments: " + items);
 		container = new BeanItemContainer<>(BasicEvent.class);
 		this.addAppointments(items);
 				
@@ -82,16 +83,17 @@ public class AppointmentListView extends BaseView {
 	
 	public void addAppointments(List<AppointmentEntity> items) {
         for (AppointmentEntity appointment : items) {
-        	String description = appointment.getAddress();
         	
+        	String name = appointment.getClient().getFullName();
+        	String description = appointment.getAddress();
+       
         	GregorianCalendar cal = new GregorianCalendar();
-			cal.setTime(new Date(appointment.getStartTime()));
+			cal.setTime(new Date(new Integer(appointment.getStartTime())));
 			Date start = cal.getTime();
-			
 			cal.add(GregorianCalendar.MINUTE, (int) appointment.getEndLong());
 			Date end = cal.getTime();
-
-            container.addBean(new BasicEvent(appointment.getClient().getFullName(), description, start, end));
+			logger.debug("added appointment to calendar: " + name + " - " + start + " - " + end);
+            container.addBean(new BasicEvent(name, description, start, end));
         }
         container.sort(new Object[]{"start"}, new boolean[] { true });
 	}

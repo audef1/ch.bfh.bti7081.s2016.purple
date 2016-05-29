@@ -37,6 +37,7 @@ public class DashboardView extends BaseView{
 
 		GridLayout grid = new GridLayout(3, 2);
 		grid.setSpacing(true);
+		grid.setMargin(true);
 		grid.addStyleName("ourcustomlayout");
 
 		DashboardButtonComponent btAppointmentNow = new DashboardButtonComponent("Aktueller Termin", FontAwesome.CLOCK_O);

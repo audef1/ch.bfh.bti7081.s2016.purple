@@ -23,11 +23,12 @@ public class AppointmentDao implements Dao{
 
     public List<AppointmentEntity> getAppointments(){
         EntityManager em = factory.createEntityManager();
-        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT a FROM appointments a WHERE a.hv_id = :hvid", AppointmentEntity.class);;
+        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv" , AppointmentEntity.class);
         try{
-        	return query.setParameter("hvid", new AuthenticationService().getUser().getId()).getResultList();
+        	return query.setParameter("hv", new AuthenticationService().getUser()).getResultList();
         }catch(NoResultException e){
-        	return null;
+            logger.debug("no appointments found " + e.getMessage());
+            return null;
         }
     }
 
@@ -70,7 +71,7 @@ public class AppointmentDao implements Dao{
 
             AppointmentEntity appointment=  query.setParameter("hv", new AuthenticationService().getUser()).
                     setParameter("today", timeNow).setParameter("tomorrow", timeTomorrow).getSingleResult();
-            appointment.getClient();
+            appointment.getClient(); 
             return appointment;
         }catch(NoResultException e){
             logger.debug("no current appointment found " + e.getMessage());

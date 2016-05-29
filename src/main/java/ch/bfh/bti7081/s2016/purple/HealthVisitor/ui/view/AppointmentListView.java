@@ -7,6 +7,7 @@ import java.util.List;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentEventProvider;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.ui.*;
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
@@ -59,7 +61,7 @@ public class AppointmentListView extends BaseView {
 		HealthVisitorEntity user = controller.getUser();
 		List<AppointmentEntity> items = user.getAppointments();
 		container = new BeanItemContainer<>(BasicEvent.class);
-		this.addAppointments(items);
+		//this.addAppointments(items);
 				
 		HorizontalLayout calnav = new HorizontalLayout();
 		calnav.setSpacing(true);
@@ -73,7 +75,7 @@ public class AppointmentListView extends BaseView {
 		cal.setFirstVisibleHourOfDay(FIRST_HOUR);
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container);
-		
+	
 		general.addComponents(calnav, cal);
 		
 		// TODO Add patients and appointments from db to the list

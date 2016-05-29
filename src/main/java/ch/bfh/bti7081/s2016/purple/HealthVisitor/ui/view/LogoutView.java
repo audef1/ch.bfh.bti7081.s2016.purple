@@ -10,14 +10,11 @@ import org.apache.logging.log4j.Logger;
 /**
  * Created by tgdflto1 on 27/05/16.
  */
-public class LogoutView extends BaseView{
+public class LogoutView extends BaseView {
 
         private final Logger logger = LogManager.getLogger(LoginView.class);
-        public static final String NAME ="logout";
+        public static final String NAME ="Logout";
         private SessionController controller;
-        private TextField user;
-        private PasswordField password;
-        private Button magicLoginButton;
 
         public LogoutView(){
             super();

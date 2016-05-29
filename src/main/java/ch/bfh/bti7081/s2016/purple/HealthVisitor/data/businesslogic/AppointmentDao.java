@@ -18,7 +18,7 @@ public class AppointmentDao implements Dao{
 
     public List<AppointmentEntity> getAppointments(){
         EntityManager em = factory.createEntityManager();
-        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT * FROM appointment WHERE a.hv_id = :hvid", AppointmentEntity.class);
+        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT a FROM appointments a WHERE a.hv_id = :hvid", AppointmentEntity.class);
         
         int hvid = new AuthenticationService().getUser().getId();
         

@@ -187,8 +187,10 @@ public class AppointmentDetailView extends BaseView{
 		content.addComponent(text);
 		
 		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
-		btnSave.addClickListener(clickevent ->
-				save(arrival, end, text));
+		btnSave.addClickListener(clickevent -> {
+				save(arrival, end, text);
+				window.close();
+				});
 		content.addComponent(btnSave);
 		
 		window.setContent(content);
@@ -198,10 +200,15 @@ public class AppointmentDetailView extends BaseView{
 	
 //	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
 	private void btnArrivalClicked(Button btn, Button report){
-		btn.setCaption("Ende bestätigen");
-		report.setEnabled(true);
-		report.addClickListener(clickevent -> newReport());
-		// TODO Persistence Current DateTime to the DB.
+		if (!btn.getCaption().equals("Ende bestätigen")) {
+			btn.setCaption("Ende bestätigen");
+//			TODO: Persistence arrival time to the db!
+			report.setEnabled(true);
+			report.addClickListener(clickevent -> newReport());
+		} else {
+			btn.setEnabled(false);
+//			TODO: Persitence end time to the db!
+		}
 	}
 	
 	private void save(DateField arrival, DateField end, RichTextArea text){

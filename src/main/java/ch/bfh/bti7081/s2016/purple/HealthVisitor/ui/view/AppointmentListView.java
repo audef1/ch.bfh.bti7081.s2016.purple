@@ -6,8 +6,6 @@ import java.util.List;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentEventProvider;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.ui.*;
@@ -17,7 +15,6 @@ import org.apache.logging.log4j.Logger;
 
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.VaadinService;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
@@ -91,7 +88,7 @@ public class AppointmentListView extends BaseView {
 			cal.setTime(new Date(appointment.getStartTime()));
 			Date start = cal.getTime();
 			
-			cal.add(GregorianCalendar.MINUTE, appointment.getDuration());
+			cal.add(GregorianCalendar.MINUTE, (int) appointment.getEndLong());
 			Date end = cal.getTime();
 
             container.addBean(new BasicEvent(appointment.getClient().getFullName(), description, start, end));

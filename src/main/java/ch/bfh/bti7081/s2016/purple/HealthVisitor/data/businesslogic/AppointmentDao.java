@@ -19,9 +19,14 @@ import java.util.List;
 public class AppointmentDao implements Dao{
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
-    public AppointmentDao() { }
+    private final EntityManager entityManager;
+
+    public AppointmentDao() {
+        entityManager =  factory.createEntityManager();
+    }
 
     public List<AppointmentEntity> getAppointments(){
+        TypedQuery<AppointmentEntity> query = entityManager.createQuery("SELECT a FROM appointments a WHERE a.hv_id = :hvid", AppointmentEntity.class);;
         EntityManager em = factory.createEntityManager();
         TypedQuery<AppointmentEntity> query = em.createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv" , AppointmentEntity.class);
         try{
@@ -34,6 +39,9 @@ public class AppointmentDao implements Dao{
 
     @Override
     public void persist(Object entity) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(entity);
+        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -42,23 +50,20 @@ public class AppointmentDao implements Dao{
 
     @Override
     public Object findById(Object id) {
-        EntityManager em = factory.createEntityManager();
-        AppointmentEntity appointment = em.find(AppointmentEntity.class, id);
-        em.close();
+        AppointmentEntity appointment = entityManager.find(AppointmentEntity.class, id);
+        entityManager.close();
         return appointment;
     }
 
     public void update(AppointmentEntity appointmentEntity) {
-        EntityManager em = factory.createEntityManager();
-        em.getTransaction().begin();
-        em.persist(appointmentEntity);
-        em.getTransaction().commit();
-        em.close();
+        entityManager.getTransaction().begin();
+        entityManager.persist(appointmentEntity);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public AppointmentEntity getCurrentAppointment() {
-        EntityManager em = factory.createEntityManager();
-        TypedQuery<AppointmentEntity> query = em.
+        TypedQuery<AppointmentEntity> query = entityManager.
                 createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv AND a.startTime" +
                         " BETWEEN :today AND :tomorrow ORDER BY a.startTime, a.endTime ASC",
                         AppointmentEntity.class);
@@ -71,7 +76,7 @@ public class AppointmentDao implements Dao{
 
             AppointmentEntity appointment=  query.setParameter("hv", new AuthenticationService().getUser()).
                     setParameter("today", timeNow).setParameter("tomorrow", timeTomorrow).getSingleResult();
-            appointment.getClient(); 
+            appointment.getClient();
             return appointment;
         }catch(NoResultException e){
             logger.debug("no current appointment found " + e.getMessage());

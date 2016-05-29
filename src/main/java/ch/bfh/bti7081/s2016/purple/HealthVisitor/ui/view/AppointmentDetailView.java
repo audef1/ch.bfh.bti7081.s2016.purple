@@ -53,16 +53,11 @@ public class AppointmentDetailView extends BaseView{
 		general.setSpacing(true);
 
 
-		Label lblHeader = new Label("Termin Detail");
-		lblHeader.setStyleName("header");
-
-		Button btBack = new Button("Zurück");
-		btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-		btBack.addClickListener((clickEvent -> getUI().getNavigator().navigateTo(DashboardView.NAME)));
-
+		Label lblHeader = new Label("29.02.2016, 15:30-17:00 - Wolfgang Schaefer");
+		lblHeader.setStyleName("h1");
 
 		Button btnArrival = new Button("Ankunft bestätigen");
-		
+		btnArrival.setWidth("200px");
 
 //		Google-Maps-Implementation
 		LatLon pos = new LatLon(46.9648208, 7.453848);
@@ -99,7 +94,7 @@ public class AppointmentDetailView extends BaseView{
 		btnArrival.addClickListener(clickevent ->
 		btnArrivalClicked(btnArrival, btnNewReport));
 
-//		Vreate button to show patient details
+//		Create button to show patient details
 		Button btnDetails = new Button("Patientendetails");
 //		TODO: Show Patient data
 
@@ -116,23 +111,16 @@ public class AppointmentDetailView extends BaseView{
 		//		btnEmergencyContact.addClickListener(clickevent -> getUI().getNavigator().navigateTo(emergencyContactView.NAME));
 
 
-		// The Layout for the Logo
-		HorizontalLayout hl = new HorizontalLayout(btBack, lblHeader);
-		hl.setSpacing(true);
-		hl.setMargin(new MarginInfo(true, false, true, false));
-
-		VerticalLayout vl = new VerticalLayout();
-		vl.addComponent(btnArrival);
-		vl.setComponentAlignment(btnArrival, Alignment.TOP_LEFT);
-		vl.setMargin(new MarginInfo(false, false, true, false));
-		vl.setSpacing(true);
-
+		// The Layout for title and arrival button
 		GridLayout top = new GridLayout(2, 2);
+		top.setColumnExpandRatio(0, 10);
+		top.setColumnExpandRatio(1, 0);
 		top.setSizeFull();
-		top.addComponent(hl, 0, 0);
-		top.addComponent(vl, 1, 0);
-//		top.addComponent(lblTitle, 0, 1);
-		top.setMargin(new MarginInfo(false, true, false, false));
+		top.addComponent(lblHeader, 0, 0);
+		top.setComponentAlignment(lblHeader, Alignment.MIDDLE_LEFT);
+		top.addComponent(btnArrival, 1, 0);
+		top.setComponentAlignment(btnArrival, Alignment.MIDDLE_RIGHT);
+		top.setMargin(new MarginInfo(true, true, false, false));
 
 
 //		Set the data-Layout
@@ -140,9 +128,6 @@ public class AppointmentDetailView extends BaseView{
 		data.setSpacing(true);
 		data.setMargin(false);
 		data.setSizeFull();
-
-
-
 
 		data.addComponent(map, 0, 0, 0, 2);
 		data.addComponent(checklist, 0, 3, 0, 4);

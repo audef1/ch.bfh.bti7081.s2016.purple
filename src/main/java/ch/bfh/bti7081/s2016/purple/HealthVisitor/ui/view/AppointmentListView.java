@@ -1,9 +1,11 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentEventProvider;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.data.util.BeanItemContainer;
@@ -38,7 +40,6 @@ public class AppointmentListView extends BaseView {
 		logger.debug("arrived on appointment list view");
 		controller = new AppointmentListController(this);
 
-		// TODO outsource into an xml/html file
 		layout = new StandardLayout(this);
 	}
 
@@ -54,26 +55,17 @@ public class AppointmentListView extends BaseView {
 
 		HealthVisitorEntity user = controller.getUser();
 		List<AppointmentEntity> items = user.getAppointments();
-		final BeanItemContainer<AppointmentEntity> container =
-				new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, items);
 		
-		Grid grid = new Grid(container);
-		grid.setColumnOrder("address", "duration");
+		//final BeanItemContainer<AppointmentEntity> container = new BeanItemContainer<AppointmentEntity>(AppointmentEntity.class, items);
 		
-		// The Layout for the Logo
-		GridLayout top = new GridLayout(2, 1);
-		top.setSizeFull();
-		top.setMargin(new MarginInfo(true, true, false, true));
-
-		VerticalLayout title = new VerticalLayout();
-		title.addComponent(listTitle);
-		title.setMargin(new MarginInfo(false, true, true, true));
-		title.setSpacing(true);
-		title.addComponent(grid);
-
+		Calendar cal = new Calendar(new AppointmentEventProvider(items));
+		cal.setSizeFull();
+		cal.setResponsive(true);
+		
+		general.addComponent(cal);
+		
 		// TODO Add patients and appointments from db to the list
-		general.addComponents(top, title);
-		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
+		//addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 		return general;
 	}
 

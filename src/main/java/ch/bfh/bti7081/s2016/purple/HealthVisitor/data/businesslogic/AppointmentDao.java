@@ -56,12 +56,7 @@ public class AppointmentDao implements Dao{
     }
 
     public AppointmentEntity getCurrentAppointment() {
-//       ÷ getAppointments()
-//
         EntityManager em = factory.createEntityManager();
-
-        //SELECT * FROM APPOINTMENT as a WHERE a.hv_id = 1 AND STARTTIME =  (SELECT MAX(STARTTIME) FROM APPOINTMENT WHERE STARTTIME < 1464535039);
-        //ELECT * from Table1 where myDate = (select max(myDate) from Table1 WHERE myDate < DATE('now') )
         TypedQuery<AppointmentEntity> query = em.
                 createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv AND a.startTime" +
                         " BETWEEN :today AND :tomorrow ORDER BY a.startTime, a.endTime ASC",
@@ -83,14 +78,6 @@ public class AppointmentDao implements Dao{
         }
 
 
-    }
-
-        public  Date addDays(Date date, int days)
-        {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            cal.add(Calendar.DATE, days); //minus number would decrement the days
-            return cal.getTime();
     }
 
 }

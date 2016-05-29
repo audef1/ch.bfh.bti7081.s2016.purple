@@ -31,6 +31,7 @@ public class AppointmentEntity implements AppoinmentState{
     private long startTime;
     private long endTime;
 
+    @Lob
     private AppoinmentState state;
 
     @ManyToOne(fetch=FetchType.EAGER)
@@ -144,6 +145,7 @@ public class AppointmentEntity implements AppoinmentState{
 
     @Override
     public void doAction(AppointmentEntity context) {
+        if(this.state == null) this.state = new PlannedState();
         this.state.doAction(this);
     }
 }

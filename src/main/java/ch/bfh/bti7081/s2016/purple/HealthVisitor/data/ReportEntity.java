@@ -21,6 +21,23 @@ public class ReportEntity {
     private Date end;
     private String description;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public AppointmentEntity getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(AppointmentEntity appointment) {
+        this.appointment = appointment;
+    }
+
     public Date getEnd() {
         return end;
     }

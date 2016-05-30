@@ -107,15 +107,15 @@ public class AppointmentEntity implements AppoinmentState{
     }
 
     public Date getStartTime(){
-        return new Date(getStartLong());
+        return new Date(getStartLong()*1000);
     }
 
     public Date getEndTime(){
-        return new Date(getEndLong());
+        return new Date(getEndLong()*1000);
     }
 
     public String getDate(){
-        Date date = new Date(getStartLong());
+        Date date = new Date(getStartLong()*1000);
         Format format = new SimpleDateFormat("dd MM yyyy");
         return format.format(date);
     }

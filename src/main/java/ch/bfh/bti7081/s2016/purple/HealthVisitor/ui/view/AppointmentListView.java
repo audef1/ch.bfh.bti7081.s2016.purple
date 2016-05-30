@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -82,7 +83,7 @@ public class AppointmentListView extends BaseView {
 	}
 	
 	public void addAppointments(List<AppointmentEntity> items) {
-        
+       
 		if (items !=null && !items.isEmpty()){
 			for (AppointmentEntity appointment : items) {
 	        	

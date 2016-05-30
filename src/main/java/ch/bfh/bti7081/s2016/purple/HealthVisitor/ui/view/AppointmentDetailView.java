@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 import com.vaadin.data.validator.DateRangeValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.shared.ui.datefield.Resolution;
@@ -54,6 +55,9 @@ public class AppointmentDetailView extends BaseView{
 			lblHeader.setStyleName("h1");
 
 			Button btnArrival = new Button("Ankunft bestätigen");
+			boolean stateNull = (appointment.getState() == null );
+			boolean isPlanned = appointment.getState().getClass().equals(PlannedState.class);
+			btnArrival.setEnabled(stateNull || isPlanned);
 			btnArrival.setWidth("200px");
 
 	//		Google-Maps-Implementation

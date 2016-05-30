@@ -82,20 +82,21 @@ public class AppointmentListView extends BaseView {
 	}
 	
 	public void addAppointments(List<AppointmentEntity> items) {
-        for (AppointmentEntity appointment : items) {
-        	
-        	String name = appointment.getClient().getFullName();
-        	String description = appointment.getAddress();
-       
-        	GregorianCalendar cal = new GregorianCalendar();
-			cal.setTime(new Date(new Integer(appointment.getStartTime())));
-			Date start = cal.getTime();
-			cal.add(GregorianCalendar.MINUTE, (int) appointment.getEndLong());
-			Date end = cal.getTime();
-			logger.debug("added appointment to calendar: " + name + " - " + start + " - " + end);
-            container.addBean(new BasicEvent(name, description, start, end));
+        
+		if (items !=null && !items.isEmpty()){
+			for (AppointmentEntity appointment : items) {
+	        	
+				String name = appointment.getPlace();
+	        	String description = appointment.getAddress();
+				Date start = appointment.getStartTime();
+				Date end = appointment.getEndTime();
+				
+				logger.debug("added appointment to calendar: " + name + " - " + start + " - " + end);
+	            container.addBean(new BasicEvent(name, description, start, end));
+	        }
+	        container.sort(new Object[]{"start"}, new boolean[] { true });
         }
-        container.sort(new Object[]{"start"}, new boolean[] { true });
+		
 	}
 
 	@Override

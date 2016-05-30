@@ -22,11 +22,9 @@ public class AppointmentEventProvider implements CalendarEventProvider{
 		
 		for (AppointmentEntity a : appointments){
 			GregorianCalendar cal = new GregorianCalendar();
-			cal.setTime(new Date(a.getStartTime()));
+			cal.setTime(a.getStartTime());
 			Date start = cal.getTime();
-			
-			//get enddate from duration
-			cal.add(GregorianCalendar.MINUTE, (int) a.getEndLong());
+			cal.setTime(a.getEndTime());
 			Date end = cal.getTime();
 			
 			String name = "Test";

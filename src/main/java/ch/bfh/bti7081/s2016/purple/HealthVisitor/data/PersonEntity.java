@@ -81,7 +81,10 @@ public class PersonEntity {
     }
     
     public String getFullName(){
-    	return getFirstName() + " " + getLastName();
+        StringBuffer sb = new StringBuffer();
+        if(getFirstName() != null) sb.append(getFirstName());
+        if(getLastName() != null) sb.append(" "+getLastName());
+    	return sb.toString();
     }
 
 

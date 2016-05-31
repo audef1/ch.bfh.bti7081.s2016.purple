@@ -1,0 +1,6 @@
+ID,NAME,DESCRIPTION,CHECKED,AMOUNT,APPOINTMENT_ID
+1,'Schlaftabletten','Jeden Abend eine Stunde vor dem Schlafen gehen.','0','1','4'
+2,'Antidepressiva','3x täglich','0','1','4'
+3,'Antidepressiva','3x täglich','0','1','112'
+4,'Vitamine','1x täglich','0','1','112'
+5,'Starkes Antidepressiva','1x täglich','0','1','112'

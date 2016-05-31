@@ -45,8 +45,14 @@ public class AppointmentEntity implements AppoinmentState{
     @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
     private Collection<ReportEntity> reports;
 
+    @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
+    private Collection<MedicationEntity> medications;
 
-    public AppoinmentState getState() {
+    public Collection<MedicationEntity> getMedications() {
+		return medications;
+	}
+
+	public AppoinmentState getState() {
         return state;
     }
 

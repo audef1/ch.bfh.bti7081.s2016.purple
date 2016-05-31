@@ -2,6 +2,9 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import org.apache.logging.log4j.LogManager;
@@ -64,19 +67,30 @@ public class AppointmentDao implements Dao{
     public AppointmentEntity getCurrentAppointment() {
         TypedQuery<AppointmentEntity> query = entityManager.
                 createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv AND a.startTime" +
-                        " BETWEEN :today AND :tomorrow ORDER BY a.startTime, a.endTime ASC",
+                        " BETWEEN :today AND :tomorrow AND a.client IS NOT NULL ORDER BY a.startTime, a.endTime ASC",
                         AppointmentEntity.class);
         try{
             long oneDay = 24*60*60;
-            long timeNow =  System.currentTimeMillis()/1000-oneDay;
-            long timeTomorrow =  timeNow+oneDay;
-            logger.debug("timeNow = "+timeNow);
+            long currentTime = System.currentTimeMillis()/1000;
+            long timeYesterday =  currentTime-oneDay;
+            long timeTomorrow =  currentTime+oneDay;
+            logger.debug("timeNow = "+timeYesterday);
             logger.debug("timeTomorrow = "+timeTomorrow);
 
-            AppointmentEntity appointment=  query.setParameter("hv", new AuthenticationService().getUser()).
-                    setParameter("today", timeNow).setParameter("tomorrow", timeTomorrow).getSingleResult();
-            appointment.getClient();
-            return appointment;
+            List<AppointmentEntity> appointments =  query.
+                    setParameter("hv", new AuthenticationService().getUser()).
+                    setParameter("today", timeYesterday).
+                    setParameter("tomorrow", timeTomorrow).getResultList();
+            AppointmentEntity appointmentToReturn = null;
+
+            for(AppointmentEntity appointment : appointments){
+                AppoinmentState state = appointment.getState();
+                if((state == null) || (state instanceof  PlannedState) || (state instanceof RunningState)){
+                    appointmentToReturn = appointment;
+                    break;
+                }
+            }
+            return appointmentToReturn;
         }catch(NoResultException e){
             logger.debug("no current appointment found " + e.getMessage());
             return null;

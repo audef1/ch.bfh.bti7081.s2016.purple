@@ -1,7 +1,57 @@
-ID,TYPE,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,PASSWORD,EMPLOYEENUMBER,HIREDATE,WORKINGHOURS,RELATION,HV_ID
-1, 'H', '1980-01-01', 'test@user.ch', 'Test', 'User', 'secret_2016', 1, '1999-01-01', 1, 'Relation?', 1
-2, 'H', '1988-02-02', 'hans@wurst.ch', 'Hans', 'Wurst', 'secret_2016', 2, '2002-01-01', 2, 'Relation?', 2
-3, 'H', '1977-06-08', 'heidi@blume.ch', 'Heidi', 'Blume', 'secret_2016', 3, '2005-01-01', 3, 'Relation?', 3
-4, 'K', '1960-06-22', 'lisa@vogel.ch', 'Lisa', 'Vogel', 'secret_2016', NULL, NULL, NULL, 'Patient', 1
-5, 'K', '1950-11-01', 'hansi@fausi.ch', 'Hansi', 'Fausi', 'secret_2016', NULL, NULL, NULL, 'Patient', 1
-6, 'K', '1960-05-01', 'wolfgang@schaefer.ch', 'Wolfgang', 'Schaefer', 'secret_2016', NULL, NULL, NULL, 'Patient', 2
+ID,TYPE,DATEOFBIRTH,EMAIL,FIRSTNAME,LASTNAME,PASSWORD,EMPLOYEENUMBER,HIREDATE,WORKINGHOURS,RELATION,DETAILS,HV_ID
+1,	 'H', '1980-01-01', 'test@user.ch', 	'Test', 	'User',		'secret_2016', 1, '1999-01-01', 40, 'Relation?', NULL, 1
+2,	 'H', '1988-02-02', 'hans@wurst.ch', 	'Hans', 	'Wurst',	'secret_2016', 2, '2002-10-01', 29, 'Relation?', NULL, 2
+3,	 'H', '1977-06-08', 'heidi@blume.ch', 	'Heidi', 	'Blume',	'secret_2016', 3, '2005-01-01', 40, 'Relation?', NULL, 3
+4,	 'H', '1960-06-22', 'lisa@vogel.ch', 	'Lisa', 	'Vogel',	'secret_2016', 4, '2001-05-01', 32, 'Relation?', NULL, 4
+5,	 'H', '1950-11-01', 'hansi@fausi.ch', 	'Hansi', 	'Fausi', 	'secret_2016', 5, '2010-06-01', 40, 'Relation?', NULL, 5
+100	, 'K','1945-10-09',	'Melanie@Trojahn.ch',	'Melanie',	'Trojahn',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+101	, 'K','1951-07-30',	'Larissa@Vini.ch',	'Larissa',	'Vini',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+102	, 'K','1948-07-27',	'Melissa@Wille.ch',	'Melissa',	'Wille',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+103	, 'K','1957-08-02',	'Bianka@Zürcher.ch',	'Bianka',	'Zürcher',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+104	, 'K','1950-09-03',	'Ditmar@Eiger.ch',	'Ditmar',	'Eiger',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+105	, 'K','1957-05-02',	'Helge@Gafner.ch',	'Helge',	'Gafner',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+106	, 'K','1944-05-28',	'Mirella@Gerster.ch',	'Mirella',	'Gerster',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+107	, 'K','1949-01-31',	'Jeffery@Rimensberger.ch',	'Jeffery',	'Rimensberger',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+108	, 'K','1961-10-24',	'Lothar@Aeschbacher.ch',	'Lothar',	'Aeschbacher',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
+109	, 'K','1964-01-21',	'Silke@Beyeler.ch',	'Silke',	'Beyeler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+110	, 'K','1957-02-12',	'Anette@Brönnimann.ch',	'Anette',	'Brönnimann',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+111	, 'K','1956-09-26',	'Gunnar@Eichenberger.ch',	'Gunnar',	'Eichenberger',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+112	, 'K','1959-11-18',	'Brigitta@Gilgen.ch',	'Brigitta',	'Gilgen',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+113	, 'K','1958-02-08',	'Martha@Gisler.ch',	'Martha',	'Gisler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+114	, 'K','1945-05-26',	'Bob@Helbling.ch',	'Bob',	'Helbling',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+115	, 'K','1955-04-13',	'Joshua@Jaun.ch',	'Joshua',	'Jaun',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+116	, 'K','1962-10-29',	'Larissa@Jent.ch',	'Larissa',	'Jent',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+117	, 'K','1959-05-01',	'Aurica@Bucher.ch',	'Aurica',	'Bucher',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+118	, 'K','1953-06-07',	'Bettina@Giesser.ch',	'Bettina',	'Giesser',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
+119	, 'K','1962-08-19',	'Kirstin@Jahn.ch',	'Kirstin',	'Jahn',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+120	, 'K','1949-03-14',	'Fabiana@Petris.ch',	'Fabiana',	'Petris',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+121	, 'K','1964-07-30',	'Elina@Plüss.ch',	'Elina',	'Plüss',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+122	, 'K','1964-06-10',	'Olivia@Seethaler.ch',	'Olivia',	'Seethaler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+123	, 'K','1945-05-03',	'Arthur@Dalcher.ch',	'Arthur',	'Dalcher',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+124	, 'K','1957-05-21',	'Luther@Fräfel.ch',	'Luther',	'Fräfel',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+125	, 'K','1957-01-20',	'Adrian@Gerber.ch',	'Adrian',	'Gerber',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+126	, 'K','1948-05-14',	'Jochim@Grandjean.ch',	'Jochim',	'Grandjean',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+127	, 'K','1960-01-19',	'Dennis@Martin.ch',	'Dennis',	'Martin',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+128	, 'K','1946-05-20',	'Klemens@Neugebauer.ch',	'Klemens',	'Neugebauer',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
+129	, 'K','1965-04-29',	'Bjorn@Urwyler.ch',	'Bjorn',	'Urwyler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+130	, 'K','1946-03-10',	'Cellina@Utz.ch',	'Cellina',	'Utz',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+131	, 'K','1945-03-15',	'Ismail@Viret.ch',	'Ismail',	'Viret',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+132	, 'K','1960-01-15',	'Leonardo@Walpen.ch',	'Leonardo',	'Walpen',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+133	, 'K','1964-07-21',	'Rodolph@Terranova.ch',	'Rodolph',	'Terranova',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+134	, 'K','1953-06-14',	'Clementine@Würgler.ch',	'Clementine',	'Würgler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+135	, 'K','1963-10-22',	'Marco@Baumgartner.ch',	'Marco',	'Baumgartner',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+136	, 'K','1945-10-08',	'Hajo@Burkhalter.ch',	'Hajo',	'Burkhalter',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+137	, 'K','1960-02-01',	'Moni@Bürge.ch',	'Moni',	'Bürge',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+138	, 'K','1947-09-29',	'Margit@Eisenhut.ch',	'Margit',	'Eisenhut',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
+139	, 'K','1947-10-18',	'Annekathrin@Gander.ch',	'Annekathrin',	'Gander',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+140	, 'K','1966-01-14',	'Ali@Gasser.ch',	'Ali',	'Gasser',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+141	, 'K','1944-11-07',	'Luigi@Günter.ch',	'Luigi',	'Günter',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+142	, 'K','1959-05-04',	'Malin@Hasler.ch',	'Malin',	'Hasler',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+143	, 'K','1960-02-24',	'Tatjana@Hugi.ch',	'Tatjana',	'Hugi',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+144	, 'K','1959-07-22',	'Annalena@Rolli.ch',	'Annalena',	'Rolli',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+145	, 'K','1953-03-06',	'Fatima@Steinmann.ch',	'Fatima',	'Steinmann',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+146	, 'K','1957-04-14',	'Helen@Wülser.ch',	'Helen',	'Wülser',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+147	, 'K','1947-10-11',	'Noah@Bögöthy.ch',	'Noah',	'Bögöthy',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+148	, 'K','1962-03-24',	'Jules@Gerteis.ch',	'Jules',	'Gerteis',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+149	, 'K','1965-10-15',	'Heinrich@Hebeisen.ch',	'Heinrich',	'Hebeisen',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5
+150	, 'K','1952-01-07',	'Julius@Kiener.ch',	'Julius',	'Kiener',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	5

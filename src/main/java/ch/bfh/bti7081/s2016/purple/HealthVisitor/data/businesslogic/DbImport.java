@@ -46,16 +46,24 @@ public abstract class DbImport {
     	Statement stmt = null;
     	
     	try {
+    		//register JDBC driver
+			Class.forName(JDBC_DRIVER);
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			
     		String query = "";
     		br = new BufferedReader(new FileReader(fileName));
     		int count = 0;
+    		String line1 = "";
     		
     		while ((line = br.readLine()) != null) {
     			if (count == 0){
     				if (deleteFirst){
     					query += "DELETE FROM " + tableName + "; ";
+    					deleteFirst = false;
+    					line1 = "INSERT INTO " + tableName + " (" + line + ")";
     				}
-    				query += "INSERT INTO " + tableName + " (" + line + ")";
+    				
+    				query += line1;
     				count++;
     			}
     			else if (count == 1) {
@@ -66,16 +74,16 @@ public abstract class DbImport {
     				query += " UNION ALL SELECT " + line;
     				count++;
     			}
+    			
+    			if (count >= 500){
+    		      	stmt = conn.createStatement();
+    		      	stmt.executeUpdate(query);
+    		      	
+    		      	query = "";
+    		      	count = 0;
+    			}
 			}
     		
-			//register JDBC driver
-			Class.forName(JDBC_DRIVER);
-
-	      	conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-	      	stmt = conn.createStatement();
-	      
-	      	stmt.executeUpdate(query);
 	      	logger.debug("import from " + fileName + " into " + tableName + " successful");
     	} catch(SQLException se){
     	      //Handle errors for JDBC

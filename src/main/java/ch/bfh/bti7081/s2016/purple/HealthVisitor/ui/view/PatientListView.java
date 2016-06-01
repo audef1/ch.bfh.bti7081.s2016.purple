@@ -68,7 +68,7 @@ public class PatientListView extends BaseView {
         HealthVisitorEntity user = controller.getUser();
         Set<ClientEntity> clients = user.getClients();
 		final BeanItemContainer<ClientEntity> container =
-				new BeanItemContainer<ClientEntity>(ClientEntity.class, clients);
+				new BeanItemContainer<>(ClientEntity.class, clients);
 
 		Grid grid = new Grid(container);
 		//Grid list = new Grid();

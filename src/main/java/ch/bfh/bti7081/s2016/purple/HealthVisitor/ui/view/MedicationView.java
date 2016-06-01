@@ -77,9 +77,7 @@ public class MedicationView extends BaseView {
     
     protected BeanItemContainer<MedicationEntity> getContainer(){
     	Collection<MedicationEntity> medications = this.controller.getMedicationForDay();
-        final BeanItemContainer<MedicationEntity> container =
-                new BeanItemContainer<MedicationEntity>(MedicationEntity.class, medications);
-        return container;
+        return new BeanItemContainer<>(MedicationEntity.class, medications);
     }
 
     @Override

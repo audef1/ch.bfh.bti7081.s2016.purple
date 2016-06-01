@@ -121,13 +121,9 @@ public class AppointmentListView extends BaseView {
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
-	    cal.setHandler(new EventClickHandler() {
-
-	        @Override
-	        public void eventClick(EventClick event) {
-	        	logger.debug("event clicked: " + event.getCalendarEvent());
-	        }
-	    });
+	    cal.setHandler((EventClickHandler) event -> {
+            logger.debug("event clicked: " + event.getCalendarEvent());
+        });
 
 	    
 		general.addComponents(calnav, cal);

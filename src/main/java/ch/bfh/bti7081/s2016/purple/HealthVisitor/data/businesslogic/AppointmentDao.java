@@ -9,6 +9,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import sun.net.www.content.text.Generic;
 
 import javax.persistence.*;
 import java.text.SimpleDateFormat;
@@ -19,54 +20,23 @@ import java.util.List;
 /**
  * Created by tgdflto1 on 22/05/16.
  */
-public class AppointmentDao implements Dao{
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
+public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
-    private final EntityManager entityManager;
-
-    public AppointmentDao() {
-        entityManager =  factory.createEntityManager();
-    }
+    private static final int MAX_RESULTS = 100;
 
     public List<AppointmentEntity> getAppointments(){
-        EntityManager em = factory.createEntityManager();
-        TypedQuery<AppointmentEntity> query = em.createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv" , AppointmentEntity.class);
+        TypedQuery<AppointmentEntity> query = entityManager.
+                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv WHERE a.hv = :hv AND c.id IS NOT NULL" ,
+                        AppointmentEntity.class);
         try{
-        	return query.setParameter("hv", new AuthenticationService().getUser()).getResultList();
+            query.setParameter("hv", new AuthenticationService().getUser());
+            query.setMaxResults(MAX_RESULTS);
+        	List<AppointmentEntity> appointments = query.getResultList();
+            return appointments;
         }catch(NoResultException e){
             logger.debug("no appointments found " + e.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public void update(Object entity) {
-
-    }
-
-    @Override
-    public void persist(Object entity) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(entity);
-        entityManager.getTransaction().commit();
-    }
-
-    @Override
-    public void remove(Object entity) {
-    }
-
-    @Override
-    public Object findById(Object id) {
-        AppointmentEntity appointment = entityManager.find(AppointmentEntity.class, id);
-        entityManager.close();
-        return appointment;
-    }
-
-    public void update(AppointmentEntity appointmentEntity) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(appointmentEntity);
-        entityManager.getTransaction().commit();
-        entityManager.close();
     }
 
     public AppointmentEntity getCurrentAppointment() {

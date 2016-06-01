@@ -11,14 +11,8 @@ import java.util.List;
 /**
  * Created by tgdflto1 on 22/05/16.
  */
-public class HealthVisitorDao implements PersonDao{
+public class HealthVisitorDao extends GenericDao<HealthVisitorEntity, Integer>{
     private static Logger logger = LogManager.getLogger(HealthVisitorDao.class);
-    private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
-    private final EntityManager entityManager;
-
-    public HealthVisitorDao() {
-        entityManager = factory.createEntityManager();
-    }
 
     public HealthVisitorEntity findByEmail(String mail){
         TypedQuery<HealthVisitorEntity> query = entityManager.
@@ -26,7 +20,6 @@ public class HealthVisitorDao implements PersonDao{
                         HealthVisitorEntity.class);
         try{
             HealthVisitorEntity hv = query.setParameter("klass", HealthVisitorEntity.class).setParameter("email", mail).getSingleResult();
-            logger.debug("user fetched with :"+hv.getAppointments().size()+" appointments");
             return hv;
         }catch(NoResultException e){
             return null;
@@ -37,26 +30,5 @@ public class HealthVisitorDao implements PersonDao{
         HealthVisitorEntity hv = entityManager.find(HealthVisitorEntity.class, id);
         entityManager.close();
         return hv;
-    }
-
-
-    @Override
-    public void update(Object entity) {
-
-    }
-
-    @Override
-    public void persist(Object entity) {
-
-    }
-
-    @Override
-    public void remove(Object entity) {
-
-    }
-
-    @Override
-    public Object findById(Object id) {
-        return null;
     }
 }

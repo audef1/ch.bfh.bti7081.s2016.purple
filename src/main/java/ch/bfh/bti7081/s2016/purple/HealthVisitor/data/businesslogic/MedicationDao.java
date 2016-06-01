@@ -30,6 +30,11 @@ public class MedicationDao implements Dao<MedicationEntity, Integer> {
 	}
 
 	@Override
+	public void update(MedicationEntity entity) {
+
+	}
+
+	@Override
 	public void persist(MedicationEntity entity) {
 		logger.debug("Persist medication " + entity);
         entityManager.getTransaction().begin();

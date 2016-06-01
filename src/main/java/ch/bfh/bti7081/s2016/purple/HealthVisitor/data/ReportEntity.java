@@ -13,7 +13,7 @@ public class ReportEntity {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="APPOINTMENT_ID")
     private  AppointmentEntity appointment;
 

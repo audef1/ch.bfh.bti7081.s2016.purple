@@ -28,7 +28,6 @@ public class ReportComponent extends CustomComponent {
     public ReportComponent(AppointmentEntity appointment, ReportEntity report, AppointmentDetailController controller){
         this.controller = controller;
         this.appointment = appointment;
-
         this.report = report;
         initialize();
     }

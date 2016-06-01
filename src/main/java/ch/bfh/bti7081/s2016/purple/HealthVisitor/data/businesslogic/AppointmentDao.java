@@ -40,6 +40,11 @@ public class AppointmentDao implements Dao{
     }
 
     @Override
+    public void update(Object entity) {
+
+    }
+
+    @Override
     public void persist(Object entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);

@@ -7,6 +7,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -43,7 +44,7 @@ public class AppointmentEntity implements AppoinmentState{
     private ClientEntity client;
 
     @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
-    private Collection<ReportEntity> reports;
+    private List<ReportEntity> reports;
 
     @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
     private Collection<MedicationEntity> medications;
@@ -68,11 +69,11 @@ public class AppointmentEntity implements AppoinmentState{
         this.hv = hv;
     }
 
-    public Collection<ReportEntity> getReports() {
+    public List<ReportEntity> getReports() {
         return reports;
     }
 
-    public void setReports(Collection<ReportEntity> reports) {
+    public void setReports(List<ReportEntity> reports) {
         this.reports = reports;
     }
 

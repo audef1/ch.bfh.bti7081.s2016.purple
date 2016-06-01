@@ -40,6 +40,10 @@ public class HealthVisitorDao implements PersonDao{
     }
 
 
+    @Override
+    public void update(Object entity) {
+
+    }
 
     @Override
     public void persist(Object entity) {

@@ -1,10 +1,13 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.util.Date;
-import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import com.vaadin.data.validator.DateRangeValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.shared.ui.datefield.Resolution;
@@ -48,15 +51,17 @@ public class AppointmentDetailView extends BaseView{
 		if(appointment == null){
 			general.addComponent(new Label("Heute keinen Termin gefunden"));
 		}else{
+			SimpleDateFormat dateFormat = new SimpleDateFormat();
+			dateFormat.applyPattern("HH:mm");
 
-
-			Label lblHeader = new Label(appointment.getDate() +", " + appointment.getStartTime() +
-					"-"+appointment.getEndTime()+" - "+appointment.getClient().getFullName());
+			Label lblHeader = new Label(appointment.getDate() +", " + dateFormat.format(appointment.getStartTime()) +
+					"-"+dateFormat.format(appointment.getEndTime())+" - "+appointment.getClient().getFullName());
 			lblHeader.setStyleName("h1");
 
 			Button btnArrival = new Button("Ankunft bestätigen");
 			boolean stateNull = (appointment.getState() == null );
-			boolean isPlanned = appointment.getState().getClass().equals(PlannedState.class);
+			boolean isPlanned = false;
+			if(!stateNull) isPlanned = appointment.getState().getClass().equals(PlannedState.class);
 			btnArrival.setEnabled(stateNull || isPlanned);
 			btnArrival.setWidth("200px");
 
@@ -65,7 +70,7 @@ public class AppointmentDetailView extends BaseView{
 
 			GoogleMap map = new GoogleMap("AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714", null, "german");
 			map.setSizeFull();
-			map.addMarker("Wankdorffeldstrasse 102, 3014 Bern", pos, false, null);
+			map.addMarker(appointment.getAddress() +" "+ appointment.getPlace(), pos, false, null);
 			map.setMinZoom(4);
 			map.setMaxZoom(16);
 			map.setCenter(pos);
@@ -76,11 +81,18 @@ public class AppointmentDetailView extends BaseView{
 			checklist.setColumns("Aufgabenliste");
 
 	//		Create Column last report
+			VerticalLayout reports = new VerticalLayout();
+			reports.setWidth("300px");
 			Label lastReport = new Label("Letzter Rapport");
 			lastReport.setStyleName("h2");
+			reports.addComponent(lastReport);
+			List<ReportEntity> allReports = appointment.getReports();
+			if(allReports.size() > 0){
+				reports.addComponent(new Label(allReports.get(allReports.size()-1).getDescription()));
+			}else{
+				reports.addComponent(new Label("Hier steht der letzte Rapport."));
+			}
 
-	//		Show the last report
-			Label report = new Label("Hier steht der letzte Rapport.");
 
 	//		Create button to show the form of the new report
 			Button btnNewReport = new Button("Neuer Rapport erfassen");
@@ -93,7 +105,7 @@ public class AppointmentDetailView extends BaseView{
 
 	//		Add clicklistener to button Arrival
 			btnArrival.addClickListener(clickevent -> {
-				btnArrivalClicked(btnArrival, btnNewReport);
+				btnArrivalClicked(btnArrival, btnNewReport, appointment);
 				appointment.doAction(appointment);
 			});
 
@@ -143,8 +155,8 @@ public class AppointmentDetailView extends BaseView{
 			data.addComponent(checklist, 0, 3, 0, 4);
 			data.addComponent(lastReport, 1, 0);
 			data.setComponentAlignment(lastReport, Alignment.TOP_LEFT);
-			data.addComponent(report, 1, 1, 1, 2);
-			data.setComponentAlignment(report, Alignment.TOP_LEFT);
+			data.addComponent(reports, 1, 1, 1, 2);
+			data.setComponentAlignment(reports, Alignment.TOP_LEFT);
 			data.addComponent(btnNewReport, 1, 3);
 			data.setComponentAlignment(btnNewReport, Alignment.TOP_LEFT);
 			data.addComponent(btnDetails, 1, 4);
@@ -172,7 +184,7 @@ public class AppointmentDetailView extends BaseView{
 
 
 	//	Create pop-up window to enter a new report
-	private void newReport() {
+	private void newReport(AppointmentEntity appointmentEntity) {
 		final Window window = new Window("Neuer Rapport erstellen");
 		window.setWidth("90%");
 		final FormLayout content = new FormLayout();
@@ -201,7 +213,7 @@ public class AppointmentDetailView extends BaseView{
 		
 		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
 		btnSave.addClickListener(clickevent -> {
-				save(arrival, end, text);
+				controller.save(arrival, end, text, appointmentEntity);
 				window.close();
 				});
 		content.addComponent(btnSave);
@@ -212,23 +224,17 @@ public class AppointmentDetailView extends BaseView{
 
 	
 //	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
-	private void btnArrivalClicked(Button btn, Button report){
+	private void btnArrivalClicked(Button btn, Button report, AppointmentEntity appointmentEntity){
 		if (!btn.getCaption().equals("Ende bestätigen")) {
 
 			btn.setCaption("Ende bestätigen");
 //			TODO: Persistence arrival time to the db!
 			report.setEnabled(true);
-			report.addClickListener(clickevent -> newReport());
+			report.addClickListener(clickevent -> newReport(appointmentEntity));
 		} else {
 			btn.setEnabled(false);
 //			TODO: Persitence end time to the db!
 		}
-	}
-	
-	private void save(DateField arrival, DateField end, RichTextArea text){
-		logger.debug("written text is: "+text.getValue());
-		logger.debug(arrival.getValue());
-		logger.debug(end.getValue());
 	}
 
 	@Override

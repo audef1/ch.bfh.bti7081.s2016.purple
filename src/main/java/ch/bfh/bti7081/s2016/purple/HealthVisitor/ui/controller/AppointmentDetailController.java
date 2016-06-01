@@ -2,10 +2,14 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.DateField;
+import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,5 +32,18 @@ public class AppointmentDetailController extends BaseController {
 		new ClientDao().persist(client);
 		button.setCaption("saved");
 		button.setEnabled(false);
+	}
+
+
+	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment){
+		logger.debug("written text is: "+text.getValue());
+		logger.debug(arrival.getValue());
+		logger.debug(end.getValue());
+		ReportEntity report = new ReportEntity();
+		report.setAppointment(appointment);
+		report.setDescription(text.getValue());
+		report.setStart(arrival.getValue());
+		report.setEnd(end.getValue());
+		new ReportDao().persist(report);
 	}
 }

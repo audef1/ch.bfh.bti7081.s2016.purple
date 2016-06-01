@@ -28,15 +28,17 @@ public class HealthVisitorEntity extends PersonEntity implements Serializable{
         this.hireDate = hireDate;
     }
 
-    @OneToMany(mappedBy="hv", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="hv", fetch=FetchType.LAZY)
     private List<AppointmentEntity> appointments;
 
 
-    @OneToMany(mappedBy="hv", fetch= FetchType.EAGER)
+    @OneToMany(mappedBy="hv", fetch= FetchType.LAZY)
     private Set<ClientEntity> clients;
 
     private int workingHours;
     private int employeeNumber;
+
+    @Temporal(TemporalType.DATE)
     private Date hireDate;
 
     public Set<ClientEntity> getClients() {

@@ -34,11 +34,10 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
 
     public List<AppointmentEntity> getAppointments(){
         TypedQuery<AppointmentEntity> query = entityManager.
-                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv WHERE a.hv = :hv AND c.id IS NOT NULL" ,
+                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv WHERE a.hv = :hv AND c.id IS NOT NULL LIMIT 10" ,
                         AppointmentEntity.class);
         try{
             query.setParameter("hv", new AuthenticationService().getUser());
-            query.setMaxResults(MAX_RESULTS);
         	List<AppointmentEntity> appointments = query.getResultList();
             return appointments;
         }catch(NoResultException e){

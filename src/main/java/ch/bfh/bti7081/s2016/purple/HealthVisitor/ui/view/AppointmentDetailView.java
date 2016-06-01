@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -121,12 +123,9 @@ public class AppointmentDetailView extends BaseView{
 
 	//		Create button to show the form of the new report
 			Button btnNewReport = new Button(strReportButtonName);
-			btnNewReport.addClickListener(clickevent -> newReport(appointment));
-			if (btnArrival.getCaption().equals("Ende bestätigen")){
-				btnNewReport.setEnabled(true);
-			} else {
-				btnNewReport.setEnabled(false);
-			}
+			btnNewReport.addClickListener(clickevent -> new ReportComponent(appointment, currentReport, controller));
+			btnNewReport.setEnabled(!isPlanned);
+
 
 
 	//		Add clicklistener to button Arrival
@@ -201,58 +200,6 @@ public class AppointmentDetailView extends BaseView{
 		}
 
 		return general;
-	}
-
-
-
-	//	Create pop-up window to enter a new report
-	private void newReport(AppointmentEntity appointmentEntity) {
-		String datePattern = "dd.MM.yyyy HH:mm";
-//		Locale swissGerman = new Locale("de", "CH");
-		SimpleDateFormat df = new SimpleDateFormat(datePattern);
-		
-		final Window window = new Window("Rapport bearbeiten");
-		window.setWidth("90%");
-		final FormLayout content = new FormLayout();
-		if(appointmentEntity == null) logger.debug("appointment null");
-		if(appointmentEntity.getReport() == null) logger.debug("report null");
-		//if(appointmentEntity.getReport().getStart() == null) logger.debug("starttime null");
-		
-		AppointmentEntity refreshedAppointmentEntity = AppointmentDao.getInstance().findById(appointmentEntity.getId());
-		Date startDate = new Date(refreshedAppointmentEntity.getReport().getEnd());
-		DateField arrival = new DateField(df.format(startDate));
-		arrival.setCaption("Behandlungsbeginn:");
-		arrival.setDateFormat(datePattern);
-//		arrival.setLocale(swissGerman);
-		arrival.setResolution(arrival.RESOLUTION_MIN);
-		content.addComponent(arrival);
-		
-		Date endDate = new Date(refreshedAppointmentEntity.getReport().getEnd());
-		DateField end = new DateField(df.format(endDate));
-		end.setCaption("Ende der Behandlung");
-		end.setDateFormat(datePattern);
-//		end.setLocale(swissGerman);
-		end.setResolution(end.RESOLUTION_MIN);
-		end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
-		content.addComponent(end);
-		
-		RichTextArea text = new RichTextArea();
-		text.setDescription("aktueller Rapport");
-		text.setImmediate(true);
-		text.setSizeFull();
-		text.addValidator(new StringLengthValidator("Bitte geben Sie einen Text ein", 10, Integer.MAX_VALUE, false));
-		content.addComponent(text);
-		
-		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
-		btnSave.addClickListener(clickevent -> {
-				controller.save(arrival, end, text, refreshedAppointmentEntity);
-				window.close();
-				getUI().getNavigator().navigateTo(NAME);
-				});
-		content.addComponent(btnSave);
-		
-		window.setContent(content);
-		UI.getCurrent().addWindow(window);
 	}
 
 	

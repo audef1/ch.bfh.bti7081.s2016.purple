@@ -38,11 +38,10 @@ public class AppointmentDetailController extends BaseController {
 		button.setEnabled(false);
 	}
 
-	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment) {
+	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment, ReportEntity report) {
 		logger.debug("written text is: " + text.getValue());
 		logger.debug(arrival.getValue());
 		logger.debug(end.getValue());
-		ReportEntity report = appointment.getReport();
 		boolean existing = true;
 		if(report == null){
 			existing = false;

@@ -27,4 +27,7 @@ public abstract class BaseView extends CustomComponent implements View {
 		super.setCompositionRoot(compositionRoot);
 	}
 
+	public BaseController getController() {
+		return controller;
+	}
 }

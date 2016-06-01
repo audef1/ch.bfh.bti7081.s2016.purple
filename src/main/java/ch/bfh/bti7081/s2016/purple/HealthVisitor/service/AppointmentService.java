@@ -20,6 +20,6 @@ public class AppointmentService {
 
     //TODO: 2016.05.28 gimmie7 - check if this is still used
     public List<AppointmentEntity> getAppointments(){
-    	return new AppointmentDao().getAppointments();
+    	return AppointmentDao.getInstance().getAppointments();
     }
 }

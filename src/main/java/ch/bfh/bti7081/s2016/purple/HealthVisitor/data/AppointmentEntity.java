@@ -53,10 +53,7 @@ public class AppointmentEntity implements AppoinmentState{
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.LAZY)
-    private List<ReportEntity> reports;
-
-    @OneToOne(targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
+    @OneToOne(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.LAZY)
     private ReportEntity report;
 
     @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.LAZY)

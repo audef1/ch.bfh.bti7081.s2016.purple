@@ -11,8 +11,11 @@ import java.io.Serializable;
 public class RunningState implements AppoinmentState, Serializable{
     @Override
     public void doAction(AppointmentEntity context) {
-        AppointmentDao appoinmentDao = new AppointmentDao();
+        AppointmentDao appoinmentDao = AppointmentDao.getInstance();
         context.setState(new FinishedState());
-        appoinmentDao.persist(context);
+        appoinmentDao.update(context);
+    }
+    public String toString(){
+    	return "RUNNING";
     }
 }

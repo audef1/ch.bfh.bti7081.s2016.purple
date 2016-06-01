@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class FinishedState implements AppoinmentState, Serializable {
     @Override
     public void doAction(AppointmentEntity context) {
-        AppointmentDao appoinmentDao = new AppointmentDao();
+        AppointmentDao appoinmentDao = AppointmentDao.getInstance();
         context.setState(new ClosedState());
-        appoinmentDao.persist(context);
+        appoinmentDao.update(context);
     }
 
 }

@@ -12,6 +12,7 @@ import com.vaadin.ui.DateField;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,14 +26,14 @@ public class AppointmentDetailController extends BaseController {
 	}
 
 	public AppointmentEntity getCurrentAppointment() {
-		return new AppointmentDao().getCurrentAppointment();
+		return AppointmentDao.getInstance().getCurrentAppointment();
 	}
 
 	public void saveDetails(Button button, AppointmentEntity appointmentEntity, String description) {
 		ClientEntity client = appointmentEntity.getClient();
 		logger.debug("setting details for " + client.getFullName() + " to: " + description);
 		client.setDetails(description);
-		new ClientDao().persist(client);
+		new ClientDao().update(client);
 		button.setCaption("saved");
 		button.setEnabled(false);
 	}
@@ -41,23 +42,35 @@ public class AppointmentDetailController extends BaseController {
 		logger.debug("written text is: " + text.getValue());
 		logger.debug(arrival.getValue());
 		logger.debug(end.getValue());
-		ReportEntity report = new ReportEntity();
+		ReportEntity report = appointment.getReport();
+		boolean existing = true;
+		if(report == null){
+			existing = false;
+			report = new ReportEntity();
+		}
 		report.setAppointment(appointment);
+		Date arrivalDate = arrival.getValue();
+		logger.debug("saving arrival to db: "+arrivalDate.toString());
 		report.setDescription(text.getValue());
-		report.setStart(arrival.getValue());
-		report.setEnd(end.getValue());
-		new ReportDao().persist(report);
+		report.setStart(arrivalDate.getTime());
+		Date leaveDate = end.getValue();
+		report.setEnd(leaveDate.getTime());
+		ReportDao reportDao = ReportDao.getInstance();
+		if (existing) 
+			reportDao.update(report);
+		else
+			reportDao.persist(report);
 	}
 
 	public void saveReportTime(ReportEntity report, AppointmentEntity appointment) {
-		ReportDao dao = new ReportDao();
+		ReportDao dao = ReportDao.getInstance();
 		if (report != null) {
-			report.setEnd(new Date(System.currentTimeMillis() / 1000));
+			report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
 			dao.update(report);
 		} else {
 			report = new ReportEntity();
 			report.setAppointment(appointment);
-			report.setStart(new Date(System.currentTimeMillis() / 1000));
+			report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
 			dao.persist(report);
 		}
 		

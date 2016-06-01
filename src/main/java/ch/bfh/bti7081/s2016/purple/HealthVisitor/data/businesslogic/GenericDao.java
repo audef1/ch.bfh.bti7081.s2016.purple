@@ -66,4 +66,12 @@ public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
         entityManager.getTransaction().commit();
         return entity;
     }
+
+	@Override
+	public E updateOrPersist(E entity) {
+		if(entityManager.contains(entity))
+			return update(entity);
+		else
+			return persist(entity);
+	}
 }

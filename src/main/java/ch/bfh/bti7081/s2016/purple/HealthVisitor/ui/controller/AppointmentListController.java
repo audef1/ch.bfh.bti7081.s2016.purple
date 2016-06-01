@@ -15,6 +15,6 @@ public class AppointmentListController extends BaseController {
     }
 
     public List<AppointmentEntity> getAppointments() {
-        return new AppointmentDao().getAppointments();
+        return AppointmentDao.getInstance().getAppointments();
     }
 }

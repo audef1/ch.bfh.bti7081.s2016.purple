@@ -13,4 +13,5 @@ public interface Dao<E, K extends Serializable> {
     void remove(E entity);
     E refresh(E entity);
     E findById(K id);
+    E updateOrPersist(E entity);
 }

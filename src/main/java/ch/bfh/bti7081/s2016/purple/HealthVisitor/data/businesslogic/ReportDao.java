@@ -14,5 +14,14 @@ import javax.persistence.Persistence;
  */
 public class ReportDao extends GenericDao<ReportEntity, Integer> {
     private static Logger logger = LogManager.getLogger(HealthVisitorDao.class);
-
+    private static ReportDao instance;
+    
+    public static ReportDao getInstance(){
+    	if(instance == null) instance = new ReportDao();
+    	return instance;
+    }
+    private ReportDao(){
+    	
+    }
+    
 }

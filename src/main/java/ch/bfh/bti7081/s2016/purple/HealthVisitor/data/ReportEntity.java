@@ -17,8 +17,11 @@ public class ReportEntity {
     @JoinColumn(name="APPOINTMENT_ID")
     private  AppointmentEntity appointment;
 
-    private Date start;
-    private Date end;
+    
+    private long start;
+    
+    
+    private long end;
     private String description;
 
 
@@ -38,11 +41,11 @@ public class ReportEntity {
         this.appointment = appointment;
     }
 
-    public Date getEnd() {
+    public long getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(long end) {
         this.end = end;
     }
 
@@ -54,11 +57,11 @@ public class ReportEntity {
         this.description = description;
     }
 
-    public Date getStart() {
+    public long getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(long start) {
         this.start = start;
     }
 }

@@ -1,32 +1,40 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.SimpleFormatter;
+import java.util.Date;
+import java.util.Locale;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
-import com.vaadin.data.validator.DateRangeValidator;
-import com.vaadin.data.validator.StringLengthValidator;
-import com.vaadin.shared.ui.datefield.Resolution;
-import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.vaadin.event.ShortcutAction;
+import com.vaadin.data.validator.DateRangeValidator;
+import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.DateField;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Grid;
+import com.vaadin.ui.GridLayout;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
+import com.vaadin.ui.RichTextArea;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.UI;
+import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
@@ -37,6 +45,8 @@ public class AppointmentDetailView extends BaseView{
 	private  VerticalLayout general;
 
 	private ReportEntity currentReport;
+	AppointmentDao appointmentDao;
+	
 	public AppointmentDetailView() {
 		super();
 		logger.debug("arrived on appointment detail view");
@@ -46,7 +56,9 @@ public class AppointmentDetailView extends BaseView{
 
 	@Override
 	public Layout initView() {
+		appointmentDao = AppointmentDao.getInstance();
 		String strReportButtonName = "";
+		String strArrivalButtonName = "Ankunft bestätigen";
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
@@ -61,8 +73,14 @@ public class AppointmentDetailView extends BaseView{
 			Label lblHeader = new Label(appointment.getDate() +", " + dateFormat.format(appointment.getStartTime()) +
 					"-"+dateFormat.format(appointment.getEndTime())+" - "+appointment.getClient().getFullName());
 			lblHeader.setStyleName("h1");
-
-			Button btnArrival = new Button("Ankunft bestätigen");
+			
+			currentReport = appointment.getReport();
+			
+			if (currentReport != null){
+				if (currentReport.getStart() > 0) strArrivalButtonName = "Ende bestätigen";
+			}
+			
+			Button btnArrival = new Button(strArrivalButtonName);
 			boolean stateNull = (appointment.getState() == null );
 			boolean isPlanned = false;
 			if(!stateNull) isPlanned = appointment.getState().getClass().equals(PlannedState.class);
@@ -88,8 +106,6 @@ public class AppointmentDetailView extends BaseView{
 			VerticalLayout reportContainer = new VerticalLayout();
 			reportContainer.setWidth("300px");
 			
-			currentReport = appointment.getReport();
-			
 			Label lastReport = new Label("Letzter Rapport");
 			lastReport.setStyleName("h2");
 			reportContainer.addComponent(lastReport);
@@ -105,6 +121,7 @@ public class AppointmentDetailView extends BaseView{
 
 	//		Create button to show the form of the new report
 			Button btnNewReport = new Button(strReportButtonName);
+			btnNewReport.addClickListener(clickevent -> newReport(appointment));
 			if (btnArrival.getCaption().equals("Ende bestätigen")){
 				btnNewReport.setEnabled(true);
 			} else {
@@ -114,9 +131,7 @@ public class AppointmentDetailView extends BaseView{
 
 	//		Add clicklistener to button Arrival
 			btnArrival.addClickListener(clickevent -> {
-				btnArrivalClicked(btnArrival, btnNewReport, appointment);
-				controller.saveReportTime(currentReport, appointment);
-				appointment.doAction(appointment);
+				btnArrivalClicked(btnArrival, btnNewReport, appointment, currentReport);
 			});
 
 	//		Create button to show patient details
@@ -193,24 +208,30 @@ public class AppointmentDetailView extends BaseView{
 	//	Create pop-up window to enter a new report
 	private void newReport(AppointmentEntity appointmentEntity) {
 		String datePattern = "dd.MM.yyyy HH:mm";
-		Locale swissGerman = new Locale("de", "CH");
-		SimpleDateFormat df = new SimpleDateFormat(datePattern, swissGerman);
+//		Locale swissGerman = new Locale("de", "CH");
+		SimpleDateFormat df = new SimpleDateFormat(datePattern);
 		
 		final Window window = new Window("Rapport bearbeiten");
 		window.setWidth("90%");
 		final FormLayout content = new FormLayout();
+		if(appointmentEntity == null) logger.debug("appointment null");
+		if(appointmentEntity.getReport() == null) logger.debug("report null");
+		//if(appointmentEntity.getReport().getStart() == null) logger.debug("starttime null");
 		
-		DateField arrival = new DateField(df.format(appointmentEntity.getReport().getStart()));
+		AppointmentEntity refreshedAppointmentEntity = AppointmentDao.getInstance().findById(appointmentEntity.getId());
+		Date startDate = new Date(refreshedAppointmentEntity.getReport().getEnd());
+		DateField arrival = new DateField(df.format(startDate));
 		arrival.setCaption("Behandlungsbeginn:");
 		arrival.setDateFormat(datePattern);
-		arrival.setLocale(swissGerman);
+//		arrival.setLocale(swissGerman);
 		arrival.setResolution(arrival.RESOLUTION_MIN);
 		content.addComponent(arrival);
 		
-		DateField end = new DateField(df.format(appointmentEntity.getReport().getEnd()));
+		Date endDate = new Date(refreshedAppointmentEntity.getReport().getEnd());
+		DateField end = new DateField(df.format(endDate));
 		end.setCaption("Ende der Behandlung");
 		end.setDateFormat(datePattern);
-		end.setLocale(swissGerman);
+//		end.setLocale(swissGerman);
 		end.setResolution(end.RESOLUTION_MIN);
 		end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
 		content.addComponent(end);
@@ -224,8 +245,9 @@ public class AppointmentDetailView extends BaseView{
 		
 		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
 		btnSave.addClickListener(clickevent -> {
-				controller.save(arrival, end, text, appointmentEntity);
+				controller.save(arrival, end, text, refreshedAppointmentEntity);
 				window.close();
+				getUI().getNavigator().navigateTo(NAME);
 				});
 		content.addComponent(btnSave);
 		
@@ -235,16 +257,20 @@ public class AppointmentDetailView extends BaseView{
 
 	
 //	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
-	private void btnArrivalClicked(Button btn, Button report, AppointmentEntity appointmentEntity){
-		if (!btn.getCaption().equals("Ende bestätigen")) {
-			btn.setCaption("Ende bestätigen");
-//			TODO: Persistence arrival time to the db!
-			report.setEnabled(true);
-			report.addClickListener(clickevent -> newReport(appointmentEntity));
+	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointmentEntity, ReportEntity report){
+		if (!btnArrival.getCaption().equals("Ende bestätigen")) {
+			btnArrival.setCaption("Ende bestätigen");
+			
+			btnReport.setCaption("Rapport bearbeiten");
 		} else {
-			btn.setEnabled(false);
-//			TODO: Persitence end time to the db!
+			btnArrival.setEnabled(false);
 		}
+		btnReport.setEnabled(true);
+		
+		controller.saveReportTime(currentReport, appointmentEntity);
+		
+		appointmentEntity.doAction(appointmentEntity);
+//		appointmentDao.update(appointmentEntity);
 	}
 
 	@Override

@@ -23,6 +23,14 @@ import java.util.List;
 public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
     private static final int MAX_RESULTS = 100;
+    
+    private static AppointmentDao instance;
+    
+    public static AppointmentDao getInstance(){
+    	if(instance == null) instance = new AppointmentDao();
+    	return instance;
+    }
+    private AppointmentDao(){ }
 
     public List<AppointmentEntity> getAppointments(){
         TypedQuery<AppointmentEntity> query = entityManager.

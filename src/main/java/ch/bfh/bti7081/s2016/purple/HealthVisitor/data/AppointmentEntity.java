@@ -161,4 +161,9 @@ public class AppointmentEntity implements AppoinmentState{
         if(this.state == null) this.state = new PlannedState();
         this.state.doAction(this);
     }
+
+    public boolean isPlanned() {
+        if(this.getState() == null) this.state = new PlannedState();
+        return (this.getState() instanceof PlannedState);
+    }
 }

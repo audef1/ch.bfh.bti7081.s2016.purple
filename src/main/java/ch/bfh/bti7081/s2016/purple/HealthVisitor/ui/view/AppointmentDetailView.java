@@ -1,42 +1,20 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.tapio.googlemaps.GoogleMap;
+import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.vaadin.data.validator.DateRangeValidator;
-import com.vaadin.data.validator.StringLengthValidator;
-import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
-import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.shared.ui.datefield.Resolution;
-import com.vaadin.tapio.googlemaps.GoogleMap;
-import com.vaadin.tapio.googlemaps.client.LatLon;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.DateField;
-import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.Grid;
-import com.vaadin.ui.GridLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Layout;
-import com.vaadin.ui.RichTextArea;
-import com.vaadin.ui.TextArea;
-import com.vaadin.ui.UI;
-import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Window;
-
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+import java.text.SimpleDateFormat;
 
 public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
@@ -53,7 +31,16 @@ public class AppointmentDetailView extends BaseView{
 	public static final String NO_REPORT = "Kein Report vorhanden";
 	public static final String LAST_REPORT = "Letzter Report";
 
+	//Client
+	public static final String CLIENTDETAILS = "Patientendetails";
+	public static final String CLIENTDESCRIPTION = "Kurzbeschrieb";
+	public static final String SAVE_CLIENTDETAILS = "Details speichern";
 
+	//Other
+	public static final String NO_APPOINTMENT = "Heute keinen Termin gefunden";
+	public static final String TASKLIST = "Aufgabenliste";
+	public static final String SAVE = "Speichern";
+	public static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
 
 
 
@@ -82,7 +69,7 @@ public class AppointmentDetailView extends BaseView{
 
 		AppointmentEntity appointment = controller.getCurrentAppointment();
 		if(appointment == null){
-			general.addComponent(new Label("Heute keinen Termin gefunden"));
+			general.addComponent(new Label(NO_APPOINTMENT));
 		}else{
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
 			dateFormat.applyPattern("HH:mm");
@@ -95,9 +82,6 @@ public class AppointmentDetailView extends BaseView{
 			
 			if (currentReport != null && currentReport.getStart() > 0) strArrivalButtonName = CONFIRM_END;
 			Button buttonArrival = new Button(strArrivalButtonName);
-			boolean stateNull = (appointment.getState() == null );
-			boolean isPlanned = false;
-			if(!stateNull) isPlanned = appointment.getState().getClass().equals(PlannedState.class);
 			buttonArrival.setWidth("200px");
 
 	//		Google-Maps-Implementation
@@ -113,7 +97,7 @@ public class AppointmentDetailView extends BaseView{
 
 	//		Create Checklist
 			Grid checklist = new Grid();
-			checklist.setColumns("Aufgabenliste");
+			checklist.setColumns(TASKLIST);
 
 	//		Create Column last report
 			VerticalLayout reportContainer = new VerticalLayout();
@@ -135,9 +119,7 @@ public class AppointmentDetailView extends BaseView{
 	//		Create button to show the form of the new report
 			Button btnNewReport = new Button(strReportButtonName);
 			btnNewReport.addClickListener(clickevent -> new ReportComponent(appointment, currentReport, controller));
-			btnNewReport.setEnabled(!isPlanned);
-
-
+			btnNewReport.setEnabled(!appointment.isPlanned());
 
 	//		Add clicklistener to button Arrival
 			buttonArrival.addClickListener(clickevent -> {
@@ -145,31 +127,28 @@ public class AppointmentDetailView extends BaseView{
 			});
 
 	//		Create button to show patient details
-			Button buttonDetail = new Button("Patientendetails");
+			Button buttonDetail = new Button(CLIENTDETAILS);
 	//		TODO: Show Patient data
 
-
 	//		Create Column Info and emergency-contact
-			Label lblBeschriebTitle = new Label("Kurzbeschrieb");
+			Label lblBeschriebTitle = new Label(CLIENTDESCRIPTION);
 			lblBeschriebTitle.setStyleName("h2");
-			Button saveClientDetails = new Button("Details speichern");
+			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
 			saveClientDetails.setEnabled(false);
 
 	//		Show short description about the patient
 			TextArea description = new TextArea();
 			description.setValue(appointment.getClient().getDetails());
 			description.addTextChangeListener(click -> {
-				saveClientDetails.setCaption("Speichern");
+				saveClientDetails.setCaption(SAVE);
 				saveClientDetails.setEnabled(true);
 			});
 
 			saveClientDetails.addClickListener(click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
-			Button btnEmergencyContact = new Button("Notfallkontakte des Patienten");
+			Button btnEmergencyContact = new Button(ERMERGENCY_CONTACTS);
 			VerticalLayout patientDetails = new VerticalLayout(description, saveClientDetails);
 
 	//		TODO: EmerencyContactView
-			//		btnEmergencyContact.addClickListener(clickevent -> getUI().getNavigator().navigateTo(emergencyContactView.NAME));
-
 
 			// The Layout for title and arrival button
 			GridLayout top = new GridLayout(2, 2);
@@ -181,7 +160,6 @@ public class AppointmentDetailView extends BaseView{
 			top.addComponent(buttonArrival, 1, 0);
 			top.setComponentAlignment(buttonArrival, Alignment.MIDDLE_RIGHT);
 			top.setMargin(new MarginInfo(true, true, false, false));
-
 
 	//		Set the data-Layout
 			GridLayout data = new GridLayout(3, 5);
@@ -206,13 +184,9 @@ public class AppointmentDetailView extends BaseView{
 			data.addComponent(btnEmergencyContact, 2, 4);
 			data.setComponentAlignment(btnEmergencyContact, Alignment.TOP_LEFT);
 
-	//		data.addComponents(map, checklist);
-
-			// Set the root layout
 			general.addComponent(top);
 			general.addComponent(data);
 		}
-
 		return general;
 	}
 
@@ -234,15 +208,10 @@ public class AppointmentDetailView extends BaseView{
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-		// TODO Auto-generated method stub
-
-	}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {}
 
 	@Override
 	public String getViewName() {
-		// TODO Auto-generated method stub
 		return VIEW_NAME;
 	}
-
 }

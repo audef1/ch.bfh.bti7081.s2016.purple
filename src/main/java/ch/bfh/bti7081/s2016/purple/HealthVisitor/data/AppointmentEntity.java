@@ -4,6 +4,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -44,18 +45,21 @@ public class AppointmentEntity implements AppoinmentState{
     @Lob
     private AppoinmentState state;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="HV_ID")
     private HealthVisitorEntity hv;
 
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
+
+    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.LAZY)
+    private List<ReportEntity> reports;
 
     @OneToOne(targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
     private ReportEntity report;
 
-    @OneToMany(targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.LAZY)
     private Collection<MedicationEntity> medications;
 
     public Collection<MedicationEntity> getMedications() {

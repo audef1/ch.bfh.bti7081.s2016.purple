@@ -33,11 +33,14 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     private AppointmentDao(){ }
 
     public List<AppointmentEntity> getAppointments(){
-        TypedQuery<AppointmentEntity> query = entityManager.
-                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv WHERE a.hv = :hv AND c.id IS NOT NULL LIMIT 10" ,
-                        AppointmentEntity.class);
+//        TypedQuery<AppointmentEntity> query = entityManager.
+//                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv h WHERE a.hv = :hv AND c.id IS NOT NULL" ,
+//                        AppointmentEntity.class);
+        //TODO re-implement with a typed query
+        Query query = entityManager.
+                createNativeQuery("SELECT * FROM APPOINTMENT LEFT JOIN PERSON AS CLIENT ON APPOINTMENT.CLIENT_ID = CLIENT.ID LEFT JOIN PERSON AS HV ON APPOINTMENT.HV_ID = HV.ID WHERE CLIENT.TYPE = 'K' AND HV.TYPE = 'H' AND APPOINTMENT.HV_ID ="+new AuthenticationService().getUser().getId(), AppointmentEntity.class);
         try{
-            query.setParameter("hv", new AuthenticationService().getUser());
+           // query.setParameter("hv", new AuthenticationService().getUser());
         	List<AppointmentEntity> appointments = query.getResultList();
             return appointments;
         }catch(NoResultException e){

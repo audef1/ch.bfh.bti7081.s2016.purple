@@ -57,7 +57,6 @@ public class AppointmentListView extends BaseView {
 		super();
 		logger.debug("arrived on appointment list view");
 		controller = new AppointmentListController(this);
-
 		layout = new StandardLayout(this);
 	}
 

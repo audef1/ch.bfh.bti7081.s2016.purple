@@ -1,15 +1,24 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
-
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 
 /**
  * Created by tgdflto1 on 22/05/16.
@@ -43,10 +52,10 @@ public class AppointmentEntity implements AppoinmentState{
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-    @OneToMany(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
-    private List<ReportEntity> reports;
+    @OneToOne(targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
+    private ReportEntity report;
 
-    @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
+    @OneToMany(targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
     private Collection<MedicationEntity> medications;
 
     public Collection<MedicationEntity> getMedications() {
@@ -69,12 +78,12 @@ public class AppointmentEntity implements AppoinmentState{
         this.hv = hv;
     }
 
-    public List<ReportEntity> getReports() {
-        return reports;
+    public ReportEntity getReport() {
+        return report;
     }
 
-    public void setReports(List<ReportEntity> reports) {
-        this.reports = reports;
+    public void setReport(ReportEntity report) {
+        this.report = report;
     }
 
     public int getId() {

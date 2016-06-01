@@ -11,13 +11,16 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.RichTextArea;
 import com.vaadin.ui.TextArea;
+
+import java.util.Date;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class AppointmentDetailController extends BaseController {
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailController.class);
 
-	public AppointmentDetailController(AppointmentDetailView view){
+	public AppointmentDetailController(AppointmentDetailView view) {
 		super(view);
 	}
 
@@ -27,16 +30,15 @@ public class AppointmentDetailController extends BaseController {
 
 	public void saveDetails(Button button, AppointmentEntity appointmentEntity, String description) {
 		ClientEntity client = appointmentEntity.getClient();
-		logger.debug("setting details for " + client.getFullName() + " to: "+description);
+		logger.debug("setting details for " + client.getFullName() + " to: " + description);
 		client.setDetails(description);
 		new ClientDao().persist(client);
 		button.setCaption("saved");
 		button.setEnabled(false);
 	}
 
-
-	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment){
-		logger.debug("written text is: "+text.getValue());
+	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment) {
+		logger.debug("written text is: " + text.getValue());
 		logger.debug(arrival.getValue());
 		logger.debug(end.getValue());
 		ReportEntity report = new ReportEntity();
@@ -45,5 +47,19 @@ public class AppointmentDetailController extends BaseController {
 		report.setStart(arrival.getValue());
 		report.setEnd(end.getValue());
 		new ReportDao().persist(report);
+	}
+
+	public void saveReportTime(ReportEntity report, AppointmentEntity appointment) {
+		ReportDao dao = new ReportDao();
+		if (report != null) {
+			report.setEnd(new Date(System.currentTimeMillis() / 1000));
+			dao.update(report);
+		} else {
+			report = new ReportEntity();
+			report.setAppointment(appointment);
+			report.setStart(new Date(System.currentTimeMillis() / 1000));
+			dao.persist(report);
+		}
+		
 	}
 }

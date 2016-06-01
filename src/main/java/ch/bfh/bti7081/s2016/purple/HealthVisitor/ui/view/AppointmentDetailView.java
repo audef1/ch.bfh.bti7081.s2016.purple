@@ -1,7 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.SimpleFormatter;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
@@ -34,6 +36,7 @@ public class AppointmentDetailView extends BaseView{
 	private final AppointmentDetailController controller;
 	private  VerticalLayout general;
 
+	private ReportEntity currentReport;
 	public AppointmentDetailView() {
 		super();
 		logger.debug("arrived on appointment detail view");
@@ -43,6 +46,7 @@ public class AppointmentDetailView extends BaseView{
 
 	@Override
 	public Layout initView() {
+		String strReportButtonName = "";
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
@@ -81,21 +85,26 @@ public class AppointmentDetailView extends BaseView{
 			checklist.setColumns("Aufgabenliste");
 
 	//		Create Column last report
-			VerticalLayout reports = new VerticalLayout();
-			reports.setWidth("300px");
+			VerticalLayout reportContainer = new VerticalLayout();
+			reportContainer.setWidth("300px");
+			
+			currentReport = appointment.getReport();
+			
 			Label lastReport = new Label("Letzter Rapport");
 			lastReport.setStyleName("h2");
-			reports.addComponent(lastReport);
-			List<ReportEntity> allReports = appointment.getReports();
-			if(allReports.size() > 0){
-				reports.addComponent(new Label(allReports.get(allReports.size()-1).getDescription()));
+			reportContainer.addComponent(lastReport);
+//			List<ReportEntity> allReports = appointment.getReports();
+			if(currentReport != null){
+				reportContainer.addComponent(new Label(currentReport.getDescription()));
+				strReportButtonName = "Rapport bearbeiten";
 			}else{
-				reports.addComponent(new Label("Hier steht der letzte Rapport."));
+				reportContainer.addComponent(new Label("Kein alter Report vorhanden."));
+				strReportButtonName = "Neuen Rapport erfassen";
 			}
 
 
 	//		Create button to show the form of the new report
-			Button btnNewReport = new Button("Neuer Rapport erfassen");
+			Button btnNewReport = new Button(strReportButtonName);
 			if (btnArrival.getCaption().equals("Ende bestätigen")){
 				btnNewReport.setEnabled(true);
 			} else {
@@ -106,6 +115,7 @@ public class AppointmentDetailView extends BaseView{
 	//		Add clicklistener to button Arrival
 			btnArrival.addClickListener(clickevent -> {
 				btnArrivalClicked(btnArrival, btnNewReport, appointment);
+				controller.saveReportTime(currentReport, appointment);
 				appointment.doAction(appointment);
 			});
 
@@ -155,8 +165,8 @@ public class AppointmentDetailView extends BaseView{
 			data.addComponent(checklist, 0, 3, 0, 4);
 			data.addComponent(lastReport, 1, 0);
 			data.setComponentAlignment(lastReport, Alignment.TOP_LEFT);
-			data.addComponent(reports, 1, 1, 1, 2);
-			data.setComponentAlignment(reports, Alignment.TOP_LEFT);
+			data.addComponent(reportContainer, 1, 1, 1, 2);
+			data.setComponentAlignment(reportContainer, Alignment.TOP_LEFT);
 			data.addComponent(btnNewReport, 1, 3);
 			data.setComponentAlignment(btnNewReport, Alignment.TOP_LEFT);
 			data.addComponent(btnDetails, 1, 4);
@@ -170,9 +180,6 @@ public class AppointmentDetailView extends BaseView{
 
 	//		data.addComponents(map, checklist);
 
-
-
-
 			// Set the root layout
 			general.addComponent(top);
 			general.addComponent(data);
@@ -185,21 +192,25 @@ public class AppointmentDetailView extends BaseView{
 
 	//	Create pop-up window to enter a new report
 	private void newReport(AppointmentEntity appointmentEntity) {
-		final Window window = new Window("Neuer Rapport erstellen");
+		String datePattern = "dd.MM.yyyy HH:mm";
+		Locale swissGerman = new Locale("de", "CH");
+		SimpleDateFormat df = new SimpleDateFormat(datePattern, swissGerman);
+		
+		final Window window = new Window("Rapport bearbeiten");
 		window.setWidth("90%");
 		final FormLayout content = new FormLayout();
 		
-		DateField arrival = new DateField();
+		DateField arrival = new DateField(df.format(appointmentEntity.getReport().getStart()));
 		arrival.setCaption("Behandlungsbeginn:");
-		arrival.setDateFormat("dd.MM.yyyy HH:mm");
-		arrival.setLocale(new Locale("de", "CH"));
+		arrival.setDateFormat(datePattern);
+		arrival.setLocale(swissGerman);
 		arrival.setResolution(arrival.RESOLUTION_MIN);
 		content.addComponent(arrival);
 		
-		DateField end = new DateField();
+		DateField end = new DateField(df.format(appointmentEntity.getReport().getEnd()));
 		end.setCaption("Ende der Behandlung");
-		end.setDateFormat("dd.MM.yyyy HH:mm");
-		end.setLocale(new Locale("de", "CH"));
+		end.setDateFormat(datePattern);
+		end.setLocale(swissGerman);
 		end.setResolution(end.RESOLUTION_MIN);
 		end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
 		content.addComponent(end);
@@ -208,7 +219,7 @@ public class AppointmentDetailView extends BaseView{
 		text.setDescription("aktueller Rapport");
 		text.setImmediate(true);
 		text.setSizeFull();
-		text.addValidator(new StringLengthValidator("Bitte geben Sie einen Text ein", 30, Integer.MAX_VALUE, false));
+		text.addValidator(new StringLengthValidator("Bitte geben Sie einen Text ein", 10, Integer.MAX_VALUE, false));
 		content.addComponent(text);
 		
 		Button btnSave = new Button("Speichern", FontAwesome.SAVE);
@@ -226,7 +237,6 @@ public class AppointmentDetailView extends BaseView{
 //	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
 	private void btnArrivalClicked(Button btn, Button report, AppointmentEntity appointmentEntity){
 		if (!btn.getCaption().equals("Ende bestätigen")) {
-
 			btn.setCaption("Ende bestätigen");
 //			TODO: Persistence arrival time to the db!
 			report.setEnabled(true);

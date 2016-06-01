@@ -37,7 +37,7 @@ public abstract class DbImport {
     static final String USER = "";
     static final String PASS = "";
 
-    public static void importFromFile(String fileName, String tableName, boolean deleteFirst){
+    public static void importFromFile(String fileName, String tableName, char delimiter, boolean deleteFirst){
     	BufferedReader br = null;
     	String line = "";
     	String cvsSplitBy = ",";
@@ -58,6 +58,10 @@ public abstract class DbImport {
     		while ((line = br.readLine()) != null) {
     			if (line == "")
     				continue;
+    			
+    			if (delimiter != ','){
+    				line = line.replace(delimiter, ',');
+    			}
     			
     			if (count == 0){
     				if (deleteFirst){

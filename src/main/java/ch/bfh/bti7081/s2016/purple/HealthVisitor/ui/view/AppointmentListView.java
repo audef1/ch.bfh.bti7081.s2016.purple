@@ -40,18 +40,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListCo
  * Created by tgdflto1 on 20/05/16.
  */
 public class AppointmentListView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	public static final String NAME = "AppointmentList";
 	public static final String VIEW_NAME = "Terminliste";
+	public static final String WEEK = "Woche";
+	public static final String TODAY = "Heute";
 	public static final int FIRST_HOUR = 8;
 	public static final int LAST_HOUR = 19;
 
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
-	public static final String WEEK = "Woche";
-	public static final String TODAY = "Heute";
 	private final AppointmentListController controller;
 	private VerticalLayout general;
 	
@@ -67,7 +63,6 @@ public class AppointmentListView extends BaseView {
 
 	@Override
 	public Layout initView() {
-
 		general = new VerticalLayout();
 		general.setSpacing(true);
 		general.setMargin(true);
@@ -75,7 +70,6 @@ public class AppointmentListView extends BaseView {
 		Label listTitle = new Label("Termine für ");
 		listTitle.setStyleName("h1");
 
-		HealthVisitorEntity user = controller.getUser();
 		List<AppointmentEntity> items = controller.getAppointments();
 		logger.debug("getting appointments: " + items);
 		container = new BeanItemContainer<>(BasicEvent.class);
@@ -88,32 +82,21 @@ public class AppointmentListView extends BaseView {
 		Button week = new Button(WEEK);
 		Button today = new Button(TODAY);
 
-		week.addClickListener(new ClickListener() {
+		week.addClickListener((ClickListener) event -> {
+            GregorianCalendar calendar = new GregorianCalendar();
+            WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
+            handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR),
+					calendar.get(GregorianCalendar.YEAR)));
+        });
 
-	        private static final long serialVersionUID = 1L;
-
-	        @Override
-	        public void buttonClick(ClickEvent event) {
-	        	GregorianCalendar calendar = new GregorianCalendar();
-	            WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
-	            handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR), calendar.get(GregorianCalendar.YEAR)));
-	        }
-	    });
-
-		today.addClickListener(new ClickListener() {
-
-			private static final long serialVersionUID = 1L;
-
-			@Override
-	        public void buttonClick(ClickEvent event) {
-				GregorianCalendar calendar = new GregorianCalendar();
-	            BasicDateClickHandler handler = (BasicDateClickHandler) cal.getHandler(DateClickEvent.EVENT_ID);
-	            handler.dateClick(new DateClickEvent(cal,calendar.getTime()));
-	        }
-	    });
+		today.addClickListener((ClickListener) event -> {
+            GregorianCalendar calendar = new GregorianCalendar();
+            BasicDateClickHandler handler = (BasicDateClickHandler) cal.
+                    getHandler(DateClickEvent.EVENT_ID);
+            handler.dateClick(new DateClickEvent(cal,calendar.getTime()));
+        });
 		
 		calnav.addComponents(week, today);
-		
 		cal.setReadOnly(true);
 		cal.setSizeFull();
 		cal.setResponsive(true);
@@ -121,27 +104,21 @@ public class AppointmentListView extends BaseView {
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
-	    cal.setHandler((EventClickHandler) event -> {
-            logger.debug("event clicked: " + event.getCalendarEvent());
-        });
+	    cal.setHandler((EventClickHandler) event -> logger.
+				debug("event clicked: " + event.getCalendarEvent()));
 
-	    
 		general.addComponents(calnav, cal);
-		
 		// TODO Add patients and appointments from db to the list
 		//addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 		return general;
 	}
 	
 	public void addAppointments(List<AppointmentEntity> items) {
-       
-		if (items !=null && !items.isEmpty()){
-			for (AppointmentEntity appointment : items) {
-				container.addBean(new AppointmentEvent(appointment));
-	        }
-	        container.sort(new Object[]{"start"}, new boolean[] { true });
-        }
-		
+		if (items == null || items.isEmpty()) return;
+		for (AppointmentEntity appointment : items) {
+			container.addBean(new AppointmentEvent(appointment));
+		}
+		container.sort(new Object[]{"start"}, new boolean[] { true });
 	}
 
 	@Override
@@ -150,7 +127,5 @@ public class AppointmentListView extends BaseView {
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-		// TODO set a focus
-	}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {}
 }

@@ -29,8 +29,8 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListCo
 public class AppointmentListView extends BaseView {
 	public static final String NAME = "AppointmentList";
 	public static final String VIEW_NAME = "Terminliste";
-	public static final int FIRST_HOUR = 0;
-	public static final int LAST_HOUR = 24;
+	public static final int FIRST_HOUR = 8;
+	public static final int LAST_HOUR = 19;
 
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
 	private final AppointmentListController controller;
@@ -69,6 +69,7 @@ public class AppointmentListView extends BaseView {
 		calnav.addComponents(week, today);
 		
 		Calendar cal = new Calendar();
+		cal.setReadOnly(true);
 		cal.setSizeFull();
 		cal.setResponsive(true);
 		cal.setFirstVisibleHourOfDay(FIRST_HOUR);
@@ -87,7 +88,7 @@ public class AppointmentListView extends BaseView {
 		if (items !=null && !items.isEmpty()){
 			for (AppointmentEntity appointment : items) {
 	        	
-				String name = appointment.getPlace();
+				String name = appointment.getClient().getFullName();
 	        	String description = appointment.getAddress();
 				Date start = appointment.getStartTime();
 				Date end = appointment.getEndTime();

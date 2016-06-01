@@ -56,6 +56,9 @@ public abstract class DbImport {
     		String line1 = "";
     		
     		while ((line = br.readLine()) != null) {
+    			if (line == "")
+    				continue;
+    			
     			if (count == 0){
     				if (deleteFirst){
     					query += "DELETE FROM " + tableName + "; ";
@@ -83,6 +86,11 @@ public abstract class DbImport {
     		      	count = 0;
     			}
 			}
+    		
+    		if (query.length() > 0){
+    			stmt = conn.createStatement();
+		      	stmt.executeUpdate(query);
+    		}
     		
 	      	logger.debug("import from " + fileName + " into " + tableName + " successful");
     	} catch(SQLException se){

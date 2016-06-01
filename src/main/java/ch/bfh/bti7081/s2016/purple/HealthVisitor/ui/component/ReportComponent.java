@@ -57,7 +57,7 @@ public class ReportComponent extends CustomComponent {
         end.setCaption("Ende der Behandlung");
         end.setDateFormat(datePattern);
 //		end.setLocale(swissGerman);
-        end.setResolution(DateField.RESOLUTION_MIN);
+        end.setResolution(Resolution.MINUTE);
         end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
         content.addComponent(end);
 

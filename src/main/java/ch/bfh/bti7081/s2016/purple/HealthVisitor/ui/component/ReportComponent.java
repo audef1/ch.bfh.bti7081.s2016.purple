@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by tgdflto1 on 01/06/16.
@@ -33,10 +34,8 @@ public class ReportComponent extends CustomComponent {
     }
 
     private void initialize() {
-
-
         String datePattern = "dd.MM.yyyy HH:mm";
-        //		Locale swissGerman = new Locale("de", "CH");
+        Locale swissGerman = new Locale("de", "CH");
 
         final Window window = new Window("Rapport bearbeiten");
         window.setWidth("90%");
@@ -47,7 +46,7 @@ public class ReportComponent extends CustomComponent {
         arrival.setValue(startDate);
         arrival.setCaption("Behandlungsbeginn:");
         arrival.setDateFormat(datePattern);
-//		arrival.setLocale(swissGerman);
+		arrival.setLocale(swissGerman);
         arrival.setResolution(Resolution.MINUTE);
         content.addComponent(arrival);
 
@@ -56,7 +55,7 @@ public class ReportComponent extends CustomComponent {
         end.setValue(endDate);
         end.setCaption("Ende der Behandlung");
         end.setDateFormat(datePattern);
-//		end.setLocale(swissGerman);
+		end.setLocale(swissGerman);
         end.setResolution(Resolution.MINUTE);
         end.addValidator(new DateRangeValidator("Ende muss nach dem start liegen", arrival.getValue(), arrival.getRangeEnd(), Resolution.DAY));
         content.addComponent(end);

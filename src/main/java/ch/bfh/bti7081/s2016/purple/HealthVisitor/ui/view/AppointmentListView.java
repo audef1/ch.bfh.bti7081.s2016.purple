@@ -57,7 +57,7 @@ public class AppointmentListView extends BaseView {
 		listTitle.setStyleName("h1");
 
 		HealthVisitorEntity user = controller.getUser();
-		List<AppointmentEntity> items = user.getAppointments();
+		List<AppointmentEntity> items = controller.getAppointments();
 		logger.debug("getting appointments: " + items);
 		container = new BeanItemContainer<>(BasicEvent.class);
 		this.addAppointments(items);

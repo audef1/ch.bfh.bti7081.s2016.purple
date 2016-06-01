@@ -42,6 +42,21 @@ public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
 	public static final String VIEW_NAME = "Termindetails";
 
+	//States
+	public static final String CONFIRM_END = "Ende bestätigen";
+	public static final String CLOSE = "Abschliessen";
+	public static final String ARRIVED = "Ankunft bestätigen";
+
+	//Report
+	public static final String EDIT_REPORT = "Report bearbeiten";
+	public static final String CREATE_REPORT = "Report erstellen";
+	public static final String NO_REPORT = "Kein Report vorhanden";
+	public static final String LAST_REPORT = "Letzter Report";
+
+
+
+
+
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private final AppointmentDetailController controller;
 	private  VerticalLayout general;
@@ -59,8 +74,8 @@ public class AppointmentDetailView extends BaseView{
 	@Override
 	public Layout initView() {
 		appointmentDao = AppointmentDao.getInstance();
-		String strReportButtonName = "";
-		String strArrivalButtonName = "Ankunft bestätigen";
+		String strReportButtonName;
+		String strArrivalButtonName = ARRIVED;
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
@@ -78,16 +93,12 @@ public class AppointmentDetailView extends BaseView{
 			
 			currentReport = appointment.getReport();
 			
-			if (currentReport != null){
-				if (currentReport.getStart() > 0) strArrivalButtonName = "Ende bestätigen";
-			}
-			
-			Button btnArrival = new Button(strArrivalButtonName);
+			if (currentReport != null && currentReport.getStart() > 0) strArrivalButtonName = CONFIRM_END;
+			Button buttonArrival = new Button(strArrivalButtonName);
 			boolean stateNull = (appointment.getState() == null );
 			boolean isPlanned = false;
 			if(!stateNull) isPlanned = appointment.getState().getClass().equals(PlannedState.class);
-			btnArrival.setEnabled(stateNull || isPlanned);
-			btnArrival.setWidth("200px");
+			buttonArrival.setWidth("200px");
 
 	//		Google-Maps-Implementation
 			LatLon pos = new LatLon(46.9648208, 7.453848);
@@ -108,16 +119,16 @@ public class AppointmentDetailView extends BaseView{
 			VerticalLayout reportContainer = new VerticalLayout();
 			reportContainer.setWidth("300px");
 			
-			Label lastReport = new Label("Letzter Rapport");
+			Label lastReport = new Label(LAST_REPORT);
 			lastReport.setStyleName("h2");
 			reportContainer.addComponent(lastReport);
-//			List<ReportEntity> allReports = appointment.getReports();
+
 			if(currentReport != null){
 				reportContainer.addComponent(new Label(currentReport.getDescription()));
-				strReportButtonName = "Rapport bearbeiten";
+				strReportButtonName = EDIT_REPORT;
 			}else{
-				reportContainer.addComponent(new Label("Kein alter Report vorhanden."));
-				strReportButtonName = "Neuen Rapport erfassen";
+				reportContainer.addComponent(new Label(NO_REPORT));
+				strReportButtonName = CREATE_REPORT;
 			}
 
 
@@ -129,12 +140,12 @@ public class AppointmentDetailView extends BaseView{
 
 
 	//		Add clicklistener to button Arrival
-			btnArrival.addClickListener(clickevent -> {
-				btnArrivalClicked(btnArrival, btnNewReport, appointment, currentReport);
+			buttonArrival.addClickListener(clickevent -> {
+				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
 			});
 
 	//		Create button to show patient details
-			Button btnDetails = new Button("Patientendetails");
+			Button buttonDetail = new Button("Patientendetails");
 	//		TODO: Show Patient data
 
 
@@ -147,7 +158,10 @@ public class AppointmentDetailView extends BaseView{
 	//		Show short description about the patient
 			TextArea description = new TextArea();
 			description.setValue(appointment.getClient().getDetails());
-			description.addTextChangeListener(click -> {saveClientDetails.setCaption("Speichern"); saveClientDetails.setEnabled(true);});
+			description.addTextChangeListener(click -> {
+				saveClientDetails.setCaption("Speichern");
+				saveClientDetails.setEnabled(true);
+			});
 
 			saveClientDetails.addClickListener(click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
 			Button btnEmergencyContact = new Button("Notfallkontakte des Patienten");
@@ -164,8 +178,8 @@ public class AppointmentDetailView extends BaseView{
 			top.setSizeFull();
 			top.addComponent(lblHeader, 0, 0);
 			top.setComponentAlignment(lblHeader, Alignment.MIDDLE_LEFT);
-			top.addComponent(btnArrival, 1, 0);
-			top.setComponentAlignment(btnArrival, Alignment.MIDDLE_RIGHT);
+			top.addComponent(buttonArrival, 1, 0);
+			top.setComponentAlignment(buttonArrival, Alignment.MIDDLE_RIGHT);
 			top.setMargin(new MarginInfo(true, true, false, false));
 
 
@@ -183,8 +197,8 @@ public class AppointmentDetailView extends BaseView{
 			data.setComponentAlignment(reportContainer, Alignment.TOP_LEFT);
 			data.addComponent(btnNewReport, 1, 3);
 			data.setComponentAlignment(btnNewReport, Alignment.TOP_LEFT);
-			data.addComponent(btnDetails, 1, 4);
-			data.setComponentAlignment(btnDetails, Alignment.TOP_LEFT);
+			data.addComponent(buttonDetail, 1, 4);
+			data.setComponentAlignment(buttonDetail, Alignment.TOP_LEFT);
 			data.addComponent(lblBeschriebTitle, 2, 0);
 			data.setComponentAlignment(lblBeschriebTitle, Alignment.TOP_LEFT);
 			data.addComponent(patientDetails, 2, 1, 2, 3);
@@ -204,20 +218,19 @@ public class AppointmentDetailView extends BaseView{
 
 	
 //	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
-	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointmentEntity, ReportEntity report){
-		if (!btnArrival.getCaption().equals("Ende bestätigen")) {
-			btnArrival.setCaption("Ende bestätigen");
-			
-			btnReport.setCaption("Rapport bearbeiten");
-		} else {
-			btnArrival.setEnabled(false);
-		}
+	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointment, ReportEntity report){
 		btnReport.setEnabled(true);
-		
-		controller.saveReportTime(currentReport, appointmentEntity);
-		
-		appointmentEntity.doAction(appointmentEntity);
-//		appointmentDao.update(appointmentEntity);
+		if (btnArrival.getCaption().equals(CONFIRM_END)) {
+			btnArrival.setCaption(CLOSE);
+			btnReport.setCaption(EDIT_REPORT);
+		}else if(btnArrival.getCaption().equals(ARRIVED)){
+			btnArrival.setCaption(CONFIRM_END);
+		} else if(btnArrival.getCaption().equals(CLOSE)) {
+			btnArrival.setEnabled(false);
+			btnReport.setEnabled(false);
+		}
+		controller.saveReportTime(currentReport, appointment);
+		appointment.doAction(appointment);
 	}
 
 	@Override

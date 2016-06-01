@@ -19,8 +19,20 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.EmergencyControll
 
 public class EmergencyView extends BaseView {
 	public static final String NAME ="Emergency";
-    private static final Logger logger = LogManager.getLogger(MedicationView.class);
-    private final EmergencyController controller;
+	private static final Logger logger = LogManager.getLogger(MedicationView.class);
+
+	public static final String EMERGENCY = "Allgemeiner Notruf (112)";
+	public static final String EMERGENCY_NUMBER = "tel://112";
+	public static final String POLICE_NUMBER = "tel://117";
+	public static final String POLICE = "Polizei (117)";
+	public static final String AMBULANCE = "Ambulanz (144)";
+	public static final String AMBULANCE_NUMBER = "tel://144";
+	public static final String FIRE_DEPARTMENT = "Feuerwehr (118)";
+	public static final String FIRE_DEPARTMENT_NUMBER = "tel://118";
+	public static final String REGA = "REGA (1414)";
+	public static final String REGA_NUMBER = "tel://1414";
+
+	private final EmergencyController controller;
     private GridLayout general;
     
     
@@ -42,39 +54,39 @@ public class EmergencyView extends BaseView {
 		
 		
 		// Create Button to call the general emergency number of Europe
-		DashboardButtonComponent btGeneral = new DashboardButtonComponent("Allgemeiner Notruf (112)", FontAwesome.PLUS_SQUARE);
+		DashboardButtonComponent btGeneral = new DashboardButtonComponent(EMERGENCY, FontAwesome.PLUS_SQUARE);
 		btGeneral.setWidth("100%");
 		general.addComponent(btGeneral, 0, 0, 1, 0);
-		Resource resGeneral = new ExternalResource("tel://112");
-		final ResourceReference rrGeneral = ResourceReference.create(resGeneral, btGeneral, "Allgemeiner Notruf (112)");
+		Resource resGeneral = new ExternalResource(EMERGENCY_NUMBER);
+		final ResourceReference rrGeneral = ResourceReference.create(resGeneral, btGeneral, EMERGENCY);
 		btGeneral.addClickListener(clickevent -> Page.getCurrent().open(rrGeneral.getURL(), null));
 		
 		// Create Button to call the police
-		DashboardButtonComponent btPolice = new DashboardButtonComponent("Polizei (117)", FontAwesome.CAB);
+		DashboardButtonComponent btPolice = new DashboardButtonComponent(POLICE_NUMBER, FontAwesome.CAB);
 		general.addComponent(btPolice, 0, 1);
-		Resource resPolice = new ExternalResource("tel://117");
-		final ResourceReference rrPolice = ResourceReference.create(resPolice, btPolice, "Polizei (117)");
+		Resource resPolice = new ExternalResource(POLICE_NUMBER);
+		final ResourceReference rrPolice = ResourceReference.create(resPolice, btPolice, POLICE);
 		btPolice.addClickListener(clickevent -> Page.getCurrent().open(rrPolice.getURL(), null));
 		
 		// Create Button to call the ambulance
-		DashboardButtonComponent btAmbulance = new DashboardButtonComponent("Ambulanz (144)", FontAwesome.AMBULANCE);
+		DashboardButtonComponent btAmbulance = new DashboardButtonComponent(AMBULANCE, FontAwesome.AMBULANCE);
 		general.addComponent(btAmbulance, 1, 1);
-		Resource resAmbulance = new ExternalResource("tel://144");
-		final ResourceReference rrAmbulance = ResourceReference.create(resAmbulance, btAmbulance, "Ambulanz (144)");
+		Resource resAmbulance = new ExternalResource(AMBULANCE_NUMBER);
+		final ResourceReference rrAmbulance = ResourceReference.create(resAmbulance, btAmbulance,  AMBULANCE);
 		btAmbulance.addClickListener(clickevent -> Page.getCurrent().open(rrAmbulance.getURL(), null));
 		
 		// Create Button to call the firefighters
-		DashboardButtonComponent btFireFighter = new DashboardButtonComponent("Feuerwehr (118)", FontAwesome.FIRE_EXTINGUISHER);
+		DashboardButtonComponent btFireFighter = new DashboardButtonComponent(FIRE_DEPARTMENT, FontAwesome.FIRE_EXTINGUISHER);
 		general.addComponent(btFireFighter, 0, 2);
-		Resource resFireFighter = new ExternalResource("tel://118");
-		final ResourceReference rrFireFighter = ResourceReference.create(resFireFighter, btFireFighter, "Feuerwehr (118)");
+		Resource resFireFighter = new ExternalResource(FIRE_DEPARTMENT_NUMBER);
+		final ResourceReference rrFireFighter = ResourceReference.create(resFireFighter, btFireFighter, FIRE_DEPARTMENT);
 		btFireFighter.addClickListener(clickevent -> Page.getCurrent().open(rrFireFighter.getURL(), null));
 		
 		// Create Button to call REGA
-		DashboardButtonComponent btRega = new DashboardButtonComponent("REGA (1414)", FontAwesome.H_SQUARE);
+		DashboardButtonComponent btRega = new DashboardButtonComponent(REGA, FontAwesome.H_SQUARE);
 		general.addComponent(btRega, 1, 2);
-		Resource resRega = new ExternalResource("tel://1414");
-		final ResourceReference rrRega = ResourceReference.create(resRega, btRega, "REGA (1414)");
+		Resource resRega = new ExternalResource(REGA_NUMBER);
+		final ResourceReference rrRega = ResourceReference.create(resRega, btRega, REGA);
 		btRega.addClickListener(clickevent -> Page.getCurrent().open(rrRega.getURL(), null));
 		
 		return general;

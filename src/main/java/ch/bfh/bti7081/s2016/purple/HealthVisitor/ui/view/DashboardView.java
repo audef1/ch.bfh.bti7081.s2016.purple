@@ -27,7 +27,6 @@ public class DashboardView extends BaseView{
 		logger.debug("arrived on dashboard view");
 		controller = new DashboardController(this);
 		layout = new StandardLayout(this);
-		// TODO outsource into an xml/html file
 	}
 
 	@Override

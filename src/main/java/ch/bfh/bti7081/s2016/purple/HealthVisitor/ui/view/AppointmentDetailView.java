@@ -42,8 +42,6 @@ public class AppointmentDetailView extends BaseView{
 	public static final String SAVE = "Speichern";
 	public static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
 
-
-
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private final AppointmentDetailController controller;
 	private  VerticalLayout general;

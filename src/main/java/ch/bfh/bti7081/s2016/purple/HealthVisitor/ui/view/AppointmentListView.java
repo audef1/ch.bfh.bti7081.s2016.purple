@@ -7,6 +7,7 @@ import java.util.List;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.ui.*;
@@ -17,6 +18,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.event.ContextClickEvent;
+import com.vaadin.event.ContextClickEvent.ContextClickListener;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
@@ -24,6 +27,8 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickEvent;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClick;
+import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
 import com.vaadin.ui.components.calendar.event.BasicEvent;
@@ -114,6 +119,14 @@ public class AppointmentListView extends BaseView {
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
+	    cal.setHandler(new EventClickHandler() {
+
+	        @Override
+	        public void eventClick(EventClick event) {
+	        	logger.debug("event clicked: " + event.getCalendarEvent());
+	        }
+	    });
+
 	    
 		general.addComponents(calnav, cal);
 		
@@ -126,16 +139,7 @@ public class AppointmentListView extends BaseView {
        
 		if (items !=null && !items.isEmpty()){
 			for (AppointmentEntity appointment : items) {
-	        	
-				//String name = appointment.getClient().getFullName();
-				String name = appointment.getPlace();
-	        	String description = appointment.getAddress();
-				Date start = appointment.getStartTime();
-				Date end = appointment.getEndTime();
-				
-				logger.debug("added appointment to calendar: " + name + " - " + start + " - " + end);
-	            BasicEvent event = new BasicEvent(name, description, start, end);
-				container.addBean(event);
+				container.addBean(new AppointmentEvent(appointment));
 	        }
 	        container.sort(new Object[]{"start"}, new boolean[] { true });
         }

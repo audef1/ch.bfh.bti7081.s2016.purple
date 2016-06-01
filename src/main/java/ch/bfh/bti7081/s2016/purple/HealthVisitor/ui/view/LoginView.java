@@ -17,6 +17,15 @@ import org.apache.logging.log4j.Logger;
  */
 public class LoginView extends BaseView{
 
+    public static final String USERNAME = "Benutzername";
+    public static final String EMAIL = "E-Mail";
+    public static final String ERROR_EMAIL = "Bitte geben Sie eine gültige E-Mail Adresse ein!";
+    public static final String PASSWORD = "Kennwort";
+    public static final String LOGIN = "Login";
+    public static final String WRONG_CREDENTIALS = "Login oder Kennwort falsch";
+    public static final String THREE_HUNDRED_PX = "300px";
+
+
     private final Logger logger = LogManager.getLogger(LoginView.class);
     public static final String NAME = "Login";
     private  SessionController controller;
@@ -31,28 +40,27 @@ public class LoginView extends BaseView{
         controller = new SessionController(this);
         logger.debug("this is the loginview");
         layout = new StandardLayout(this);
-
     }
 
     @Override
     public Layout initView() {
 
         user = new TextField("");
-        user.setWidth("300px");
+        user.setWidth(THREE_HUNDRED_PX);
         user.setRequired(true);
-        user.setCaption("Benutzername");
-        user.setInputPrompt("E-Mail");
-        user.addValidator(new EmailValidator("Bitte geben Sie eine gültige E-Mail Adresse ein!"));
+        user.setCaption(USERNAME);
+        user.setInputPrompt(EMAIL);
+        user.addValidator(new EmailValidator(ERROR_EMAIL));
         user.setInvalidAllowed(false);
 
         password = new PasswordField("");
-        password.setWidth("300px");
+        password.setWidth(THREE_HUNDRED_PX);
         password.setRequired(true);
-        password.setCaption("Kennwort");
+        password.setCaption(PASSWORD);
         password.addValidator(new PasswordValidator());
         password.setInvalidAllowed(true);
 
-        magicLoginButton = new Button("Login");
+        magicLoginButton = new Button(LOGIN);
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((click -> validate()));
 
@@ -97,7 +105,7 @@ public class LoginView extends BaseView{
     private void validate(){
         Notification.show("received", Notification.Type.ASSISTIVE_NOTIFICATION);
         if(!password.isValid() || !user.isValid()){
-            Notification.show("Login oder Kennwort falsch",
+            Notification.show(WRONG_CREDENTIALS,
                     Notification.Type.WARNING_MESSAGE);
             return;
         }

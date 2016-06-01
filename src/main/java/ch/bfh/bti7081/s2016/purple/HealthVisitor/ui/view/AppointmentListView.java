@@ -50,6 +50,8 @@ public class AppointmentListView extends BaseView {
 	public static final int LAST_HOUR = 19;
 
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
+	public static final String WEEK = "Woche";
+	public static final String TODAY = "Heute";
 	private final AppointmentListController controller;
 	private VerticalLayout general;
 	
@@ -83,8 +85,8 @@ public class AppointmentListView extends BaseView {
 		calnav.setSpacing(true);
 		Calendar cal = new Calendar();
 		
-		Button week = new Button("Woche");
-		Button today = new Button("Heute");
+		Button week = new Button(WEEK);
+		Button today = new Button(TODAY);
 
 		week.addClickListener(new ClickListener() {
 

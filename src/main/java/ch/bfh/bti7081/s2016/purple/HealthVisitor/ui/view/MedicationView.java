@@ -63,7 +63,8 @@ public class MedicationView extends BaseView {
 			private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
 	            List<MedicationEntity> items = new ArrayList<MedicationEntity>();
 	            for (Object id : itemIds) {
-	            	BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.getContainerDataSource().getItem(id);
+	            	BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
+                            getContainerDataSource().getItem(id);
 	            	items.add(beanItem.getBean());
 	            }
 	            return items;
@@ -76,7 +77,8 @@ public class MedicationView extends BaseView {
     
     protected BeanItemContainer<MedicationEntity> getContainer(){
     	Collection<MedicationEntity> medications = this.controller.getMedicationForDay();
-        final BeanItemContainer<MedicationEntity> container = new BeanItemContainer<MedicationEntity>(MedicationEntity.class, medications);
+        final BeanItemContainer<MedicationEntity> container =
+                new BeanItemContainer<MedicationEntity>(MedicationEntity.class, medications);
         return container;
     }
 

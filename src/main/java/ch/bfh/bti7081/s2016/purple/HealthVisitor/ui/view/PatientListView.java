@@ -34,8 +34,8 @@ public class PatientListView extends BaseView {
     public static final String VIEW_NAME ="Patientenliste";
 
     private static final Logger logger = LogManager.getLogger(PatientListView.class);
+    public static final String BACK = "Zurück";
 
-    
 
     public PatientListView(){
         super();
@@ -52,7 +52,7 @@ public class PatientListView extends BaseView {
 
         HorizontalLayout topLeft = new HorizontalLayout();
 
-        Button btBack = new Button("Zurück");
+        Button btBack = new Button(BACK);
         btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         btBack.addClickListener((clickEvent ->
                 getUI().getNavigator().navigateTo(DashboardView.NAME)));

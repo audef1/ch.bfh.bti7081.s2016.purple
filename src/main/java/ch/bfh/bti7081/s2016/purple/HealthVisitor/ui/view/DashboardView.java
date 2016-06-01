@@ -74,7 +74,5 @@ public class DashboardView extends BaseView{
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-		// TODO set a focus
-	}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {}
 }

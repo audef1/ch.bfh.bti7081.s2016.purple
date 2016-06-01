@@ -12,7 +12,9 @@ import org.apache.logging.log4j.Logger;
  */
 public class LogoutView extends BaseView {
 
-        private final Logger logger = LogManager.getLogger(LoginView.class);
+    public static final String SEE_YOU_SOON = "Vielen Dank und bis zum nächsten mal.";
+    public static final String BACK_TO_LOGIN = "Zurück zum Login";
+    private final Logger logger = LogManager.getLogger(LoginView.class);
         public static final String NAME ="Logout";
         private SessionController controller;
 
@@ -28,9 +30,9 @@ public class LogoutView extends BaseView {
         public Layout initView() {
             VerticalLayout hl = new VerticalLayout();
 
-            Label label = new Label("Vielen Dank und bis zum nächsten mal.");
+            Label label = new Label(SEE_YOU_SOON);
             label.setStyleName("h1");
-            Button button = new Button("Zurück zum Login");
+            Button button = new Button(BACK_TO_LOGIN);
             button.addClickListener(click -> getUI().getNavigator().navigateTo("Login"));
             hl.addComponent(label);
             hl.addComponent(button);

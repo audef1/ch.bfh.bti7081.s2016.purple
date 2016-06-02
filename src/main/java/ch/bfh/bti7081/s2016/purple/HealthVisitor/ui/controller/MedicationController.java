@@ -10,6 +10,7 @@ import com.vaadin.data.util.BeanItem;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.MedicationEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.MedicationDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 
@@ -19,14 +20,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 public class MedicationController extends BaseController {
 	
 	private MedicationDao medicationDao = MedicationDao.getInstance();
+	private AppointmentDao appointmentDao = AppointmentDao.getInstance();
 	
     public MedicationController(MedicationView view) {
         super(view);
     }
     
     public Collection<MedicationEntity> getMedicationForDay(){
-		HealthVisitorEntity user = this.getUser();
-		List<AppointmentEntity> appointments = user.getAppointments();
+		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(this.getUser());
 		Collection<MedicationEntity> medications = new ArrayList<MedicationEntity>();
 		for (AppointmentEntity appointment : appointments){
 			medications.addAll(appointment.getMedications());
@@ -37,13 +38,13 @@ public class MedicationController extends BaseController {
     public void check(Collection<MedicationEntity> medications){
     	for (MedicationEntity medication: medications){
     		medication.setChecked(true);
-    		medicationDao.persist(medication);
+    		medicationDao.update(medication);
     	}
     }
     public void uncheck(Collection<MedicationEntity> medications){
     	for (MedicationEntity medication: medications){
     		medication.setChecked(false);
-    		medicationDao.persist(medication);
+    		medicationDao.update(medication);
     	} 	
     }
 }

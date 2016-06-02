@@ -35,11 +35,10 @@ public class MedicationView extends BaseView {
     public static final String NAME ="Medication";
     private static final Logger logger = LogManager.getLogger(MedicationView.class);
     private final MedicationController controller;
-
-
+    
     public MedicationView(){
         super();
-        logger.debug("arrived on dashboard view");
+        logger.debug("arrived on medication view");
         controller = new MedicationController(this);
         layout = new StandardLayout(this);
     }
@@ -50,12 +49,17 @@ public class MedicationView extends BaseView {
         general.setSpacing(true);
         general.setMargin(true);
 
-        Grid grid = new Grid(getContainer());
+
+    	Collection<MedicationEntity> medications = this.controller.getMedicationForDay();
+    	BeanItemContainer<MedicationEntity> container = new BeanItemContainer<>(MedicationEntity.class, medications);
+        
+        Grid grid = new Grid(container);
         grid.setSizeFull();
         grid.setSelectionMode(SelectionMode.MULTI);
         grid.addSelectionListener(new SelectionListener(){
 			@Override
 			public void select(SelectionEvent event) {
+				logger.debug("selection event triggered");
 		        controller.check(getItems(event.getAdded()));
 		        controller.uncheck(getItems(event.getRemoved()));
 			}
@@ -70,14 +74,16 @@ public class MedicationView extends BaseView {
 	            return items;
 	        }
         });
-        general.addComponents(grid);
+        
+        for (MedicationEntity medication: medications){
+        	if (medication.isChecked()){
+        		grid.select(medication);
+        	}
+        }
       
+        general.addComponents(grid);
+        
         return general;
-    }
-    
-    protected BeanItemContainer<MedicationEntity> getContainer(){
-    	Collection<MedicationEntity> medications = this.controller.getMedicationForDay();
-        return new BeanItemContainer<>(MedicationEntity.class, medications);
     }
 
     @Override

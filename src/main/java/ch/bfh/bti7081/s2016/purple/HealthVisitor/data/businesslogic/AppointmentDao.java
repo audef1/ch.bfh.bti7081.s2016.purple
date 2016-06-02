@@ -65,60 +65,49 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     public Collection<AppointmentEntity> getTodaysAppointmentsByHealthVisitor(HealthVisitorEntity healthVisitor)
     {
     	TypedQuery<AppointmentEntity> query = entityManager.createQuery(
-    		"SELECT a.* "
+    		"SELECT a "
     		+ "FROM appointment AS a "
     		+ "WHERE a.hv = :hv "
-    		+ "AND a.startTime BETWEEN :startTime AND :endTime",
+    		+ "AND a.startTime BETWEEN :startTime AND :endTime "
+    		+ "AND a.client IS NOT NULL ORDER BY a.startTime, a.endTime ASC",
             AppointmentEntity.class
         );
     	
     	LocalDate now = LocalDate.now();
-    	ZoneOffset offset = null; 
+    	ZoneOffset offset = ZoneOffset.UTC;
     	long startTime = now.atStartOfDay().toEpochSecond(offset);
     	long endTime = startTime + (24 * 60 * 60);
     
-    	Collection<AppointmentEntity> appointments =  query.
+    	Collection<AppointmentEntity> appointments = null;
+    	try {
+    		appointments = query.
                 setParameter("hv", healthVisitor).
                 setParameter("startTime", startTime).
                 setParameter("endTime", endTime)
                 .getResultList();
-    	
+    	} catch (NoResultException e){
+    		logger.debug("No todays appointment found " + e.getMessage());
+    	}
     	return appointments;
     }
-
+    
     public AppointmentEntity getCurrentAppointment() {
-        TypedQuery<AppointmentEntity> query = entityManager.
-                createQuery("SELECT a FROM appointment AS a WHERE a.hv = :hv AND a.startTime" +
-                        " BETWEEN :today AND :tomorrow AND a.client IS NOT NULL ORDER BY a.startTime, a.endTime ASC",
-                        AppointmentEntity.class);
-        try{
-            long oneDay = 24*60*60;
-            long currentTime = System.currentTimeMillis()/1000;
-            long timeYesterday =  currentTime-oneDay;
-            long timeTomorrow =  currentTime+oneDay;
-            logger.debug("timeNow = "+timeYesterday);
-            logger.debug("timeTomorrow = "+timeTomorrow);
-
-            List<AppointmentEntity> appointments =  query.
-                    setParameter("hv", new AuthenticationService().getUser()).
-                    setParameter("today", timeYesterday).
-                    setParameter("tomorrow", timeTomorrow).getResultList();
-            AppointmentEntity appointmentToReturn = null;
-
-            for(AppointmentEntity appointment : appointments){
+    	return getCurrentAppointment(new AuthenticationService().getUser());
+    }
+    
+    public AppointmentEntity getCurrentAppointment(HealthVisitorEntity healthVisitor) {
+        
+    	Collection<AppointmentEntity> appointments = getTodaysAppointmentsByHealthVisitor(healthVisitor);
+    	if (appointments != null){
+    		for(AppointmentEntity appointment : appointments){
                 AppoinmentState state = appointment.getState();
                 if((state == null) || (state instanceof  PlannedState) || (state instanceof RunningState)){
-                    appointmentToReturn = appointment;
-                    break;
+                    return appointment;
                 }
             }
-            return appointmentToReturn;
-        }catch(NoResultException e){
-            logger.debug("no current appointment found " + e.getMessage());
-            return null;
-        }
-
-
+    	}
+    	
+    	logger.debug("No current appointment found");
+    	return null;
     }
-
 }

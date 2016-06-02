@@ -40,6 +40,7 @@ public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
     public E persist(E entity) {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
+//        entityManager.refresh(entity);
         entityManager.getTransaction().commit();
         return entity;
     }

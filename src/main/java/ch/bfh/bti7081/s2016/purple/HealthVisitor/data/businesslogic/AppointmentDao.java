@@ -7,13 +7,21 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedSt
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import sun.net.www.content.text.Generic;
 
 import javax.persistence.*;
+
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +55,35 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
             logger.debug("no appointments found " + e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * TODO ZoneOffset
+     * @param healthVisitor
+     * @return
+     */
+    public Collection<AppointmentEntity> getTodaysAppointmentsByHealthVisitor(HealthVisitorEntity healthVisitor)
+    {
+    	TypedQuery<AppointmentEntity> query = entityManager.createQuery(
+    		"SELECT a.* "
+    		+ "FROM appointment AS a "
+    		+ "WHERE a.hv = :hv "
+    		+ "AND a.startTime BETWEEN :startTime AND :endTime",
+            AppointmentEntity.class
+        );
+    	
+    	LocalDate now = LocalDate.now();
+    	ZoneOffset offset = null; 
+    	long startTime = now.atStartOfDay().toEpochSecond(offset);
+    	long endTime = startTime + (24 * 60 * 60);
+    
+    	Collection<AppointmentEntity> appointments =  query.
+                setParameter("hv", healthVisitor).
+                setParameter("startTime", startTime).
+                setParameter("endTime", endTime)
+                .getResultList();
+    	
+    	return appointments;
     }
 
     public AppointmentEntity getCurrentAppointment() {

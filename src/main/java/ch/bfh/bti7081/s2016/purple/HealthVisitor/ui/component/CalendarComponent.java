@@ -95,8 +95,8 @@ public class CalendarComponent extends VerticalLayout {
 	        Date startDate = calendar.getTime();
 	        
 	        GregorianCalendar calendar2 = new GregorianCalendar();
-	        calendar.set(GregorianCalendar.DAY_OF_MONTH, calendar.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
-	        Date endDate = calendar.getTime();
+	        calendar2.set(GregorianCalendar.DAY_OF_MONTH, calendar2.getActualMaximum(GregorianCalendar.DAY_OF_MONTH));
+	        Date endDate = calendar2.getTime();
 	        
 			cal.setStartDate(startDate);
 			cal.setEndDate(endDate);

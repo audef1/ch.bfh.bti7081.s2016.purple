@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.*;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 import org.apache.logging.log4j.LogManager;

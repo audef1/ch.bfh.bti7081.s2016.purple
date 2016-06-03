@@ -62,7 +62,7 @@ public class EmergencyView extends BaseView {
 		btGeneral.addClickListener(clickevent -> Page.getCurrent().open(rrGeneral.getURL(), null));
 		
 		// Create Button to call the police
-		DashboardButtonComponent btPolice = new DashboardButtonComponent(POLICE_NUMBER, FontAwesome.CAB);
+		DashboardButtonComponent btPolice = new DashboardButtonComponent(POLICE, FontAwesome.CAB);
 		general.addComponent(btPolice, 0, 1);
 		Resource resPolice = new ExternalResource(POLICE_NUMBER);
 		final ResourceReference rrPolice = ResourceReference.create(resPolice, btPolice, POLICE);

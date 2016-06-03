@@ -1,9 +1,8 @@
-package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
+package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by tgdflto1 on 21/05/16.

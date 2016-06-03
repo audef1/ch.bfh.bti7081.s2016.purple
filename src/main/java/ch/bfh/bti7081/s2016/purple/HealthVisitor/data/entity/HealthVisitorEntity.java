@@ -1,7 +1,6 @@
-package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
+package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity;
 
 import javax.persistence.*;
-import javax.persistence.criteria.Fetch;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

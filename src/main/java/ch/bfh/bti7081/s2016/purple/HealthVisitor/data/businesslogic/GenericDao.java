@@ -14,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
  * Created by tgdflto1 on 01/06/16.
  */
 public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
-    protected static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
+    protected static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
     protected final EntityManager entityManager;
 

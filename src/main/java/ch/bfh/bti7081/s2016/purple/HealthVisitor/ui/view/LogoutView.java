@@ -29,6 +29,7 @@ public class LogoutView extends BaseView {
         @Override
         public Layout initView() {
             VerticalLayout hl = new VerticalLayout();
+            hl.setMargin(true);
 
             Label label = new Label(SEE_YOU_SOON);
             label.setStyleName("h1");

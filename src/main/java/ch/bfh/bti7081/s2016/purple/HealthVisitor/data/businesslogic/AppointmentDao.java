@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
@@ -33,7 +34,7 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     }
     private AppointmentDao(){ }
 
-    public List<AppointmentEntity> getAppointments(){
+    public List getAppointments() {
 //        TypedQuery<AppointmentEntity> query = entityManager.
 //                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv h WHERE a.hv = :hv AND c.id IS NOT NULL" ,
 //                        AppointmentEntity.class);
@@ -91,14 +92,15 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     public AppointmentEntity getCurrentAppointment(HealthVisitorEntity healthVisitor) {
 
     	Collection<AppointmentEntity> appointments = getTodaysAppointmentsByHealthVisitor(healthVisitor);
-    	if (appointments != null){
-    		for(AppointmentEntity appointment : appointments){
+        if (appointments != null) {
+            for (AppointmentEntity appointment : appointments) {
                 AppointmentState state = appointment.getState();
-                if((state == null) || (state instanceof  PlannedState) || (state instanceof RunningState)){
+                logger.debug("STATE grabbed" + state);
+                if ((state == null) || (state instanceof PlannedState) ||
+                        (state instanceof RunningState) || state instanceof FinishedState)
                     return appointment;
-                }
             }
-    	}
+        }
 
     	logger.debug("No current appointment found");
     	return null;

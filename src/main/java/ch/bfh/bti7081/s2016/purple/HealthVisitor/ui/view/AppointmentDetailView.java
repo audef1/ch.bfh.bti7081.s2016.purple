@@ -1,5 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
@@ -192,14 +196,18 @@ public class AppointmentDetailView extends BaseView{
 	// clicklistener of button arrival. activate the button "new report" and associate the clicklistener
 	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointment, ReportEntity report){
 		btnReport.setEnabled(true);
-		if (btnArrival.getCaption().equals(CONFIRM_END)) {
+		AppointmentState currentState = appointment.getState();
+		logger.debug("STATE is: " + currentState);
+		if (currentState instanceof RunningState) {
 			btnArrival.setCaption(CLOSE);
 			btnReport.setCaption(EDIT_REPORT);
-		}else if(btnArrival.getCaption().equals(ARRIVED)){
+		} else if (currentState instanceof PlannedState) {
 			btnArrival.setCaption(CONFIRM_END);
-		} else if(btnArrival.getCaption().equals(CLOSE)) {
+		} else if (currentState instanceof FinishedState) {
 			btnArrival.setEnabled(false);
 			btnReport.setEnabled(false);
+		} else {
+			logger.debug("STATE not found");
 		}
 		controller.saveReportTime(currentReport, appointment);
 		appointment.doAction(appointment);
@@ -207,7 +215,6 @@ public class AppointmentDetailView extends BaseView{
 
 	@Override
 	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-		BaseView comingfrom = (BaseView) viewChangeEvent.getOldView();
 	}
 
 	@Override

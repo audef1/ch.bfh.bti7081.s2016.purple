@@ -31,10 +31,9 @@ public class AppointmentEntity implements AppointmentState {
     private long startTime;
     private long endTime;
 
+    @Lob
     @Column(name="STATE")
-    private String stateName;
-
-    private transient AppointmentState state;
+    private AppointmentState state;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="HV_ID")
@@ -63,7 +62,6 @@ public class AppointmentEntity implements AppointmentState {
     }
 
     public void setState(AppointmentState state) {
-        this.stateName = state.toString();
         this.state = state;
     }
 

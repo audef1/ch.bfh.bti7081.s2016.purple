@@ -70,6 +70,7 @@ public class AppointmentDetailView extends BaseView{
 		//get appointment from session (calendarview)
 		if (VaadinSession.getCurrent().getSession().getAttribute("appointment") != null){
 			this.appointment = (AppointmentEntity) VaadinSession.getCurrent().getSession().getAttribute("appointment");
+			VaadinSession.getCurrent().getSession().setAttribute("appointment", null);
 		}
 		else{
 			this.appointment = controller.getCurrentAppointment();
@@ -218,9 +219,6 @@ public class AppointmentDetailView extends BaseView{
 	@Override
 	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 		BaseView comingfrom = (BaseView) viewChangeEvent.getOldView();
-		if (comingfrom.getViewName() != "Terminliste"){
-			VaadinSession.getCurrent().getSession().setAttribute("appointment", null);
-		}
 	}
 
 	@Override

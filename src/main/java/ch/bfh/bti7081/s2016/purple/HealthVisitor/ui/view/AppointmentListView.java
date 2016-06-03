@@ -103,12 +103,15 @@ public class AppointmentListView extends BaseView {
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
-	    cal.setHandler((EventClickHandler) event -> logger.
-				debug("event clicked: " + event.getCalendarEvent()));
-
+	    cal.setHandler(new EventClickHandler() {
+            public void eventClick(EventClick event) {
+                //somehow get appointment id and pass it as parameter to the navigator
+            	event.getCalendarEvent();
+                getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+            }
+        });
+	    
 		general.addComponents(calnav, cal);
-		// TODO Add patients and appointments from db to the list
-		//addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 		return general;
 	}
 	

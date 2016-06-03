@@ -16,5 +16,4 @@ public class AppointmentEvent extends BasicEvent {
 	public AppointmentEntity getAppointment() {
 		return appointment;
 	}
-	
 }

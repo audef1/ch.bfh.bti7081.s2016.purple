@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
@@ -90,22 +91,14 @@ public class AppointmentDetailView extends BaseView{
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
 
-	//		Google-Maps-Implementation
-			LatLon pos = new LatLon(46.9648208, 7.453848);
+			// Google-Maps-Implementation
+			GoogleMap map = new GoogleMapsComponent(appointment.getAddress() +" "+ appointment.getPlace());
 
-			GoogleMap map = new GoogleMap("AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714", null, "german");
-			map.setSizeFull();
-			map.addMarker(appointment.getAddress() +" "+ appointment.getPlace(), pos, false, null);
-			map.setMinZoom(4);
-			map.setMaxZoom(16);
-			map.setCenter(pos);
-			map.setZoom(16);
-
-	//		Create Checklist
+			// Create Checklist
 			Grid checklist = new Grid();
 			checklist.setColumns(TASKLIST);
 
-	//		Create Column last report
+			// Create Column last report
 			VerticalLayout reportContainer = new VerticalLayout();
 			reportContainer.setWidth("300px");
 			

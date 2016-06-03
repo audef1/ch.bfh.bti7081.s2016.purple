@@ -1,12 +1,11 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
-import com.vaadin.shared.ui.AlignmentInfo;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 

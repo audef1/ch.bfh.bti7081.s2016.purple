@@ -9,7 +9,7 @@ public class AppointmentEvent extends BasicEvent {
 	protected AppointmentEntity appointment;
 	
 	public AppointmentEvent(AppointmentEntity appointment){
-		super(appointment.getPlace(), appointment.getAddress(), appointment.getStartTime(), appointment.getEndTime());
+		super(appointment.getClient().getFullName(), appointment.getAddress(), appointment.getStartTime(), appointment.getEndTime());
 		this.appointment = appointment;
 	}
 

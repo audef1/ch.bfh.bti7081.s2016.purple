@@ -12,4 +12,8 @@ public class CancelledState implements AppointmentState, Serializable{
     public void doAction(AppointmentEntity context) {
 
     }
+
+    public String toString(){
+        return "CANCELLED";
+    }
 }

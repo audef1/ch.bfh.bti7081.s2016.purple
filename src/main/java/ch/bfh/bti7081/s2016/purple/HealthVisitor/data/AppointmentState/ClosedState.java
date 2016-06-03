@@ -12,4 +12,7 @@ public class ClosedState implements AppointmentState, Serializable{
     public void doAction(AppointmentEntity context) {
 
     }
+    public String toString(){
+        return "CLOSED";
+    }
 }

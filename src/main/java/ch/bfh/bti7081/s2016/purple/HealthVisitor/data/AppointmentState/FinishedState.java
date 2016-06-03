@@ -15,5 +15,8 @@ public class FinishedState implements AppointmentState, Serializable {
         context.setState(new ClosedState());
         appoinmentDao.update(context);
     }
+    public String toString(){
+        return "FINISHED";
+    }
 
 }

@@ -1,10 +1,9 @@
-package ch.bfh.bti7081.s2016.purple.HealthVisitor.data;
+package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

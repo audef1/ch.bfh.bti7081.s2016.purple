@@ -1,15 +1,11 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
-import java.util.List;
 import java.util.Set;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-
-import com.vaadin.ui.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

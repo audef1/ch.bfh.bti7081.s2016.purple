@@ -1,7 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;

@@ -1,34 +1,26 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 import com.vaadin.ui.*;
-import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
+import com.vaadin.ui.components.calendar.CalendarComponentEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.event.ContextClickEvent;
-import com.vaadin.event.ContextClickEvent.ContextClickListener;
-import com.vaadin.event.SelectionEvent;
-import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickEvent;
-import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
@@ -105,7 +97,7 @@ public class AppointmentListView extends BaseView {
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
 	    cal.setHandler(new EventClickHandler() {
-            public void eventClick(EventClick event) {
+            public void eventClick(CalendarComponentEvents.EventClick event) {
                 //somehow get appointment id and pass it as parameter to the navigator
             	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());

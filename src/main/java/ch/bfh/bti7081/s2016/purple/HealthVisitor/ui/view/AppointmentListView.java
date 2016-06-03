@@ -23,6 +23,7 @@ import com.vaadin.event.ContextClickEvent.ContextClickListener;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
@@ -106,8 +107,9 @@ public class AppointmentListView extends BaseView {
 	    cal.setHandler(new EventClickHandler() {
             public void eventClick(EventClick event) {
                 //somehow get appointment id and pass it as parameter to the navigator
-            	event.getCalendarEvent();
-                getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+            	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
+            	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+            	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
             }
         });
 	    

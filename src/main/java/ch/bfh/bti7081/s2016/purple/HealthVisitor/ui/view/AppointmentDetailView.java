@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
@@ -48,6 +49,7 @@ public class AppointmentDetailView extends BaseView{
 
 	private ReportEntity currentReport;
 	AppointmentDao appointmentDao;
+	private AppointmentEntity appointment;
 	
 	public AppointmentDetailView() {
 		super();
@@ -58,15 +60,23 @@ public class AppointmentDetailView extends BaseView{
 
 	@Override
 	public Layout initView() {
-		appointmentDao = AppointmentDao.getInstance();
+		//appointmentDao = AppointmentDao.getInstance();
 		String strReportButtonName;
 		String strArrivalButtonName = ARRIVED;
 		general = new VerticalLayout();
 		general.setMargin(new MarginInfo(false, false, true, true));
 		general.setSpacing(true);
+		
+		//get appointment from session (calendarview)
+		if (VaadinSession.getCurrent().getSession().getAttribute("appointment") != null){
+			this.appointment = (AppointmentEntity) VaadinSession.getCurrent().getSession().getAttribute("appointment");
+		}
+		else{
+			this.appointment = controller.getCurrentAppointment();
 
-		AppointmentEntity appointment = controller.getCurrentAppointment();
-		if(appointment == null){
+		};
+	
+		if(this.appointment == null){
 			general.addComponent(new Label(NO_APPOINTMENT));
 		}else{
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
@@ -189,7 +199,7 @@ public class AppointmentDetailView extends BaseView{
 	}
 
 	
-//	clicklistener of button arrival. activate the button "new report" and associate the clicklistener
+	// clicklistener of button arrival. activate the button "new report" and associate the clicklistener
 	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointment, ReportEntity report){
 		btnReport.setEnabled(true);
 		if (btnArrival.getCaption().equals(CONFIRM_END)) {
@@ -206,7 +216,12 @@ public class AppointmentDetailView extends BaseView{
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+		BaseView comingfrom = (BaseView) viewChangeEvent.getOldView();
+		if (comingfrom.getViewName() != "Terminliste"){
+			VaadinSession.getCurrent().getSession().setAttribute("appointment", null);
+		}
+	}
 
 	@Override
 	public String getViewName() {

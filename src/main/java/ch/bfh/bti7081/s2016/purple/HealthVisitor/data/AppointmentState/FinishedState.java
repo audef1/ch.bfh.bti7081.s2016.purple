@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by tgdflto1 on 29/05/16.
  */
-public class FinishedState implements AppoinmentState, Serializable {
+public class FinishedState implements AppointmentState, Serializable {
     @Override
     public void doAction(AppointmentEntity context) {
         AppointmentDao appoinmentDao = AppointmentDao.getInstance();

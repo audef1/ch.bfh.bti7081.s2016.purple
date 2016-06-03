@@ -17,10 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.vaadin.client.ui.calendar.schedule.CalendarEvent;
-import com.vaadin.ui.components.calendar.event.BasicEvent;
-
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 
 /**
@@ -28,7 +25,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedSt
  */
 @Entity(name="appointment")
 @Table(name="APPOINTMENT")
-public class AppointmentEntity implements AppoinmentState{
+public class AppointmentEntity implements AppointmentState {
 
     public AppointmentEntity(){
         super();
@@ -44,8 +41,9 @@ public class AppointmentEntity implements AppoinmentState{
     private long startTime;
     private long endTime;
 
-    @Lob
-    private AppoinmentState state;
+    private String stateName;
+
+    private transient AppointmentState state;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="HV_ID")
@@ -61,15 +59,20 @@ public class AppointmentEntity implements AppoinmentState{
     @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.LAZY)
     private Collection<MedicationEntity> medications;
 
+    public String getStateName() {
+        return this.state.toString();
+    }
+
     public Collection<MedicationEntity> getMedications() {
 		return medications;
 	}
 
-	public AppoinmentState getState() {
+	public AppointmentState getState() {
         return state;
     }
 
-    public void setState(AppoinmentState state) {
+    public void setState(AppointmentState state) {
+        this.stateName = state.toString();
         this.state = state;
     }
 

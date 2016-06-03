@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by tgdflto1 on 29/05/16.
  */
-public class CancelledState implements AppoinmentState, Serializable{
+public class CancelledState implements AppointmentState, Serializable{
     @Override
     public void doAction(AppointmentEntity context) {
 

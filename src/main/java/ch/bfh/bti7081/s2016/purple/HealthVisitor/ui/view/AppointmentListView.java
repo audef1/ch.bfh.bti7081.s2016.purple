@@ -37,6 +37,7 @@ public class AppointmentListView extends BaseView {
 	public static final String VIEW_NAME = "Terminliste";
 	public static final String WEEK = "Woche";
 	public static final String TODAY = "Heute";
+	public static final String MONTH = "Monat";
 	public static final int FIRST_HOUR = 8;
 	public static final int LAST_HOUR = 19;
 
@@ -70,38 +71,49 @@ public class AppointmentListView extends BaseView {
 		HorizontalLayout calnav = new HorizontalLayout();
 		calnav.setSpacing(true);
 		Calendar cal = new Calendar();
-		
-		Button week = new Button(WEEK);
-		Button today = new Button(TODAY);
-
-		week.addClickListener((ClickListener) event -> {
-            GregorianCalendar calendar = new GregorianCalendar();
-            WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
-            handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR),
-					calendar.get(GregorianCalendar.YEAR)));
-        });
-
-		today.addClickListener((ClickListener) event -> {
-            GregorianCalendar calendar = new GregorianCalendar();
-            BasicDateClickHandler handler = (BasicDateClickHandler) cal.
-                    getHandler(DateClickEvent.EVENT_ID);
-            handler.dateClick(new DateClickEvent(cal,calendar.getTime()));
-        });
-		
-		calnav.addComponents(week, today);
 		cal.setReadOnly(true);
 		cal.setSizeFull();
 		cal.setResponsive(true);
 		cal.setFirstVisibleHourOfDay(FIRST_HOUR);
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
-	
-	    cal.setHandler((EventClickHandler) event -> {
-            //somehow get appointment id and pass it as parameter to the navigator
-            AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
-            VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
-            getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+	    cal.setHandler(new EventClickHandler() {
+            public void eventClick(CalendarComponentEvents.EventClick event) {
+                //somehow get appointment id and pass it as parameter to the navigator
+            	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
+            	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+            	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+            }
         });
+	    
+	    // initial switch to day-view
+		GregorianCalendar g = new GregorianCalendar();
+        BasicDateClickHandler dh = (BasicDateClickHandler) cal.getHandler(DateClickEvent.EVENT_ID);
+        dh.dateClick(new DateClickEvent(cal,g.getTime()));
+		
+		Button week = new Button(WEEK);
+		Button today = new Button(TODAY);
+		Button month = new Button(MONTH);
+
+		week.addClickListener((ClickListener) event -> {
+            GregorianCalendar calendar = new GregorianCalendar();
+            WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
+            handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR), calendar.get(GregorianCalendar.YEAR)));
+        });
+
+		today.addClickListener((ClickListener) event -> {
+            GregorianCalendar calendar = new GregorianCalendar();
+            BasicDateClickHandler handler = (BasicDateClickHandler) cal.getHandler(DateClickEvent.EVENT_ID);
+            handler.dateClick(new DateClickEvent(cal,calendar.getTime()));
+        });
+		
+		month.addClickListener((ClickListener) event -> {
+			// set month view
+			cal.setStartDate(new GregorianCalendar(2016, 6, 1, 13, 00, 00).getTime());
+			cal.setEndDate(new GregorianCalendar(2016, 6, 30, 13, 00, 00).getTime());
+		});
+		
+		calnav.addComponents(month, week, today);
 	    
 		general.addComponents(calnav, cal);
 		return general;
@@ -121,5 +133,7 @@ public class AppointmentListView extends BaseView {
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+		
+	}
 }

@@ -1,13 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  * Created by tgdflto1 on 31/05/16.

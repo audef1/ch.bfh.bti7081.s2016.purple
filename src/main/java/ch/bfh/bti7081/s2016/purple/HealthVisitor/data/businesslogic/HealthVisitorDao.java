@@ -1,12 +1,10 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by tgdflto1 on 22/05/16.

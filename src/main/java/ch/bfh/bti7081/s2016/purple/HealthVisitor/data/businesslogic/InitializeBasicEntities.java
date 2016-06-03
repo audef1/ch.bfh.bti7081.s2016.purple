@@ -1,8 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

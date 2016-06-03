@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

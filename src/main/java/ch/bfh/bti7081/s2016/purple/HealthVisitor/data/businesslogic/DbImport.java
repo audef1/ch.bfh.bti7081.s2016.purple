@@ -4,23 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-
-import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.sql.Connection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import java.sql.*;
 
 /**

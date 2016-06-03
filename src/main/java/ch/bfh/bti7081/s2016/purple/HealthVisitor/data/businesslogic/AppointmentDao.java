@@ -1,11 +1,10 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
 import org.apache.logging.log4j.LogManager;
@@ -72,12 +71,12 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     		+ "AND a.client IS NOT NULL ORDER BY a.startTime, a.endTime ASC",
             AppointmentEntity.class
         );
-    	
+
     	LocalDate now = LocalDate.now();
     	ZoneOffset offset = ZoneOffset.UTC;
     	long startTime = now.atStartOfDay().toEpochSecond(offset);
     	long endTime = startTime + (24 * 60 * 60);
-    
+
     	Collection<AppointmentEntity> appointments = null;
     	try {
     		appointments = query.
@@ -90,13 +89,13 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     	}
     	return appointments;
     }
-    
+
     public AppointmentEntity getCurrentAppointment() {
     	return getCurrentAppointment(new AuthenticationService().getUser());
     }
-    
+
     public AppointmentEntity getCurrentAppointment(HealthVisitorEntity healthVisitor) {
-        
+
     	Collection<AppointmentEntity> appointments = getTodaysAppointmentsByHealthVisitor(healthVisitor);
     	if (appointments != null){
     		for(AppointmentEntity appointment : appointments){
@@ -106,7 +105,7 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
                 }
             }
     	}
-    	
+
     	logger.debug("No current appointment found");
     	return null;
     }

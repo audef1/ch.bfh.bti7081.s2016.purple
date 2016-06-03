@@ -1,6 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 
 import java.io.Serializable;
 

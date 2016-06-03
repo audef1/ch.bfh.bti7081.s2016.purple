@@ -6,13 +6,14 @@ import com.google.maps.model.GeocodingResult;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.tapio.googlemaps.client.LatLon;
 
-public class GoogleMapsComponent {
+public class GoogleMapsComponent extends GoogleMap{
 
-	public final String apikey = "AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714";
+	private static String apikey = "AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714";
 	private LatLon coordinates;
 	private String address;
 	
 	public GoogleMapsComponent(String address){
+		super(apikey, null, "german");
 		this.address = address;
 		GeoApiContext context = new GeoApiContext().setApiKey(apikey);
 		GeocodingResult[] results = null;
@@ -29,23 +30,11 @@ public class GoogleMapsComponent {
 		}
 		
 		this.coordinates = new LatLon(lat, lng);
+		this.addMarker(this.address , this.coordinates, false, null);
+		this.setSizeFull();
+		this.setMinZoom(4);
+		this.setMaxZoom(16);
+		this.setCenter(this.coordinates);
+		this.setZoom(16);
 	}
-
-	public LatLon getCoordinates() {
-		return this.coordinates;
-	}
-	
-	public GoogleMap getComponent(){
-		GoogleMap map = new GoogleMap(apikey, null, "german");
-		
-		map.addMarker(this.address , this.coordinates, false, null);
-		map.setSizeFull();
-		map.setMinZoom(4);
-		map.setMaxZoom(16);
-		map.setCenter(this.coordinates);
-		map.setZoom(16);
-		
-		return map;
-	}
-
 }

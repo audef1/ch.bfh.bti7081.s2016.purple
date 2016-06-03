@@ -1,15 +1,12 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.service;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.HealthVisitorDao;
-import com.vaadin.server.VaadinService;
-import com.vaadin.server.VaadinSession;
-import com.vaadin.server.WrappedSession;
-import com.vaadin.ui.UI;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.jws.soap.SOAPBinding;
+import com.vaadin.server.VaadinSession;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.HealthVisitorDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 
 /**
  * Created by tgdflto1 on 25/05/16.

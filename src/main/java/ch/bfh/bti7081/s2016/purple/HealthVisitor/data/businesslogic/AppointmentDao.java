@@ -1,28 +1,23 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import sun.net.www.content.text.Generic;
-
-import javax.persistence.*;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppoinmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
 /**
  * Created by tgdflto1 on 22/05/16.

@@ -2,7 +2,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.events;
 
 import com.vaadin.ui.components.calendar.event.BasicEvent;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 
 public class AppointmentEvent extends BasicEvent {
 

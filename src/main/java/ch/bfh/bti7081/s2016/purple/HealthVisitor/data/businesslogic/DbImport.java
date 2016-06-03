@@ -25,11 +25,10 @@ public abstract class DbImport {
     static final String PASS = "";
 
     public static void importFromFile(String fileName, String tableName, char delimiter, boolean deleteFirst){
-    	BufferedReader br = null;
-    	String line = "";
-    	String cvsSplitBy = ",";
-    	
-    	Connection conn = null;
+    	BufferedReader br;
+    	String line;
+
+		Connection conn = null;
     	Statement stmt = null;
     	
     	try {
@@ -43,7 +42,7 @@ public abstract class DbImport {
     		String line1 = "";
     		
     		while ((line = br.readLine()) != null) {
-    			if (line == "")
+    			if (line.isEmpty())
     				continue;
     			
     			if (delimiter != ','){

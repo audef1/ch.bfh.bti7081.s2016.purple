@@ -96,13 +96,11 @@ public class AppointmentListView extends BaseView {
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	
-	    cal.setHandler(new EventClickHandler() {
-            public void eventClick(CalendarComponentEvents.EventClick event) {
-                //somehow get appointment id and pass it as parameter to the navigator
-            	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
-            	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
-            	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
-            }
+	    cal.setHandler((EventClickHandler) event -> {
+            //somehow get appointment id and pass it as parameter to the navigator
+            AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
+            VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+            getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
         });
 	    
 		general.addComponents(calnav, cal);

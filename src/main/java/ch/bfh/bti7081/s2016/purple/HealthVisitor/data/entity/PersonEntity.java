@@ -81,9 +81,9 @@ public class PersonEntity {
     }
     
     public String getFullName(){
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if(getFirstName() != null) sb.append(getFirstName());
-        if(getLastName() != null) sb.append(" "+getLastName());
+        if(getLastName() != null) sb.append(" ").append(getLastName());
     	return sb.toString();
     }
 

@@ -60,7 +60,7 @@ public class MedicationView extends BaseView {
 			}
 //			private Collection<BeanItem<MedicationEntity>> getItems(Set<Object> itemIds) {
 			private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
-	            List<MedicationEntity> items = new ArrayList<MedicationEntity>();
+	            List<MedicationEntity> items = new ArrayList<>();
 	            for (Object id : itemIds) {
 	            	BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
                             getContainerDataSource().getItem(id);
@@ -69,15 +69,9 @@ public class MedicationView extends BaseView {
 	            return items;
 	        }
         });
-        
-        for (MedicationEntity medication: medications){
-        	if (medication.isChecked()){
-        		grid.select(medication);
-        	}
-        }
-      
+
+        medications.stream().filter(medication -> medication.isChecked()).forEach(grid::select);
         general.addComponents(grid);
-        
         return general;
     }
 

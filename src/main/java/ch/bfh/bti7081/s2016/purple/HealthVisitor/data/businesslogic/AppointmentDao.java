@@ -42,8 +42,7 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
                 createNativeQuery("SELECT * FROM APPOINTMENT LEFT JOIN PERSON AS CLIENT ON APPOINTMENT.CLIENT_ID = CLIENT.ID LEFT JOIN PERSON AS HV ON APPOINTMENT.HV_ID = HV.ID WHERE CLIENT.TYPE = 'K' AND HV.TYPE = 'H' AND APPOINTMENT.HV_ID ="+new AuthenticationService().getUser().getId(), AppointmentEntity.class);
         try{
            // query.setParameter("hv", new AuthenticationService().getUser());
-        	List<AppointmentEntity> appointments = query.getResultList();
-            return appointments;
+        	return query.getResultList();
         }catch(NoResultException e){
             logger.debug("no appointments found " + e.getMessage());
             return null;
@@ -53,6 +52,7 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     /**
      * TODO ZoneOffset
      * @param healthVisitor
+     *
      * @return
      */
     public Collection<AppointmentEntity> getTodaysAppointmentsByHealthVisitor(HealthVisitorEntity healthVisitor)

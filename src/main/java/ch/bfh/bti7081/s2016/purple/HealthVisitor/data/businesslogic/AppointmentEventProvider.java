@@ -14,11 +14,11 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 public class AppointmentEventProvider implements CalendarEventProvider{
 	
 	private List<AppointmentEntity> appointments;
-	private List<CalendarEvent> events = new ArrayList<CalendarEvent>();
+	private List<CalendarEvent> events = new ArrayList<>();
 	
 	public AppointmentEventProvider(List<AppointmentEntity> items) {
 		this.appointments = items;
-		events = new ArrayList<CalendarEvent>();
+		events = new ArrayList<>();
 		
 		for (AppointmentEntity a : appointments){
 			GregorianCalendar cal = new GregorianCalendar();

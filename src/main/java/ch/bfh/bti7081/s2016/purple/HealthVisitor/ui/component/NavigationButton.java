@@ -9,6 +9,6 @@ public class NavigationButton extends Button {
 	        super(name);
 	        this.setIcon(icon);
 	        this.setData(name);
-	        this.addClickListener(click -> {getUI().getNavigator().navigateTo(view);});
+	        this.addClickListener(click -> getUI().getNavigator().navigateTo(view));
 	    }
 }

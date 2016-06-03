@@ -25,7 +25,7 @@ public class MedicationController extends BaseController {
     
     public Collection<MedicationEntity> getMedicationForDay(){
 		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(this.getUser());
-		Collection<MedicationEntity> medications = new ArrayList<MedicationEntity>();
+		Collection<MedicationEntity> medications = new ArrayList<>();
 		for (AppointmentEntity appointment : appointments){
 			medications.addAll(appointment.getMedications());
 		}

@@ -1,8 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
@@ -45,10 +45,9 @@ public class AppointmentDetailView extends BaseView{
 
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private final AppointmentDetailController controller;
-	private  VerticalLayout general;
-
-	private ReportEntity currentReport;
 	AppointmentDao appointmentDao;
+	private  VerticalLayout general;
+	private ReportEntity currentReport;
 	private AppointmentEntity appointment;
 	
 	public AppointmentDetailView() {
@@ -71,11 +70,9 @@ public class AppointmentDetailView extends BaseView{
 		if (VaadinSession.getCurrent().getSession().getAttribute("appointment") != null){
 			this.appointment = (AppointmentEntity) VaadinSession.getCurrent().getSession().getAttribute("appointment");
 			VaadinSession.getCurrent().getSession().setAttribute("appointment", null);
-		}
-		else{
+		}else
 			this.appointment = controller.getCurrentAppointment();
 
-		};
 	
 		if(this.appointment == null){
 			general.addComponent(new Label(NO_APPOINTMENT));
@@ -131,9 +128,8 @@ public class AppointmentDetailView extends BaseView{
 			btnNewReport.setEnabled(!appointment.isPlanned());
 
 	//		Add clicklistener to button Arrival
-			buttonArrival.addClickListener(clickevent -> {
-				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
-			});
+			buttonArrival.addClickListener(clickevent -> btnArrivalClicked(buttonArrival,
+					btnNewReport, appointment, currentReport));
 
 	//		Create button to show patient details
 			Button buttonDetail = new Button(CLIENTDETAILS);

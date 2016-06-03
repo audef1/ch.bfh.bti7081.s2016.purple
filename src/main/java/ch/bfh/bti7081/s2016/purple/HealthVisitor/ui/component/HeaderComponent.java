@@ -14,24 +14,16 @@ import com.vaadin.ui.*;
  */
 public class HeaderComponent extends HorizontalLayout {
 
-    private Label pagename;
-    private NavigationButton logout;
-    private NavigationButton back;
-    private NavigationButton home;
-    private Image logo;
-    private HorizontalLayout buttons;
-    private Label loggedin;
-
 
     public HeaderComponent(BaseView view) {
 
-        logout = new NavigationButton("Logout", "Logout", FontAwesome.SIGN_OUT);
-        back = new NavigationButton("zurück", "Dashboard", FontAwesome.BACKWARD);
-        home = new NavigationButton("", "Dashboard", FontAwesome.HOME);
+        NavigationButton logout = new NavigationButton("Logout", "Logout", FontAwesome.SIGN_OUT);
+        NavigationButton back = new NavigationButton("zurück", "Dashboard", FontAwesome.BACKWARD);
+        NavigationButton home = new NavigationButton("", "Dashboard", FontAwesome.HOME);
 
-        pagename = new Label(view.getViewName());
-        logo = new Image("Logo", new ThemeResource("images/Logo_HealthVisitor.png"));
-        buttons = new HorizontalLayout();
+        Label pagename = new Label(view.getViewName());
+        Image logo = new Image("Logo", new ThemeResource("images/Logo_HealthVisitor.png"));
+        HorizontalLayout buttons = new HorizontalLayout();
         
         this.setWidth("100%");
         this.setSizeFull();
@@ -49,7 +41,7 @@ public class HeaderComponent extends HorizontalLayout {
             buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
             AuthenticationService as = new AuthenticationService();
     	    HealthVisitorEntity hv = as.getUser();
-    	    loggedin = new Label("angemeldet als: " + hv.getFullName());
+            Label loggedin = new Label("angemeldet als: " + hv.getFullName());
             buttons.addComponent(loggedin);
         }
        

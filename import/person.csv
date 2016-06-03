@@ -1,4 +1,9 @@
 ID,	TYPE,	DATEOFBIRTH,	EMAIL,	FIRSTNAME,	LASTNAME,	PASSWORD,	EMPLOYEENUMBER,	HIREDATE,	WORKINGHOURS,	RELATION,	DETAILS,	HV_ID
+1,		'H','1980-01-01','test@user.ch','Test','User','secret_2016',1,'1999-01-01',40,'Relation?',NULL,1
+2,		'H','1988-02-02','hans@wurst.ch','Hans','Wurst','secret_2016',2,'2002-10-01',29,'Relation?',NULL,2
+3,		'H','1977-06-08','heidi@blume.ch','Heidi','Blume','secret_2016',3,'2005-01-01',40,'Relation?',NULL,3
+4,		'H','1960-06-22','lisa@vogel.ch','Lisa','Vogel','secret_2016',4,'2001-05-01',32,'Relation?',NULL,4
+5,		'H','1950-11-01','hansi@fausi.ch','Hansi','Fausi','secret_2016',5,'2010-06-01',40,'Relation?',NULL,5
 0050	, 'K',	'1964-01-29',	'Roxanne@Neugebauer.ch',	'Roxanne',	'Neugebauer',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	1
 0051	, 'K',	'1946-08-25',	'Joan@Ogi.ch',	'Joan',	'Ogi',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
 0052	, 'K',	'1950-07-16',	'Gwenda@Ricchiuto.ch',	'Gwenda',	'Ricchiuto',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3

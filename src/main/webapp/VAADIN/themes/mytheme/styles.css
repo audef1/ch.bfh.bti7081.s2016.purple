@@ -12939,12 +12939,7 @@ div.v-layout.v-horizontal.v-widget {
 	font-weight: bold;
 }
 
-.mytheme .dashboardbutton .v-button-wrap {
-	display: inline-block;
-}
-
-.mytheme .dashboardbutton .v-icon {
-	display: block;
+.mytheme .v-button-icon-align-top .v-icon {
 	font-size: 40px;
 }
 

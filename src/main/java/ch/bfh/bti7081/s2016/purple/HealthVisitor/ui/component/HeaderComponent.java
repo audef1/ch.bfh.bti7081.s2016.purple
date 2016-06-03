@@ -21,6 +21,9 @@ public class HeaderComponent extends HorizontalLayout {
         NavigationButton back = new NavigationButton("zurück", "Dashboard", FontAwesome.BACKWARD);
         NavigationButton home = new NavigationButton("", "Dashboard", FontAwesome.HOME);
 
+        home.setStyleName("v-button-primary");
+        logout.setStyleName("v-button-danger");
+        
         Label pagename = new Label(view.getViewName());
         Image logo = new Image("Logo", new ThemeResource("images/Logo_HealthVisitor.png"));
         HorizontalLayout buttons = new HorizontalLayout();
@@ -35,6 +38,7 @@ public class HeaderComponent extends HorizontalLayout {
         buttons.setSpacing(true);
 
         if (new AuthenticationService().isAuthenticated()){
+        //if (view.getViewName().equals("Login") || view.getViewName().equals("Logout")){
         	buttons.addComponent(home);
             buttons.addComponent(back);
             buttons.addComponent(logout);

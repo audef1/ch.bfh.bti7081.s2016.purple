@@ -1,5 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.service;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.HealthVisitorDao;
+import com.vaadin.server.VaadinSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

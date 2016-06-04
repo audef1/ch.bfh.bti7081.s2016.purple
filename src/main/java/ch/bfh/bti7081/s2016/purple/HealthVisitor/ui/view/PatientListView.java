@@ -1,6 +1,5 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-
 import java.util.Set;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
@@ -26,79 +25,67 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListContro
  * Created by tgdflto1 on 20/05/16.
  */
 public class PatientListView extends BaseView {
-    public static final String NAME ="PatientList";
-    public static final String VIEW_NAME ="Patientenliste";
+	public static final String NAME = "PatientList";
+	public static final String VIEW_NAME = "Patientenliste";
 
-    private static final Logger logger = LogManager.getLogger(PatientListView.class);
-    public static final String BACK = "Zurück";
+	private static final Logger logger = LogManager.getLogger(PatientListView.class);
+	public static final String BACK = "Zurück";
 
+	public PatientListView() {
+		super();
+		this.controller = new PatientListController(this);
+		logger.debug("arrived on appointment list view");
+		layout = new StandardLayout(this);
+	}
 
-    public PatientListView(){
-        super();
-        this.controller = new PatientListController(this);
-        logger.debug("arrived on appointment list view");
-        layout = new StandardLayout(this);
-    }
+	@Override
+	public Layout initView() {
+		VerticalLayout general = new VerticalLayout();
+		general.setSpacing(true);
+		general.setMargin(true);
 
-    @Override
-    public Layout initView() {
-        VerticalLayout general = new VerticalLayout();
-        general.setSpacing(true);
-        general.setMargin(true);
+		HorizontalLayout topLeft = new HorizontalLayout();
 
-        HorizontalLayout topLeft = new HorizontalLayout();
+		Button btBack = new Button(BACK);
+		btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
+		btBack.addClickListener((clickEvent -> getUI().getNavigator().navigateTo(DashboardView.NAME)));
 
-        Button btBack = new Button(BACK);
-        btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-        btBack.addClickListener((clickEvent ->
-                getUI().getNavigator().navigateTo(DashboardView.NAME)));
+		topLeft.addComponent(btBack);
 
-        topLeft.addComponent(btBack);
+		HorizontalLayout title = new HorizontalLayout();
+		Label listTitle = new Label("Patienten von ");
+		listTitle.setStyleName("h1");
 
-        HorizontalLayout title = new HorizontalLayout();
-        Label listTitle = new Label("Patienten von ");
-        listTitle.setStyleName("h1");
+		title.addComponent(listTitle);
 
-        title.addComponent(listTitle);
-        
-        HealthVisitorEntity user = controller.getUser();
-        Set<ClientEntity> clients = user.getClients();
-		final BeanItemContainer<ClientEntity> container =
-				new BeanItemContainer<>(ClientEntity.class, clients);
-		
+		HealthVisitorEntity user = controller.getUser();
+		Set<ClientEntity> clients = user.getClients();
+		final BeanItemContainer<ClientEntity> container = new BeanItemContainer<>(ClientEntity.class, clients);
+
 		container.removeContainerProperty("details");
 		container.removeContainerProperty("id");
 		container.removeContainerProperty("password");
 		container.removeContainerProperty("responsibleHealthVisitor");
 		container.removeContainerProperty("fullName");
-		
+
 		Grid grid = new Grid(container);
 		grid.setSizeFull();
-		grid.setColumnOrder("lastName", "firstName", "email"); 
-//		grid.addColumn(container);
-//		grid.setColumnOrder(container.getContainerProperty(ClientEntity.class, "fullName"));
+		grid.setColumnOrder("lastName", "firstName", "email");
 		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());
-		
-		
-		
-		//Grid list = new Grid();
-        //list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
 
-        general.addComponents(topLeft, title, grid);
-        grid.addSelectionListener((clickEvent ->
-                getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
+		general.addComponents(topLeft, title, grid);
+		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
 
+		return general;
+	}
 
-        return general;
-    }
+	@Override
+	public String getViewName() {
+		return VIEW_NAME;
+	}
 
-    @Override
-    public String getViewName() {
-        return VIEW_NAME;
-    }
-
-    @Override
-    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-        //TODO set a focus
-    }
+	@Override
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+		// TODO set a focus
+	}
 }

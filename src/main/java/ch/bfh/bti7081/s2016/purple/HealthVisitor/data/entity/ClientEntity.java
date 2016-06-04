@@ -47,7 +47,7 @@ public class ClientEntity extends PersonEntity {
     public void setDetails(String details) {
         this.details = details;
     }
-
+    
     /**
     public Collection<ContactEntity> getContacts() {
         return contacts;

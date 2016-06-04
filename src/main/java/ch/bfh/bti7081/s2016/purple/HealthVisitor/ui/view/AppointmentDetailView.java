@@ -147,6 +147,7 @@ public class AppointmentDetailView extends BaseView{
 			saveClientDetails.setEnabled(false);
 			
 			TextArea description = new TextArea();
+			description.setSizeFull();
 			description.setCaption(CLIENTDESCRIPTION);
 			description.setValue(appointment.getClient().getDetails());
 			

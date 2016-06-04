@@ -13,9 +13,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.tapio.googlemaps.GoogleMap;
-import com.vaadin.tapio.googlemaps.client.LatLon;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -64,13 +62,12 @@ public class AppointmentDetailView extends BaseView{
 
 	@Override
 	public Layout initView() {
-		//appointmentDao = AppointmentDao.getInstance();
 		String strReportButtonName;
 		String strArrivalButtonName = ARRIVED;
 		general = new VerticalLayout();
-		general.setMargin(new MarginInfo(false, false, true, true));
+		general.setMargin(true);
 		general.setSpacing(true);
-		
+
 		//get appointment from session (calendarview)
 		if (VaadinSession.getCurrent().getSession().getAttribute("appointment") != null){
 			this.appointment = (AppointmentEntity) VaadinSession.getCurrent().getSession().getAttribute("appointment");
@@ -82,21 +79,68 @@ public class AppointmentDetailView extends BaseView{
 		if(this.appointment == null){
 			general.addComponent(new Label(NO_APPOINTMENT));
 		}else{
-			SimpleDateFormat dateFormat = new SimpleDateFormat();
-			dateFormat.applyPattern("HH:mm");
-
-			Label lblHeader = new Label(appointment.getDate() +", " + dateFormat.format(appointment.getStartTime()) +
-					"-"+dateFormat.format(appointment.getEndTime())+" - "+appointment.getClient().getFullName());
-			lblHeader.setStyleName("h1");
 			
-			currentReport = appointment.getReport();
+			// two column layout with topnav
+			HorizontalLayout topnav = new HorizontalLayout();
+			topnav.setDefaultComponentAlignment(Alignment.MIDDLE_RIGHT);
+			general.addComponent(topnav);
 			
-			if (currentReport != null && currentReport.getStart() > 0) strArrivalButtonName = CONFIRM_END;
+			GridLayout top = new GridLayout(2,1);
+			top.setWidth("100%");
+			top.setColumnExpandRatio(0, 0.5f);
+			top.setColumnExpandRatio(1, 0.5f);
+			general.addComponent(top);
+			
+			GridLayout bottom = new GridLayout(2,1);
+			bottom.setWidth("100%");
+			bottom.setColumnExpandRatio(0, 0.5f);
+			bottom.setColumnExpandRatio(1, 0.5f);
+			general.addComponent(bottom);
+		
+		
+			// topnav
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
-
-			// Google-Maps-Implementation
+			
+			topnav.addComponent(buttonArrival);	
+			
+			// infopanel (top left)
+			Panel infopanel = new Panel("Termininformationen");
+			infopanel.setSizeFull();
+			VerticalLayout infopanelContent = new VerticalLayout();
+			infopanelContent.addComponent(new Label(appointment.getDate()));
+		
+			SimpleDateFormat dateFormat = new SimpleDateFormat();
+			dateFormat.applyPattern("HH:mm");
+			infopanelContent.addComponent(new Label(dateFormat.format(appointment.getStartTime()) + " - " + dateFormat.format(appointment.getEndTime())));
+			
+			infopanel.setContent(infopanelContent);
+			VerticalLayout topleft = new VerticalLayout();
+			topleft.setSpacing(true);
 			GoogleMap map = new GoogleMapsComponent(appointment.getAddress() +" "+ appointment.getPlace());
+			
+			topleft.addComponent(infopanel);
+			topleft.addComponent(map);
+			
+			top.addComponent(topleft, 0, 0);
+			
+			
+			// user information (top right)
+			
+			
+			// checklist (bottom left)
+			
+			
+			// reporting (bottom right)
+			
+			
+
+			currentReport = appointment.getReport();
+			
+			if (currentReport != null && currentReport.getStart() > 0)
+				strArrivalButtonName = CONFIRM_END;
+			
+
 
 			// Create Checklist
 			Grid checklist = new Grid();
@@ -119,20 +163,20 @@ public class AppointmentDetailView extends BaseView{
 			}
 
 
-	//		Create button to show the form of the new report
+			// Create button to show the form of the new report
 			Button btnNewReport = new Button(strReportButtonName);
 			btnNewReport.addClickListener(clickevent -> new ReportComponent(appointment, currentReport, controller));
 			btnNewReport.setEnabled(!appointment.isPlanned());
 
-	//		Add clicklistener to button Arrival
+			// Add clicklistener to button Arrival
 			buttonArrival.addClickListener(clickevent -> btnArrivalClicked(buttonArrival,
 					btnNewReport, appointment, currentReport));
 
-	//		Create button to show patient details
+			// Create button to show patient details
 			Button buttonDetail = new Button(CLIENTDETAILS);
-	//		TODO: Show Patient data
+			// TODO: Show Patient data
 
-	//		Create Column Info and emergency-contact
+			// Create Column Info and emergency-contact
 			Label lblBeschriebTitle = new Label(CLIENTDESCRIPTION);
 			lblBeschriebTitle.setStyleName("h2");
 			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
@@ -150,26 +194,14 @@ public class AppointmentDetailView extends BaseView{
 			Button btnEmergencyContact = new Button(ERMERGENCY_CONTACTS);
 			VerticalLayout patientDetails = new VerticalLayout(description, saveClientDetails);
 
-	//		TODO: EmerencyContactView
+			// TODO: EmerencyContactView
 
-			// The Layout for title and arrival button
-			GridLayout top = new GridLayout(2, 2);
-			top.setColumnExpandRatio(0, 10);
-			top.setColumnExpandRatio(1, 0);
-			top.setSizeFull();
-			top.addComponent(lblHeader, 0, 0);
-			top.setComponentAlignment(lblHeader, Alignment.MIDDLE_LEFT);
-			top.addComponent(buttonArrival, 1, 0);
-			top.setComponentAlignment(buttonArrival, Alignment.MIDDLE_RIGHT);
-			top.setMargin(new MarginInfo(true, true, false, false));
-
-	//		Set the data-Layout
+			// Set the data-Layout
 			GridLayout data = new GridLayout(3, 5);
 			data.setSpacing(true);
 			data.setMargin(false);
 			data.setSizeFull();
 
-			data.addComponent(map, 0, 0, 0, 2);
 			data.addComponent(checklist, 0, 3, 0, 4);
 			data.addComponent(lastReport, 1, 0);
 			data.setComponentAlignment(lastReport, Alignment.TOP_LEFT);
@@ -186,7 +218,6 @@ public class AppointmentDetailView extends BaseView{
 			data.addComponent(btnEmergencyContact, 2, 4);
 			data.setComponentAlignment(btnEmergencyContact, Alignment.TOP_LEFT);
 
-			general.addComponent(top);
 			general.addComponent(data);
 		}
 		return general;

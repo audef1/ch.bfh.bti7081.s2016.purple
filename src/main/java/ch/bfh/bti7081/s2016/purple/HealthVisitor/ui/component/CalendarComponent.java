@@ -26,6 +26,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 public class CalendarComponent extends VerticalLayout {
 
@@ -62,6 +63,8 @@ public class CalendarComponent extends VerticalLayout {
                 //somehow get appointment id and pass it as parameter to the navigator
             	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+            	BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
+            	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getViewName());
             	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
             }
         });

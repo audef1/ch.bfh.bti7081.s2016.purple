@@ -6,6 +6,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
@@ -18,7 +19,6 @@ public class HeaderComponent extends HorizontalLayout {
     public HeaderComponent(BaseView view) {
 
         NavigationButton logout = new NavigationButton("Logout", "Logout", FontAwesome.SIGN_OUT);
-        NavigationButton back = new NavigationButton("zurück", "Dashboard", FontAwesome.BACKWARD);
         NavigationButton home = new NavigationButton("", "Dashboard", FontAwesome.HOME);
 
         home.setStyleName("v-button-primary");
@@ -39,8 +39,17 @@ public class HeaderComponent extends HorizontalLayout {
 
         if (new AuthenticationService().isAuthenticated()){
         //if (view.getViewName().equals("Login") || view.getViewName().equals("Logout")){
-        	buttons.addComponent(home);
-            buttons.addComponent(back);
+        	
+        	if (!view.getViewName().equals("Dashboard")){
+        		buttons.addComponent(home);
+        	}
+        	
+        	if (null !=  VaadinSession.getCurrent().getSession().getAttribute("oldview")){
+        		String oldview = (String) VaadinSession.getCurrent().getSession().getAttribute("oldview");
+                NavigationButton back = new NavigationButton("zurück", oldview, FontAwesome.BACKWARD);
+        		buttons.addComponent(back);
+        	}
+        	
             buttons.addComponent(logout);
             buttons.setComponentAlignment(logout, Alignment.MIDDLE_LEFT);
             AuthenticationService as = new AuthenticationService();

@@ -86,12 +86,14 @@ public class AppointmentDetailView extends BaseView{
 			general.addComponent(topnav);
 			
 			GridLayout top = new GridLayout(2,1);
+			top.setSpacing(true);
 			top.setWidth("100%");
 			top.setColumnExpandRatio(0, 0.5f);
 			top.setColumnExpandRatio(1, 0.5f);
 			general.addComponent(top);
 			
 			GridLayout bottom = new GridLayout(2,1);
+			bottom.setSpacing(true);
 			bottom.setWidth("100%");
 			bottom.setColumnExpandRatio(0, 0.5f);
 			bottom.setColumnExpandRatio(1, 0.5f);
@@ -101,15 +103,17 @@ public class AppointmentDetailView extends BaseView{
 			// topnav
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
-			
+	
 			topnav.addComponent(buttonArrival);	
 			
 			// infopanel (top left)
 			Panel infopanel = new Panel("Termininformationen");
 			infopanel.setSizeFull();
 			VerticalLayout infopanelContent = new VerticalLayout();
+			infopanelContent.setMargin(true);
+			
 			infopanelContent.addComponent(new Label(appointment.getDate()));
-		
+			
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
 			dateFormat.applyPattern("HH:mm");
 			infopanelContent.addComponent(new Label(dateFormat.format(appointment.getStartTime()) + " - " + dateFormat.format(appointment.getEndTime())));
@@ -126,7 +130,44 @@ public class AppointmentDetailView extends BaseView{
 			
 			
 			// user information (top right)
+			Panel patientpanel = new Panel("Patienteninformationen");
+			infopanel.setSizeFull();
+			VerticalLayout patientpanelContent = new VerticalLayout();
+			patientpanelContent.setSpacing(true);
+			patientpanelContent.setMargin(true);
 			
+			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
+			saveClientDetails.setEnabled(false);
+			
+			TextArea description = new TextArea();
+			description.setCaption(CLIENTDESCRIPTION);
+			description.setValue(appointment.getClient().getDetails());
+			description.addTextChangeListener(click -> {
+				saveClientDetails.setCaption(SAVE);
+				saveClientDetails.setEnabled(true);
+			});
+			
+			patientpanelContent.addComponent(new Label(appointment.getClient().getFullName()));
+			patientpanelContent.addComponent(description);
+			patientpanelContent.addComponent(saveClientDetails);
+			
+			patientpanel.setContent(patientpanelContent);
+			
+			VerticalLayout topright = new VerticalLayout();
+			topright.setSpacing(true);
+			
+			HorizontalLayout patientbuttons = new HorizontalLayout();
+			patientbuttons.setSpacing(true);
+			
+			Button buttonDetail = new Button(CLIENTDETAILS);
+			Button buttonEmergencyContact = new Button(ERMERGENCY_CONTACTS);
+			patientbuttons.addComponent(buttonDetail);
+			patientbuttons.addComponent(buttonEmergencyContact);
+				
+			topright.addComponent(patientpanel);
+			topright.addComponent(patientbuttons);
+
+			top.addComponent(topright, 1, 0);
 			
 			// checklist (bottom left)
 			
@@ -172,29 +213,11 @@ public class AppointmentDetailView extends BaseView{
 			buttonArrival.addClickListener(clickevent -> btnArrivalClicked(buttonArrival,
 					btnNewReport, appointment, currentReport));
 
-			// Create button to show patient details
-			Button buttonDetail = new Button(CLIENTDETAILS);
+	
 			// TODO: Show Patient data
-
-			// Create Column Info and emergency-contact
-			Label lblBeschriebTitle = new Label(CLIENTDESCRIPTION);
-			lblBeschriebTitle.setStyleName("h2");
-			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
-			saveClientDetails.setEnabled(false);
-
-	//		Show short description about the patient
-			TextArea description = new TextArea();
-			description.setValue(appointment.getClient().getDetails());
-			description.addTextChangeListener(click -> {
-				saveClientDetails.setCaption(SAVE);
-				saveClientDetails.setEnabled(true);
-			});
-
-			saveClientDetails.addClickListener(click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
-			Button btnEmergencyContact = new Button(ERMERGENCY_CONTACTS);
-			VerticalLayout patientDetails = new VerticalLayout(description, saveClientDetails);
-
 			// TODO: EmerencyContactView
+			
+			saveClientDetails.addClickListener(click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
 
 			// Set the data-Layout
 			GridLayout data = new GridLayout(3, 5);
@@ -209,15 +232,6 @@ public class AppointmentDetailView extends BaseView{
 			data.setComponentAlignment(reportContainer, Alignment.TOP_LEFT);
 			data.addComponent(btnNewReport, 1, 3);
 			data.setComponentAlignment(btnNewReport, Alignment.TOP_LEFT);
-			data.addComponent(buttonDetail, 1, 4);
-			data.setComponentAlignment(buttonDetail, Alignment.TOP_LEFT);
-			data.addComponent(lblBeschriebTitle, 2, 0);
-			data.setComponentAlignment(lblBeschriebTitle, Alignment.TOP_LEFT);
-			data.addComponent(patientDetails, 2, 1, 2, 3);
-			data.setComponentAlignment(patientDetails, Alignment.TOP_LEFT);
-			data.addComponent(btnEmergencyContact, 2, 4);
-			data.setComponentAlignment(btnEmergencyContact, Alignment.TOP_LEFT);
-
 			general.addComponent(data);
 		}
 		return general;

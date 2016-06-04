@@ -6,11 +6,15 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedSt
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.DummyTask;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.tapio.googlemaps.GoogleMap;
@@ -19,6 +23,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class AppointmentDetailView extends BaseView{
 	public static final String NAME = "AppointmentDetail";
@@ -169,9 +175,21 @@ public class AppointmentDetailView extends BaseView{
 			
 			// checklist (bottom left)
 			VerticalLayout bottomleft = new VerticalLayout();
-			Grid checklist = new Grid();
+			
+			Collection<DummyTask> tasks = new ArrayList<DummyTask>();
+			tasks.add(new DummyTask("Task1", "sauber machen", true));
+			tasks.add(new DummyTask("Task2", "plfege", false));
+			tasks.add(new DummyTask("Task3", "kochen", false));
+			
+			BeanItemContainer<DummyTask> container = new BeanItemContainer<DummyTask>(DummyTask.class, tasks);
+			
+			Grid checklist = new Grid(container);
+			
+			checklist.setColumnOrder("checked", "name", "description");
 			checklist.setSizeFull();
-			checklist.setColumns(TASKLIST);
+			checklist.setHeightByRows(tasks.size());
+			checklist.setColumns("checked", "name", "description");
+			checklist.setCaption(TASKLIST);
 			
 			bottomleft.addComponent(checklist);
 			bottom.addComponent(bottomleft, 0, 0);

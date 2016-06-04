@@ -49,6 +49,9 @@ public class AppointmentEntity implements AppointmentState {
     @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.LAZY)
     private Collection<MedicationEntity> medications;
 
+    @OneToMany(mappedBy="appointment", targetEntity=TaskEntity.class, fetch=FetchType.LAZY)
+    private Collection<TaskEntity> tasks;
+    
     public String getStateName() {
         return this.state.toString();
     }
@@ -57,6 +60,10 @@ public class AppointmentEntity implements AppointmentState {
 		return medications;
 	}
 
+    public Collection<TaskEntity> getTasks() {
+		return tasks;
+	}
+    
 	public AppointmentState getState() {
         return state;
     }

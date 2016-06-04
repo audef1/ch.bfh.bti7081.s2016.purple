@@ -14,11 +14,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 
+import com.vaadin.client.widgets.Grid.SelectionMode;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.ui.*;
+import com.vaadin.ui.Grid.MultiSelectionModel;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -185,12 +188,16 @@ public class AppointmentDetailView extends BaseView{
 			BeanItemContainer<DummyTask> container = new BeanItemContainer<DummyTask>(DummyTask.class, tasks);
 			
 			Grid checklist = new Grid(container);
-			
-			checklist.setColumnOrder("checked", "name", "description");
+			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
+			checklist.setColumnOrder("name", "description");
 			checklist.setSizeFull();
 			checklist.setHeightByRows(tasks.size());
-			checklist.setColumns("checked", "name", "description");
+			checklist.setColumns("name", "description");
 			checklist.setCaption(TASKLIST);
+			
+			// Pre-select some items TODO: add functionality
+			MultiSelectionModel selection = (MultiSelectionModel) checklist.getSelectionModel();
+			selection.setSelected(checklist.getContainerDataSource().getItemIds(0, 0));
 			
 			bottomleft.addComponent(checklist);
 			bottom.addComponent(bottomleft, 0, 0);

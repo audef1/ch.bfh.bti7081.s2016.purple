@@ -65,8 +65,22 @@ public class PatientListView extends BaseView {
         Set<ClientEntity> clients = user.getClients();
 		final BeanItemContainer<ClientEntity> container =
 				new BeanItemContainer<>(ClientEntity.class, clients);
-
+		
+		container.removeContainerProperty("details");
+		container.removeContainerProperty("id");
+		container.removeContainerProperty("password");
+		container.removeContainerProperty("responsibleHealthVisitor");
+		container.removeContainerProperty("fullName");
+		
 		Grid grid = new Grid(container);
+		grid.setSizeFull();
+		grid.setColumnOrder("lastName", "firstName", "email"); 
+//		grid.addColumn(container);
+//		grid.setColumnOrder(container.getContainerProperty(ClientEntity.class, "fullName"));
+		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());
+		
+		
+		
 		//Grid list = new Grid();
         //list.setColumns("Patient", "Adresse", "Ort", "Beginn", "Ende");
 

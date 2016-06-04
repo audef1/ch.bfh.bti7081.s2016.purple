@@ -8,14 +8,15 @@ import org.apache.logging.log4j.Logger;
  * Created by tgdflto1 on 31/05/16.
  */
 public class ReportDao extends GenericDao<ReportEntity, Integer> {
-    private static Logger logger = LogManager.getLogger(HealthVisitorDao.class);
+    @SuppressWarnings("unused")
+	private static Logger logger = LogManager.getLogger(HealthVisitorDao.class);
     private static ReportDao instance;
     
     public static ReportDao getInstance(){
     	if(instance == null) instance = new ReportDao();
     	return instance;
     }
-    private ReportDao(){
+    public ReportDao(){
     	
     }
     

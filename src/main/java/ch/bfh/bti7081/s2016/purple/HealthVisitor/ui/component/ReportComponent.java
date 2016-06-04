@@ -19,7 +19,12 @@ import java.util.Locale;
  * Created by tgdflto1 on 01/06/16.
  */
 public class ReportComponent extends CustomComponent {
-    private final static Logger logger = LogManager.getLogger(ReportComponent.class);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5373128523929612097L;
+	@SuppressWarnings("unused")
+	private final static Logger logger = LogManager.getLogger(ReportComponent.class);
     private ReportEntity report;
     private AppointmentEntity appointment;
     private AppointmentDetailController controller;

@@ -103,6 +103,7 @@ public class AppointmentDetailView extends BaseView{
 			// topnav
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
+			buttonArrival.setStyleName("v-button-success");
 	
 			topnav.addComponent(buttonArrival);	
 			
@@ -142,10 +143,6 @@ public class AppointmentDetailView extends BaseView{
 			TextArea description = new TextArea();
 			description.setCaption(CLIENTDESCRIPTION);
 			description.setValue(appointment.getClient().getDetails());
-			description.addTextChangeListener(click -> {
-				saveClientDetails.setCaption(SAVE);
-				saveClientDetails.setEnabled(true);
-			});
 			
 			patientpanelContent.addComponent(new Label(appointment.getClient().getFullName()));
 			patientpanelContent.addComponent(description);
@@ -169,70 +166,67 @@ public class AppointmentDetailView extends BaseView{
 
 			top.addComponent(topright, 1, 0);
 			
-			// checklist (bottom left)
 			
+			// checklist (bottom left)
+			VerticalLayout bottomleft = new VerticalLayout();
+			Grid checklist = new Grid();
+			checklist.setSizeFull();
+			checklist.setColumns(TASKLIST);
+			
+			bottomleft.addComponent(checklist);
+			bottom.addComponent(bottomleft, 0, 0);
+
 			
 			// reporting (bottom right)
-			
-			
-
 			currentReport = appointment.getReport();
-			
-			if (currentReport != null && currentReport.getStart() > 0)
+			if (currentReport != null && currentReport.getStart() > 0){
 				strArrivalButtonName = CONFIRM_END;
+			}
 			
-
-
-			// Create Checklist
-			Grid checklist = new Grid();
-			checklist.setColumns(TASKLIST);
-
-			// Create Column last report
-			VerticalLayout reportContainer = new VerticalLayout();
-			reportContainer.setWidth("300px");
+			Panel reportpanel = new Panel(LAST_REPORT);
+			reportpanel.setSizeFull();
+			VerticalLayout reportpanelContent = new VerticalLayout();
+			reportpanelContent.setSpacing(true);
+			reportpanelContent.setMargin(true);
 			
-			Label lastReport = new Label(LAST_REPORT);
-			lastReport.setStyleName("h2");
-			reportContainer.addComponent(lastReport);
-
-			if(currentReport != null){
-				reportContainer.addComponent(new Label(currentReport.getDescription()));
+			if (currentReport != null) {
+				reportpanelContent.addComponent(new Label(currentReport.getDescription()));
 				strReportButtonName = EDIT_REPORT;
-			}else{
-				reportContainer.addComponent(new Label(NO_REPORT));
+			} else {
+				reportpanelContent.addComponent(new Label(NO_REPORT));
 				strReportButtonName = CREATE_REPORT;
 			}
-
-
-			// Create button to show the form of the new report
+			
 			Button btnNewReport = new Button(strReportButtonName);
-			btnNewReport.addClickListener(clickevent -> new ReportComponent(appointment, currentReport, controller));
 			btnNewReport.setEnabled(!appointment.isPlanned());
 
-			// Add clicklistener to button Arrival
-			buttonArrival.addClickListener(clickevent -> btnArrivalClicked(buttonArrival,
-					btnNewReport, appointment, currentReport));
+			reportpanel.setContent(reportpanelContent);
+			
+			VerticalLayout bottomright = new VerticalLayout();
+			bottomright.setSpacing(true);
+			bottomright.addComponent(reportpanel);
 
-	
-			// TODO: Show Patient data
-			// TODO: EmerencyContactView
+			bottom.addComponent(bottomright, 1, 0);
+
+			
+			// Listeners
+			buttonArrival.addClickListener(clickevent -> btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport));
 			
 			saveClientDetails.addClickListener(click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
 
-			// Set the data-Layout
-			GridLayout data = new GridLayout(3, 5);
-			data.setSpacing(true);
-			data.setMargin(false);
-			data.setSizeFull();
-
-			data.addComponent(checklist, 0, 3, 0, 4);
-			data.addComponent(lastReport, 1, 0);
-			data.setComponentAlignment(lastReport, Alignment.TOP_LEFT);
-			data.addComponent(reportContainer, 1, 1, 1, 2);
-			data.setComponentAlignment(reportContainer, Alignment.TOP_LEFT);
-			data.addComponent(btnNewReport, 1, 3);
-			data.setComponentAlignment(btnNewReport, Alignment.TOP_LEFT);
-			general.addComponent(data);
+			description.addTextChangeListener(click -> {
+				saveClientDetails.setCaption(SAVE);
+				saveClientDetails.setEnabled(true);
+			});
+			
+			btnNewReport.addClickListener(clickevent -> new ReportComponent(appointment, currentReport, controller));
+			
+			// TODO: Show Patient data
+			//buttonDetail.addClickListener(click -> { do some stuff here... });
+			
+			// TODO: EmerencyContactView
+			//buttonEmergencyContact.addClickListener(click -> { do some stuff here... });
+			
 		}
 		return general;
 	}

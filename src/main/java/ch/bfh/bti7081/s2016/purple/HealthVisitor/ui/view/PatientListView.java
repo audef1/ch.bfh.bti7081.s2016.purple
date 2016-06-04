@@ -53,7 +53,7 @@ public class PatientListView extends BaseView {
 		topLeft.addComponent(btBack);
 
 		HorizontalLayout title = new HorizontalLayout();
-		Label listTitle = new Label("Patienten von ");
+		Label listTitle = new Label("Patienten von " + controller.getUser().getFullName());
 		listTitle.setStyleName("h1");
 
 		title.addComponent(listTitle);
@@ -71,7 +71,13 @@ public class PatientListView extends BaseView {
 		Grid grid = new Grid(container);
 		grid.setSizeFull();
 		grid.setColumnOrder("lastName", "firstName", "email");
-		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());
+		grid.sort("lastName");
+		grid.getColumn("lastName").setHeaderCaption("Nachname");
+		grid.getColumn("firstName").setHeaderCaption("Vorname");
+		grid.getColumn("email").setHeaderCaption("E-Mail Adresse");
+		
+//		Shows all available Property-IDs for the Client Entity. Only for selection of removements.
+//		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());
 
 		general.addComponents(topLeft, title, grid);
 		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));

@@ -22,6 +22,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.EmergencyView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LogoutView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.PatientListView;
 
 /**
@@ -53,6 +54,7 @@ public class HealthVisitorUI extends UI {
 		getNavigator().addView(AppointmentListView.NAME, AppointmentListView.class);
 		getNavigator().addView(AppointmentDetailView.NAME, AppointmentDetailView.class);
 		getNavigator().addView(PatientListView.NAME, PatientListView.class);
+		getNavigator().addView(PatientDetailView.NAME, PatientDetailView.class);
 		getNavigator().addView(MedicationView.NAME, MedicationView.class);
 		getNavigator().addView(EmergencyView.NAME, EmergencyView.class);
 		// register all views in the navigator --> acts like a dispatcher

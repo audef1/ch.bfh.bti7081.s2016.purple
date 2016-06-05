@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.HorizontalLayout;
@@ -29,7 +30,6 @@ public class PatientListView extends BaseView {
 	public static final String VIEW_NAME = "Patientenliste";
 
 	private static final Logger logger = LogManager.getLogger(PatientListView.class);
-	public static final String BACK = "Zurück";
 
 	public PatientListView() {
 		super();
@@ -44,20 +44,9 @@ public class PatientListView extends BaseView {
 		general.setSpacing(true);
 		general.setMargin(true);
 
-		HorizontalLayout topLeft = new HorizontalLayout();
-
-		Button btBack = new Button(BACK);
-		btBack.setClickShortcut(ShortcutAction.KeyCode.ENTER);
-		btBack.addClickListener((clickEvent -> getUI().getNavigator().navigateTo(DashboardView.NAME)));
-
-		topLeft.addComponent(btBack);
-
-		HorizontalLayout title = new HorizontalLayout();
 		Label listTitle = new Label("Patienten von " + controller.getUser().getFullName());
 		listTitle.setStyleName("h1");
-
-		title.addComponent(listTitle);
-
+		
 		HealthVisitorEntity user = controller.getUser();
 		Set<ClientEntity> clients = user.getClients();
 		final BeanItemContainer<ClientEntity> container = new BeanItemContainer<>(ClientEntity.class, clients);
@@ -79,8 +68,13 @@ public class PatientListView extends BaseView {
 //		Shows all available Property-IDs for the Client Entity. Only for selection of removements.
 //		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());
 
-		general.addComponents(topLeft, title, grid);
-		grid.addSelectionListener((clickEvent -> getUI().getNavigator().navigateTo(AppointmentDetailView.NAME)));
+		general.addComponents(listTitle, grid);
+		
+		grid.addSelectionListener((clickEvent -> {
+			BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
+			VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
+			getUI().getNavigator().navigateTo(PatientDetailView.NAME);
+		}));
 
 		return general;
 	}

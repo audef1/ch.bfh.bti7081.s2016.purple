@@ -7,9 +7,8 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.vaadin.client.widget.escalator.Row;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.navigator.ViewChangeListener;	
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -29,6 +28,7 @@ import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.ClosedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
@@ -100,6 +100,9 @@ public class AppointmentDetailView extends BaseView {
 			general.addComponent(new Label(NO_APPOINTMENT));
 		} else {
 
+			if (appointment.getState() == null)
+				appointment.doAction(appointment);
+					
 			// two column layout with topnav
 			HorizontalLayout topnav = new HorizontalLayout();
 			topnav.setSizeFull();
@@ -263,9 +266,12 @@ public class AppointmentDetailView extends BaseView {
 			AppointmentState state = appointment.getState();
 			btnNewReport.setEnabled(!(state instanceof FinishedState));
 
+			Label lblState = new Label(appointment.getStateName());
+			reportpanelContent.addComponent(lblState);
+			
 			reportpanelContent.addComponent(btnNewReport);
 			reportpanel.setContent(reportpanelContent);
-
+			
 			VerticalLayout bottomright = new VerticalLayout();
 			bottomright.setSpacing(true);
 			bottomright.addComponent(reportpanel);
@@ -278,7 +284,7 @@ public class AppointmentDetailView extends BaseView {
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
 				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
-				buttonArrival.setCaption(CLOSE);
+//				buttonArrival.setCaption(CLOSE);
 			});
 
 			saveClientDetails.addClickListener(
@@ -327,16 +333,18 @@ public class AppointmentDetailView extends BaseView {
 		logger.debug("STATE is: " + currentState);
 		if (currentState instanceof RunningState) {
 			btnArrival.setCaption(CLOSE);
-			btnReport.setCaption(EDIT_REPORT);
 		} else if (currentState instanceof PlannedState) {
 			btnArrival.setCaption(CONFIRM_END);
+			btnReport.setCaption(EDIT_REPORT);
 		} else if (currentState instanceof FinishedState) {
 			btnArrival.setEnabled(false);
 			btnReport.setEnabled(false);
+		} else if (currentState instanceof ClosedState){
+			logger.debug("State is CLOSED. Why we are here?");
 		} else {
 			logger.debug("STATE not found");
 		}
-		controller.saveReportTime(currentReport, appointment);
+		controller.saveReportTime(currentReport, appointment, btnArrival);
 		appointment.doAction(appointment);
 	}
 

@@ -32,37 +32,40 @@ public class AppointmentDetailController extends BaseController {
 		logger.debug("setting details for " + client.getFullName() + " to: " + description);
 		client.setDetails(description);
 		new ClientDao().update(client);
-		button.setCaption("saved");
-		button.setEnabled(false);
+		button.setDescription("Gespeichert.");
 	}
 
-	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment, ReportEntity report) {
+	public void save(DateField arrival, DateField end, RichTextArea text, AppointmentEntity appointment,
+			ReportEntity report) {
 		logger.debug("written text is: " + text.getValue());
 		logger.debug(arrival.getValue());
 		logger.debug(end.getValue());
 		boolean existing = true;
-		if(report == null){
+		if (report == null) {
 			existing = false;
 			report = new ReportEntity();
 		}
 		report.setAppointment(appointment);
 		Date arrivalDate = arrival.getValue();
-		logger.debug("saving arrival to db: "+arrivalDate.toString());
+		logger.debug("saving arrival to db: " + arrivalDate.toString());
 		report.setDescription(text.getValue());
 		report.setStart(arrivalDate.getTime());
 		Date leaveDate = end.getValue();
 		report.setEnd(leaveDate.getTime());
 		ReportDao reportDao = ReportDao.getInstance();
-		if (existing) 
+		if (existing)
 			reportDao.update(report);
 		else
 			reportDao.persist(report);
 	}
 
-	public void saveReportTime(ReportEntity report, AppointmentEntity appointment) {
+	public void saveReportTime(ReportEntity report, AppointmentEntity appointment, Button button) {
 		ReportDao dao = ReportDao.getInstance();
 		if (report != null) {
-			report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
+			if (button.getCaption().equals("Ankunft bestätigen"))
+				report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
+			else
+				report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
 			dao.update(report);
 		} else {
 			report = new ReportEntity();
@@ -70,6 +73,6 @@ public class AppointmentDetailController extends BaseController {
 			report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
 			dao.persist(report);
 		}
-		
+
 	}
 }

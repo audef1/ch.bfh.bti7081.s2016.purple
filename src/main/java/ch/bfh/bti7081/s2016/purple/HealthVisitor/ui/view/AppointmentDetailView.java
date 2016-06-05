@@ -152,7 +152,7 @@ public class AppointmentDetailView extends BaseView {
 			
 			table.addItem(new Object[]{new Label("<b>Datum:</b>", ContentMode.HTML), appointment.getDate()}, 1);
 			table.addItem(new Object[]{new Label("<b>Zeit:</b>", ContentMode.HTML), dateFormat.format(appointment.getStartTime()) + " - " + dateFormat.format(appointment.getEndTime())}, 2);
-			table.addItem(new Object[]{new Label("<b>Adresse:</b>", ContentMode.HTML), appointment.getAddress() + "\n" + appointment.getPlace()}, 3);
+			table.addItem(new Object[]{new Label("<b>Adresse:</b>", ContentMode.HTML), appointment.getAddress() + ", " + appointment.getPlace()}, 3);
 			
 			table.setPageLength(table.size());
 			infopanelContent.addComponent(table);

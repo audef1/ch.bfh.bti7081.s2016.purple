@@ -27,6 +27,10 @@ import org.apache.logging.log4j.Logger;
  * Created by tgdflto1 on 20/05/16.
  */
 public class MedicationView extends BaseView {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3630629153886169591L;
 	public static final String VIEW_NAME ="Medication";
     public static final String NAME ="Medication";
     private static final Logger logger = LogManager.getLogger(MedicationView.class);
@@ -39,7 +43,8 @@ public class MedicationView extends BaseView {
         layout = new StandardLayout(this);
     }
 
-    @Override
+    @SuppressWarnings("serial")
+	@Override
     public Layout initView() {
         VerticalLayout general = new VerticalLayout();
         general.setSpacing(true);
@@ -63,7 +68,8 @@ public class MedicationView extends BaseView {
 			private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
 	            List<MedicationEntity> items = new ArrayList<>();
 	            for (Object id : itemIds) {
-	            	BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
+	            	@SuppressWarnings("unchecked")
+					BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
                             getContainerDataSource().getItem(id);
 	            	items.add(beanItem.getBean());
 	            }

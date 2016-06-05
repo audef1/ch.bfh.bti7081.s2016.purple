@@ -6,6 +6,10 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 
 public class AppointmentEvent extends BasicEvent {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -992810546115994695L;
 	protected AppointmentEntity appointment;
 	
 	public AppointmentEvent(AppointmentEntity appointment){

@@ -20,12 +20,12 @@ import java.util.Date;
 public class PersonEntity {
 
     public PersonEntity(String firstName, String lastName, Date dateOfBirth, String email,  String password ) {
-        this.id = 0;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.password = password;
-        this.email = email;
-        this.dateOfBirth = dateOfBirth;
+        this.setId(id);
+        this.setFirstName(firstName);
+        this.setLastName(lastName);
+        this.setPassword(password);
+        this.setEmail(email);
+        this.setDateOfBirth(dateOfBirth);
     }
 
     @Id
@@ -86,6 +86,14 @@ public class PersonEntity {
         if(getLastName() != null) sb.append(" ").append(getLastName());
     	return sb.toString();
     }
+
+	public Date getDateOfBirth() {
+		return this.dateOfBirth;
+	}
+
+	public void setDateOfBirth(Date dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 
 
 }

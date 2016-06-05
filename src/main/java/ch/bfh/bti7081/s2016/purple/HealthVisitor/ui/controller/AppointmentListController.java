@@ -1,10 +1,9 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import java.util.List;
+
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
-
-import java.util.List;
 
 public class AppointmentListController extends BaseController {
 //	private final List<AppointmentEntity> appointments;
@@ -14,7 +13,8 @@ public class AppointmentListController extends BaseController {
 
     }
 
-    public List getAppointments() {
+    @SuppressWarnings("rawtypes")
+	public List getAppointments() {
         return AppointmentDao.getInstance().getAppointments();
     }
 }

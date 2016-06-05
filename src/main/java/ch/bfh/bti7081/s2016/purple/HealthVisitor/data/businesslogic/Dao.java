@@ -1,7 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
 import java.io.Serializable;
-import java.lang.invoke.SerializedLambda;
 
 /**
  * Created by tgdflto1 on 27/05/16.

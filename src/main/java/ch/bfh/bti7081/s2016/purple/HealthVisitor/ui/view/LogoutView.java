@@ -12,7 +12,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class LogoutView extends BaseView {
 
-    public static final String SEE_YOU_SOON = "Vielen Dank und bis zum nächsten mal.";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3007272125972318403L;
+	public static final String SEE_YOU_SOON = "Vielen Dank und bis zum nächsten mal.";
     public static final String BACK_TO_LOGIN = "Zurück zum Login";
     private final Logger logger = LogManager.getLogger(LoginView.class);
     	public static final String VIEW_NAME ="Logout";

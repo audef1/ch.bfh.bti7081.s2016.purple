@@ -15,23 +15,28 @@ import java.util.Set;
 @Table
 @DiscriminatorValue("H")
 public class HealthVisitorEntity extends PersonEntity implements Serializable{
-    public HealthVisitorEntity(){}
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -131754847150978450L;
+
+	public HealthVisitorEntity(){}
     public HealthVisitorEntity(String firstName, String lastName,
                                Date dateOfBirth, String email,
                                String password, int workingHours,
                                int employeeNumber, Date hireDate) {
 
         super(firstName, lastName, dateOfBirth, email, password);
-        this.workingHours = workingHours;
-        this.employeeNumber = employeeNumber;
-        this.hireDate = hireDate;
+        this.setWorkingHours(workingHours);
+        this.setEmployeeNumber(employeeNumber);
+        this.setHireDate(hireDate);
     }
 
-    @OneToMany(mappedBy="hv", fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="hv", fetch=FetchType.EAGER)
     private List<AppointmentEntity> appointments;
 
 
-    @OneToMany(mappedBy="hv", fetch= FetchType.LAZY)
+    @OneToMany(mappedBy="hv", fetch= FetchType.EAGER)
     private Set<ClientEntity> clients;
 
     private int workingHours;
@@ -74,7 +79,7 @@ public class HealthVisitorEntity extends PersonEntity implements Serializable{
     }
 
     public Date getHireDate() {
-        return hireDate;
+        return this.hireDate;
     }
 
     public void setHireDate(Date hireDate) {

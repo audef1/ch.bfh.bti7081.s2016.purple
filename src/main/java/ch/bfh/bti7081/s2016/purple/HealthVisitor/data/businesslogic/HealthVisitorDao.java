@@ -1,16 +1,14 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 
-import javax.persistence.*;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 
 /**
  * Created by tgdflto1 on 22/05/16.
  */
 public class HealthVisitorDao extends GenericDao<HealthVisitorEntity, Integer>{
-    private static Logger logger = LogManager.getLogger(HealthVisitorDao.class);
 
     public HealthVisitorEntity findByEmail(String mail){
         TypedQuery<HealthVisitorEntity> query = entityManager.

@@ -10,10 +10,10 @@ import org.apache.logging.log4j.Logger;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Calendar;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.DateClickEvent;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.EventClickHandler;
@@ -30,6 +30,10 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 public class CalendarComponent extends VerticalLayout {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 87917910503891622L;
 	private BeanItemContainer<BasicEvent> container;
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
 	public static final String WEEK = "Woche";
@@ -59,7 +63,12 @@ public class CalendarComponent extends VerticalLayout {
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
 	    
 	    cal.setHandler(new EventClickHandler() {
-            public void eventClick(CalendarComponentEvents.EventClick event) {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 8985695458565156477L;
+
+			public void eventClick(CalendarComponentEvents.EventClick event) {
                 //somehow get appointment id and pass it as parameter to the navigator
             	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());

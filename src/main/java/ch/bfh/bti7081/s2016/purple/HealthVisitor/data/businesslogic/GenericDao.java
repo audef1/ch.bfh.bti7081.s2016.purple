@@ -1,24 +1,23 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 
 /**
  * Created by tgdflto1 on 01/06/16.
  */
 public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
     protected static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
-    private static Logger logger = LogManager.getLogger(AppointmentDao.class);
     protected final EntityManager entityManager;
 
-    public GenericDao(){
+    @SuppressWarnings("unchecked")
+	public GenericDao(){
         this.entityManager = factory.createEntityManager();
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();

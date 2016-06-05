@@ -8,7 +8,11 @@ import java.io.Serializable;
  * Created by tgdflto1 on 29/05/16.
  */
 public class ClosedState implements AppointmentState, Serializable{
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7251139570890699244L;
+	@Override
     public void doAction(AppointmentEntity context) {
 
     }

@@ -14,6 +14,8 @@
             <property name="eclipselink.logging.level" value="ALL" />
             <property name="eclipselink.ddl-generation" value="create-tables" />
             <property name="eclipselink.logging.logger" value="ch.bfh.bti7081.s2016.purple.HealthVisitor.CustomLogger"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="admin"/>
         </properties>
     </persistence-unit>
 </persistence>

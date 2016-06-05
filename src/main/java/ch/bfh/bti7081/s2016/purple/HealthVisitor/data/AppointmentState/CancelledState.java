@@ -8,7 +8,12 @@ import java.io.Serializable;
  * Created by tgdflto1 on 29/05/16.
  */
 public class CancelledState implements AppointmentState, Serializable{
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2036991121474007994L;
+
+	@Override
     public void doAction(AppointmentEntity context) {
 
     }

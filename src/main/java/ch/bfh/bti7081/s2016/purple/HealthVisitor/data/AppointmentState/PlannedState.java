@@ -9,7 +9,12 @@ import java.io.Serializable;
  * Created by tgdflto1 on 29/05/16.
  */
 public class PlannedState implements AppointmentState, Serializable {
-    @Override
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -791162284396585686L;
+
+	@Override
     public void doAction(AppointmentEntity context) {
         AppointmentDao appoinmentDao = AppointmentDao.getInstance();
         context.setState(new RunningState());

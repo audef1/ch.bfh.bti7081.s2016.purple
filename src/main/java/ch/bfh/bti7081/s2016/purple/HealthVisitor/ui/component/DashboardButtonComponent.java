@@ -5,6 +5,11 @@ import com.vaadin.ui.Button;
 
 public class DashboardButtonComponent extends Button {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8678413838884982463L;
+
 	public DashboardButtonComponent(String text, FontAwesome icon){
 		this.setCaption(text);
 		this.setIcon(icon);

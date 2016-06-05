@@ -9,7 +9,7 @@ import org.eclipse.persistence.logging.SessionLogEntry;
 /**
  * Created by tgdflto1 on 21/05/16.
  */
-public class CustomLogger extends AbstractSessionLog implements SessionLog {
+public class CustomLogger extends AbstractSessionLog {
     private static final Logger LOGGER = LogManager.getLogger(CustomLogger.class);
 
     @Override
@@ -17,12 +17,14 @@ public class CustomLogger extends AbstractSessionLog implements SessionLog {
         int level = sessionLogEntry.getLevel();
         String message = sessionLogEntry.getMessage();
         if (sessionLogEntry.getParameters() != null) {
-            message += " [";
+//            message += " [";
             int index = 0;
+            StringBuffer buf = new StringBuffer();
             for (Object object : sessionLogEntry.getParameters()) {
-                message += (index++ > 0 ? "," : "") + object;
+            	buf.append(index++ > 0 ? "," : "" + object);
+            	// message += (index++ > 0 ? "," : "") + object;
             }
-            message += "]";
+            message = " [" + buf + "]";
         }
         switch (level) {
             case SessionLog.SEVERE:

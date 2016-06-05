@@ -2,13 +2,11 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.MedicationDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 
 /**

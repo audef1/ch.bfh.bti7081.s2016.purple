@@ -1,14 +1,20 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
-import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.MarginInfo;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Label;
 
 /**
  * Created by tgdflto1 on 25/05/16.
  */
 public class FooterComponent extends HorizontalLayout {
-    public FooterComponent(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3827164233007717671L;
+
+	public FooterComponent(){
         Label copyright = new Label("© Copyright by Raphael Suter, Florian Auderset, Remo Häusler, Mathias Rudolf, Tobias Flühmann");
         this.addComponent(copyright);
         this.setStyleName("footer");

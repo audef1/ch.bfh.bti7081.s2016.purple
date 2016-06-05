@@ -17,7 +17,12 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedSt
 @Table(name="APPOINTMENT")
 public class AppointmentEntity implements AppointmentState {
 
-    public AppointmentEntity(){
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6979629192290135360L;
+
+	public AppointmentEntity(){
         super();
         this.setState(new PlannedState());
     }
@@ -35,18 +40,18 @@ public class AppointmentEntity implements AppointmentState {
     @Column(name="STATE")
     private AppointmentState state;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="HV_ID")
     private HealthVisitorEntity hv;
 
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="CLIENT_ID")
     private ClientEntity client;
 
-    @OneToOne(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.LAZY)
+    @OneToOne(mappedBy="appointment", targetEntity=ReportEntity.class, fetch=FetchType.EAGER)
     private ReportEntity report;
 
-    @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
     private Collection<MedicationEntity> medications;
 
     @OneToMany(mappedBy="appointment", targetEntity=TaskEntity.class, fetch=FetchType.LAZY)

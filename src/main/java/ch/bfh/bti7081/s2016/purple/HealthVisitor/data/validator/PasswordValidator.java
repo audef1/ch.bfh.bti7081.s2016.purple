@@ -3,10 +3,9 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.validator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
-
-import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.ui.Notification;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 
 public class PasswordValidator implements com.vaadin.data.Validator {
 	/**

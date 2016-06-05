@@ -1,7 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 
 /**
  * Created by tgdflto1 on 27/05/16.

@@ -17,7 +17,11 @@ import org.apache.logging.log4j.Logger;
  */
 public class LoginView extends BaseView{
 
-    public static final String USERNAME = "Benutzername";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8630338256224562843L;
+	public static final String USERNAME = "Benutzername";
     public static final String EMAIL = "E-Mail";
     public static final String ERROR_EMAIL = "Bitte geben Sie eine gültige E-Mail Adresse ein!";
     public static final String PASSWORD = "Kennwort";

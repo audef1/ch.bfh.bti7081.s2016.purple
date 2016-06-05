@@ -8,6 +8,10 @@ import com.vaadin.tapio.googlemaps.client.LatLon;
 
 public class GoogleMapsComponent extends GoogleMap{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6107586135539573654L;
 	private static String apikey = "AIzaSyCnqIoyh9ULI3b6rtkCYXPdMXRqivaH714";
 	private LatLon coordinates;
 	private String address;

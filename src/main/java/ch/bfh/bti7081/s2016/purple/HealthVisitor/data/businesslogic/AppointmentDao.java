@@ -1,31 +1,30 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Collection;
+import java.util.List;
+
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import javax.persistence.*;
-
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.util.Collection;
-import java.util.List;
-
 /**
  * Created by tgdflto1 on 22/05/16.
  */
 public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
-    private static final int MAX_RESULTS = 100;
-    
     private static AppointmentDao instance;
     
     public static AppointmentDao getInstance(){
@@ -34,7 +33,8 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     }
     private AppointmentDao(){ }
 
-    public List getAppointments() {
+    @SuppressWarnings("rawtypes")
+	public List getAppointments() {
 //        TypedQuery<AppointmentEntity> query = entityManager.
 //                createQuery("SELECT a FROM appointment a LEFT JOIN a.client c LEFT JOIN a.hv h WHERE a.hv = :hv AND c.id IS NOT NULL" ,
 //                        AppointmentEntity.class);

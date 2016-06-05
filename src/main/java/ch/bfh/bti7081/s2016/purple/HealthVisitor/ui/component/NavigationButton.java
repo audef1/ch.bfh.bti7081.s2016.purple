@@ -5,7 +5,12 @@ import com.vaadin.ui.Button;
 
 public class NavigationButton extends Button {
 
-	  public NavigationButton(String name, String view, FontAwesome icon){
+	  /**
+	 * 
+	 */
+	private static final long serialVersionUID = -5965251405523547764L;
+
+	public NavigationButton(String name, String view, FontAwesome icon){
 	        super(name);
 	        this.setIcon(icon);
 	        this.setData(name);

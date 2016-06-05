@@ -16,7 +16,12 @@ import com.vaadin.ui.*;
 public class HeaderComponent extends HorizontalLayout {
 
 
-    public HeaderComponent(BaseView view) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1374695523181389922L;
+
+	public HeaderComponent(BaseView view) {
 
         NavigationButton logout = new NavigationButton("Logout", "Logout", FontAwesome.SIGN_OUT);
         NavigationButton home = new NavigationButton("", "Dashboard", FontAwesome.HOME);

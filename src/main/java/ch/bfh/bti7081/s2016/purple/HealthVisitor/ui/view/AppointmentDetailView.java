@@ -7,10 +7,12 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.client.widget.escalator.Row;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -21,6 +23,8 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
+import com.vaadin.ui.Table;
+import com.vaadin.ui.Table.ColumnHeaderMode;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 
@@ -128,14 +132,30 @@ public class AppointmentDetailView extends BaseView {
 			Panel infopanel = new Panel("Termininformationen");
 			infopanel.setSizeFull();
 			VerticalLayout infopanelContent = new VerticalLayout();
+			infopanelContent.setSizeFull();
 			infopanelContent.setMargin(true);
-
-			infopanelContent.addComponent(new Label(appointment.getDate()));
-
+	
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
 			dateFormat.applyPattern("HH:mm");
-			infopanelContent.addComponent(new Label(dateFormat.format(appointment.getStartTime()) + " - "
-					+ dateFormat.format(appointment.getEndTime())));
+			
+			Table table = new Table();
+			table.setSizeFull();
+			table.addContainerProperty("key", Label.class, null);
+			table.addContainerProperty("value",  String.class, null);
+			table.setColumnHeaderMode(ColumnHeaderMode.HIDDEN);
+			table.addStyleName("v-table-borderless");
+			table.addStyleName("borderless");
+			table.addStyleName("no-stripes");
+			table.addStyleName("v-table-no-stripes");
+			table.addStyleName("no-vertical-lines");
+			table.addStyleName("v-table-no-vertical-lines");
+			
+			table.addItem(new Object[]{new Label("<b>Datum:</b>", ContentMode.HTML), appointment.getDate()}, 1);
+			table.addItem(new Object[]{new Label("<b>Zeit:</b>", ContentMode.HTML), dateFormat.format(appointment.getStartTime()) + " - " + dateFormat.format(appointment.getEndTime())}, 2);
+			table.addItem(new Object[]{new Label("<b>Adresse:</b>", ContentMode.HTML), appointment.getAddress() + "\n" + appointment.getPlace()}, 3);
+			
+			table.setPageLength(table.size());
+			infopanelContent.addComponent(table);
 
 			infopanel.setContent(infopanelContent);
 			VerticalLayout topleft = new VerticalLayout();

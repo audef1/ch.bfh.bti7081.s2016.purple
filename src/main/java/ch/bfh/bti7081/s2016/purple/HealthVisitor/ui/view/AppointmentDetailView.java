@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -182,8 +183,13 @@ public class AppointmentDetailView extends BaseView {
 			top.addComponent(topright, 1, 0);
 
 			// checklist (bottom left)
-			VerticalLayout bottomleft = new VerticalLayout();
-
+			Panel checklistpanel = new Panel(TASKLIST);
+			infopanel.setSizeFull();
+			VerticalLayout checklistpanelContent = new VerticalLayout();
+			checklistpanelContent.setSpacing(true);
+			checklistpanelContent.setMargin(true);
+			
+			// dummy data for checklist
 			Collection<DummyTask> tasks = new ArrayList<DummyTask>();
 			tasks.add(new DummyTask("Task1", "sauber machen", true));
 			tasks.add(new DummyTask("Task2", "plfege", false));
@@ -195,15 +201,20 @@ public class AppointmentDetailView extends BaseView {
 			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
 			checklist.setColumnOrder("name", "description");
 			checklist.setSizeFull();
+			checklist.setHeightMode(HeightMode.ROW);
 			checklist.setHeightByRows(tasks.size());
 			checklist.setColumns("name", "description");
-			checklist.setCaption(TASKLIST);
 
 			// Preselect some items TODO: add functionality
 			MultiSelectionModel selection = (MultiSelectionModel) checklist.getSelectionModel();
 			selection.setSelected(checklist.getContainerDataSource().getItemIds(0, 0));
 
-			bottomleft.addComponent(checklist);
+			checklistpanelContent.addComponent(checklist);
+			checklistpanel.setContent(checklistpanelContent);
+			
+			VerticalLayout bottomleft = new VerticalLayout();
+
+			bottomleft.addComponent(checklistpanel);
 			bottom.addComponent(bottomleft, 0, 0);
 
 			// reporting (bottom right)
@@ -308,11 +319,16 @@ public class AppointmentDetailView extends BaseView {
 	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-	}
-
-	@Override
 	public String getViewName() {
 		return VIEW_NAME;
+	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
+	
+	@Override
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 	}
 }

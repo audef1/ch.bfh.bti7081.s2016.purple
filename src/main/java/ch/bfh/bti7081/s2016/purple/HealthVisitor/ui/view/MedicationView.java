@@ -27,6 +27,7 @@ import org.apache.logging.log4j.Logger;
  * Created by tgdflto1 on 20/05/16.
  */
 public class MedicationView extends BaseView {
+	public static final String VIEW_NAME ="Medication";
     public static final String NAME ="Medication";
     private static final Logger logger = LogManager.getLogger(MedicationView.class);
     private final MedicationController controller;
@@ -77,11 +78,17 @@ public class MedicationView extends BaseView {
 
     @Override
     public String getViewName() {
-        return NAME;
+        return VIEW_NAME;
     }
 
+    @Override
+	public String getName() {
+		return NAME;
+	}
+    
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
         //TODO set a focus
     }
+	
 }

@@ -63,8 +63,10 @@ public class CalendarComponent extends VerticalLayout {
                 //somehow get appointment id and pass it as parameter to the navigator
             	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+            	
             	BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
-            	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getViewName());
+            	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
+            	
             	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
             }
         });

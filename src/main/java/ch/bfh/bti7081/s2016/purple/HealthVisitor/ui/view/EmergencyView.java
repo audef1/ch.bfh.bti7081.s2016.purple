@@ -18,7 +18,8 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.EmergencyController;
 
 public class EmergencyView extends BaseView {
-	public static final String NAME ="Emergency";
+	public static final String VIEW_NAME ="Emergency";
+	public static final String NAME = "Emergency";
 	private static final Logger logger = LogManager.getLogger(MedicationView.class);
 
 	public static final String EMERGENCY = "Allgemeiner Notruf (112)";
@@ -95,6 +96,11 @@ public class EmergencyView extends BaseView {
 	
 	@Override
 	public String getViewName() {
+		return VIEW_NAME;
+	}
+	
+	@Override
+	public String getName() {
 		return NAME;
 	}
 	
@@ -104,5 +110,8 @@ public class EmergencyView extends BaseView {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
 	
 }

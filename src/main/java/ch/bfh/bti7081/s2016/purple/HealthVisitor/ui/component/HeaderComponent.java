@@ -48,6 +48,7 @@ public class HeaderComponent extends HorizontalLayout {
         		String oldview = (String) VaadinSession.getCurrent().getSession().getAttribute("oldview");
                 NavigationButton back = new NavigationButton("zurück", oldview, FontAwesome.BACKWARD);
         		buttons.addComponent(back);
+            	VaadinSession.getCurrent().getSession().setAttribute("oldview", null);
         	}
         	
             buttons.addComponent(logout);

@@ -27,6 +27,7 @@ public class LoginView extends BaseView{
 
 
     private final Logger logger = LogManager.getLogger(LoginView.class);
+    public static final String VIEW_NAME = "Login";
     public static final String NAME = "Login";
     private  SessionController controller;
     private  TextField user;
@@ -94,6 +95,11 @@ public class LoginView extends BaseView{
 
     @Override
     public String getViewName() {
+        return VIEW_NAME;
+    }
+    
+    @Override
+    public String getName() {
         return NAME;
     }
 

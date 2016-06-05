@@ -57,9 +57,12 @@ public class AppointmentListView extends BaseView {
 	public String getViewName() {
 		return VIEW_NAME;
 	}
+	
+	@Override
+	public String getName() {
+		return NAME;
+	}
 
 	@Override
-	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-		
-	}
+	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {	}
 }

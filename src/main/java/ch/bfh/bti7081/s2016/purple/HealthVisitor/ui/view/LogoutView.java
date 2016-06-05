@@ -15,7 +15,8 @@ public class LogoutView extends BaseView {
     public static final String SEE_YOU_SOON = "Vielen Dank und bis zum nächsten mal.";
     public static final String BACK_TO_LOGIN = "Zurück zum Login";
     private final Logger logger = LogManager.getLogger(LoginView.class);
-        public static final String NAME ="Logout";
+    	public static final String VIEW_NAME ="Logout";
+    	public static final String NAME ="Logout";
         private SessionController controller;
 
         public LogoutView(){
@@ -42,11 +43,18 @@ public class LogoutView extends BaseView {
 
     @Override
     public String getViewName() {
-        return NAME;
+        return VIEW_NAME;
     }
+    
+    @Override
+	public String getName() {
+		return NAME;
+	}
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
 
     }
+
+	
 }

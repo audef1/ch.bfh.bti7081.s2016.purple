@@ -98,7 +98,7 @@ public class AppointmentDetailView extends BaseView {
 
 			// two column layout with topnav
 			HorizontalLayout topnav = new HorizontalLayout();
-			topnav.setDefaultComponentAlignment(Alignment.MIDDLE_RIGHT);
+			topnav.setSizeFull();
 			general.addComponent(topnav);
 
 			GridLayout top = new GridLayout(2, 1);
@@ -118,9 +118,11 @@ public class AppointmentDetailView extends BaseView {
 			// topnav
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
-			buttonArrival.setStyleName("v-button-success");
-
+			buttonArrival.setStyleName("v-button-friendly");
+			
 			topnav.addComponent(buttonArrival);
+			topnav.setComponentAlignment(buttonArrival, Alignment.MIDDLE_RIGHT);
+
 
 			// infopanel (top left)
 			Panel infopanel = new Panel("Termininformationen");

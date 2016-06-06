@@ -1,6 +1,6 @@
 ID, ADDRESS, PLACE, STARTTIME, ENDTIME, STATE, CLIENT_ID, HV_ID
-0112,'Marzillistrasse 12',	'3050 Bern',	strftime('%s','2016-05-27 15:15:00'), strftime('%s','2016-05-27 15:45:00'), NULL,	50,	1
-0113,'Aarbergergasse 5',	'3050 Bern',	strftime('%s','2016-04-29 11:00:00'), strftime('%s','2016-04-29 12:00:00'), NULL,	50,	1
+0112,'Marzillistrasse 12',	'3050 Bern',	strftime('%s','2016-06-06 15:15:00'), strftime('%s','2016-06-06 15:45:00'), NULL,	50,	1
+0113,'Aarbergergasse 5',	'3050 Bern',	strftime('%s','2016-06-06 11:00:00'), strftime('%s','2016-06-06 12:00:00'), NULL,	50,	1
 0114,'Marzillistrasse 10',	'3050 Bern',	strftime('%s','2016-03-30 11:00:00'), strftime('%s','2016-03-30 12:00:00'), NULL,	50,	1
 0115,'Monbijoustrasse 10',	'3050 Bern',	strftime('%s','2016-02-18 11:00:00'), strftime('%s','2016-02-18 12:00:00'), NULL,	50,	1
 0116,'Genfergasse 16',	'3050 Bern',	strftime('%s','2016-01-14 08:30:00'), strftime('%s','2016-01-14 09:30:00'), NULL,	50,	1

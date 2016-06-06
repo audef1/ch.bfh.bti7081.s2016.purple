@@ -74,6 +74,7 @@ public class HealthVisitorUI extends UI {
 		DbImport.importFromFile("import/person.csv", "PERSON", ',', true);
 		DbImport.importFromFile("import/appointment.csv", "APPOINTMENT", ',', true);
 		DbImport.importFromFile("import/medication.csv", "MEDICATION", ',', true);
+		DbImport.importFromFile("import/task.csv", "TASK", ',', true);
 
 		if (new AuthenticationService().isAuthenticated()) {
 			getNavigator().navigateTo(DashboardView.NAME);

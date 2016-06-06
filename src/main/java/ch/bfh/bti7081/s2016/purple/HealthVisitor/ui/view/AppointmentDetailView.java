@@ -36,6 +36,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.DummyTask;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
@@ -215,20 +216,24 @@ public class AppointmentDetailView extends BaseView {
 			checklistpanelContent.setMargin(true);
 			
 			// dummy data for checklist
-			Collection<DummyTask> tasks = new ArrayList<DummyTask>();
-			tasks.add(new DummyTask("Task1", "sauber machen", true));
-			tasks.add(new DummyTask("Task2", "plfege", false));
-			tasks.add(new DummyTask("Task3", "kochen", false));
+//			Collection<DummyTask> tasks = new ArrayList<DummyTask>();
+//			tasks.add(new DummyTask("Task1", "sauber machen", true));
+//			tasks.add(new DummyTask("Task2", "plfege", false));
+//			tasks.add(new DummyTask("Task3", "kochen", false));
 
-			BeanItemContainer<DummyTask> container = new BeanItemContainer<DummyTask>(DummyTask.class, tasks);
+			Collection<TaskEntity> tasks = appointment.getTasks();
+			logger.debug("tasks " + tasks);
+			BeanItemContainer<TaskEntity> container = new BeanItemContainer<TaskEntity>(TaskEntity.class, tasks);
 
 			Grid checklist = new Grid(container);
 			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
 			checklist.setColumnOrder("name", "description");
-			checklist.setSizeFull();
-			checklist.setHeightMode(HeightMode.ROW);
-			checklist.setHeightByRows(tasks.size());
 			checklist.setColumns("name", "description");
+			checklist.setSizeFull();
+			if (tasks.size() > 0){
+				checklist.setHeightMode(HeightMode.ROW);
+				checklist.setHeightByRows(tasks.size());
+			}
 
 			// Preselect some items TODO: add functionality
 			MultiSelectionModel selection = (MultiSelectionModel) checklist.getSelectionModel();

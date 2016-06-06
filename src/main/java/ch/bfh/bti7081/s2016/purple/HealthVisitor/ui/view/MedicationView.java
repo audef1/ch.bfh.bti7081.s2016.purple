@@ -56,6 +56,8 @@ public class MedicationView extends BaseView {
         
         Grid grid = new Grid(container);
         grid.setSizeFull();
+        grid.setColumnOrder("amount", "name");
+        grid.setColumns("amount", "name");
         grid.setSelectionMode(SelectionMode.MULTI);
         grid.addSelectionListener(new SelectionListener(){
 			@Override

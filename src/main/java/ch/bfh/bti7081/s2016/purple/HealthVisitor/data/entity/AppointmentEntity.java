@@ -54,7 +54,7 @@ public class AppointmentEntity implements AppointmentState {
     @OneToMany(mappedBy="appointment", targetEntity=MedicationEntity.class, fetch=FetchType.EAGER)
     private Collection<MedicationEntity> medications;
 
-    @OneToMany(mappedBy="appointment", targetEntity=TaskEntity.class, fetch=FetchType.LAZY)
+    @OneToMany(mappedBy="appointment", targetEntity=TaskEntity.class, fetch=FetchType.EAGER)
     private Collection<TaskEntity> tasks;
     
     public String getStateName() {

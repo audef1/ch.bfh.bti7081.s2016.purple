@@ -3,11 +3,16 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.event.SelectionEvent;
+import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;	
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
@@ -25,7 +30,9 @@ import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.ColumnHeaderMode;
 import com.vaadin.ui.TextArea;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
+import com.vaadin.ui.Window;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.ClosedState;
@@ -35,6 +42,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningSt
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.DummyTask;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
@@ -226,18 +234,41 @@ public class AppointmentDetailView extends BaseView {
 			BeanItemContainer<TaskEntity> container = new BeanItemContainer<TaskEntity>(TaskEntity.class, tasks);
 
 			Grid checklist = new Grid(container);
-			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
-			checklist.setColumnOrder("name", "description");
-			checklist.setColumns("name", "description");
+			checklist.setColumnOrder("name");
+			checklist.setColumns("name");
 			checklist.setSizeFull();
 			if (tasks.size() > 0){
 				checklist.setHeightMode(HeightMode.ROW);
 				checklist.setHeightByRows(tasks.size());
 			}
+			
+			// Handle selection of tasks
+			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
+			checklist.addSelectionListener(new SelectionListener(){
+				@Override
+				public void select(SelectionEvent event) {
+					logger.debug("selection event triggered");
+			        controller.checkTask(getItems(event.getAdded()));
+			        controller.uncheckTask(getItems(event.getRemoved()));
+				}
 
-			// Preselect some items TODO: add functionality
-			MultiSelectionModel selection = (MultiSelectionModel) checklist.getSelectionModel();
-			selection.setSelected(checklist.getContainerDataSource().getItemIds(0, 0));
+				private Collection<TaskEntity> getItems(Set<Object> itemIds) {
+		            List<TaskEntity> items = new ArrayList<>();
+		            for (Object id : itemIds) {
+		            	@SuppressWarnings("unchecked")
+						BeanItem<TaskEntity> beanItem = (BeanItem<TaskEntity>) checklist.
+	                            getContainerDataSource().getItem(id);
+		            	items.add(beanItem.getBean());
+		            }
+		            return items;
+		        }
+	        });
+			
+			checklist.addItemClickListener(event -> {
+		    	showTaskDetail(container.getItem(event.getItemId()).getBean());
+			});
+
+	        tasks.stream().filter(task -> task.isChecked()).forEach(checklist::select);
 
 			checklistpanelContent.addComponent(checklist);
 			checklistpanel.setContent(checklistpanelContent);
@@ -319,6 +350,23 @@ public class AppointmentDetailView extends BaseView {
 		return general;
 	}
 
+	private void showTaskDetail(TaskEntity task){
+		final Window window = new Window("Window");
+        window.setWidth(300.0f, Unit.PIXELS);
+        final VerticalLayout content = new VerticalLayout();
+        content.setMargin(true);
+        final Label label = new Label(
+        		"<h2>" + task.getName() + "</h2>"
+        		+ "<p>" + task.getDescription() + "</p>"
+        );
+        label.setContentMode(ContentMode.HTML);
+        content.addComponent(label);
+        window.setContent(content);
+        window.setModal(true);
+        UI.getCurrent().addWindow(window);
+        window.center();
+	}
+	
 	// Method to create a new report if it's missing.
 	private void createNewReport() {
 		ReportDao dao = new ReportDao();

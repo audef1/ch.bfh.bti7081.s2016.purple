@@ -2,15 +2,20 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.TaskDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
+
 import com.vaadin.ui.Button;
 import com.vaadin.ui.DateField;
 import com.vaadin.ui.RichTextArea;
 
+import java.util.Collection;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +24,8 @@ import org.apache.logging.log4j.Logger;
 public class AppointmentDetailController extends BaseController {
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailController.class);
 
+	private TaskDao taskDao = TaskDao.getInstance();
+	
 	public AppointmentDetailController(AppointmentDetailView view) {
 		super(view);
 	}
@@ -74,5 +81,19 @@ public class AppointmentDetailController extends BaseController {
 			dao.persist(report);
 		}
 
+	}
+
+	public void checkTask(Collection<TaskEntity> tasks) {
+    	for (TaskEntity task: tasks){
+    		task.setChecked(true);
+    		taskDao.update(task);
+    	}
+	}
+
+	public void uncheckTask(Collection<TaskEntity> tasks) {
+    	for (TaskEntity task: tasks){
+    		task.setChecked(false);
+    		taskDao.update(task);
+    	} 	
 	}
 }

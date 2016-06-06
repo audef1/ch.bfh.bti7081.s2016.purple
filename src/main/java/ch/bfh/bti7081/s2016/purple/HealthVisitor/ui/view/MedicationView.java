@@ -66,7 +66,6 @@ public class MedicationView extends BaseView {
 		        controller.check(getItems(event.getAdded()));
 		        controller.uncheck(getItems(event.getRemoved()));
 			}
-//			private Collection<BeanItem<MedicationEntity>> getItems(Set<Object> itemIds) {
 			private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
 	            List<MedicationEntity> items = new ArrayList<>();
 	            for (Object id : itemIds) {

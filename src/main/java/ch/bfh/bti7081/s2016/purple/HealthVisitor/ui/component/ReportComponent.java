@@ -42,7 +42,9 @@ public class ReportComponent extends CustomComponent {
 
         final Window window = new Window("Rapport bearbeiten");
         window.setWidth("90%");
+        window.setModal(true);
         final FormLayout content = new FormLayout();
+        content.setMargin(true);
 
         Date startDate = new Date(report.getStart());
         DateField arrival = new DateField();
@@ -81,5 +83,7 @@ public class ReportComponent extends CustomComponent {
 
         window.setContent(content);
         UI.getCurrent().addWindow(window);
+        
+        window.center();
     }
 }

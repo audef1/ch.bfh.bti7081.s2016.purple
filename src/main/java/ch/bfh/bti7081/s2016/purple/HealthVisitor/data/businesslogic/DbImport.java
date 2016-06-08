@@ -38,7 +38,7 @@ public abstract class DbImport {
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-			String sqlQuery = "";
+			StringBuilder sb = new StringBuilder();
 			String firstLine = "";
 			int lineCount = 0;
 			
@@ -54,37 +54,37 @@ public abstract class DbImport {
 
 				if (lineCount == 0) {
 					if (deleteFirst) {
-						sqlQuery += "DELETE FROM " + tableName + "; ";
+						sb.append(String.format("DELETE FROM %1$s;", tableName));
+						firstLine = String.format(" INSERT INTO %1$s (%2$s) ", tableName, line);
+						logger.debug(firstLine);
 						deleteFirst = false;
-						firstLine = "INSERT INTO " + tableName + " (" + line + ")";
 					}
-
-					sqlQuery += firstLine;
 				} else if (lineCount == 1) {
-					sqlQuery += " SELECT " + line;
+					sb.append(firstLine);
+					sb.append(String.format(" SELECT %1$s ", line));
 				} else {
-					sqlQuery += " UNION ALL SELECT " + line;
+					sb.append(String.format(" UNION ALL SELECT %1$s ", line));
 				}
-				
-				++lineCount;
 
 				if (lineCount >= SQLITE_MAX_COMPOUND_SELECT) {
 					statement = conn.createStatement();
-					statement.executeUpdate(sqlQuery);
+					statement.executeUpdate(sb.toString());
 
-					sqlQuery = "";
-					lineCount = 0;
+					sb.setLength(0);
+					lineCount = 1;
+				} else {
+					lineCount++;
 				}
 			}
 
-			if (sqlQuery.length() > 0) {
+			if (sb.length() > 0) {
 				statement = conn.createStatement();
-				statement.executeUpdate(sqlQuery);
+				statement.executeUpdate(sb.toString());
 			}
 
 			reader.close();
 
-			logger.debug("import from " + fileName + " into " + tableName + " successful");
+			logger.debug(String.format("Successfully imported data from %1$s into table %2$s", fileName, tableName));
 		} catch (SQLException se) {
 			// Handle errors for JDBC
 			logger.error(se.getMessage());

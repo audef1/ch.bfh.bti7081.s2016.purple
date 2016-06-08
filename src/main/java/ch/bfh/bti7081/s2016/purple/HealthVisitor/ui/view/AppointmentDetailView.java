@@ -21,7 +21,6 @@ import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Grid;
-import com.vaadin.ui.Grid.MultiSelectionModel;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -41,8 +40,6 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedSt
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.DummyTask;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
@@ -193,8 +190,27 @@ public class AppointmentDetailView extends BaseView {
 			description.setSizeFull();
 			description.setCaption(CLIENTDESCRIPTION);
 			description.setValue(appointment.getClient().getDetails());
+			
+			Table ptable = new Table();
+			ptable.setSizeFull();
+			ptable.addContainerProperty("key", Label.class, null);
+			ptable.addContainerProperty("value",  String.class, null);
+			ptable.setColumnHeaderMode(ColumnHeaderMode.HIDDEN);
+			ptable.addStyleName("v-table-borderless");
+			ptable.addStyleName("borderless");
+			ptable.addStyleName("no-stripes");
+			ptable.addStyleName("v-table-no-stripes");
+			ptable.addStyleName("no-vertical-lines");
+			ptable.addStyleName("v-table-no-vertical-lines");
+			
+			SimpleDateFormat dob = new SimpleDateFormat();
+			dob.applyPattern("dd.MM.YYYY");
+			
+			ptable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
+			ptable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
 
-			patientpanelContent.addComponent(new Label(appointment.getClient().getFullName()));
+			ptable.setPageLength(ptable.size());
+			patientpanelContent.addComponent(ptable);
 			patientpanelContent.addComponent(description);
 			patientpanelContent.addComponent(saveClientDetails);
 
@@ -223,12 +239,6 @@ public class AppointmentDetailView extends BaseView {
 			checklistpanelContent.setSpacing(true);
 			checklistpanelContent.setMargin(true);
 			
-			// dummy data for checklist
-//			Collection<DummyTask> tasks = new ArrayList<DummyTask>();
-//			tasks.add(new DummyTask("Task1", "sauber machen", true));
-//			tasks.add(new DummyTask("Task2", "plfege", false));
-//			tasks.add(new DummyTask("Task3", "kochen", false));
-
 			Collection<TaskEntity> tasks = appointment.getTasks();
 			logger.debug("tasks " + tasks);
 			BeanItemContainer<TaskEntity> container = new BeanItemContainer<TaskEntity>(TaskEntity.class, tasks);

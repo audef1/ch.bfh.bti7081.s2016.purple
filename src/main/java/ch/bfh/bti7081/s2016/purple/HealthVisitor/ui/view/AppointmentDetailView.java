@@ -334,6 +334,11 @@ public class AppointmentDetailView extends BaseView {
 			// TODO: Show Patient data
 			buttonDetail.addClickListener(click -> {
             	VaadinSession.getCurrent().getSession().setAttribute("patient", this.appointment.getClient());
+            	VaadinSession.getCurrent().getSession().setAttribute("appointment", this.appointment);
+            	
+            	//set back button
+            	BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
+            	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
             	getUI().getNavigator().navigateTo(PatientDetailView.NAME);
 			});
 

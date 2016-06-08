@@ -1,5 +1,7 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity;
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 /**
@@ -43,6 +45,10 @@ public class ReportEntity {
     public long getEnd() {
         return end;
     }
+    
+    public Date getEndDate() {
+        return new Date(this.getEnd());
+    }
 
     public void setEnd(long end) {
         this.end = end;
@@ -58,6 +64,10 @@ public class ReportEntity {
 
     public long getStart() {
         return start;
+    }
+    
+    public Date getStartDate() {
+        return new Date(this.getStart());
     }
 
     public void setStart(long start) {

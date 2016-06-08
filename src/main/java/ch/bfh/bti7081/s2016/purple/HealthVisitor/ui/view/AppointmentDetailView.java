@@ -303,7 +303,7 @@ public class AppointmentDetailView extends BaseView {
 			reportpanelContent.setMargin(true);
 
 			if (currentReport != null) {
-				reportpanelContent.addComponent(new Label(currentReport.getDescription()));
+				reportpanelContent.addComponent(new Label(currentReport.getDescription(), ContentMode.HTML));
 				strReportButtonName = EDIT_REPORT;
 			} else {
 				reportpanelContent.addComponent(new Label(NO_REPORT));
@@ -332,7 +332,7 @@ public class AppointmentDetailView extends BaseView {
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
 				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
-//				buttonArrival.setCaption(CLOSE);
+				// buttonArrival.setCaption(CLOSE);
 			});
 
 			saveClientDetails.addClickListener(
@@ -387,6 +387,8 @@ public class AppointmentDetailView extends BaseView {
 		if (currentReport == null) {
 			currentReport = new ReportEntity();
 			currentReport.setAppointment(appointment);
+			Long now = System.currentTimeMillis() / 1000L;
+			currentReport.setStart(now);
 			dao.persist(currentReport);
 		}
 	}

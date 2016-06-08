@@ -45,10 +45,11 @@ public class ReportComponent extends CustomComponent {
         window.setModal(true);
         window.setResizable(false);
         window.setDraggable(false);
+
         final FormLayout content = new FormLayout();
         content.setMargin(true);
 
-        Date startDate = new Date(report.getStart());
+        Date startDate = report.getStartDate();
         DateField arrival = new DateField();
         arrival.setValue(startDate);
         arrival.setCaption("Behandlungsbeginn:");
@@ -57,7 +58,7 @@ public class ReportComponent extends CustomComponent {
         arrival.setResolution(Resolution.MINUTE);
         content.addComponent(arrival);
 
-        Date endDate = new Date(report.getEnd());
+        Date endDate = report.getEndDate();
         DateField end = new DateField();
         end.setValue(endDate);
         end.setCaption("Ende der Behandlung");
@@ -84,6 +85,7 @@ public class ReportComponent extends CustomComponent {
         content.addComponent(btnSave);
 
         window.setContent(content);
+        
         UI.getCurrent().addWindow(window);
         
         window.center();

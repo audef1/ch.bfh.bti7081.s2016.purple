@@ -151,6 +151,7 @@ public class AppointmentDetailView extends BaseView {
 			table.setSizeFull();
 			table.addContainerProperty("key", Label.class, null);
 			table.addContainerProperty("value",  String.class, null);
+			table.setColumnWidth("key", 80);
 			table.setColumnHeaderMode(ColumnHeaderMode.HIDDEN);
 			table.addStyleName("v-table-borderless");
 			table.addStyleName("borderless");
@@ -208,7 +209,8 @@ public class AppointmentDetailView extends BaseView {
 			
 			ptable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
 			ptable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
-
+			ptable.setColumnWidth("key", 130);
+			
 			ptable.setPageLength(ptable.size());
 			patientpanelContent.addComponent(ptable);
 			patientpanelContent.addComponent(description);

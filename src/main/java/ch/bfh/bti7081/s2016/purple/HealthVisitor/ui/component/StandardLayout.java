@@ -14,6 +14,7 @@ public class StandardLayout extends VerticalLayout{
 
 	public StandardLayout(BaseView view){
         this.setSizeFull();
+        this.setSpacing(true);
         this.addComponent(new HeaderComponent(view)); // Header
         this.addComponent(view.initView()); // Custom content
         this.addComponent(new FooterComponent()); // Footer

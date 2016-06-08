@@ -42,6 +42,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
@@ -351,8 +352,10 @@ public class AppointmentDetailView extends BaseView {
 			});
 
 			// TODO: Show Patient data
-			// buttonDetail.addClickListener(click -> { do some stuff here...
-			// });
+			buttonDetail.addClickListener(click -> {
+            	VaadinSession.getCurrent().getSession().setAttribute("patient", this.appointment.getClient());
+            	getUI().getNavigator().navigateTo(PatientDetailView.NAME);
+			});
 
 			// TODO: EmerencyContactView
 			// buttonEmergencyContact.addClickListener(click -> { do some stuff

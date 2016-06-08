@@ -169,7 +169,8 @@ public class AppointmentDetailView extends BaseView {
 			infopanel.setContent(infopanelContent);
 			VerticalLayout topleft = new VerticalLayout();
 			topleft.setSpacing(true);
-			GoogleMap map = new GoogleMapsComponent(appointment.getAddress() + " " + appointment.getPlace());
+			String place = appointment.getPlace().split(" ")[1];
+			GoogleMap map = new GoogleMapsComponent(appointment.getAddress() + " " + place);
 
 			topleft.addComponent(infopanel);
 			topleft.addComponent(map);

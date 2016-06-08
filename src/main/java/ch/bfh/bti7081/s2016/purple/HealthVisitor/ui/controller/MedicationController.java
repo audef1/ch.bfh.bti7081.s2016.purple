@@ -1,11 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.MedicationDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 
@@ -15,19 +12,8 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 public class MedicationController extends BaseController {
 	
 	private MedicationDao medicationDao = MedicationDao.getInstance();
-	private AppointmentDao appointmentDao = AppointmentDao.getInstance();
-	
-    public MedicationController(MedicationView view) {
+	public MedicationController(MedicationView view) {
         super(view);
-    }
-    
-    public Collection<MedicationEntity> getMedicationForDay(){
-		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(this.getUser());
-		Collection<MedicationEntity> medications = new ArrayList<>();
-		for (AppointmentEntity appointment : appointments){
-			medications.addAll(appointment.getMedications());
-		}
-    	return medications;
     }
     
     public void check(Collection<MedicationEntity> medications){

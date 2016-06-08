@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.MedicationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationController;
 
@@ -17,6 +18,7 @@ import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
 
@@ -31,10 +33,15 @@ public class MedicationView extends BaseView {
 	 * 
 	 */
 	private static final long serialVersionUID = -3630629153886169591L;
-	public static final String VIEW_NAME ="Medication";
-    public static final String NAME ="Medication";
+	public static final String VIEW_NAME = "Medication";
+    public static final String NAME = "Medication";
+    public static final String LABEL_NO_MEDICATIONS = "Heute gibt es keine Medikamente zum mitnehmen!";
+    public static final String LABEL_INFO = "Medikamente die Sie heute mitbringen müssen:";
+    public static final String LABEL_PACKAGES = "Packung(en)";
     private static final Logger logger = LogManager.getLogger(MedicationView.class);
     private final MedicationController controller;
+    
+    private final MedicationService medicationService = MedicationService.getInstance();
     
     public MedicationView(){
         super();
@@ -49,37 +56,47 @@ public class MedicationView extends BaseView {
         VerticalLayout general = new VerticalLayout();
         general.setSpacing(true);
         general.setMargin(true);
-
-
-    	Collection<MedicationEntity> medications = this.controller.getMedicationForDay();
-    	BeanItemContainer<MedicationEntity> container = new BeanItemContainer<>(MedicationEntity.class, medications);
         
-        Grid grid = new Grid(container);
-        grid.setSizeFull();
-        grid.setColumnOrder("amount", "name");
-        grid.setColumns("amount", "name");
-        grid.setSelectionMode(SelectionMode.MULTI);
-        grid.addSelectionListener(new SelectionListener(){
-			@Override
-			public void select(SelectionEvent event) {
-				logger.debug("selection event triggered");
-		        controller.check(getItems(event.getAdded()));
-		        controller.uncheck(getItems(event.getRemoved()));
-			}
-			private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
-	            List<MedicationEntity> items = new ArrayList<>();
-	            for (Object id : itemIds) {
-	            	@SuppressWarnings("unchecked")
-					BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
-                            getContainerDataSource().getItem(id);
-	            	items.add(beanItem.getBean());
-	            }
-	            return items;
-	        }
-        });
 
-        medications.stream().filter(medication -> medication.isChecked()).forEach(grid::select);
-        general.addComponents(grid);
+		Label info = new Label(LABEL_INFO);
+		general.addComponent(info);
+
+    	Collection<MedicationEntity> medications = this.medicationService.getMedicationForDay(controller.getUser());
+    	if (medications.size() == 0){
+    		Label message = new Label(LABEL_NO_MEDICATIONS);
+    		general.addComponent(message);
+    	} else {
+	    	BeanItemContainer<MedicationEntity> container = new BeanItemContainer<>(MedicationEntity.class, medications);
+	        
+	        Grid grid = new Grid(container);
+	        grid.setSizeFull();
+	        grid.setColumnOrder("amount", "name");
+	        grid.setColumns("amount", "name");
+	        grid.getColumn("amount").setHeaderCaption(LABEL_PACKAGES);
+	        
+	        grid.setSelectionMode(SelectionMode.MULTI);
+	        grid.addSelectionListener(new SelectionListener(){
+				@Override
+				public void select(SelectionEvent event) {
+					logger.debug("selection event triggered");
+			        controller.check(getItems(event.getAdded()));
+			        controller.uncheck(getItems(event.getRemoved()));
+				}
+				private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
+		            List<MedicationEntity> items = new ArrayList<>();
+		            for (Object id : itemIds) {
+		            	@SuppressWarnings("unchecked")
+						BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
+	                            getContainerDataSource().getItem(id);
+		            	items.add(beanItem.getBean());
+		            }
+		            return items;
+		        }
+	        });
+	
+	        medications.stream().filter(medication -> medication.isChecked()).forEach(grid::select);
+	        general.addComponent(grid);
+    	}
         return general;
     }
 

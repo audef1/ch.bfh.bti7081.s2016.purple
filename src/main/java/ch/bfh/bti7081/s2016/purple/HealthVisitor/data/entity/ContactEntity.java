@@ -20,7 +20,7 @@ public class ContactEntity extends PersonEntity{
     }
 
     @ManyToMany
-    @JoinTable(name="ClI_CON",
+    @JoinTable(name="CLI_CON",
             joinColumns=
             @JoinColumn(name="CON_ID", referencedColumnName="ID"),
             inverseJoinColumns=

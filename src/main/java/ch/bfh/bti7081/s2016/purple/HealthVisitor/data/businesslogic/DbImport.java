@@ -21,7 +21,8 @@ public abstract class DbImport {
 
 	static final String JDBC_DRIVER = "org.sqlite.JDBC";
 	static final String DB_URL = "jdbc:sqlite:test.db";
-
+	static final int SQLITE_MAX_COMPOUND_SELECT = 500;
+	
 	// Database credentials
 	static final String USER = "root";
 	static final String PASS = "admin";
@@ -29,22 +30,21 @@ public abstract class DbImport {
 	@SuppressWarnings("resource")
 	public static void importFromFile(String fileName, String tableName, char delimiter, boolean deleteFirst) {
 		String line;
-		// br;
 		Connection conn = null;
-		Statement stmt = null;
+		Statement statement = null;
 
 		try {
-
 			// register JDBC driver
 			Class.forName(JDBC_DRIVER);
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-			String query = "";
-			BufferedReader br = new BufferedReader(new FileReader(fileName));
-			int count = 0;
-			String line1 = "";
+			String sqlQuery = "";
+			String firstLine = "";
+			int lineCount = 0;
+			
+			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 
-			while ((line = br.readLine()) != null) {
+			while ((line = reader.readLine()) != null) {
 				if (line.isEmpty())
 					continue;
 
@@ -52,38 +52,37 @@ public abstract class DbImport {
 					line = line.replace(delimiter, ',');
 				}
 
-				if (count == 0) {
+				if (lineCount == 0) {
 					if (deleteFirst) {
-						query += "DELETE FROM " + tableName + "; ";
+						sqlQuery += "DELETE FROM " + tableName + "; ";
 						deleteFirst = false;
-						line1 = "INSERT INTO " + tableName + " (" + line + ")";
+						firstLine = "INSERT INTO " + tableName + " (" + line + ")";
 					}
 
-					query += line1;
-					count++;
-				} else if (count == 1) {
-					query += " SELECT " + line;
-					count++;
+					sqlQuery += firstLine;
+				} else if (lineCount == 1) {
+					sqlQuery += " SELECT " + line;
 				} else {
-					query += " UNION ALL SELECT " + line;
-					count++;
+					sqlQuery += " UNION ALL SELECT " + line;
 				}
+				
+				++lineCount;
 
-				if (count >= 500) {
-					stmt = conn.createStatement();
-					stmt.executeUpdate(query);
+				if (lineCount >= SQLITE_MAX_COMPOUND_SELECT) {
+					statement = conn.createStatement();
+					statement.executeUpdate(sqlQuery);
 
-					query = "";
-					count = 0;
+					sqlQuery = "";
+					lineCount = 0;
 				}
 			}
 
-			if (query.length() > 0) {
-				stmt = conn.createStatement();
-				stmt.executeUpdate(query);
+			if (sqlQuery.length() > 0) {
+				statement = conn.createStatement();
+				statement.executeUpdate(sqlQuery);
 			}
 
-			br.close();
+			reader.close();
 
 			logger.debug("import from " + fileName + " into " + tableName + " successful");
 		} catch (SQLException se) {
@@ -95,8 +94,8 @@ public abstract class DbImport {
 		} finally {
 			// close resources
 			try {
-				if (stmt != null)
-					stmt.close();
+				if (statement != null)
+					statement.close();
 			} catch (SQLException se2) {
 				se2.printStackTrace();
 			}

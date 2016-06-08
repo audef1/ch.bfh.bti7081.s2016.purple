@@ -43,6 +43,8 @@ public class ReportComponent extends CustomComponent {
         final Window window = new Window("Rapport bearbeiten");
         window.setWidth("90%");
         window.setModal(true);
+        window.setResizable(false);
+        window.setDraggable(false);
         final FormLayout content = new FormLayout();
         content.setMargin(true);
 

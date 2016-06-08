@@ -363,8 +363,10 @@ public class AppointmentDetailView extends BaseView {
 	}
 
 	private void showTaskDetail(TaskEntity task){
-		final Window window = new Window("Window");
+		final Window window = new Window("Aufgabe");
         window.setWidth(300.0f, Unit.PIXELS);
+        window.setResizable(false);
+        window.setDraggable(false);
         final VerticalLayout content = new VerticalLayout();
         content.setMargin(true);
         final Label label = new Label(

@@ -56,7 +56,7 @@ public class PatientListView extends BaseView {
 		container.removeContainerProperty("password");
 		container.removeContainerProperty("responsibleHealthVisitor");
 		container.removeContainerProperty("fullName");
-
+		
 		Grid grid = new Grid(container);
 		grid.setSizeFull();
 		grid.setColumnOrder("lastName", "firstName", "email");
@@ -64,6 +64,7 @@ public class PatientListView extends BaseView {
 		grid.getColumn("lastName").setHeaderCaption("Nachname");
 		grid.getColumn("firstName").setHeaderCaption("Vorname");
 		grid.getColumn("email").setHeaderCaption("E-Mail Adresse");
+		grid.getColumn("dateOfBirth").setHeaderCaption("Geburtsdatum");
 		
 //		Shows all available Property-IDs for the Client Entity. Only for selection of removements.
 //		logger.debug("ContainerPropertys:" + container.getContainerPropertyIds());

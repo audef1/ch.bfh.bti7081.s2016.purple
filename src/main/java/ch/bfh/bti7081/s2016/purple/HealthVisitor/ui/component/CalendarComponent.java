@@ -28,12 +28,9 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
+@SuppressWarnings("serial")
 public class CalendarComponent extends VerticalLayout {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 87917910503891622L;
 	private BeanItemContainer<BasicEvent> container;
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
 	public static final String WEEK = "Woche";

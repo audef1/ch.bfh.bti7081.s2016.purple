@@ -1,19 +1,13 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.event.SelectionEvent;
-import com.vaadin.event.SelectionEvent.SelectionListener;
-import com.vaadin.navigator.ViewChangeListener;	
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.shared.ui.label.ContentMode;
@@ -47,6 +41,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponen
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasks;
 
 public class AppointmentDetailView extends BaseView {
 	private static final long serialVersionUID = -3442651787982820693L;
@@ -76,7 +71,7 @@ public class AppointmentDetailView extends BaseView {
 	public static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
 
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
-	private final AppointmentDetailController controller;
+	private AppointmentDetailController controller;
 	private VerticalLayout general;
 	private ReportEntity currentReport;
 	private AppointmentEntity appointment;
@@ -84,7 +79,7 @@ public class AppointmentDetailView extends BaseView {
 	public AppointmentDetailView() {
 		super();
 		logger.debug("arrived on appointment detail view");
-		controller = new AppointmentDetailController(this);
+		this.controller = new AppointmentDetailController(this);
 		layout = new StandardLayout(this);
 	}
 
@@ -101,7 +96,7 @@ public class AppointmentDetailView extends BaseView {
 			this.appointment = (AppointmentEntity) VaadinSession.getCurrent().getSession().getAttribute("appointment");
 			VaadinSession.getCurrent().getSession().setAttribute("appointment", null);
 		} else
-			this.appointment = controller.getCurrentAppointment();
+			this.appointment = getController().getCurrentAppointment();
 
 		if (this.appointment == null) {
 			general.addComponent(new Label(NO_APPOINTMENT));
@@ -109,7 +104,7 @@ public class AppointmentDetailView extends BaseView {
 
 			if (appointment.getState() == null)
 				appointment.doAction(appointment);
-					
+
 			// two column layout with topnav
 			HorizontalLayout topnav = new HorizontalLayout();
 			topnav.setSizeFull();
@@ -133,10 +128,9 @@ public class AppointmentDetailView extends BaseView {
 			Button buttonArrival = new Button(strArrivalButtonName);
 			buttonArrival.setWidth("200px");
 			buttonArrival.setStyleName("v-button-friendly");
-			
+
 			topnav.addComponent(buttonArrival);
 			topnav.setComponentAlignment(buttonArrival, Alignment.MIDDLE_RIGHT);
-
 
 			// infopanel (top left)
 			Panel infopanel = new Panel("Termininformationen");
@@ -144,14 +138,14 @@ public class AppointmentDetailView extends BaseView {
 			VerticalLayout infopanelContent = new VerticalLayout();
 			infopanelContent.setSizeFull();
 			infopanelContent.setMargin(true);
-	
+
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
 			dateFormat.applyPattern("HH:mm");
-			
+
 			Table table = new Table();
 			table.setSizeFull();
 			table.addContainerProperty("key", Label.class, null);
-			table.addContainerProperty("value",  String.class, null);
+			table.addContainerProperty("value", String.class, null);
 			table.setColumnWidth("key", 80);
 			table.setColumnHeaderMode(ColumnHeaderMode.HIDDEN);
 			table.addStyleName("v-table-borderless");
@@ -160,11 +154,15 @@ public class AppointmentDetailView extends BaseView {
 			table.addStyleName("v-table-no-stripes");
 			table.addStyleName("no-vertical-lines");
 			table.addStyleName("v-table-no-vertical-lines");
-			
-			table.addItem(new Object[]{new Label("<b>Datum:</b>", ContentMode.HTML), appointment.getDate()}, 1);
-			table.addItem(new Object[]{new Label("<b>Zeit:</b>", ContentMode.HTML), dateFormat.format(appointment.getStartTime()) + " - " + dateFormat.format(appointment.getEndTime())}, 2);
-			table.addItem(new Object[]{new Label("<b>Adresse:</b>", ContentMode.HTML), appointment.getAddress() + ", " + appointment.getPlace()}, 3);
-			
+
+			table.addItem(new Object[] { new Label("<b>Datum:</b>", ContentMode.HTML), appointment.getDate() }, 1);
+			table.addItem(new Object[] { new Label("<b>Zeit:</b>", ContentMode.HTML),
+					dateFormat.format(appointment.getStartTime()) + " - "
+							+ dateFormat.format(appointment.getEndTime()) },
+					2);
+			table.addItem(new Object[] { new Label("<b>Adresse:</b>", ContentMode.HTML),
+					appointment.getAddress() + ", " + appointment.getPlace() }, 3);
+
 			table.setPageLength(table.size());
 			infopanelContent.addComponent(table);
 
@@ -241,7 +239,7 @@ public class AppointmentDetailView extends BaseView {
 			VerticalLayout checklistpanelContent = new VerticalLayout();
 			checklistpanelContent.setSpacing(true);
 			checklistpanelContent.setMargin(true);
-			
+
 			Collection<TaskEntity> tasks = appointment.getTasks();
 			logger.debug("tasks " + tasks);
 			BeanItemContainer<TaskEntity> container = new BeanItemContainer<TaskEntity>(TaskEntity.class, tasks);
@@ -250,42 +248,24 @@ public class AppointmentDetailView extends BaseView {
 			checklist.setColumnOrder("name");
 			checklist.setColumns("name");
 			checklist.setSizeFull();
-			if (tasks.size() > 0){
+			if (tasks.size() > 0) {
 				checklist.setHeightMode(HeightMode.ROW);
 				checklist.setHeightByRows(tasks.size());
 			}
-			
+
 			// Handle selection of tasks
 			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
-			checklist.addSelectionListener(new SelectionListener(){
-				@Override
-				public void select(SelectionEvent event) {
-					logger.debug("selection event triggered");
-			        controller.checkTask(getItems(event.getAdded()));
-			        controller.uncheckTask(getItems(event.getRemoved()));
-				}
+			checklist.addSelectionListener(new OrganizeTasks(getController(), checklist));
 
-				private Collection<TaskEntity> getItems(Set<Object> itemIds) {
-		            List<TaskEntity> items = new ArrayList<>();
-		            for (Object id : itemIds) {
-		            	@SuppressWarnings("unchecked")
-						BeanItem<TaskEntity> beanItem = (BeanItem<TaskEntity>) checklist.
-	                            getContainerDataSource().getItem(id);
-		            	items.add(beanItem.getBean());
-		            }
-		            return items;
-		        }
-	        });
-			
 			checklist.addItemClickListener(event -> {
-		    	showTaskDetail(container.getItem(event.getItemId()).getBean());
+				showTaskDetail(container.getItem(event.getItemId()).getBean());
 			});
 
-	        tasks.stream().filter(task -> task.isChecked()).forEach(checklist::select);
+			tasks.stream().filter(task -> task.isChecked()).forEach(checklist::select);
 
 			checklistpanelContent.addComponent(checklist);
 			checklistpanel.setContent(checklistpanelContent);
-			
+
 			VerticalLayout bottomleft = new VerticalLayout();
 
 			bottomleft.addComponent(checklistpanel);
@@ -317,10 +297,10 @@ public class AppointmentDetailView extends BaseView {
 
 			Label lblState = new Label(appointment.getStateName());
 			reportpanelContent.addComponent(lblState);
-			
+
 			reportpanelContent.addComponent(btnNewReport);
 			reportpanel.setContent(reportpanelContent);
-			
+
 			VerticalLayout bottomright = new VerticalLayout();
 			bottomright.setSpacing(true);
 			bottomright.addComponent(reportpanel);
@@ -337,7 +317,7 @@ public class AppointmentDetailView extends BaseView {
 			});
 
 			saveClientDetails.addClickListener(
-					click -> controller.saveDetails(saveClientDetails, appointment, description.getValue()));
+					click -> getController().saveDetails(saveClientDetails, appointment, description.getValue()));
 
 			description.addTextChangeListener(click -> {
 				saveClientDetails.setCaption(SAVE);
@@ -348,7 +328,7 @@ public class AppointmentDetailView extends BaseView {
 				createNewReport();
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
-				new ReportComponent(appointment, currentReport, controller);
+				new ReportComponent(appointment, currentReport, getController());
 			});
 
 			// TODO: Show Patient data
@@ -365,9 +345,9 @@ public class AppointmentDetailView extends BaseView {
 		return general;
 	}
 
-	private void showTaskDetail(TaskEntity task){
+	private void showTaskDetail(TaskEntity task) {
 		final Window window = new Window("Aufgabe");
-        window.setWidth(300.0f, Unit.PIXELS);
+		window.setWidth(300.0f, Unit.PIXELS);
         window.setResizable(false);
         window.setDraggable(false);
         final VerticalLayout content = new VerticalLayout();
@@ -383,7 +363,7 @@ public class AppointmentDetailView extends BaseView {
         UI.getCurrent().addWindow(window);
         window.center();
 	}
-	
+
 	// Method to create a new report if it's missing.
 	private void createNewReport() {
 		ReportDao dao = new ReportDao();
@@ -411,12 +391,12 @@ public class AppointmentDetailView extends BaseView {
 		} else if (currentState instanceof FinishedState) {
 			btnArrival.setEnabled(false);
 			btnReport.setEnabled(false);
-		} else if (currentState instanceof ClosedState){
+		} else if (currentState instanceof ClosedState) {
 			logger.debug("State is CLOSED. Why we are here?");
 		} else {
 			logger.debug("STATE not found");
 		}
-		controller.saveReportTime(currentReport, appointment, btnArrival);
+		getController().saveReportTime(currentReport, appointment, btnArrival);
 		appointment.doAction(appointment);
 	}
 
@@ -424,13 +404,22 @@ public class AppointmentDetailView extends BaseView {
 	public String getViewName() {
 		return VIEW_NAME;
 	}
-	
+
 	@Override
 	public String getName() {
 		return NAME;
 	}
-	
+
 	@Override
 	public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 	}
+
+	public AppointmentDetailController getController() {
+		return controller;
+	}
+
+	public void setController(AppointmentDetailController controller) {
+		this.controller = controller;
+	}
+
 }

@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by tgdflto1 on 21/05/16.
+ * @author tgdflto1
  *
  * This class has single table inheritance because not all persons have the same attributes
  *

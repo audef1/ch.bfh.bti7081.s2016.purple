@@ -8,10 +8,6 @@ import com.vaadin.ui.Notification;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.LoginView;
 
 public class PasswordValidator implements com.vaadin.data.Validator {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3300213985229801002L;
 	
 	private final Logger logger = LogManager.getLogger(LoginView.class);
     @Override

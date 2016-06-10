@@ -1,33 +1,25 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.MedicationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationController;
-
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.SelectMedicationListener;
-import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.event.SelectionEvent;
-import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
+
 /**
- * Created by tgdflto1 on 20/05/16.
+ * @author tgdflto1 on 20/05/16.
  */
 public class MedicationView extends BaseView {
 	/**

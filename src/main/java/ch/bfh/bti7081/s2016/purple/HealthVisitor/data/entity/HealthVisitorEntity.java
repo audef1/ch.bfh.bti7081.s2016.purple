@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * Created by tgdflto1 on 21/05/16.
+ * @author tgdflto1
  * one health visitor is responsible for many clients
  */
 

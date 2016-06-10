@@ -7,7 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Created by tgdflto1 on 20/05/16.
+ * @author tgdflto1 on 20/05/16.
  */
 public abstract class BaseController {
     protected AuthenticationService authService;

@@ -18,10 +18,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.EmergencyController;
 
 public class EmergencyView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -831195751470891314L;
+
 	public static final String VIEW_NAME ="Emergency";
 	public static final String NAME = "Emergency";
 	private static final Logger logger = LogManager.getLogger(MedicationView.class);

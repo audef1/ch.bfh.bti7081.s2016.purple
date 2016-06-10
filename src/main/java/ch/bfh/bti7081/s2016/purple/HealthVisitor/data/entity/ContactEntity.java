@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * Created by tgdflto1 on 21/05/16.
+ * @author tgdflto1
  *
  * one contact can be contact for 0, 1 or many clients
  */

@@ -9,7 +9,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.HealthVisito
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 
 /**
- * Created by tgdflto1 on 25/05/16.
+ * @author tgdflto1
  */
 public class AuthenticationService {
     private static Logger logger = LogManager.getLogger(AuthenticationService.class);

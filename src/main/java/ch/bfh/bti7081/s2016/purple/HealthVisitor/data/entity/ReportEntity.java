@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 
 /**
- * Created by tgdflto1 on 29/05/16.
+ * @author tgdflto1
  */
 @Entity(name="report")
 @Table(name="REPORT")

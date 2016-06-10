@@ -6,7 +6,7 @@ import javax.persistence.TypedQuery;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 
 /**
- * Created by tgdflto1 on 22/05/16.
+ * @author tgdflto1 on 22/05/16.
  */
 public class HealthVisitorDao extends GenericDao<HealthVisitorEntity, Integer>{
 

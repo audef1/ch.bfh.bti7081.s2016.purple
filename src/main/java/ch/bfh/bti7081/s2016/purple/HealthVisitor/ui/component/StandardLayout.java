@@ -4,13 +4,9 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 import com.vaadin.ui.VerticalLayout;
 
 /**
- * Created by tgdflto1 on 27/05/16.
+ * @author tgdflto1
  */
 public class StandardLayout extends VerticalLayout{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -9130035755533241915L;
 
 	public StandardLayout(BaseView view){
         this.setSizeFull();

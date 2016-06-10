@@ -11,13 +11,19 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentD
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MedicationService {
 
 	private static MedicationService instance;
     private static final Logger logger = LogManager.getLogger(MedicationService.class);
-	
-	private AppointmentDao appointmentDao;
+
+	private AppointmentDao appointmentDao = AppointmentDao.getInstance();
 	
 	public static MedicationService getInstance(){
 		if (instance == null){
@@ -29,11 +35,11 @@ public class MedicationService {
 	public MedicationService (AppointmentDao appointmentDao){
 		this.appointmentDao = appointmentDao;
 	}
-	
+
 	private MedicationService(){
 		this.appointmentDao = AppointmentDao.getInstance();
 	}
-	
+
 	public Collection<MedicationEntity> getMedicationForDay(HealthVisitorEntity healthVisitor){
 		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(healthVisitor);
 		Map<String, MedicationEntity> medications = new HashMap<>();
@@ -43,7 +49,7 @@ public class MedicationService {
 					String hash = medication.getName();
 					MedicationEntity m = medications.get(hash);
 					if (m != null){
-						m.setAmount(m.getAmount() + medication.getAmount());	
+						m.setAmount(m.getAmount() + medication.getAmount());
 					} else {
 						try {
 							m = medication.clone();

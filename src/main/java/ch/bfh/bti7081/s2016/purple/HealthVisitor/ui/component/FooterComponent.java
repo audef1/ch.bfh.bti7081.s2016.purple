@@ -6,7 +6,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 
 /**
- * Created by tgdflto1 on 25/05/16.
+ * @author tgdflto1
  */
 public class FooterComponent extends HorizontalLayout {
     /**

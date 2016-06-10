@@ -5,7 +5,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 
 /**
- * Created by tgdflto1 on 10/06/16.
+ * @author tgdflto1
  */
 public class PersonTable extends Table {
 

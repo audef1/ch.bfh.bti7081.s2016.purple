@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by tgdflto1 on 10/06/16.
+ * @author tgdflto1
  */
 public class SelectMedicationListener implements SelectionEvent.SelectionListener {
     private static final Logger logger = LogManager.getLogger(SelectMedicationListener.class);

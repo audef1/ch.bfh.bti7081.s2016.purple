@@ -1,34 +1,26 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
-import java.util.Set;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.vaadin.data.util.BeanItem;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListController;
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.event.SelectionEvent;
-import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.VerticalLayout;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientListController;
+import java.util.Set;
 
 /**
- * Created by tgdflto1 on 20/05/16.
+ * @author tgdflto1
  */
 public class PatientListView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3663674186900731311L;
+
 	public static final String NAME = "PatientList";
 	public static final String VIEW_NAME = "Patientenliste";
 

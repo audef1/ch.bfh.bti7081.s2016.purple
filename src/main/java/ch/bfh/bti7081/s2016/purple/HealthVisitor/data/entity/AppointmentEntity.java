@@ -13,7 +13,7 @@ import org.eclipse.persistence.annotations.*;
 import org.eclipse.persistence.annotations.Index;
 
 /**
- * Created by tgdflto1 on 22/05/16.
+ * @author tgdflto1
  */
 @Entity(name="appointment")
 @Table(name="APPOINTMENT")

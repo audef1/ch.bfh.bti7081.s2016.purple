@@ -10,7 +10,7 @@ import javax.persistence.Persistence;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 
 /**
- * Created by tgdflto1 on 01/06/16.
+ * @author tgdflto1 on 01/06/16.
  */
 public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
     protected static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);

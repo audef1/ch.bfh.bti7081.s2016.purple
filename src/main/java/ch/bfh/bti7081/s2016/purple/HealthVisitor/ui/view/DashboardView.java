@@ -14,13 +14,10 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardController;
 
 /**
- * Created by tgdflto1 on 20/05/16.
+ * @author tgdflto1 on 20/05/16.
  */
 public class DashboardView extends BaseView{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8059552436996468898L;
+
 	public static final String NAME = "Dashboard";
 	public static final String VIEW_NAME = NAME;
 	private static final Logger logger = LogManager.getLogger(DashboardView.class);

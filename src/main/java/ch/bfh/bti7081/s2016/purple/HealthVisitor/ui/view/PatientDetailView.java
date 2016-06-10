@@ -23,10 +23,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponen
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 
 public class PatientDetailView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7480991664922494897L;
+
 	public static final String NAME = "PatientDetailView";
 	public static final String VIEW_NAME = "Patientendetails";
 	private static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";

@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
 
 /**
- * Created by gimmie7 on 27/05/16.
+ * @author gimmie7 on 27/05/16.
  */
 public abstract class DbImport {
 

@@ -247,9 +247,7 @@ public class AppointmentDetailView extends BaseView {
 			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
 			checklist.addSelectionListener(new OrganizeTasksListener(getController(), checklist));
 
-			checklist.addItemClickListener(event -> {
-				showTaskDetail(container.getItem(event.getItemId()).getBean());
-			});
+			checklist.addItemClickListener(event -> showTaskDetail(container.getItem(event.getItemId()).getBean()));
 
 			tasks.stream().filter(TaskEntity::isChecked).forEach(checklist::select);
 

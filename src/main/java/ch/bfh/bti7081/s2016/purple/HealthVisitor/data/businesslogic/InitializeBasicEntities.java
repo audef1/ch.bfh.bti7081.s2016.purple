@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by tgdflto1 on 23/05/16.
+ * @author tgdflto1 on 23/05/16.
  */
 public class InitializeBasicEntities {
     private static EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);

@@ -3,7 +3,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 
 /**
- * Created by tgdflto1 on 27/05/16.
+ * @author tgdflto1
  */
 public class SessionController extends BaseController {
 

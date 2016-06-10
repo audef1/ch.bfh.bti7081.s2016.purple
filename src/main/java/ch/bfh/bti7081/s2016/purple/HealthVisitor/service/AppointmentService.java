@@ -6,7 +6,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentD
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 
 /**
- * Created by tgdflto1 on 25/05/16.
+ * @author tgdflto1
  */
 public class AppointmentService {
 

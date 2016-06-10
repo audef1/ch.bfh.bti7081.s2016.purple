@@ -9,7 +9,7 @@ import com.vaadin.ui.Layout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.BaseController;
 
 /**
- * Created by tgdflto1 on 25/05/16.
+ * @author tgdflto1 on 25/05/16.
  */
 public abstract class BaseView extends CustomComponent implements View {
 	/**

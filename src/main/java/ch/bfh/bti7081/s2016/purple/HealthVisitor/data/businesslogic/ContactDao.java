@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ContactEntity;
 
 /**
- * Created by gimmie7 on 08/06/16.
+ * @author gimmie7
  */
 public class ContactDao extends GenericDao<ContactEntity, Integer> {
 	private static Logger logger = LogManager.getLogger(AppointmentDao.class);

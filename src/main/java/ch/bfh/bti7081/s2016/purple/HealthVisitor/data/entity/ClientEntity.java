@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by tgdflto1 on 21/05/16.
+ * @author tgdflto1
  *
  * one client has many contacts, and one responsible health visitor
  */

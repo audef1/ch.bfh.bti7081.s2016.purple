@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Created by tgdflto1 on 27/05/16.
+ * @author tgdflto1 on 27/05/16.
  */
 
 public class LogoutView extends BaseView {

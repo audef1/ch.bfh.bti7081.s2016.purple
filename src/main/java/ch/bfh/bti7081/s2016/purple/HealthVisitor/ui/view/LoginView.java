@@ -13,14 +13,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * Created by tgdflto1 on 20/05/16.
+ * @author tgdflto1
  */
 public class LoginView extends BaseView{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 8630338256224562843L;
 	public static final String USERNAME = "Benutzername";
     public static final String EMAIL = "E-Mail";
     public static final String ERROR_EMAIL = "Bitte geben Sie eine gültige E-Mail Adresse ein!";

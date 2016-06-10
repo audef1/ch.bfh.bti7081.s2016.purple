@@ -11,15 +11,9 @@ import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
 /**
- * Created by tgdflto1 on 25/05/16.
+ * @author tgdflto1
  */
 public class HeaderComponent extends HorizontalLayout {
-
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1374695523181389922L;
 
 	public HeaderComponent(BaseView view) {
 

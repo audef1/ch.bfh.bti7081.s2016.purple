@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by tgdflto1 on 01/06/16.
+ * @author tgdflto1
  */
 public class ReportComponent extends CustomComponent {
     /**

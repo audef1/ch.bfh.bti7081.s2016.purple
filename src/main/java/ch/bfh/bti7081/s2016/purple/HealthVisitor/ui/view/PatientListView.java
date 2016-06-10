@@ -80,10 +80,10 @@ public class PatientListView extends BaseView {
 			VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
 			
 			// handover patient data to detail view 
-			BeanItem<ClientEntity> selecteditem = container.getItem(grid.getSelectedRow());
-			ClientEntity patient = selecteditem.getBean();
+			ClientEntity patient = container.getItem(grid.getSelectedRow()).getBean();
 			VaadinSession.getCurrent().getSession().setAttribute("patient", patient);
 			
+			// forward to detaiview
 			getUI().getNavigator().navigateTo(PatientDetailView.NAME);
 		}));
 

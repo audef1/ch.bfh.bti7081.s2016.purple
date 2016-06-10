@@ -282,7 +282,7 @@ public class AppointmentDetailView extends BaseView {
 				createNewReport();
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
-				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
+				btnArrivalClicked(buttonArrival, btnNewReport, appointment);
 				buttonArrival.setCaption(timeButtonName());
 			});
 
@@ -345,8 +345,7 @@ public class AppointmentDetailView extends BaseView {
 
 	// clicklistener of button arrival. activate the button "new report" and
 	// associate the clicklistener
-	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointment,
-			ReportEntity report) {
+	private void btnArrivalClicked(Button btnArrival, Button btnReport, AppointmentEntity appointment) {
 		btnReport.setEnabled(true);
 		AppointmentState currentState = appointment.getState();
 		logger.debug("STATE is: " + currentState);

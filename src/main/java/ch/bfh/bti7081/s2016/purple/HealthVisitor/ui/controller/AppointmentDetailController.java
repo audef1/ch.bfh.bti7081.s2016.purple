@@ -1,25 +1,24 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.TaskDao;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
-
-import com.vaadin.ui.Button;
-import com.vaadin.ui.DateField;
-import com.vaadin.ui.RichTextArea;
-
 import java.util.Collection;
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.vaadin.ui.Button;
+import com.vaadin.ui.DateField;
+import com.vaadin.ui.RichTextArea;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.TaskDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 
 public class AppointmentDetailController extends BaseController {
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailController.class);
@@ -69,9 +68,10 @@ public class AppointmentDetailController extends BaseController {
 	public void saveReportTime(ReportEntity report, AppointmentEntity appointment, Button button) {
 		ReportDao dao = ReportDao.getInstance();
 		if (report != null) {
-			if (button.getCaption().equals("Ankunft bestätigen"))
+			if (button.getCaption().equals("Ankunft bestätigen")) {
 				report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
-			else
+				report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
+			} else
 				report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
 			dao.update(report);
 		} else {

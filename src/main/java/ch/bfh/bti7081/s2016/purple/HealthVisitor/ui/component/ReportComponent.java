@@ -48,7 +48,7 @@ public class ReportComponent extends CustomComponent {
 
         final FormLayout content = new FormLayout();
         content.setMargin(true);
-
+        
         Date startDate = report.getStartDate();
         DateField arrival = new DateField();
         arrival.setValue(startDate);

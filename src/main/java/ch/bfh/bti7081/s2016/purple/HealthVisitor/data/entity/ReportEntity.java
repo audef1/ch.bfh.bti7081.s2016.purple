@@ -4,6 +4,11 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
+
 /**
  * Created by tgdflto1 on 29/05/16.
  */
@@ -17,6 +22,8 @@ public class ReportEntity {
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="APPOINTMENT_ID")
     private  AppointmentEntity appointment;
+    
+    private final static Logger logger = LogManager.getLogger(ReportComponent.class);
 
     
     private long start;
@@ -47,7 +54,7 @@ public class ReportEntity {
     }
     
     public Date getEndDate() {
-        return new Date(this.getEnd());
+        return new Date(this.getEnd()*1000);
     }
 
     public void setEnd(long end) {
@@ -67,7 +74,7 @@ public class ReportEntity {
     }
     
     public Date getStartDate() {
-        return new Date(this.getStart());
+        return new Date(this.getStart()*1000);
     }
 
     public void setStart(long start) {

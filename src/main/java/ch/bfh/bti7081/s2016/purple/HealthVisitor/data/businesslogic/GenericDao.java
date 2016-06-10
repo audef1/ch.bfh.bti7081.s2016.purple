@@ -14,15 +14,18 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.HealthVisitorUI;
  */
 public class GenericDao<E, K extends Serializable>  implements Dao<E, K> {
     protected static final EntityManagerFactory factory = Persistence.createEntityManagerFactory(HealthVisitorUI.PERSISTENCE_UNIT_NAME);
-    protected final EntityManager entityManager;
+    protected EntityManager entityManager;
 
     @SuppressWarnings("unchecked")
 	public GenericDao(){
+    	init();
+    }
+    
+    protected void init(){
         this.entityManager = factory.createEntityManager();
         ParameterizedType genericSuperclass = (ParameterizedType) getClass()
                 .getGenericSuperclass();
-        this.entityClass = (Class<E>) genericSuperclass
-                .getActualTypeArguments()[0];
+        this.entityClass = (Class<E>) genericSuperclass.getActualTypeArguments()[0];
     }
 
     protected Class<E> entityClass;

@@ -25,7 +25,7 @@ public class MedicationEntity implements Cloneable {
 
     @JoinColumn(name="APPOINTMENT_ID")
     private  AppointmentEntity appointment;
-	
+    
 	public int getId() {
 		return id;
 	}
@@ -36,6 +36,18 @@ public class MedicationEntity implements Cloneable {
 
 	public void setChecked(boolean checked) {
 		this.checked = checked;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setAppointment(AppointmentEntity appointment) {
+		this.appointment = appointment;
 	}
 
 	public String getName() {
@@ -59,9 +71,6 @@ public class MedicationEntity implements Cloneable {
 		return "MedicationEntity [id=" + id + ", name=" + name + "]";
 	}
 	
-	public String hash (){
-		return this.name;
-	}
 	public MedicationEntity clone() throws CloneNotSupportedException{
 		return (MedicationEntity) super.clone();
 	}

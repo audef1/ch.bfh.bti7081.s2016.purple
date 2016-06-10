@@ -34,7 +34,7 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     	if(instance == null) instance = new AppointmentDao();
     	return instance;
     }
-    private AppointmentDao(){ }
+    protected AppointmentDao(){ }
 
     @SuppressWarnings("rawtypes")
 	public List getAppointments() {

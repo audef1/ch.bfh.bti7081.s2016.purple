@@ -11,14 +11,13 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentD
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.MedicationView;
 
 public class MedicationService {
 
 	private static MedicationService instance;
     private static final Logger logger = LogManager.getLogger(MedicationService.class);
 	
-	private AppointmentDao appointmentDao = AppointmentDao.getInstance();
+	private AppointmentDao appointmentDao;
 	
 	public static MedicationService getInstance(){
 		if (instance == null){
@@ -27,23 +26,33 @@ public class MedicationService {
 		return instance;
 	}
 	
+	public MedicationService (AppointmentDao appointmentDao){
+		this.appointmentDao = appointmentDao;
+	}
+	
+	private MedicationService(){
+		this.appointmentDao = AppointmentDao.getInstance();
+	}
+	
 	public Collection<MedicationEntity> getMedicationForDay(HealthVisitorEntity healthVisitor){
 		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(healthVisitor);
 		Map<String, MedicationEntity> medications = new HashMap<>();
-		for (AppointmentEntity appointment : appointments){
-			for (MedicationEntity medication : appointment.getMedications()){
-				String hash = medication.hash();
-				MedicationEntity m = medications.get(hash);
-				if (m != null){
-					m.setAmount(m.getAmount() + medication.getAmount());	
-				} else {
-					try {
-						m = medication.clone();
-					} catch (CloneNotSupportedException e) {
-						// Todo
-						logger.error("Could not clone medication entitiy!");
+		if (appointments != null){
+			for (AppointmentEntity appointment : appointments){
+				for (MedicationEntity medication : appointment.getMedications()){
+					String hash = medication.getName();
+					MedicationEntity m = medications.get(hash);
+					if (m != null){
+						m.setAmount(m.getAmount() + medication.getAmount());	
+					} else {
+						try {
+							m = medication.clone();
+						} catch (CloneNotSupportedException e) {
+							// Todo
+							logger.error("Could not clone medication entitiy!");
+						}
+						medications.put(hash, m);
 					}
-					medications.put(hash, m);
 				}
 			}
 		}

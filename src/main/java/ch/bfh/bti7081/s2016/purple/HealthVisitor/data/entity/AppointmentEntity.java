@@ -179,4 +179,9 @@ public class AppointmentEntity implements AppointmentState {
         if(this.getState() == null) this.state = new PlannedState();
         return (this.getState() instanceof PlannedState);
     }
+
+	public void setMedications(Collection<MedicationEntity> medications) {
+		this.medications = medications;
+	}
+    
 }

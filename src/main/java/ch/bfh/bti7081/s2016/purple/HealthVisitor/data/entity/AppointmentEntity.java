@@ -70,6 +70,8 @@ public class AppointmentEntity implements AppointmentState {
 	}
     
 	public AppointmentState getState() {
+		if (state == null)
+			state = new PlannedState();
         return state;
     }
 

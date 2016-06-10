@@ -86,7 +86,6 @@ public class AppointmentDetailView extends BaseView {
 	@Override
 	public Layout initView() {
 		String strReportButtonName;
-		String strArrivalButtonName = ARRIVED;
 		general = new VerticalLayout();
 		general.setMargin(true);
 		general.setSpacing(true);
@@ -102,8 +101,8 @@ public class AppointmentDetailView extends BaseView {
 			general.addComponent(new Label(NO_APPOINTMENT));
 		} else {
 
-			if (appointment.getState() == null)
-				appointment.doAction(appointment);
+//			if (appointment.getState() == null)
+//				appointment.doAction(appointment);
 
 			// two column layout with topnav
 			HorizontalLayout topnav = new HorizontalLayout();
@@ -125,7 +124,7 @@ public class AppointmentDetailView extends BaseView {
 			general.addComponent(bottom);
 
 			// topnav
-			Button buttonArrival = new Button(strArrivalButtonName);
+			Button buttonArrival = new Button(timeButtonName());
 			buttonArrival.setWidth("200px");
 			buttonArrival.setStyleName("v-button-friendly");
 
@@ -274,9 +273,6 @@ public class AppointmentDetailView extends BaseView {
 
 			// reporting (bottom right)
 			currentReport = appointment.getReport();
-			if (currentReport != null && currentReport.getStart() > 0) {
-				strArrivalButtonName = CONFIRM_END;
-			}
 
 			Panel reportpanel = new Panel(LAST_REPORT);
 			reportpanel.setSizeFull();
@@ -314,7 +310,7 @@ public class AppointmentDetailView extends BaseView {
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
 				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
-				// buttonArrival.setCaption(CLOSE);
+				buttonArrival.setCaption(timeButtonName());
 			});
 
 			saveClientDetails.addClickListener(
@@ -389,21 +385,36 @@ public class AppointmentDetailView extends BaseView {
 		btnReport.setEnabled(true);
 		AppointmentState currentState = appointment.getState();
 		logger.debug("STATE is: " + currentState);
-		if (currentState instanceof RunningState) {
-			btnArrival.setCaption(CLOSE);
-		} else if (currentState instanceof PlannedState) {
-			btnArrival.setCaption(CONFIRM_END);
+		if (currentState instanceof PlannedState) {
 			btnReport.setCaption(EDIT_REPORT);
 		} else if (currentState instanceof FinishedState) {
 			btnArrival.setEnabled(false);
 			btnReport.setEnabled(false);
 		} else if (currentState instanceof ClosedState) {
+			btnArrival.setEnabled(false);
+			btnReport.setEnabled(false);
 			logger.debug("State is CLOSED. Why we are here?");
 		} else {
 			logger.debug("STATE not found");
 		}
 		getController().saveReportTime(currentReport, appointment, btnArrival);
 		appointment.doAction(appointment);
+	}
+	
+	private String timeButtonName() {
+		AppointmentState currentState = appointment.getState();
+		if (currentState instanceof RunningState) {
+			return CONFIRM_END;
+		} else if (currentState instanceof PlannedState) {
+			return ARRIVED;
+		} else if (currentState instanceof FinishedState) {
+			return CLOSE;
+		} else if (currentState instanceof ClosedState) {
+			logger.debug("State is CLOSED. Why we are here?");
+		} else {
+			logger.debug("STATE not found");
+		}
+		return ARRIVED;
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.DashboardControll
 /**
  * @author tgdflto1 on 20/05/16.
  */
+@SuppressWarnings("serial")
 public class DashboardView extends BaseView{
 
 	public static final String NAME = "Dashboard";

@@ -9,10 +9,6 @@ import com.vaadin.ui.Label;
  * @author tgdflto1
  */
 public class FooterComponent extends HorizontalLayout {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3827164233007717671L;
 
 	public FooterComponent(){
         Label copyright = new Label("© Copyright by Raphael Suter, Florian Auderset, Remo Häusler, Mathias Rudolf, Tobias Flühmann");

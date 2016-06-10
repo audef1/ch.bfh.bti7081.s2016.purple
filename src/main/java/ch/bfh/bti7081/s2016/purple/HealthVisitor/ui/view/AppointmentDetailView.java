@@ -43,6 +43,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasksListener;
 
+@SuppressWarnings("serial")
 public class AppointmentDetailView extends BaseView {
 	public static final String NAME = "AppointmentDetail";
 	public static final String VIEW_NAME = "Termindetails";

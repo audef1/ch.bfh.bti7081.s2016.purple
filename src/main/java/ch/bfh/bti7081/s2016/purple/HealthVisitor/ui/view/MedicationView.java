@@ -21,12 +21,10 @@ import java.util.Collection;
 /**
  * @author tgdflto1 on 20/05/16.
  */
+@SuppressWarnings("serial")
 public class MedicationView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3630629153886169591L;
-	public static final String VIEW_NAME = "Medication";
+
+    public static final String VIEW_NAME = "Medication";
     public static final String NAME = "Medication";
     public static final String LABEL_NO_MEDICATIONS = "Heute gibt es keine Medikamente zum mitnehmen!";
     public static final String LABEL_INFO = "Medikamente die Sie heute mitbringen müssen:";

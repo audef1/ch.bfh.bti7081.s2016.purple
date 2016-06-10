@@ -14,11 +14,10 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentListCo
 /**
  * @author tgdflto1 on 20/05/16.
  */
+
+@SuppressWarnings("serial")
 public class AppointmentListView extends BaseView {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7327625531322913571L;
+
 	public static final String NAME = "AppointmentList";
 	public static final String VIEW_NAME = "Terminliste";
 

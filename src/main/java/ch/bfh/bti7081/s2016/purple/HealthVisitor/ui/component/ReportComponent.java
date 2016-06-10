@@ -19,11 +19,6 @@ import java.util.Locale;
  * @author tgdflto1
  */
 public class ReportComponent extends CustomComponent {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5373128523929612097L;
-	@SuppressWarnings("unused")
 	private final static Logger logger = LogManager.getLogger(ReportComponent.class);
     private ReportEntity report;
     private AppointmentEntity appointment;

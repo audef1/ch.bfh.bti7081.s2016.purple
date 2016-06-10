@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * @author tgdflto1
  */
+@SuppressWarnings("serial")
 public class LoginView extends BaseView{
 
 	public static final String USERNAME = "Benutzername";

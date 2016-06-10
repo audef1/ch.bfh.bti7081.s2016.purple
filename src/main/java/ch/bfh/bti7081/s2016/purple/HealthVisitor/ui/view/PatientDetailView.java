@@ -29,6 +29,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
 
+@SuppressWarnings("serial")
 public class PatientDetailView extends BaseView {
 
 	public static final String NAME = "PatientDetailView";

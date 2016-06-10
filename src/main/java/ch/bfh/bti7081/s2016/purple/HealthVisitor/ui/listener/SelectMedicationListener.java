@@ -16,6 +16,7 @@ import java.util.Set;
 /**
  * @author tgdflto1
  */
+@SuppressWarnings("serial")
 public class SelectMedicationListener implements SelectionEvent.SelectionListener {
     private static final Logger logger = LogManager.getLogger(SelectMedicationListener.class);
     private final MedicationController controller;

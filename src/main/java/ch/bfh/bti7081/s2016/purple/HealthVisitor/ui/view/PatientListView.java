@@ -19,6 +19,7 @@ import java.util.Set;
 /**
  * @author tgdflto1
  */
+@SuppressWarnings("serial")
 public class PatientListView extends BaseView {
 
 	public static final String NAME = "PatientList";

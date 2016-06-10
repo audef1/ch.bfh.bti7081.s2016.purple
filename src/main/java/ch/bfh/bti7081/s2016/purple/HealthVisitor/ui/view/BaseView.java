@@ -11,11 +11,10 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.BaseController;
 /**
  * @author tgdflto1 on 25/05/16.
  */
+
+@SuppressWarnings("serial")
 public abstract class BaseView extends CustomComponent implements View {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2397611405353158032L;
+
 	public BaseController controller;
 	public Layout layout;
 

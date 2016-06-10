@@ -21,10 +21,9 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 
 public class AppointmentDetailController extends BaseController {
-	private static final Logger logger = LogManager.getLogger(AppointmentDetailController.class);
 
+	private static final Logger logger = LogManager.getLogger(AppointmentDetailController.class);
 	private TaskDao taskDao = TaskDao.getInstance();
-	
 	public AppointmentDetailController(AppointmentDetailView view) {
 		super(view);
 	}

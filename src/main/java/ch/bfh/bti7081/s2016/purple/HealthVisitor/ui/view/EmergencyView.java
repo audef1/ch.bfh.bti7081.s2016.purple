@@ -17,6 +17,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.DashboardButtonCom
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.EmergencyController;
 
+@SuppressWarnings("serial")
 public class EmergencyView extends BaseView {
 
 	public static final String VIEW_NAME ="Emergency";

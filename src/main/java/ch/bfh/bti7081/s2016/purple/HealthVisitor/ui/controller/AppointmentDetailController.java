@@ -69,15 +69,15 @@ public class AppointmentDetailController extends BaseController {
 		ReportDao dao = ReportDao.getInstance();
 		if (report != null) {
 			if (button.getCaption().equals("Ankunft bestätigen")) {
-				report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
-				report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
+				report.setStart(new Date(System.currentTimeMillis()).getTime());
+				report.setEnd(new Date(System.currentTimeMillis()).getTime());
 			} else
-				report.setEnd(new Date(System.currentTimeMillis() / 1000).getTime());
+				report.setEnd(new Date(System.currentTimeMillis()).getTime());
 			dao.update(report);
 		} else {
 			report = new ReportEntity();
 			report.setAppointment(appointment);
-			report.setStart(new Date(System.currentTimeMillis() / 1000).getTime());
+			report.setStart(new Date(System.currentTimeMillis()).getTime());
 			dao.persist(report);
 		}
 

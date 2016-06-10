@@ -54,7 +54,7 @@ public class ReportEntity {
     }
     
     public Date getEndDate() {
-        return new Date(this.getEnd()*1000);
+        return new Date(this.getEnd());
     }
 
     public void setEnd(long end) {
@@ -74,7 +74,7 @@ public class ReportEntity {
     }
     
     public Date getStartDate() {
-        return new Date(this.getStart()*1000);
+        return new Date(this.getStart());
     }
 
     public void setStart(long start) {

@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by tgdflto1 on 27/05/16.
  */
-public interface Dao<E, K extends Serializable> {
+interface Dao<E, K extends Serializable> {
 
     E update(E entity);
     E persist(E entity);

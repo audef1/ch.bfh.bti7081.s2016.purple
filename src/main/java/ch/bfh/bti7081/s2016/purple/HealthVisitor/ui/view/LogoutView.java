@@ -21,14 +21,12 @@ public class LogoutView extends BaseView {
     private final Logger logger = LogManager.getLogger(LoginView.class);
     	public static final String VIEW_NAME ="Logout";
     	public static final String NAME ="Logout";
-        private SessionController controller;
 
-        public LogoutView(){
+    public LogoutView() {
             super();
-            controller = new SessionController(this);
             logger.debug("this is the loginview");
             layout = new StandardLayout(this);
-            controller.invalidate();
+        new SessionController(this).invalidate();
         }
 
         @Override

@@ -37,13 +37,9 @@ public class EmergencyView extends BaseView {
 	public static final String REGA = "REGA (1414)";
 	public static final String REGA_NUMBER = "tel://1414";
 
-	@SuppressWarnings("unused")
-	private final EmergencyController controller;
-    private GridLayout general;
-    
-    
-    public EmergencyView(){
-    	super();
+
+	public EmergencyView() {
+		super();
     	logger.debug("arrived on emergency view");
     	controller = new EmergencyController(this);
     	layout = new StandardLayout(this);
@@ -52,7 +48,7 @@ public class EmergencyView extends BaseView {
     
 	@Override
 	public Layout initView() {
-		general = new GridLayout(2, 3);
+		GridLayout general = new GridLayout(2, 3);
 		general.setSpacing(true);
 		general.setMargin(true);
 		Responsive.makeResponsive(general);

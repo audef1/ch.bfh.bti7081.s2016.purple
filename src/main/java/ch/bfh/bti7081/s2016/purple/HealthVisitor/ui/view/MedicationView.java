@@ -93,9 +93,9 @@ public class MedicationView extends BaseView {
 		            return items;
 		        }
 	        });
-	
-	        medications.stream().filter(medication -> medication.isChecked()).forEach(grid::select);
-	        general.addComponent(grid);
+
+			medications.stream().filter(MedicationEntity::isChecked).forEach(grid::select);
+			general.addComponent(grid);
     	}
         return general;
     }

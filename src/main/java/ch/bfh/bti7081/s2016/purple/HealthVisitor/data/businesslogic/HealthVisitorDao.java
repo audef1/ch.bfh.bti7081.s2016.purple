@@ -15,8 +15,7 @@ public class HealthVisitorDao extends GenericDao<HealthVisitorEntity, Integer>{
                 createQuery("SELECT p FROM person p  WHERE TYPE(p) = :klass AND p.email = :email",
                         HealthVisitorEntity.class);
         try{
-            HealthVisitorEntity hv = query.setParameter("klass", HealthVisitorEntity.class).setParameter("email", mail).getSingleResult();
-            return hv;
+            return query.setParameter("klass", HealthVisitorEntity.class).setParameter("email", mail).getSingleResult();
         }catch(NoResultException e){
             return null;
         }

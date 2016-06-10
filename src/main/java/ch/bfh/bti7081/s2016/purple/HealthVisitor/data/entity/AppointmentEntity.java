@@ -9,6 +9,8 @@ import javax.persistence.*;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
+import org.eclipse.persistence.annotations.*;
+import org.eclipse.persistence.annotations.Index;
 
 /**
  * Created by tgdflto1 on 22/05/16.
@@ -33,7 +35,10 @@ public class AppointmentEntity implements AppointmentState {
 
     private String address;
     private String place;
+
+    @org.eclipse.persistence.annotations.Index
     private long startTime;
+    @Index
     private long endTime;
 
     @Lob

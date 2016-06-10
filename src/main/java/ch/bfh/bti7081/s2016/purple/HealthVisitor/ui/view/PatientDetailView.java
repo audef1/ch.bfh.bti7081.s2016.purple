@@ -22,8 +22,6 @@ public class PatientDetailView extends BaseView {
 
 	private static final Logger logger = LogManager.getLogger(PatientListView.class);
 
-	private ClientEntity patient;
-	
 	public PatientDetailView() {
 		super();
 		//this.controller = new PatientDetailController(this);
@@ -39,10 +37,10 @@ public class PatientDetailView extends BaseView {
 		
 		// get patient from session
 		if (VaadinSession.getCurrent().getSession().getAttribute("patient") != null) {
-			this.patient = (ClientEntity) VaadinSession.getCurrent().getSession().getAttribute("patient");
+			ClientEntity patient = (ClientEntity) VaadinSession.getCurrent().getSession().getAttribute("patient");
 			VaadinSession.getCurrent().getSession().setAttribute("patient", null);
-		
-			general.addComponent(new Label(this.patient.getFullName()));
+
+			general.addComponent(new Label(patient.getFullName()));
 		
 		}
 		else {

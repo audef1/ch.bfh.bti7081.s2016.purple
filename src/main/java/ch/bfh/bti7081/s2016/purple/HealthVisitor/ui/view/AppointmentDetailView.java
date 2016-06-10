@@ -44,35 +44,33 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetail
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasks;
 
 public class AppointmentDetailView extends BaseView {
-	private static final long serialVersionUID = -3442651787982820693L;
 	public static final String NAME = "AppointmentDetail";
 	public static final String VIEW_NAME = "Termindetails";
 
 	// States
-	public static final String CONFIRM_END = "Ende bestätigen";
-	public static final String CLOSE = "Abschliessen";
-	public static final String ARRIVED = "Ankunft bestätigen";
+	private static final String CONFIRM_END = "Ende bestätigen";
+	private static final String CLOSE = "Abschliessen";
+	private static final String ARRIVED = "Ankunft bestätigen";
 
 	// Report
-	public static final String EDIT_REPORT = "Rapport bearbeiten";
-	public static final String CREATE_REPORT = "Rapport erstellen";
-	public static final String NO_REPORT = "Kein Rapport vorhanden";
-	public static final String LAST_REPORT = "Aktueller Rapport";
+	private static final String EDIT_REPORT = "Rapport bearbeiten";
+	private static final String CREATE_REPORT = "Rapport erstellen";
+	private static final String NO_REPORT = "Kein Rapport vorhanden";
+	private static final String LAST_REPORT = "Aktueller Rapport";
 
 	// Client
-	public static final String CLIENTDETAILS = "Patientendetails";
-	public static final String CLIENTDESCRIPTION = "Kurzbeschrieb";
-	public static final String SAVE_CLIENTDETAILS = "Details speichern";
+	private static final String CLIENTDETAILS = "Patientendetails";
+	private static final String CLIENTDESCRIPTION = "Kurzbeschrieb";
+	private static final String SAVE_CLIENTDETAILS = "Details speichern";
 
 	// Other
-	public static final String NO_APPOINTMENT = "Heute keinen Termin gefunden";
-	public static final String TASKLIST = "Aufgabenliste";
-	public static final String SAVE = "Speichern";
-	public static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
+	private static final String NO_APPOINTMENT = "Heute keinen Termin gefunden";
+	private static final String TASKLIST = "Aufgabenliste";
+	private static final String SAVE = "Speichern";
+	private static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
 
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private AppointmentDetailController controller;
-	private VerticalLayout general;
 	private ReportEntity currentReport;
 	private AppointmentEntity appointment;
 
@@ -86,7 +84,7 @@ public class AppointmentDetailView extends BaseView {
 	@Override
 	public Layout initView() {
 		String strReportButtonName;
-		general = new VerticalLayout();
+		VerticalLayout general = new VerticalLayout();
 		general.setMargin(true);
 		general.setSpacing(true);
 
@@ -242,7 +240,7 @@ public class AppointmentDetailView extends BaseView {
 
 			Collection<TaskEntity> tasks = appointment.getTasks();
 			logger.debug("tasks " + tasks);
-			BeanItemContainer<TaskEntity> container = new BeanItemContainer<TaskEntity>(TaskEntity.class, tasks);
+			BeanItemContainer<TaskEntity> container = new BeanItemContainer<>(TaskEntity.class, tasks);
 
 			Grid checklist = new Grid(container);
 			checklist.setColumnOrder("name");
@@ -261,7 +259,7 @@ public class AppointmentDetailView extends BaseView {
 				showTaskDetail(container.getItem(event.getItemId()).getBean());
 			});
 
-			tasks.stream().filter(task -> task.isChecked()).forEach(checklist::select);
+			tasks.stream().filter(TaskEntity::isChecked).forEach(checklist::select);
 
 			checklistpanelContent.addComponent(checklist);
 			checklistpanel.setContent(checklistpanelContent);

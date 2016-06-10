@@ -21,8 +21,11 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
 /**
- * Created by tgdflto1 on 22/05/16.
- */
+ * This class implements the Data Access Object Pattern concept from Java
+ * It extends the GenericDAO which defines a few basic methods.
+ *
+ * @author tfluehmann
+ **/
 public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     private static Logger logger = LogManager.getLogger(AppointmentDao.class);
     private static AppointmentDao instance;

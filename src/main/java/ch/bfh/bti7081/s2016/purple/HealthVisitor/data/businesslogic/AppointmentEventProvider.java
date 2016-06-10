@@ -17,11 +17,10 @@ public class AppointmentEventProvider implements CalendarEventProvider{
 	 * 
 	 */
 	private static final long serialVersionUID = -8261934122713682667L;
-	private List<AppointmentEntity> appointments;
 	private List<CalendarEvent> events = new ArrayList<>();
 	
 	public AppointmentEventProvider(List<AppointmentEntity> items) {
-		this.appointments = items;
+		List<AppointmentEntity> appointments = items;
 		events = new ArrayList<>();
 		
 		for (AppointmentEntity a : appointments){

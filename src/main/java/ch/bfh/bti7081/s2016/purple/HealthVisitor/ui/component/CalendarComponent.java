@@ -33,11 +33,11 @@ public class CalendarComponent extends VerticalLayout {
 
 	private BeanItemContainer<BasicEvent> container;
 	private static final Logger logger = LogManager.getLogger(AppointmentListView.class);
-	public static final String WEEK = "Woche";
-	public static final String TODAY = "Heute";
-	public static final String MONTH = "Monat";
-	public static final int FIRST_HOUR = 8;
-	public static final int LAST_HOUR = 19;
+	private static final String WEEK = "Woche";
+	private static final String TODAY = "Heute";
+	private static final String MONTH = "Monat";
+	private static final int FIRST_HOUR = 8;
+	private static final int LAST_HOUR = 19;
 	
 	public CalendarComponent(List<AppointmentEntity> items, String $type){
 		
@@ -116,9 +116,9 @@ public class CalendarComponent extends VerticalLayout {
 		calnav.addComponents(month, week, today);
 		this.addComponents(calnav, cal);
 	}
-	
 
-	public void addAppointments(List<AppointmentEntity> items) {
+
+	private void addAppointments(List<AppointmentEntity> items) {
 		if (items == null || items.isEmpty()) return;
 		for (AppointmentEntity appointment : items) {
 			container.addBean(new AppointmentEvent(appointment));

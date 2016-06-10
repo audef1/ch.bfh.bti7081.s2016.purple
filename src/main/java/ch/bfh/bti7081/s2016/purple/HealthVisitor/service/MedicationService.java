@@ -29,7 +29,7 @@ public class MedicationService {
 	
 	public Collection<MedicationEntity> getMedicationForDay(HealthVisitorEntity healthVisitor){
 		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(healthVisitor);
-		Map<String, MedicationEntity> medications = new HashMap<String, MedicationEntity>();
+		Map<String, MedicationEntity> medications = new HashMap<>();
 		for (AppointmentEntity appointment : appointments){
 			for (MedicationEntity medication : appointment.getMedications()){
 				String hash = medication.hash();

@@ -36,8 +36,6 @@ public class LoginView extends BaseView{
     private  SessionController controller;
     private  TextField user;
     private  PasswordField password;
-    private  Button magicLoginButton;
-    private Panel loginpanel;
 
 
     public LoginView(){
@@ -65,12 +63,12 @@ public class LoginView extends BaseView{
         password.addValidator(new PasswordValidator());
         password.setInvalidAllowed(true);
 
-        magicLoginButton = new Button(LOGIN);
+        Button magicLoginButton = new Button(LOGIN);
         magicLoginButton.setClickShortcut(ShortcutAction.KeyCode.ENTER);
         magicLoginButton.addClickListener((click -> validate()));
 
         // The Layout for the Login Form
-    	loginpanel = new Panel("");
+        Panel loginpanel = new Panel("");
         FormLayout content = new FormLayout();
         content.addStyleName("loginpanel");
         content.addComponent(user);

@@ -11,6 +11,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.MedicationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationController;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.SelectMedicationListener;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.event.SelectionEvent;
@@ -75,24 +76,7 @@ public class MedicationView extends BaseView {
 	        grid.getColumn("amount").setHeaderCaption(LABEL_PACKAGES);
 	        
 	        grid.setSelectionMode(SelectionMode.MULTI);
-	        grid.addSelectionListener(new SelectionListener(){
-				@Override
-				public void select(SelectionEvent event) {
-					logger.debug("selection event triggered");
-			        controller.check(getItems(event.getAdded()));
-			        controller.uncheck(getItems(event.getRemoved()));
-				}
-				private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
-		            List<MedicationEntity> items = new ArrayList<>();
-		            for (Object id : itemIds) {
-		            	@SuppressWarnings("unchecked")
-						BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
-	                            getContainerDataSource().getItem(id);
-		            	items.add(beanItem.getBean());
-		            }
-		            return items;
-		        }
-	        });
+            grid.addSelectionListener(new SelectMedicationListener(controller, grid));
 
 			medications.stream().filter(MedicationEntity::isChecked).forEach(grid::select);
 			general.addComponent(grid);

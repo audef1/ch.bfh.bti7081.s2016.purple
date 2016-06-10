@@ -10,12 +10,8 @@ import org.apache.logging.log4j.Logger;
 /**
  * Created by tgdflto1 on 27/05/16.
  */
-public class LogoutView extends BaseView {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3007272125972318403L;
+public class LogoutView extends BaseView {
 	public static final String SEE_YOU_SOON = "Vielen Dank und bis zum nächsten mal.";
     public static final String BACK_TO_LOGIN = "Zurück zum Login";
     private final Logger logger = LogManager.getLogger(LoginView.class);
@@ -55,7 +51,6 @@ public class LogoutView extends BaseView {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent event) {
-
     }
 
 	

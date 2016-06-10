@@ -17,14 +17,14 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 
 @SuppressWarnings("serial")
-public class OrganizeTasks implements SelectionListener {
+public class OrganizeTasksListener implements SelectionListener {
 	private AppointmentDetailController controller;
 	private Grid checklist;
-	private static final Logger logger = LogManager.getLogger(OrganizeTasks.class);
-	
-	public OrganizeTasks(AppointmentDetailController controller, Grid cl) {
+	private static final Logger logger = LogManager.getLogger(OrganizeTasksListener.class);
+
+	public OrganizeTasksListener(AppointmentDetailController controller, Grid checklist) {
 		this.controller = controller;
-		this.checklist = cl;
+		this.checklist = checklist;
 	}
 
 	private Collection<TaskEntity> getItems(Set<Object> itemIds) {
@@ -40,12 +40,8 @@ public class OrganizeTasks implements SelectionListener {
 	@Override
 	public void select(SelectionEvent event) {
 		logger.debug("selection event triggered");
-		getController().checkTask(getItems(event.getAdded()));
-		getController().uncheckTask(getItems(event.getRemoved()));
+		controller.checkTask(getItems(event.getAdded()));
+		controller.uncheckTask(getItems(event.getRemoved()));
 
-	}
-
-	private AppointmentDetailController getController() {
-		return this.controller;
 	}
 }

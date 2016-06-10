@@ -3,6 +3,7 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.PersonTable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +41,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponen
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasks;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasksListener;
 
 public class AppointmentDetailView extends BaseView {
 	public static final String NAME = "AppointmentDetail";
@@ -176,9 +177,7 @@ public class AppointmentDetailView extends BaseView {
 			// user information (top right)
 			Panel patientpanel = new Panel("Patienteninformationen");
 			infopanel.setSizeFull();
-			VerticalLayout patientpanelContent = new VerticalLayout();
-			patientpanelContent.setSpacing(true);
-			patientpanelContent.setMargin(true);
+
 
 			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
 			saveClientDetails.setEnabled(false);
@@ -188,27 +187,21 @@ public class AppointmentDetailView extends BaseView {
 			description.setCaption(CLIENTDESCRIPTION);
 			description.setValue(appointment.getClient().getDetails());
 			
-			Table ptable = new Table();
-			ptable.setSizeFull();
-			ptable.addContainerProperty("key", Label.class, null);
-			ptable.addContainerProperty("value",  String.class, null);
-			ptable.setColumnHeaderMode(ColumnHeaderMode.HIDDEN);
-			ptable.addStyleName("v-table-borderless");
-			ptable.addStyleName("borderless");
-			ptable.addStyleName("no-stripes");
-			ptable.addStyleName("v-table-no-stripes");
-			ptable.addStyleName("no-vertical-lines");
-			ptable.addStyleName("v-table-no-vertical-lines");
+
 			
 			SimpleDateFormat dob = new SimpleDateFormat();
 			dob.applyPattern("dd.MM.YYYY");
-			
-			ptable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
-			ptable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
-			ptable.setColumnWidth("key", 130);
-			
-			ptable.setPageLength(ptable.size());
-			patientpanelContent.addComponent(ptable);
+
+			// Left hand person table
+			PersonTable personTable = new PersonTable();
+			personTable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
+			personTable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
+
+
+			VerticalLayout patientpanelContent = new VerticalLayout();
+			patientpanelContent.setSpacing(true);
+			patientpanelContent.setMargin(true);
+			patientpanelContent.addComponent(personTable);
 			patientpanelContent.addComponent(description);
 			patientpanelContent.addComponent(saveClientDetails);
 
@@ -252,7 +245,7 @@ public class AppointmentDetailView extends BaseView {
 
 			// Handle selection of tasks
 			checklist.setSelectionMode(com.vaadin.ui.Grid.SelectionMode.MULTI);
-			checklist.addSelectionListener(new OrganizeTasks(getController(), checklist));
+			checklist.addSelectionListener(new OrganizeTasksListener(getController(), checklist));
 
 			checklist.addItemClickListener(event -> {
 				showTaskDetail(container.getItem(event.getItemId()).getBean());

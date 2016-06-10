@@ -5,7 +5,10 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.event.SelectionEvent;
+import com.vaadin.event.SelectionEvent.SelectionListener;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Grid;
@@ -72,8 +75,15 @@ public class PatientListView extends BaseView {
 		general.addComponents(listTitle, grid);
 		
 		grid.addSelectionListener((clickEvent -> {
+			// set back button
 			BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
 			VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
+			
+			// handover patient data to detail view 
+			BeanItem<ClientEntity> selecteditem = container.getItem(grid.getSelectedRow());
+			ClientEntity patient = selecteditem.getBean();
+			VaadinSession.getCurrent().getSession().setAttribute("patient", patient);
+			
 			getUI().getNavigator().navigateTo(PatientDetailView.NAME);
 		}));
 

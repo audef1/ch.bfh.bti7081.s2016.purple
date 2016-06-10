@@ -66,7 +66,6 @@ public class CalendarComponent extends VerticalLayout {
 			private static final long serialVersionUID = 8985695458565156477L;
 
 			public void eventClick(CalendarComponentEvents.EventClick event) {
-                //somehow get appointment id and pass it as parameter to the navigator
             	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
             	

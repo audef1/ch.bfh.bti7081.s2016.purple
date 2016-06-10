@@ -2,7 +2,6 @@ package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,7 +25,6 @@ import com.vaadin.ui.VerticalLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
 
 @SuppressWarnings("serial")
@@ -189,10 +187,14 @@ public class PatientDetailView extends BaseView {
 			nextappointments.getColumn("place").setHeaderCaption("Ort");
 
 			nextappointments.setSizeFull();
-			nextappointments.setHeightMode(HeightMode.CSS);
-			nextappointments.setHeightByRows(container.size());
-			
-			appointmentpanelContent.addComponents(nextappointments);
+			if (container.size() > 0){
+				nextappointments.setHeightMode(HeightMode.ROW);
+				nextappointments.setHeightByRows(container.size());
+				appointmentpanelContent.addComponents(nextappointments);
+			}
+			else{
+				appointmentpanelContent.addComponent(new Label("Keine anstehenden Termine."));
+			}
 			
 			nextappointments.addSelectionListener((clickEvent -> {
 				// set back button
@@ -219,7 +221,7 @@ public class PatientDetailView extends BaseView {
 			
 			// listeners
 			saveClientDetails.addClickListener(
-					click -> getController().saveDetails(saveClientDetails, patient, description.getValue()));
+					click -> this.getController().saveDetails(saveClientDetails, patient, description.getValue()));
 
 			description.addTextChangeListener(click -> {
 				saveClientDetails.setCaption(SAVE);

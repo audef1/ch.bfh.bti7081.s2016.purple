@@ -28,7 +28,8 @@ public class PatientDetailController extends BaseController {
 
 	public void saveDetails(Button button, ClientEntity patient, String description) {
 		patient.setDetails(description);
-		new ClientDao().update(patient);
+		ClientDao cdao = new ClientDao();
+		cdao.update(patient);
 		button.setDescription("Gespeichert");
 	}
 	

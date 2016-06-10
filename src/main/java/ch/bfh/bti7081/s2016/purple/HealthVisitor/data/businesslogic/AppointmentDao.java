@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.Collection;
@@ -17,6 +18,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedS
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.RunningState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
 
@@ -107,5 +109,36 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
 
     	logger.debug("No current appointment found");
     	return null;
+    }
+	
+    /**
+     * @param clientEntity
+     *
+     * @return
+     */
+    public Collection<AppointmentEntity> getAppointmentsByPatient(ClientEntity patient)
+    {
+    	TypedQuery<AppointmentEntity> query = entityManager.createQuery(
+    		"SELECT a "
+    		+ "FROM appointment AS a "
+    		+ "WHERE a.client = :client "
+    		+ "AND a.startTime > :startTime "
+    		+ "AND a.client IS NOT NULL ORDER BY a.startTime",
+            AppointmentEntity.class
+        );
+
+    	
+    	long startTime = System.currentTimeMillis() / 1000L;
+
+    	Collection<AppointmentEntity> appointments = null;
+    	try {
+    		appointments = query.
+                setParameter("client", patient).
+                setParameter("startTime", startTime ).
+                getResultList();
+    	} catch (NoResultException e){
+    		logger.debug("No appointments found " + e.getMessage());
+    	}
+    	return appointments;
     }
 }

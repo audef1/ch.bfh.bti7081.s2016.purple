@@ -178,17 +178,6 @@ public class AppointmentDetailView extends BaseView {
 			Panel patientpanel = new Panel("Patienteninformationen");
 			infopanel.setSizeFull();
 
-
-			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
-			saveClientDetails.setEnabled(false);
-
-			TextArea description = new TextArea();
-			description.setSizeFull();
-			description.setCaption(CLIENTDESCRIPTION);
-			description.setValue(appointment.getClient().getDetails());
-			
-
-			
 			SimpleDateFormat dob = new SimpleDateFormat();
 			dob.applyPattern("dd.MM.YYYY");
 
@@ -196,14 +185,12 @@ public class AppointmentDetailView extends BaseView {
 			PersonTable personTable = new PersonTable();
 			personTable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
 			personTable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
-
+			personTable.addItem(new Object[]{new Label("<b>Details:</b>", ContentMode.HTML), appointment.getClient().getDetails()}, 3);
 
 			VerticalLayout patientpanelContent = new VerticalLayout();
 			patientpanelContent.setSpacing(true);
 			patientpanelContent.setMargin(true);
 			patientpanelContent.addComponent(personTable);
-			patientpanelContent.addComponent(description);
-			patientpanelContent.addComponent(saveClientDetails);
 
 			patientpanel.setContent(patientpanelContent);
 
@@ -296,14 +283,6 @@ public class AppointmentDetailView extends BaseView {
 					btnNewReport.setCaption(EDIT_REPORT);
 				btnArrivalClicked(buttonArrival, btnNewReport, appointment, currentReport);
 				buttonArrival.setCaption(timeButtonName());
-			});
-
-			saveClientDetails.addClickListener(
-					click -> getController().saveDetails(saveClientDetails, appointment, description.getValue()));
-
-			description.addTextChangeListener(click -> {
-				saveClientDetails.setCaption(SAVE);
-				saveClientDetails.setEnabled(true);
 			});
 
 			btnNewReport.addClickListener(clickevent -> {

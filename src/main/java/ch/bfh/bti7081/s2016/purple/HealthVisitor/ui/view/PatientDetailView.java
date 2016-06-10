@@ -1,39 +1,51 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.tapio.googlemaps.GoogleMap;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.Grid;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Table.ColumnHeaderMode;
+import com.vaadin.ui.TextArea;
+import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
 
 public class PatientDetailView extends BaseView {
 
 	public static final String NAME = "PatientDetailView";
 	public static final String VIEW_NAME = "Patientendetails";
 	private static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
-
+	private static final String SAVE = "Speichern";
+	private static final String CLIENTDESCRIPTION = "Kurzbeschrieb";
+	private static final String SAVE_CLIENTDETAILS = "Details speichern";
+	private PatientDetailController controller;
+	
 	private static final Logger logger = LogManager.getLogger(PatientListView.class);
 
 	public PatientDetailView() {
 		super();
 		//this.controller = new PatientDetailController(this);
 		logger.debug("arrived on patient detail view");
+		this.controller = new PatientDetailController(this);
 		layout = new StandardLayout(this);
 	}
 
@@ -78,7 +90,8 @@ public class PatientDetailView extends BaseView {
 			VerticalLayout infopanelContent = new VerticalLayout();
 			infopanelContent.setSizeFull();
 			infopanelContent.setMargin(true);
-
+			infopanelContent.setSpacing(true);
+			
 			SimpleDateFormat dateFormat = new SimpleDateFormat();
 			dateFormat.applyPattern("HH:mm");
 
@@ -99,11 +112,22 @@ public class PatientDetailView extends BaseView {
 						
 			ptable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), patient.getFullName()}, 1);
 			ptable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(patient.getDateOfBirth())}, 2);
+
 			ptable.setColumnWidth("key", 130);
 						
 			ptable.setPageLength(ptable.size());
 			infopanelContent.addComponent(ptable);
 						
+			Button saveClientDetails = new Button(SAVE_CLIENTDETAILS);
+			saveClientDetails.setEnabled(false);
+
+			TextArea description = new TextArea();
+			description.setSizeFull();
+			description.setCaption(CLIENTDESCRIPTION);
+			description.setValue(patient.getDetails());
+			
+			infopanelContent.addComponents(description, saveClientDetails);
+			
 			infopanel.setContent(infopanelContent);
 
 			VerticalLayout topleft = new VerticalLayout();
@@ -122,9 +146,14 @@ public class PatientDetailView extends BaseView {
 			medipanelContent.setMargin(true);
 
 			// add stuff here
+			
 			medipanel.setContent(medipanelContent);
 
-			grid.addComponent(medipanel, 1, 0);
+			VerticalLayout topright = new VerticalLayout();
+			topright.setSpacing(true);
+		
+			topright.addComponent(medipanel);
+			grid.addComponent(topright, 1, 0);
 			
 			// next appointments (bottom)
 			Panel appointmentpanel = new Panel("Nächste Termine");
@@ -133,11 +162,68 @@ public class PatientDetailView extends BaseView {
 			appointmentpanelContent.setSizeFull();
 			appointmentpanelContent.setMargin(true);
 			
-			// add stuff here
+			Collection<AppointmentEntity> appointments = getController().getAppointments(patient);
+			final BeanItemContainer<AppointmentEntity> container = new BeanItemContainer<>(AppointmentEntity.class, appointments);
+
+			container.removeContainerProperty("client");
+			container.removeContainerProperty("endLong");
+			container.removeContainerProperty("startLong");
+			container.removeContainerProperty("id");
+			container.removeContainerProperty("tasks");
+			container.removeContainerProperty("medications");
+			container.removeContainerProperty("planned");
+			container.removeContainerProperty("hv");
+			container.removeContainerProperty("healthVisitor");
+			container.removeContainerProperty("report");
+			container.removeContainerProperty("state");
+			container.removeContainerProperty("stateName");
+			
+			Grid nextappointments = new Grid(container);
+			nextappointments.setColumnOrder("date", "startTime", "endTime", "address", "place");
+			nextappointments.sort("date");
+			nextappointments.getColumn("date").setHeaderCaption("Datum");
+			nextappointments.getColumn("startTime").setHeaderCaption("Beginn");
+			nextappointments.getColumn("endTime").setHeaderCaption("Ende");
+			nextappointments.getColumn("address").setHeaderCaption("Adresse");
+			nextappointments.getColumn("place").setHeaderCaption("Ort");
+
+			nextappointments.setSizeFull();
+			nextappointments.setHeightMode(HeightMode.CSS);
+			nextappointments.setHeightByRows(container.size());
+			
+			appointmentpanelContent.addComponents(nextappointments);
+			
+			nextappointments.addSelectionListener((clickEvent -> {
+				// set back button
+				BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
+				VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
+				
+				// handover appointment data to detail view 
+				AppointmentEntity appointment = container.getItem(nextappointments.getSelectedRow()).getBean();
+				VaadinSession.getCurrent().getSession().setAttribute("appointment", appointment);
+				VaadinSession.getCurrent().getSession().setAttribute("patient", patient);
+				
+				// forward to detaiview
+				getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+			}));
+
 			appointmentpanel.setContent(appointmentpanelContent);
-			bottomgrid.addComponent(appointmentpanel);
+			
+			VerticalLayout bottom = new VerticalLayout();
+			bottom.setSpacing(true);
+		
+			bottom.addComponent(appointmentpanel);
+			bottomgrid.addComponent(bottom);
 			
 			
+			// listeners
+			saveClientDetails.addClickListener(
+					click -> getController().saveDetails(saveClientDetails, patient, description.getValue()));
+
+			description.addTextChangeListener(click -> {
+				saveClientDetails.setCaption(SAVE);
+				saveClientDetails.setEnabled(true);
+			});
 
 		}
 		else {
@@ -145,6 +231,10 @@ public class PatientDetailView extends BaseView {
 		}
 		
 		return general;
+	}
+
+	public PatientDetailController getController() {
+		return controller;
 	}
 
 	@Override

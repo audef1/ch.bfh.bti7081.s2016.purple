@@ -24,6 +24,7 @@ import com.vaadin.ui.VerticalLayout;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ContactComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
 
@@ -226,6 +227,10 @@ public class PatientDetailView extends BaseView {
 			description.addTextChangeListener(click -> {
 				saveClientDetails.setCaption(SAVE);
 				saveClientDetails.setEnabled(true);
+			});
+			
+			buttonEmergencyContact.addClickListener(clickevent -> {
+				new ContactComponent(controller.getContactsByClient(patient));
 			});
 
 		}

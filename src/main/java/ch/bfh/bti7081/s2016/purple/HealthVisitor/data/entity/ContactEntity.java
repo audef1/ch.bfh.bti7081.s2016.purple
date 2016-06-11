@@ -14,9 +14,10 @@ import java.util.Date;
 @DiscriminatorValue("C")
 public class ContactEntity extends PersonEntity{
     public ContactEntity(){}
-    public ContactEntity(String firstName, String lastName, Date dateOfBirth, String email, String password, String relation) {
+    public ContactEntity(String firstName, String lastName, Date dateOfBirth, String email, String password, String relation, String details) {
         super(firstName, lastName, dateOfBirth, email, password);
         this.relation = relation;
+        this.details = details;
     }
 
     @ManyToMany
@@ -28,6 +29,7 @@ public class ContactEntity extends PersonEntity{
     )
     private Collection<ClientEntity> clients;
     private String relation;
+    private String details;
 
     public Collection<ClientEntity> getClients() {
         return clients;
@@ -44,5 +46,12 @@ public class ContactEntity extends PersonEntity{
     public void setRelation(String relation) {
         this.relation = relation;
     }
-
+    
+    public String getDetails() {
+    	return details;
+    }
+    
+    public void setDetails(){
+    	this.details = details;
+    }
 }

@@ -40,6 +40,7 @@ public class ContactComponent extends CustomComponent {
     private void initialize() {
         final Window window = new Window("Notfallkontakte");
         window.setWidth("70%");
+        window.setHeight("50%");
         window.setModal(true);
         window.setResizable(false);
         window.setDraggable(false);
@@ -58,13 +59,13 @@ public class ContactComponent extends CustomComponent {
 		
 		Grid grid = new Grid(container);
 		grid.setSizeFull();
-		grid.setColumnOrder("lastName", "firstName", "relation", "email");
+		grid.setColumnOrder("lastName", "firstName", "relation", "email", "details");
 		grid.sort("lastName");
 		grid.getColumn("lastName").setHeaderCaption("Nachname");
 		grid.getColumn("firstName").setHeaderCaption("Vorname");
 		grid.getColumn("relation").setHeaderCaption("Beziehung");
 		grid.getColumn("email").setHeaderCaption("E-Mail Adresse");
-//		grid.getColumn("details").setHeaderCaption("Mobile Nr.");
+		grid.getColumn("details").setHeaderCaption("Mobile Nr.");
 
 		content.addComponents(grid);
 

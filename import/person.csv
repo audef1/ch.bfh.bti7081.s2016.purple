@@ -848,5 +848,6 @@ ID,	TYPE,	DATEOFBIRTH,	EMAIL,	FIRSTNAME,	LASTNAME,	PASSWORD,	EMPLOYEENUMBER,	HIR
 0891	, 'K',	'1951-01-11',	'Tobi@Galambos.ch',	'Tobi',	'Galambos',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	2
 0892	, 'K',	'1947-05-27',	'Samira@Gisin.ch',	'Samira',	'Gisin',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	3
 0893	, 'K',	'1967-04-27',	'Renato@Hess.ch',	'Renato',	'Hess',	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	4
-1000	, 'C',	'1960-04-03',	'Florian@Huber.ch',	'Florian',	'Huber', NULL, 'Bruder', NULL, NULL, NULL, NULL, NULL
-1001	, 'C',	'1962-09-10',	'Eva@Keller.ch',	'Eva',	'Keller', NULL, 'Schwester', NULL, NULL, NULL, NULL, NULL
+1000	, 'C',	'1960-04-03',	'Florian@Huber.ch',	'Florian',	'Huber', NULL, NULL, NULL, NULL, 'Bruder', '+41 77 192 83 74', NULL
+1001	, 'C',	'1962-09-10',	'Eva@Keller.ch',	'Eva',	'Keller', NULL, NULL, NULL, NULL, 'Schwester', '+41 78 987 65 43', NULL
+1002	, 'C',	'1978-02-20',	'Hans@Geissbuehl.ch',	'Hans',	'Geissbuehl', NULL, NULL, NULL, NULL, 'Hausarzt', '+41 79 123 45 67', NULL

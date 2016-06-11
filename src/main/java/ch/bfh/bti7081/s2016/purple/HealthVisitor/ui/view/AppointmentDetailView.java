@@ -40,6 +40,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.GoogleMapsComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ReportComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ContactComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.AppointmentDetailController;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.OrganizeTasksListener;
 
@@ -68,7 +69,7 @@ public class AppointmentDetailView extends BaseView {
 	private static final String NO_APPOINTMENT = "Heute keinen Termin gefunden";
 	private static final String TASKLIST = "Aufgabenliste";
 	private static final String SAVE = "Speichern";
-	private static final String ERMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
+	private static final String EMERGENCY_CONTACTS = "Notfallkontakte des Patienten";
 
 	private static final Logger logger = LogManager.getLogger(AppointmentDetailView.class);
 	private AppointmentDetailController controller;
@@ -202,7 +203,7 @@ public class AppointmentDetailView extends BaseView {
 			patientbuttons.setSpacing(true);
 
 			Button buttonDetail = new Button(CLIENTDETAILS);
-			Button buttonEmergencyContact = new Button(ERMERGENCY_CONTACTS);
+			Button buttonEmergencyContact = new Button(EMERGENCY_CONTACTS);
 			patientbuttons.addComponent(buttonDetail);
 			patientbuttons.addComponent(buttonEmergencyContact);
 
@@ -291,6 +292,10 @@ public class AppointmentDetailView extends BaseView {
 				if (currentReport != null)
 					btnNewReport.setCaption(EDIT_REPORT);
 				new ReportComponent(appointment, currentReport, getController());
+			});
+			
+			buttonEmergencyContact.addClickListener(clickevent -> {
+				new ContactComponent(controller.getContactsByClient(appointment.getClient()));
 			});
 
 			// TODO: Show Patient data

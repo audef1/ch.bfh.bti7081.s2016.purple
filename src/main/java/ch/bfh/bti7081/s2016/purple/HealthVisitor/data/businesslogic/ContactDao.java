@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ContactEntity;
 
 /**
@@ -23,7 +24,7 @@ public class ContactDao extends GenericDao<ContactEntity, Integer> {
     }
 	
 	@SuppressWarnings("unchecked")
-	public Collection<ContactEntity> getContactsByClientId(int id) {
+	public Collection<ContactEntity> getContactsByClient(ClientEntity client) {
 		Collection<ContactEntity> list = null;
 		
 		try {
@@ -32,7 +33,7 @@ public class ContactDao extends GenericDao<ContactEntity, Integer> {
                 createNativeQuery("SELECT p.* FROM PERSON p "
                 + "INNER JOIN CLI_CON c ON p.ID = c.CON_ID "
                 + "WHERE p.TYPE = 'C' "
-                + "AND c.CLI_ID = " + id, 
+                + "AND c.CLI_ID = " + client.getId(), 
                 ContactEntity.class);
 			
 			list = query.getResultList();

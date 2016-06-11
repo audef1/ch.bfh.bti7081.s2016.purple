@@ -1,6 +1,8 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.test;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ContactDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ContactEntity;
 import junit.framework.TestCase;
 
@@ -11,12 +13,21 @@ import java.util.Collection;
  */
 public class ContactDaoTest extends TestCase {
 
-    public void testGetContactsByClientId() throws Exception {
-    	int id = 55;
-    	ContactDao ad = ContactDao.getInstance();
-        Collection<ContactEntity> list = ad.getContactsByClientId(id);
-        System.out.println(list.size());
+    public void testGetContactsByClientPositiveCase() throws Exception {
+    	ClientEntity client = ClientDao.getInstance().findById(55);
+    	assertNotNull(client);
+    	
+        Collection<ContactEntity> list = ContactDao.getInstance().getContactsByClient(client);
         assertNotNull(list);
-        assertEquals(2, list.size());
+        assertEquals(3, list.size());
+    }
+    
+    public void testGetContactsByClientNegativeCase() throws Exception {
+    	ClientEntity client = ClientDao.getInstance().findById(893);
+    	assertNotNull(client);
+    	
+        Collection<ContactEntity> list = ContactDao.getInstance().getContactsByClient(client);
+        assertNotNull(list);
+        assertEquals(0, list.size());
     }
 }

@@ -12,10 +12,12 @@ import com.vaadin.ui.RichTextArea;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ClientDao;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ContactDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.ReportDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.TaskDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ContactEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ReportEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.TaskEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
@@ -30,6 +32,10 @@ public class AppointmentDetailController extends BaseController {
 
 	public AppointmentEntity getCurrentAppointment() {
 		return AppointmentDao.getInstance().getCurrentAppointment();
+	}
+	
+	public Collection<ContactEntity> getContactsByClient(ClientEntity client){
+		return ContactDao.getInstance().getContactsByClient(client);
 	}
 
 	public void saveDetails(Button button, AppointmentEntity appointmentEntity, String description) {

@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sun.media.jfxmedia.MediaPlayer;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
@@ -41,6 +42,8 @@ public class PatientDetailView extends BaseView {
 	private static final String SAVE = "Speichern";
 	private static final String CLIENTDESCRIPTION = "Kurzbeschrieb";
 	private static final String SAVE_CLIENTDETAILS = "Details speichern";
+	private static final String LABEL_NO_MEDICATIONS = "Keine Medikamente";
+	
 	private PatientDetailController controller;
 	
 	private static final Logger logger = LogManager.getLogger(PatientListView.class);
@@ -152,18 +155,19 @@ public class PatientDetailView extends BaseView {
 
 			// add stuff here
 			Collection<MedicationEntity> medications = medicationDao.findAllByClient(patient);
-			
-			BeanItemContainer<MedicationEntity> medicationContainer = new BeanItemContainer<>(MedicationEntity.class, medications);
-	        
-	        Grid medicationGrid = new Grid(medicationContainer);
-	        medicationGrid.setSizeFull();
-	        medicationGrid.setColumnOrder("amount", "name");
-	        medicationGrid.setColumns("amount", "name");
-//	        grid.getColumn("amount").setHeaderCaption(LABEL_PACKAGES);
-	        
-	        logger.debug("Total medications " + medications.size());
-	        medipanelContent.addComponent(medicationGrid);
-			
+			if (medications.size() == 0){
+				Label noMedications = new Label(LABEL_NO_MEDICATIONS);
+				medipanelContent.addComponent(noMedications);
+			} else {
+				BeanItemContainer<MedicationEntity> medicationContainer = new BeanItemContainer<>(MedicationEntity.class, medications);
+		        
+		        Grid medicationGrid = new Grid(medicationContainer);
+		        medicationGrid.setSizeFull();
+		        medicationGrid.setColumnOrder("name");
+		        medicationGrid.setColumns("name");
+		        
+		        medipanelContent.addComponent(medicationGrid);
+			}
 			medipanel.setContent(medipanelContent);
 
 			VerticalLayout topright = new VerticalLayout();

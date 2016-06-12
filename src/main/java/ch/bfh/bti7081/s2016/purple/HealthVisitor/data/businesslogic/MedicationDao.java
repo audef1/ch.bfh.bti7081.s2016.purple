@@ -28,6 +28,7 @@ public class MedicationDao extends GenericDao<MedicationEntity, Integer> {
 	}
 	
 	public Collection<MedicationEntity> findAllByClient(ClientEntity client){
+		// Use native query for joining tables more easely
 		Query query = entityManager.createNativeQuery(
     		"SELECT m.* "
     		+ "FROM medication AS m "

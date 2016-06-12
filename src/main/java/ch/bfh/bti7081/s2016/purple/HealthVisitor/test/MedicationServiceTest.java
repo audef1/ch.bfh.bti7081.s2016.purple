@@ -10,6 +10,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.MedicationService;
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
 public class MedicationServiceTest extends TestCase {
@@ -62,22 +63,22 @@ public class MedicationServiceTest extends TestCase {
 		
 		MedicationService medicationService = new MedicationService(new AppointmentDaoMock(mockAppointments));
 		Collection<MedicationEntity> medications = medicationService.getMedicationForDay(healthVisitorMock);
-		
-		this.assertEquals(4, medications.size());
+
+		assertEquals(4, medications.size());
 		
 		for (MedicationEntity medication: medications){
 			switch (medication.getName()) {
 			case "Medication A":
-				this.assertEquals(1.0, medication.getAmount());
+				assertEquals(1.0, medication.getAmount());
 				break;
 			case "Medication B":
-				this.assertEquals(2.0, medication.getAmount());
+				assertEquals(2.0, medication.getAmount());
 				break;
 			case "Medication C":
-				this.assertEquals(3.0, medication.getAmount());
+				assertEquals(3.0, medication.getAmount());
 				break;
 			case "Medication D":
-				this.assertEquals(4.0, medication.getAmount());
+				assertEquals(4.0, medication.getAmount());
 				break;
 			default:
 				throw new Exception("Unknow medication returned by service");
@@ -88,6 +89,6 @@ public class MedicationServiceTest extends TestCase {
 	public void testGetMedicationForDayReturnsNothing(){
 		MedicationService medicationService = new MedicationService(new AppointmentDaoMock(null));
 		Collection<MedicationEntity> medications = medicationService.getMedicationForDay(null);
-		this.assertEquals(0, medications.size());
+		assertEquals(0, medications.size());
 	} 
 }

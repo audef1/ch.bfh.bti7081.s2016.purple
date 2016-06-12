@@ -1,18 +1,5 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.util.Collection;
-import java.util.List;
-
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.AppointmentState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.FinishedState;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.AppointmentState.PlannedState;
@@ -21,6 +8,16 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.AuthenticationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * This class implements the Data Access Object Pattern concept from Java
@@ -56,9 +53,10 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     }
 
     /**
-     * TODO ZoneOffset
      * @param healthVisitor
-     *
+	 * gets the appointments between the current time and the next day
+	 * Timezone is UTC
+	 *
      * @return
      */
     public Collection<AppointmentEntity> getTodaysAppointmentsByHealthVisitor(HealthVisitorEntity healthVisitor)
@@ -90,10 +88,21 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
     	return appointments;
     }
 
-    public AppointmentEntity getCurrentAppointment() {
+	/**
+	 * Gets the logged in user from the auth service and passes it to
+	 *
+	 * @return null or the first matching AppointmentEntity
+	 * @link getCurrentAppointment(HealthVisitorEntity healthVisitor)
+	 */
+	public AppointmentEntity getCurrentAppointment() {
     	return getCurrentAppointment(new AuthenticationService().getUser());
-    }
+	}
 
+	/**
+	 *
+	 * @param healthVisitor
+	 * @return first appointment is in status null, planned, running or finished
+	 */
     public AppointmentEntity getCurrentAppointment(HealthVisitorEntity healthVisitor) {
 
     	Collection<AppointmentEntity> appointments = getTodaysAppointmentsByHealthVisitor(healthVisitor);
@@ -109,27 +118,28 @@ public class AppointmentDao extends GenericDao<AppointmentEntity, Integer>{
 
     	logger.debug("No current appointment found");
     	return null;
-    }
-	
-    /**
-     * @param clientEntity
-     *
-     * @return
-     */
-    public Collection<AppointmentEntity> getAppointmentsByPatient(ClientEntity patient)
-    {
-    	TypedQuery<AppointmentEntity> query = entityManager.createQuery(
-    		"SELECT a "
-    		+ "FROM appointment AS a "
-    		+ "WHERE a.client = :client "
-    		+ "AND a.startTime > :startTime "
-    		+ "AND a.client IS NOT NULL ORDER BY a.startTime",
-            AppointmentEntity.class
-        );
+	}
 
+	/**
+	 * @param  patient clientEntity we need the appointments for.
+	 * @code It looks for the appointments related to the given patient.
+	 * the startTime is a long from the current time (seconds).
+	 * @return List of appointments for the given patient, empty if no appointments
+	 */
+	public Collection<AppointmentEntity> getAppointmentsByPatient(ClientEntity patient) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT a ");
+		sb.append("FROM appointment AS a ");
+		sb.append("WHERE a.client = :client ");
+		sb.append("AND a.startTime > :startTime ");
+		sb.append("AND a.client IS NOT NULL ORDER BY a.startTime");
+
+    	TypedQuery<AppointmentEntity> query = entityManager.createQuery(
+				sb.toString(),
+				AppointmentEntity.class
+        );
     	
     	long startTime = System.currentTimeMillis() / 1000L;
-
     	Collection<AppointmentEntity> appointments = null;
     	try {
     		appointments = query.

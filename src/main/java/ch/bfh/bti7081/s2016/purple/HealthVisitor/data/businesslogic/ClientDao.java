@@ -16,10 +16,4 @@ public class ClientDao extends GenericDao<ClientEntity, Integer> {
     	if(instance == null) instance = new ClientDao();
     	return instance;
     }
-	
-    public ClientEntity findById(String id){
-    	ClientEntity c = entityManager.find(ClientEntity.class, id);
-        entityManager.close();
-        return c;
-    }
 }

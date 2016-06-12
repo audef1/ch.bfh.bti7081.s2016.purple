@@ -12,8 +12,8 @@ public class ReportDao extends GenericDao<ReportEntity, Integer> {
     	if(instance == null) instance = new ReportDao();
     	return instance;
     }
-    public ReportDao(){
-    	
+
+    private ReportDao() {
     }
     
 }

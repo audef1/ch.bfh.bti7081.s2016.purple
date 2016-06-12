@@ -11,14 +11,19 @@ import com.vaadin.ui.components.calendar.event.CalendarEventProvider;
 
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 
+/**
+ * This Class creates addabl CalendarEvents from Appointments
+ *
+ * @author audef1
+ */
 public class AppointmentEventProvider implements CalendarEventProvider{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8261934122713682667L;
+
 	private List<CalendarEvent> events = new ArrayList<>();
-	
+
+	/**
+	 * new instances of events to the events instance variable
+	 * @param items
+	 */
 	public AppointmentEventProvider(List<AppointmentEntity> items) {
 		List<AppointmentEntity> appointments = items;
 		events = new ArrayList<>();
@@ -32,14 +37,7 @@ public class AppointmentEventProvider implements CalendarEventProvider{
 			
 			String name = "Test";
 			String description = a.getAddress() + "\n" + a.getPlace();
-			
-			BasicEvent event = new BasicEvent();
-			event.setCaption(name);
-			event.setDescription(description);
-			event.setStart(start);
-			event.setEnd(end);
-			
-			events.add(event);
+			events.add(new BasicEvent(name, description, start, end));
 		}
 	}
 	

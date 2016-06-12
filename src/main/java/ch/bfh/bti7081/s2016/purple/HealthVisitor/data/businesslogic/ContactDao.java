@@ -22,19 +22,28 @@ public class ContactDao extends GenericDao<ContactEntity, Integer> {
     	if(instance == null) instance = new ContactDao();
     	return instance;
     }
-	
+
+
+	/**
+	 * @param client
+	 * @return a collection of contacts
+	 */
 	@SuppressWarnings("unchecked")
 	public Collection<ContactEntity> getContactsByClient(ClientEntity client) {
 		Collection<ContactEntity> list = null;
 		
 		try {
 			//hint: joins with typed query suck, that's why native query is used here.
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT p.* FROM PERSON p ");
+			sb.append("INNER JOIN CLI_CON c ON p.ID = c.CON_ID ");
+			sb.append("WHERE p.TYPE = 'C' ");
+			sb.append("AND c.CLI_ID = ");
+			sb.append(client.getId());
+
 			Query query = entityManager.
-                createNativeQuery("SELECT p.* FROM PERSON p "
-                + "INNER JOIN CLI_CON c ON p.ID = c.CON_ID "
-                + "WHERE p.TYPE = 'C' "
-                + "AND c.CLI_ID = " + client.getId(), 
-                ContactEntity.class);
+					createNativeQuery(sb.toString(),
+							ContactEntity.class);
 			
 			list = query.getResultList();
 

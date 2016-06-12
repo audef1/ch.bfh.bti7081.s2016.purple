@@ -8,6 +8,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationControl
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.SelectMedicationListener;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.Grid;
 import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Label;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.Collection;
 
 /**
+ * Provides a verticalLayout with all medications the healthVisitor should bring with
  * @author tgdflto1 on 20/05/16.
  */
 @SuppressWarnings("serial")
@@ -47,16 +49,14 @@ public class MedicationView extends BaseView {
         VerticalLayout general = new VerticalLayout();
         general.setSpacing(true);
         general.setMargin(true);
-        
 
 		Label info = new Label(LABEL_INFO);
 		general.addComponent(info);
 
     	Collection<MedicationEntity> medications = this.medicationService.getMedicationForDay(controller.getUser());
     	if (medications.size() == 0){
-    		Label message = new Label(LABEL_NO_MEDICATIONS);
-    		general.addComponent(message);
-    	} else {
+            general.addComponent(new Label(LABEL_NO_MEDICATIONS));
+        } else {
 	    	BeanItemContainer<MedicationEntity> container = new BeanItemContainer<>(MedicationEntity.class, medications);
 	        
 	        Grid grid = new Grid(container);

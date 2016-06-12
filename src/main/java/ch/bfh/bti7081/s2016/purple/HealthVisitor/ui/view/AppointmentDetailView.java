@@ -337,7 +337,7 @@ public class AppointmentDetailView extends BaseView {
 
 	// Method to create a new report if it's missing.
 	private void createNewReport() {
-		ReportDao dao = new ReportDao();
+		ReportDao dao = ReportDao.getInstance();
 		if (currentReport == null) {
 			currentReport = new ReportEntity();
 			currentReport.setAppointment(appointment);

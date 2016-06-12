@@ -41,7 +41,7 @@ public class ClientEntity extends PersonEntity {
     }
 
     public String getDetails() {
-        return details;
+        return (details == null) ? "": details;
     }
 
     public void setDetails(String details) {

@@ -13,6 +13,7 @@ import com.vaadin.data.validator.DateRangeValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.shared.ui.datefield.Resolution;
+import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -66,9 +67,16 @@ public class ContactComponent extends CustomComponent {
 		grid.getColumn("relation").setHeaderCaption("Beziehung");
 		grid.getColumn("email").setHeaderCaption("E-Mail Adresse");
 		grid.getColumn("details").setHeaderCaption("Mobile Nr.");
-
-		content.addComponents(grid);
-
+		
+		if(container.size() > 0){
+			grid.setHeightMode(HeightMode.ROW);
+			grid.setHeightByRows(container.size());
+			content.addComponent(grid);
+		}
+		else{
+			content.addComponent(new Label("Keine Notfallkontakte vorhanden"));
+		}
+		
         window.setContent(content);
         
         UI.getCurrent().addWindow(window);

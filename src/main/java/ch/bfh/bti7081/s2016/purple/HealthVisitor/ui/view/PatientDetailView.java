@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.sun.media.jfxmedia.MediaPlayer;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.grid.HeightMode;
@@ -19,7 +18,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
-import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Table.ColumnHeaderMode;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
@@ -31,7 +29,6 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ContactComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.SelectMedicationListener;
 
 @SuppressWarnings("serial")
 public class PatientDetailView extends BaseView {
@@ -51,7 +48,6 @@ public class PatientDetailView extends BaseView {
 
 	public PatientDetailView() {
 		super();
-		//this.controller = new PatientDetailController(this);
 		logger.debug("arrived on patient detail view");
 		this.controller = new PatientDetailController(this);
 		layout = new StandardLayout(this);
@@ -67,8 +63,6 @@ public class PatientDetailView extends BaseView {
 		if (VaadinSession.getCurrent().getSession().getAttribute("patient") != null) {
 			ClientEntity patient = (ClientEntity) VaadinSession.getCurrent().getSession().getAttribute("patient");
 			VaadinSession.getCurrent().getSession().setAttribute("patient", null);
-
-			
 			
 			// two column layout with topnav and buttom column
 			HorizontalLayout topnav = new HorizontalLayout();
@@ -155,19 +149,23 @@ public class PatientDetailView extends BaseView {
 
 			// add stuff here
 			Collection<MedicationEntity> medications = medicationDao.findAllByClient(patient);
-			if (medications.size() == 0){
-				Label noMedications = new Label(LABEL_NO_MEDICATIONS);
-				medipanelContent.addComponent(noMedications);
-			} else {
-				BeanItemContainer<MedicationEntity> medicationContainer = new BeanItemContainer<>(MedicationEntity.class, medications);
+	
+			BeanItemContainer<MedicationEntity> medicationContainer = new BeanItemContainer<>(MedicationEntity.class, medications);
 		        
-		        Grid medicationGrid = new Grid(medicationContainer);
-		        medicationGrid.setSizeFull();
-		        medicationGrid.setColumnOrder("name");
-		        medicationGrid.setColumns("name");
-		        
-		        medipanelContent.addComponent(medicationGrid);
+		    Grid medicationGrid = new Grid(medicationContainer);
+		    medicationGrid.setSizeFull();
+		    medicationGrid.setColumnOrder("name");
+		    medicationGrid.setColumns("name");
+		       
+		    if (medicationContainer.size() > 0) {
+		       	medicationGrid.setHeightMode(HeightMode.ROW);
+		       	medicationGrid.setHeightByRows(medicationContainer.size());
+		       	medipanelContent.addComponent(medicationGrid);
 			}
+			else {
+				medipanelContent.addComponent(new Label(LABEL_NO_MEDICATIONS));
+			}
+		        
 			medipanel.setContent(medipanelContent);
 
 			VerticalLayout topright = new VerticalLayout();

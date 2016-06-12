@@ -5,6 +5,7 @@ import java.time.ZoneOffset;
 import java.util.Collection;
 
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.apache.logging.log4j.LogManager;
@@ -27,19 +28,17 @@ public class MedicationDao extends GenericDao<MedicationEntity, Integer> {
 	}
 	
 	public Collection<MedicationEntity> findAllByClient(ClientEntity client){
-    	TypedQuery<MedicationEntity> query = entityManager.createQuery(
-    		"SELECT m "
-    		+ "FROM medication AS m, appointment AS a "
-    		+ "WHERE m.appointment = a.id "
-    		+ "AND a.client = :client",
+		Query query = entityManager.createNativeQuery(
+    		"SELECT m.* "
+    		+ "FROM medication AS m "
+    		+ "JOIN appointment a ON a.id = m.appointment_id "
+    		+ "WHERE a.client_id = '" + client.getId() + "'",
     		MedicationEntity.class
         );
 
     	Collection<MedicationEntity> medications = null;
     	try {
-    		medications = query
-                .setParameter("client", client)
-                .getResultList();
+    		medications = query.getResultList();
     	} catch (NoResultException e){
     		logger.debug("No medications found for client " + e.getMessage());
     	}

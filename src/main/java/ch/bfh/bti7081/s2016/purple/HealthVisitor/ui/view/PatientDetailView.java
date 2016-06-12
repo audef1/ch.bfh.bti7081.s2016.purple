@@ -18,15 +18,19 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Layout;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.Table;
+import com.vaadin.ui.Grid.SelectionMode;
 import com.vaadin.ui.Table.ColumnHeaderMode;
 import com.vaadin.ui.TextArea;
 import com.vaadin.ui.VerticalLayout;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.MedicationDao;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.ClientEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.ContactComponent;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component.StandardLayout;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.PatientDetailController;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener.SelectMedicationListener;
 
 @SuppressWarnings("serial")
 public class PatientDetailView extends BaseView {
@@ -40,6 +44,7 @@ public class PatientDetailView extends BaseView {
 	private PatientDetailController controller;
 	
 	private static final Logger logger = LogManager.getLogger(PatientListView.class);
+	private static MedicationDao medicationDao = MedicationDao.getInstance();
 
 	public PatientDetailView() {
 		super();
@@ -146,6 +151,18 @@ public class PatientDetailView extends BaseView {
 			medipanelContent.setMargin(true);
 
 			// add stuff here
+			Collection<MedicationEntity> medications = medicationDao.findAllByClient(patient);
+			
+			BeanItemContainer<MedicationEntity> medicationContainer = new BeanItemContainer<>(MedicationEntity.class, medications);
+	        
+	        Grid medicationGrid = new Grid(medicationContainer);
+	        medicationGrid.setSizeFull();
+	        medicationGrid.setColumnOrder("amount", "name");
+	        medicationGrid.setColumns("amount", "name");
+//	        grid.getColumn("amount").setHeaderCaption(LABEL_PACKAGES);
+	        
+	        logger.debug("Total medications " + medications.size());
+	        medipanelContent.addComponent(medicationGrid);
 			
 			medipanel.setContent(medipanelContent);
 

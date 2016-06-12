@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import com.vaadin.server.VaadinSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -36,7 +37,8 @@ public class AppointmentListView extends BaseView {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Layout initView() {
-		return new CalendarComponent(controller.getAppointments(), "today");
+		String type = (String) VaadinSession.getCurrent().getSession().getAttribute("calendar_view");
+		return new CalendarComponent(controller.getAppointments(), type);
 	}
 
 	@Override

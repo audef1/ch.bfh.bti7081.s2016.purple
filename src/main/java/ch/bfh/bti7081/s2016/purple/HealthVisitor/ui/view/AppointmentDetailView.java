@@ -185,9 +185,13 @@ public class AppointmentDetailView extends BaseView {
 
 			// Left hand person table
 			PersonTable personTable = new PersonTable();
-			personTable.addItem(new Object[]{new Label("<b>Name:</b>", ContentMode.HTML), appointment.getClient().getFullName()}, 1);
-			personTable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>", ContentMode.HTML), dob.format(appointment.getClient().getDateOfBirth())}, 2);
-			personTable.addItem(new Object[]{new Label("<b>Details:</b>", ContentMode.HTML), appointment.getClient().getDetails()}, 3);
+			personTable.addItem(new Object[]{new Label("<b>Name:</b>",
+					ContentMode.HTML), appointment.getClient().getFullName()}, 1);
+			personTable.addItem(new Object[]{new Label("<b>Geburtsdatum:</b>",
+					ContentMode.HTML), dob.format(appointment.getClient().
+					getDateOfBirth())}, 2);
+			personTable.addItem(new Object[]{new Label("<b>Details:</b>",
+					ContentMode.HTML), appointment.getClient().getDetails()}, 3);
 
 			VerticalLayout patientpanelContent = new VerticalLayout();
 			patientpanelContent.setSpacing(true);
@@ -298,7 +302,6 @@ public class AppointmentDetailView extends BaseView {
 				new ContactComponent(controller.getContactsByClient(appointment.getClient()));
 			});
 
-			// TODO: Show Patient data
 			buttonDetail.addClickListener(click -> {
             	VaadinSession.getCurrent().getSession().setAttribute("patient", this.appointment.getClient());
             	VaadinSession.getCurrent().getSession().setAttribute("appointment", this.appointment);
@@ -308,10 +311,6 @@ public class AppointmentDetailView extends BaseView {
             	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
             	getUI().getNavigator().navigateTo(PatientDetailView.NAME);
 			});
-
-			// TODO: EmerencyContactView
-			// buttonEmergencyContact.addClickListener(click -> { do some stuff
-			// here... });
 
 		}
 		return general;

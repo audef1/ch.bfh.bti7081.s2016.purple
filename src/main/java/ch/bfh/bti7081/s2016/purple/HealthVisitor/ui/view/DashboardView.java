@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view;
 
+import com.vaadin.server.VaadinSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,11 +47,17 @@ public class DashboardView extends BaseView{
 		grid.addComponent(btAppointmentNow);
 		
 		DashboardButtonComponent btAppointmentToday = new DashboardButtonComponent("Termine heute", FontAwesome.CALENDAR_TIMES_O);
-		btAppointmentToday.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
+		btAppointmentToday.addClickListener(clickevent -> {
+			VaadinSession.getCurrent().getSession().setAttribute("calendar_view", "today");
+			getUI().getNavigator().navigateTo(AppointmentListView.NAME);
+		});
 		grid.addComponent(btAppointmentToday);
 
 		DashboardButtonComponent btAppointmentList = new DashboardButtonComponent("Terminliste", FontAwesome.CALENDAR);
-		btAppointmentList.addClickListener(clickevent -> getUI().getNavigator().navigateTo(AppointmentListView.NAME));
+		btAppointmentList.addClickListener(clickevent -> {
+			VaadinSession.getCurrent().getSession().setAttribute("calendar_view", "month");
+			getUI().getNavigator().navigateTo(AppointmentListView.NAME);
+		});
 		grid.addComponent(btAppointmentList);
 		
 		DashboardButtonComponent btEmergency = new DashboardButtonComponent("Alarm", FontAwesome.HEARTBEAT);

@@ -1,12 +1,10 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.component;
 
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.Button;
@@ -21,12 +19,12 @@ import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClick;
 import com.vaadin.ui.components.calendar.CalendarComponentEvents.WeekClickHandler;
 import com.vaadin.ui.components.calendar.event.BasicEvent;
 import com.vaadin.ui.components.calendar.handler.BasicDateClickHandler;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.events.AppointmentEvent;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentListView;
-import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.BaseView;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class CalendarComponent extends VerticalLayout {
@@ -38,8 +36,8 @@ public class CalendarComponent extends VerticalLayout {
 	private static final String MONTH = "Monat";
 	private static final int FIRST_HOUR = 8;
 	private static final int LAST_HOUR = 19;
-	
-	public CalendarComponent(List<AppointmentEntity> items, String $type){
+
+	public CalendarComponent(List<AppointmentEntity> items, String type) {
 		
 		this.setSpacing(true);
 		this.setMargin(true);
@@ -58,29 +56,28 @@ public class CalendarComponent extends VerticalLayout {
 		cal.setFirstVisibleHourOfDay(FIRST_HOUR);
 	    cal.setLastVisibleHourOfDay(LAST_HOUR);
 	    cal.setContainerDataSource(container, "caption", "description", "start", "end", "styleName");
-	    
-	    cal.setHandler(new EventClickHandler() {
-            /**
-			 * 
-			 */
-			private static final long serialVersionUID = 8985695458565156477L;
 
-			public void eventClick(CalendarComponentEvents.EventClick event) {
-            	AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
-            	VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
-            	
-            	BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
-            	VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
-            	
-            	getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
-            }
-        });
-	    
-	    // initial switch to day-view
+		cal.setHandler((EventClickHandler) event -> {
+			AppointmentEvent ae = (AppointmentEvent) event.getCalendarEvent();
+			VaadinSession.getCurrent().getSession().setAttribute("appointment", ae.getAppointment());
+			BaseView currentView = (BaseView) getUI().getNavigator().getCurrentView();
+			VaadinSession.getCurrent().getSession().setAttribute("oldview", currentView.getName());
+			getUI().getNavigator().navigateTo(AppointmentDetailView.NAME);
+		});
+
 		GregorianCalendar g = new GregorianCalendar();
-        BasicDateClickHandler dh = (BasicDateClickHandler) cal.getHandler(DateClickEvent.EVENT_ID);
-        dh.dateClick(new DateClickEvent(cal,g.getTime()));
-		
+		logger.debug("selected calendar type: " + type);
+		if (type.equals("today")) {
+			CalendarComponentEvents.DateClickHandler dch = (BasicDateClickHandler) cal.getHandler(DateClickEvent.EVENT_ID);
+			dch.dateClick(new DateClickEvent(cal, g.getTime()));
+			dch.dateClick(new DateClickEvent(cal, g.getTime()));
+		} else {
+			WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
+			handler.weekClick(new WeekClick(cal, g.get(GregorianCalendar.WEEK_OF_YEAR),
+					g.get(GregorianCalendar.YEAR)));
+		}
+
+
 		Button week = new Button(WEEK);
 		Button today = new Button(TODAY);
 		Button month = new Button(MONTH);
@@ -88,8 +85,9 @@ public class CalendarComponent extends VerticalLayout {
 		week.addClickListener((ClickListener) event -> {
             GregorianCalendar calendar = new GregorianCalendar();
             WeekClickHandler handler = (WeekClickHandler) cal.getHandler(WeekClick.EVENT_ID);
-            handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR), calendar.get(GregorianCalendar.YEAR)));
-        });
+			handler.weekClick(new WeekClick(cal, calendar.get(GregorianCalendar.WEEK_OF_YEAR),
+					calendar.get(GregorianCalendar.YEAR)));
+		});
 
 		today.addClickListener((ClickListener) event -> {
             GregorianCalendar calendar = new GregorianCalendar();

@@ -7,6 +7,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.view.AppointmentDetailView;
 import com.vaadin.data.validator.DateRangeValidator;
 import com.vaadin.data.validator.StringLengthValidator;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.datefield.Resolution;
 import com.vaadin.ui.*;
 import org.apache.logging.log4j.LogManager;
@@ -75,6 +76,8 @@ public class ReportComponent extends CustomComponent {
         btnSave.addClickListener(clickevent -> {
             controller.save(arrival, end, text, appointment, report);
             window.close();
+            // TODO -> if we are on a different appointment than the current
+            VaadinSession.getCurrent().getSession().setAttribute("appointment", appointment);
             UI.getCurrent().getNavigator().navigateTo(AppointmentDetailView.NAME);
         });
         content.addComponent(btnSave);

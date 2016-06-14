@@ -7,10 +7,10 @@ status="WARN">
     </Console>
 </Appenders>
 <Loggers>
-    <Logger name="log4j.test.Log4jTest" level="trace">
+    <Logger name="log4j.test.Log4jTest" level="error">
         <AppenderRef ref="Console"/>
     </Logger>
-    <Root level="trace">
+    <Root level="error">
         <AppenderRef ref="Console"/>
     </Root>
 </Loggers>

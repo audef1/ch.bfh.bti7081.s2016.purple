@@ -344,6 +344,7 @@ public class AppointmentDetailView extends BaseView {
 			Long now = System.currentTimeMillis() / 1000L;
 			currentReport.setStart(now);
 			dao.persist(currentReport);
+			initView();
 		}
 	}
 

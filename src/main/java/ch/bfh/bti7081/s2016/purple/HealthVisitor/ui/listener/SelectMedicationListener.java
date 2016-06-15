@@ -1,10 +1,14 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.listener;
 
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
+import ch.bfh.bti7081.s2016.purple.HealthVisitor.service.MedicationService;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.ui.controller.MedicationController;
+
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.event.SelectionEvent;
 import com.vaadin.ui.Grid;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +23,7 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public class SelectMedicationListener implements SelectionEvent.SelectionListener {
     private static final Logger logger = LogManager.getLogger(SelectMedicationListener.class);
+    private static MedicationService medicationService = MedicationService.getInstance();
     private final MedicationController controller;
     private final Grid grid;
 
@@ -30,18 +35,20 @@ public class SelectMedicationListener implements SelectionEvent.SelectionListene
     @Override
     public void select(SelectionEvent event) {
         logger.debug("selection event triggered");
-        controller.check(getItems(event.getAdded()));
         controller.uncheck(getItems(event.getRemoved()));
+        controller.check(getItems(event.getAdded()));
     }
 
     private Collection<MedicationEntity> getItems(Set<Object> itemIds) {
-        List<MedicationEntity> items = new ArrayList<>();
+        Collection<MedicationEntity> items = new ArrayList<>();
+   
         for (Object id : itemIds) {
             @SuppressWarnings("unchecked")
             BeanItem<MedicationEntity> beanItem = (BeanItem<MedicationEntity>) grid.
                     getContainerDataSource().getItem(id);
             items.add(beanItem.getBean());
         }
-        return items;
+        
+        return medicationService.mergedMedicationsToDatabaseEntities(items, controller.getUser());
     }
 }

@@ -1,5 +1,6 @@
 package ch.bfh.bti7081.s2016.purple.HealthVisitor.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.businesslogic.AppointmentD
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.AppointmentEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.HealthVisitorEntity;
 import ch.bfh.bti7081.s2016.purple.HealthVisitor.data.entity.MedicationEntity;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -64,5 +66,24 @@ public class MedicationService {
 		}
     	return medications.values();
 	}
-
+	
+	public Collection<MedicationEntity> mergedMedicationsToDatabaseEntities(Collection<MedicationEntity> merged, HealthVisitorEntity healthVisitor)
+	{
+		Collection<AppointmentEntity> appointments = appointmentDao.getTodaysAppointmentsByHealthVisitor(healthVisitor);
+		Collection<MedicationEntity> medications = new ArrayList<>();
+		if (appointments != null){
+			for (AppointmentEntity appointment : appointments){
+				for (MedicationEntity medication : appointment.getMedications()){
+					for (MedicationEntity m : merged) {
+						if (m.getName().equals(medication.getName())){
+							medications.add(medication);
+							break;
+						}
+					}
+				}
+			}
+		}
+//		logger.info("Medications "+ medications.size());
+		return medications;
+	}
 }

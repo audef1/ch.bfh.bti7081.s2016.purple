@@ -15,7 +15,6 @@ public class MedicationController extends BaseController {
 	public MedicationController(MedicationView view) {
         super(view);
     }
-    
     public void check(Collection<MedicationEntity> medications){
     	for (MedicationEntity medication: medications){
     		medication.setChecked(true);
